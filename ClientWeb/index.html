@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Minesweeper Online</title>
+    <link rel="stylesheet" href="src/ui/styles.css">
+</head>
+<body>
+    <div id="app">
+
+        
+        <div id="mainMenu" class="screen active">
+            <div class="menu-content">
+                <h1>🎮 Minesweeper Online</h1>
+                <div id="menuSubtitle" class="subtitle">20×20 Grid • 20% Mines</div>
+
+                <div class="menu-row">
+                    <button id="btnGameSettings" class="btn btn-small">🎯 Game</button>
+                    <button id="btnAppSettings" class="btn btn-small">⚙️ App</button>
+                </div>
+
+                <div class="menu-separator"></div>
+
+                <button id="btnSoloPlay" class="btn">🎲 Solo Play</button>
+                <button id="btnLeaderboards" class="btn">🏆 Leaderboards</button>
+
+                <div class="menu-section-title">Online Multiplayer</div>
+
+                <button id="btnCreateLobby" class="btn">🌍 Create Online Lobby</button>
+                <button id="btnBrowseLobbies" class="btn">🔍 Browse Public Lobbies</button>
+                <button id="btnJoinByID" class="btn">🎯 Join by Game ID</button>
+
+                <div id="versionText" class="version-text"></div>
+
+                <div id="connectionIndicator"></div>
+                <div id="addressError" class="address-error" style="display:none;"></div>
+            </div>
+        </div>
+
+        
+        <div id="soloMenu" class="screen">
+            <div class="solo-content">
+                <div class="solo-scroll-area" id="soloScrollArea">
+                    <!-- Continue saved game card (hidden when no save exists) -->
+                    <div class="level-card continue-card" id="continueCard" style="display:none">
+                        <div class="level-card-body" id="continueCardBody">
+                            <div class="level-preview-container" id="continuePreview"></div>
+                            <div class="level-info">
+                                <div class="level-name continue-title">Continue Game</div>
+                                <div class="level-detail" id="continueLevelName">Custom level</div>
+                                <div class="level-detail" id="continueSize">20 × 20</div>
+                                <div class="level-detail" id="continueDensity">Density: 20% (80 mines)</div>
+                                <div class="level-detail" id="continueTime">Time: 00:00:00</div>
+                            </div>
+                            <div class="level-actions">
+                                <button class="btn btn-icon" id="btnContinueGame">▶</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Custom level card -->
+                    <div class="level-card custom-card">
+                        <div class="level-card-body">
+                            <div class="level-preview-container" id="customPreview"></div>
+                            <div class="level-info">
+                                <div class="level-name">Custom</div>
+                                <div class="level-detail" id="soloCustomSize">20 × 20</div>
+                                <div class="level-detail" id="soloCustomDensity">Density: 20%</div>
+                                <div class="level-detail" id="soloCustomMines">Mines: 80</div>
+                            </div>
+                            <div class="level-actions">
+                                <button class="btn btn-icon" id="btnSoloStart">▶</button>
+                                <button class="btn btn-icon" id="btnSoloSettings">Settings</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preset categories (injected by JS) -->
+                    <div id="presetCategories"></div>
+                </div>
+
+                <div class="solo-bottom-row">
+                    <button id="btnSoloBack" class="btn">⬅️ Back to Main Menu</button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="wanLobby" class="screen">
+            <div class="lobby-content">
+                <div class="lobby-scroll">
+                    <div class="lobby-header-row">
+                        <div id="lobbyTitle" class="lobby-title">🌍 Lobby</div>
+                        <div class="lobby-header-controls">
+                            <label id="lobbyPublicToggle" class="lobby-public-toggle" style="display:none;">
+                                <input type="checkbox" id="lobbyPublicCheck">
+                                <span>Public</span>
+                            </label>
+                            <button id="btnLobbySettings" class="btn btn-icon" style="display:none;">⚙️</button>
+                        </div>
+                    </div>
+
+                    <div id="lobbyGameID" class="lobby-gameid">Game ID: —</div>
+                    <div id="lobbyConfig" class="lobby-config">—</div>
+                    <div id="lobbyHint" class="lobby-hint">Waiting...</div>
+
+                    <div class="menu-separator"></div>
+
+                    <div class="player-list-title">👥 Connected Players</div>
+                    <div id="playerList"></div>
+
+                    <div id="pendingSection" style="display:none">
+                        <div class="menu-separator"></div>
+                        <div class="player-list-title pending-title">⏳ Pending Players</div>
+                        <div id="pendingList"></div>
+                    </div>
+                </div>
+
+                <div class="lobby-bottom-buttons">
+                    <button id="btnReturnToGame" class="btn btn-return-game" style="display:none;">🎮 Return to Game</button>
+                    <button id="btnJoinInProgress" class="btn btn-join-progress pulse-opacity" style="display:none;">🎮 Join Game in Progress</button>
+                    <button id="btnLobbyStart" class="btn btn-accent" style="display:none;">🚀 Start Game</button>
+                    <button id="btnLobbyLeave" class="btn btn-danger">⬅️ Leave Lobby</button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="gameView" class="screen">
+            
+            <div id="networkBar">
+                <div class="netbar-header">
+                    <span class="netbar-role" id="netRole">🔌 Connected</span>
+                    <span class="netbar-gameid" id="netGameID"></span>
+                    <span class="netbar-spacer"></span>
+                    <button class="net-lobby-btn" id="btnNetLobby">🏠 Lobby</button>
+                    <button class="net-leave-btn" id="btnNetLeave">❌</button>
+                </div>
+                <div class="netbar-players" id="netPlayerRow"></div>
+                <div class="netbar-pending" id="netPendingRow" style="display:none;"></div>
+            </div>
+
+            
+            <div id="statusBar">
+                <div class="status-left">
+                    <div class="status-display status-mines" id="minesDisplay">0000</div>
+                    <button class="status-btn" id="btnToggleAction">👆</button>
+                </div>
+                <button class="status-btn" id="btnPauseResume">🙂</button>
+                <div class="status-display status-timer" id="timerDisplay">00:00:00</div>
+            </div>
+
+            
+            <div id="gridsWrapper">
+                <div id="gridContainer">
+                    <canvas id="gridCanvas"></canvas>
+                    
+                    <div id="freezeOverlay" style="display:none;">
+                        <canvas id="freezeCanvas" width="200" height="200"></canvas>
+                        <div id="freezeText">0.00</div>
+                    </div>
+                    
+                    <div id="spectatorFeedback" style="display:none;">
+                        <span id="spectatorEmoji">👁️</span>
+                    </div>
+                </div>
+                
+                <div id="opponentGridContainer">
+                    <canvas id="opponentGridCanvas"></canvas>
+                    <div class="opponent-label">Opponent</div>
+                </div>
+            </div>
+
+            
+            <div id="gameModal" style="display:none;">
+                <div class="game-modal-card" id="gameModalCard">
+                    <button class="gm-close-btn" id="btnModalClose">❌</button>
+                    <h2 id="modalTitle" class="gm-title">PAUSED</h2>
+                    <div id="modalAliveCount" class="gm-alive" style="display:none;"></div>
+                    <div id="modalTimeDisplay" class="gm-time" style="display:none;"></div>
+
+                    <!-- Duel stats area -->
+                    <div id="duelStatsArea" style="display:none;">
+                        <div class="duel-score-row">
+                            <span id="duelScoreLeft" class="duel-score">0</span>
+                            <span class="duel-score-colon">:</span>
+                            <span id="duelScoreRight" class="duel-score">0</span>
+                        </div>
+                        <div class="duel-columns">
+                            <div class="duel-col duel-col-left" id="duelSelfCol"></div>
+                            <div class="duel-divider"></div>
+                            <div class="duel-col duel-col-right" id="duelOppCol"></div>
+                        </div>
+                        <div id="duelReasonBox" class="duel-reason-box" style="display:none;"></div>
+                    </div>
+
+                    <div class="gm-bottom-buttons">
+                        <button id="btnModalPrimary" class="btn btn-accent gm-btn">Resume</button>
+                        <button id="btnModalMenu" class="btn gm-btn">Main Menu</button>
+                    </div>
+                </div>
+            </div>
+
+            
+            <button id="btnClaimVictory" class="btn-claim-victory" style="display:none;">⭐ Claim Victory</button>
+        </div>
+
+        
+        <div id="toastContainer"></div>
+
+        
+
+        
+        <div id="hostDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>🌍 Create Online Lobby</h3>
+                <p class="modal-desc">Choose a username that other players will see:</p>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="hostPlayerName" maxlength="16" placeholder="Enter username">
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-accent" onclick="app.handleHostConfirm()">Create</button>
+                    <button class="btn" onclick="app._hideModal('hostDialog')">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="joinDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>🎯 Join Online Game</h3>
+                <div class="form-group">
+                    <label>Your username</label>
+                    <input type="text" id="joinPlayerName" maxlength="16" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label>Game ID</label>
+                    <input type="number" id="joinGameID" placeholder="Enter Game ID" min="1" max="999999">
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-accent" onclick="app.handleJoinConfirm()">Join</button>
+                    <button class="btn" onclick="app._hideModal('joinDialog')">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="gameSettingsDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3 id="gameSettingsTitle">🎯 Game Settings</h3>
+                <div id="settingsOnlineWarning" class="settings-warning" style="display:none;">
+                    ⚠️ Settings will apply to the next game
+                </div>
+                <div class="form-group">
+                    <label>Grid Width (5–128)</label>
+                    <input type="number" id="settingsGridW" min="5" max="128" value="20">
+                </div>
+                <div class="form-group">
+                    <label>Grid Height (5–128)</label>
+                    <input type="number" id="settingsGridH" min="5" max="128" value="20">
+                </div>
+                <div class="form-group">
+                    <label id="settingsDensityLabel">Mine Density: 20%</label>
+                    <input type="range" id="settingsGridDensity" min="5" max="40" value="20" class="density-slider">
+                </div>
+                <div class="form-group" id="gameTypeRow" style="display:none;">
+                    <label>Online Game Mode</label>
+                    <select id="settingsGameType">
+                        <option value="0">Co-Op Hard</option>
+                        <option value="1">Co-Op Soft</option>
+                        <option value="3">PVP Duel</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-accent" onclick="app.handleSettingsConfirm()">Apply</button>
+                    <button class="btn" onclick="app._hideModal('gameSettingsDialog')">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="appSettingsDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>⚙️ Application Settings</h3>
+                <div class="form-group">
+                    <label>Player Name</label>
+                    <input type="text" id="appPlayerName" maxlength="16" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label id="appFlagVolumeLabel">Flag Place Volume: 1.00</label>
+                    <input type="range" id="appFlagVolume" min="0" max="100" value="100" class="volume-slider">
+                </div>
+                <div class="form-group">
+                    <label id="appRevealVolumeLabel">Cell Reveal Volume: 1.00</label>
+                    <input type="range" id="appRevealVolume" min="0" max="100" value="100" class="volume-slider">
+                </div>
+                <div class="toggle-row">
+                    <label>Show Action Decals</label>
+                    <input type="checkbox" id="appShowDecals" checked>
+                </div>
+                <div class="form-group">
+                    <label>Server Address</label>
+                    <input type="text" id="appServerAddress" placeholder="host:port or wss://host:port" class="server-input">
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-accent" onclick="app.handleAppSettingsConfirm()">Save</button>
+                    <button class="btn" onclick="app._hideModal('appSettingsDialog')">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="publicLobbiesDialog" class="modal-backdrop">
+            <div class="modal modal-tall">
+                <h3>🔍 Public Lobbies</h3>
+                <div class="lobby-list-header">
+                    <span>Available Games</span>
+                    <button class="btn btn-small" id="btnPublicRefresh">🔄 Refresh</button>
+                </div>
+                <div class="menu-separator"></div>
+                <div id="publicLobbyList" class="scrollable-list">
+                    <div class="list-empty">No public games available</div>
+                </div>
+                <div class="menu-separator"></div>
+                <div class="pagination-row" id="publicLobbyPagination">
+                    <button class="btn btn-small" id="btnPublicPrev" disabled>◀</button>
+                    <span id="publicPageInfo">Page 1</span>
+                    <button class="btn btn-small" id="btnPublicNext" disabled>▶</button>
+                </div>
+                <button class="btn" onclick="app._hideModal('publicLobbiesDialog')">Close</button>
+            </div>
+        </div>
+
+        
+        <div id="leaderboardDialog" class="modal-backdrop">
+            <div class="modal modal-tall modal-wide">
+                <h3>🏆 Leaderboard</h3>
+
+                <!-- Category tabs -->
+                <div class="lb-tabs-scroll">
+                    <div id="lbCategoryTabs" class="lb-tabs"></div>
+                </div>
+
+                <!-- Level tabs -->
+                <div class="lb-tabs-scroll">
+                    <div id="lbLevelTabs" class="lb-tabs lb-level-tabs"></div>
+                </div>
+
+                <!-- Selection info row -->
+                <div class="lb-selection-row" id="lbSelectionRow">
+                    <span>📊</span>
+                    <span id="lbSelectionText" class="lb-selection-text"></span>
+                    <button class="btn btn-small btn-accent" id="btnLbPlayRated">▶ Rated</button>
+                    <button class="btn btn-small" id="btnLbRefresh">🔄</button>
+                </div>
+
+                <!-- Leaderboard list -->
+                <div id="leaderboardList" class="scrollable-list lb-list">
+                    <div class="list-empty">No entries yet.<br>Be the first!</div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-row" id="lbPagination">
+                    <button class="btn btn-small" id="btnLbPrev" disabled>◀</button>
+                    <span id="lbPageInfo">Page 1</span>
+                    <button class="btn btn-small" id="btnLbNext" disabled>▶</button>
+                </div>
+                <div id="lbShowingInfo" class="lb-showing-info"></div>
+
+                <button class="btn" onclick="app._hideModal('leaderboardDialog')">Close</button>
+            </div>
+        </div>
+
+        
+        <div id="leaderboardNotifDialog" class="modal-backdrop">
+            <div class="modal lb-notif-modal">
+                <div id="lbNotifHeader" class="lb-notif-header">🎉 Leaderboard!</div>
+                <div id="lbNotifBody" class="lb-notif-body"></div>
+                <div class="modal-actions">
+                    <button class="btn btn-accent" onclick="app._hideModal('leaderboardNotifDialog')">OK</button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="notConnectedDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>⚠️ Not Connected</h3>
+                <p style="color:var(--accent-red);font-size:15px;font-weight:bold;text-align:center;">You are not connected to the server.</p>
+                <p class="modal-desc">Please connect to the server before using online features.</p>
+                <div id="notConnectedIndicator" class="connection-indicator-embed"></div>
+                <div class="modal-actions">
+                    <button class="btn" onclick="app._hideModal('notConnectedDialog')">Close</button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="connectingDialog" class="modal-backdrop">
+            <div class="modal" style="text-align:center;">
+                <h3>🔗 Connecting</h3>
+                <p class="modal-desc">Connecting to server…</p>
+                <div class="spinner"></div>
+                <div class="modal-actions">
+                    <button class="btn" onclick="app._hideModal('connectingDialog'); app.stopReconnection();">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="waitingApprovalDialog" class="modal-backdrop">
+            <div class="modal" style="text-align:center;">
+                <h3>⏳ Joining Game</h3>
+                <p class="modal-desc">Waiting for host to accept your join request…</p>
+                <div class="spinner"></div>
+                <div class="modal-actions">
+                    <button class="btn" onclick="app._hideModal('waitingApprovalDialog'); app.lobbyHandler.leaveLobby();">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="leaveConfirmDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>⚠️ Leave Game</h3>
+                <p class="modal-desc">Are you sure you want to leave this game?</p>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" onclick="app._confirmLeave()">Yes</button>
+                    <button class="btn" onclick="app._hideModal('leaveConfirmDialog')">No</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>

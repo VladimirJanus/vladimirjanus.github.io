@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiral Illusion</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            cursor: pointer;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function updateSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        updateSize();
+        
+        let rotation = 0;
+        
+        // Text bouncing variables
+        let textX = canvas.width / 2;
+        let textY = canvas.height / 2;
+        let textVelX = 3;
+        let textVelY = 2;
+        const textPadding = 20;
+        
+        function drawSpiral() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(rotation);
+            
+            const maxRadius = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height) / 2;
+            const turns = 8;
+            const points = 3000;
+            
+            ctx.beginPath();
+            
+            for (let i = 0; i < points; i++) {
+                const angle = (i / points) * Math.PI * 2 * turns;
+                const radius = (i / points) * maxRadius;
+                
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * radius;
+                
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            
+            // Varying line width based on time
+            const lineWidth = 15 + Math.sin(Date.now() / 3000) * 10;
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = lineWidth;
+            ctx.stroke();
+            
+            // Draw second spiral (inverse) for the classic effect
+            ctx.beginPath();
+            for (let i = 0; i < points; i++) {
+                const angle = (i / points) * Math.PI * 2 * turns + Math.PI;
+                const radius = (i / points) * maxRadius;
+                
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * radius;
+                
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            
+            ctx.stroke();
+            ctx.restore();
+            
+            // Update text position (DVD bounce style)
+            ctx.font = 'bold 48px Arial';
+            const textMetrics = ctx.measureText('CHECK OUT MY EMULATOR');
+            const textWidth = textMetrics.width;
+            const textHeight = 48;
+            
+            textX += textVelX;
+            textY += textVelY;
+            
+            // Bounce off edges
+            if (textX - textWidth/2 <= textPadding || textX + textWidth/2 >= canvas.width - textPadding) {
+                textVelX *= -1;
+                textX = Math.max(textWidth/2 + textPadding, Math.min(textX, canvas.width - textWidth/2 - textPadding));
+            }
+            if (textY - textHeight/2 <= textPadding || textY + textHeight/2 >= canvas.height - textPadding) {
+                textVelY *= -1;
+                textY = Math.max(textHeight/2 + textPadding, Math.min(textY, canvas.height - textHeight/2 - textPadding));
+            }
+            
+            // Draw text with inverse color per pixel
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            // Use composite mode to invert colors
+            ctx.globalCompositeOperation = 'difference';
+            ctx.fillStyle = '#fff';
+            ctx.fillText('CHECK OUT MY EMULATOR', textX, textY);
+            ctx.globalCompositeOperation = 'source-over';
+            
+            rotation += 0.5;
+            requestAnimationFrame(drawSpiral);
+        }
+        
+        drawSpiral();
+        
+        // Click to go to GitHub
+        document.body.addEventListener('click', () => {
+            window.location.href = 'https://github.com/VladimirJanus/Motorola-M68XX-Microprocessor-Emulator';
+        });
+        
+        window.addEventListener('resize', () => {
+            updateSize();
+            // Reset text position on resize
+            textX = canvas.width / 2;
+            textY = canvas.height / 2;
+        });
+    </script>
+</body>
+</html>

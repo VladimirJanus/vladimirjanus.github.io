@@ -1,0 +1,784 @@
+/* styles.css — Faithful to Qt client Theme.js colours + QML layouts
+   ===================================================================== */
+
+:root {
+    /* Backgrounds (from Theme.js) */
+    --bg-menu:           #404060;
+    --bg-lobby:          #2C3E50;
+    --bg-grid:           #333333;
+    --bg-statusbar:      #888888;
+    --bg-modal:          #333333;
+    --bg-networkbar:     #34495E;
+
+    /* Cards */
+    --card-primary:      #505070;
+    --card-secondary:    #506070;
+    --card-active:       #606080;
+    --card-level:        #454560;
+    --card-level-started:#4a4a5a;
+    --card-level-done:   #4a5a4a;
+
+    /* Text */
+    --text-primary:      #ffffff;
+    --text-secondary:    #BDC3C7;
+    --text-muted:        #95A5A6;
+    --text-dimmed:       #7F8C8D;
+    --text-detail:       #aaaaaa;
+    --text-continue:     #90d090;
+
+    /* Accents */
+    --accent-red:        #E74C3C;
+    --accent-green:      #2ECC71;
+    --accent-blue:       #3498DB;
+    --accent-orange:     #F39C12;
+
+    /* Game-state */
+    --win-green:         #00FF00;
+    --loss-red:          #FF0000;
+    --pause-yellow:      #FFFF00;
+    --duel-pause:        #FFAA00;
+
+    /* Buttons */
+    --btn-default:       #666666;
+    --btn-pressed:       #555555;
+    --danger-default:    #cc0000;
+    --danger-pressed:    #aa0000;
+
+    /* Display (timer / mine counter) */
+    --display-bg:        black;
+    --display-text:      red;
+
+    /* Separator */
+    --separator:         #34495E;
+    --modal-border:      #FFFFFF;
+
+    /* Duel */
+    --duel-stat-text:    #CCCCCC;
+    --duel-divider:      #555555;
+    --duel-score-text:   #CCCCCC;
+    --duel-score-colon:  #888888;
+    --reason-box-bg:     #222222;
+    --reason-box-border: #444444;
+
+    /* Progress */
+    --progress-bg:       #30303a;
+    --progress-complete: #60d060;
+    --progress-partial:  #6060d0;
+
+    /* Ready */
+    --ready-active:      #2ECC71;
+    --ready-inactive:    #7F8C8D;
+
+    /* Input */
+    --input-bg:          #3a3a5a;
+    --input-border:      #5a5a7a;
+    --modal-overlay:     rgba(0,0,0,0.6);
+}
+
+/* ====================================================================
+   Reset
+   ==================================================================== */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1a1a2e;
+    color: var(--text-primary);
+    overflow: hidden;
+    height: 100vh; width: 100vw;
+    user-select: none; -webkit-user-select: none;
+}
+
+#app {
+    width:100%; height:100%;
+    display:flex; flex-direction:column;
+    position:relative;
+}
+
+/* ====================================================================
+   Buttons
+   ==================================================================== */
+.btn {
+    background: var(--btn-default);
+    color: var(--text-primary);
+    border: none; border-radius: 6px;
+    padding: 12px 20px; font-size: 16px;
+    cursor: pointer; text-align: center;
+    width: 100%;
+    transition: filter .12s;
+}
+.btn:hover { filter: brightness(1.15); }
+.btn:active { filter: brightness(0.9); }
+
+.btn-small  { padding: 8px 14px; font-size: 13px; width: auto; }
+.btn-icon   { width: auto; padding: 8px 12px; font-size: 14px; font-weight: bold; }
+
+.btn-accent { background: #1565c0; }
+.btn-danger { background: var(--danger-default); }
+.btn-success{ background: #2e7d32; }
+
+/* ====================================================================
+   Inputs
+   ==================================================================== */
+input[type="text"],input[type="number"],select {
+    background: var(--input-bg); color: var(--text-primary);
+    border: 1px solid var(--input-border); border-radius: 6px;
+    padding: 10px 14px; font-size: 15px; outline:none; width:100%;
+}
+input:focus,select:focus { border-color: var(--accent-blue); }
+
+input[type="range"] {
+    -webkit-appearance: none; appearance: none;
+    width:100%; height:8px; border-radius:4px;
+    background: var(--input-border); outline:none;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance:none; width:18px; height:18px;
+    border-radius:50%; background: var(--accent-blue); cursor:pointer;
+}
+
+input[type="checkbox"] {
+    width:18px; height:18px; accent-color: var(--accent-blue);
+}
+
+/* ====================================================================
+   Screens  (stack on top of each other)
+   ==================================================================== */
+.screen {
+    position:absolute; top:0; left:0;
+    width:100%; height:100%;
+    display:none; flex-direction:column;
+}
+.screen.active { display:flex; }
+
+/* ====================================================================
+   MAIN MENU
+   ==================================================================== */
+#mainMenu {
+    background: var(--bg-menu);
+    align-items:center; justify-content:center;
+    padding: 30px;
+}
+.menu-content {
+    max-width:400px; width:100%;
+    display:flex; flex-direction:column;
+    gap:12px;
+}
+#mainMenu h1 { font-size:28px; text-align:center; margin-bottom:4px; }
+.subtitle { color:var(--text-secondary); text-align:center; font-size:16px; margin-bottom:8px; }
+.menu-separator { height:2px; background:var(--separator); margin:8px 0; }
+.menu-section-title { color:var(--text-muted); font-weight:bold; text-align:center; font-size:14px; margin-top:8px; }
+.menu-row { display:flex; gap:10px; }
+.menu-row .btn { flex:1; }
+.version-text { color:var(--text-secondary); text-align:center; font-size:12px; margin-top:14px; }
+
+/* Server address row at bottom of main menu */
+.server-address-row { display:flex; gap:8px; margin-top:4px; }
+.server-input { font-size:13px; padding:8px 10px; text-align:center; }
+.address-error { color:var(--accent-red); font-size:12px; text-align:center; }
+
+/* Connection indicator — full status bar (replaces the old dot) */
+.connection-indicator {
+    display:flex; align-items:center; justify-content:center;
+    gap:6px; padding:6px 12px; border-radius:4px;
+    margin:4px auto 0; max-width:320px;
+    transition:background .3s;
+}
+.connection-indicator .ci-emoji { font-size:14px; line-height:1; }
+.connection-indicator .ci-text { font-size:12px; font-weight:bold; color:#fff; }
+.connection-indicator .ci-btn {
+    background:rgba(0,0,0,.15); border:1px solid rgba(255,255,255,.3);
+    border-radius:4px; width:24px; height:24px;
+    font-size:11px; cursor:pointer; line-height:1; padding:0;
+    display:flex; align-items:center; justify-content:center;
+}
+.connection-indicator .ci-btn:hover { background:rgba(0,0,0,.3); }
+
+/* Connection indicator states */
+.bg-connected    { background:var(--accent-green); }
+.bg-connecting   { background:var(--accent-orange); }
+.bg-retrying     { background:var(--text-muted); }
+.bg-failed       { background:var(--accent-red); }
+.bg-givenup      { background:#7F3C3C; }
+.bg-disconnected { background:var(--text-dimmed); }
+
+/* Embedded indicator in dialogs */
+.connection-indicator-embed {
+    display:flex; align-items:center; justify-content:center;
+    gap:6px; padding:8px 14px; border-radius:4px;
+    margin:4px auto; max-width:300px; background:var(--text-dimmed);
+}
+.connection-indicator-embed .ci-emoji { font-size:14px; }
+.connection-indicator-embed .ci-text { font-size:12px; font-weight:bold; color:#fff; }
+.connection-indicator-embed .ci-btn {
+    background:rgba(0,0,0,.15); border:1px solid rgba(255,255,255,.3);
+    border-radius:4px; width:24px; height:24px;
+    font-size:11px; cursor:pointer; padding:0;
+    display:flex; align-items:center; justify-content:center;
+}
+
+/* Spinner for connecting / waiting dialogs */
+.spinner {
+    width:32px; height:32px; margin:8px auto;
+    border:3px solid rgba(255,255,255,.2);
+    border-top-color:var(--accent-blue);
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* ====================================================================
+   SOLO MENU
+   ==================================================================== */
+#soloMenu {
+    background: var(--bg-menu);
+    padding:0;
+}
+.solo-content {
+    display:flex; flex-direction:column;
+    height:100%;
+}
+.solo-scroll-area {
+    flex:1; overflow-y:auto; overflow-x:hidden;
+    padding:20px;
+}
+.solo-bottom-row {
+    padding:12px 20px;
+    flex-shrink:0;
+}
+
+/* Level cards */
+.level-card {
+    background: var(--card-primary);
+    border-radius:6px; margin-bottom:12px;
+    overflow:hidden;
+}
+
+/* Continue saved game card */
+.continue-card {
+    background: var(--card-secondary, #3a3a5a);
+    border-left: 4px solid var(--text-continue, #4CAF50);
+    cursor: pointer;
+}
+.continue-card:hover { background: var(--card-active); }
+.continue-title {
+    color: var(--text-continue, #4CAF50) !important;
+    font-size: 18px !important;
+}
+.level-card-body {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 16px; gap:14px;
+}
+.level-info { flex:1; }
+.level-name { font-size:16px; font-weight:bold; }
+.level-detail { font-size:12px; color:var(--text-detail); }
+.level-actions { display:flex; flex-direction:column; gap:6px; align-items:flex-end; }
+
+/* Category header (collapsible) */
+.category-header {
+    background: var(--card-primary);
+    border-radius:6px; padding:14px 16px;
+    cursor:pointer; display:flex; align-items:center; gap:10px;
+    margin-bottom:6px; transition:background .15s;
+}
+.category-header:hover { background:var(--card-active); }
+.category-header.expanded { background:var(--card-active); }
+.category-arrow { font-size:14px; width:18px; text-align:center; }
+.category-name { font-size:18px; font-weight:bold; flex:1; }
+.category-count { font-size:12px; color:var(--text-detail); }
+
+/* Level items inside expanded category */
+.category-levels { display:none; padding-left:8px; margin-bottom:10px; }
+.category-levels.expanded { display:block; }
+
+.level-card-preset {
+    border-radius:6px; margin-bottom:8px; overflow:hidden;
+}
+.level-card-preset .level-card-body {
+    flex-wrap:wrap;
+}
+.level-best-time { font-size:11px; font-weight:bold; }
+.level-best-none { color:var(--duel-score-colon); }
+.level-best-set  { color:var(--text-continue); }
+
+/* Progress bar */
+.progress-bar-container {
+    width:100%; height:8px; border-radius:4px;
+    background:var(--progress-bg);
+    margin-top:4px; position:relative;
+}
+.progress-bar-fill {
+    height:100%; border-radius:4px;
+    transition:width .3s;
+}
+.progress-bar-text {
+    position:absolute; top:0; left:0;
+    width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:9px; font-weight:bold; color:#aaa;
+}
+
+/* ====================================================================
+   WAN LOBBY
+   ==================================================================== */
+#wanLobby {
+    background: var(--bg-lobby);
+    padding:0;
+}
+.lobby-content {
+    display:flex; flex-direction:column;
+    height:100%;
+}
+.lobby-scroll {
+    flex:1; overflow-y:auto; padding:20px;
+    max-width:700px; margin:0 auto; width:100%;
+}
+.lobby-bottom-buttons {
+    padding:12px 20px;
+    max-width:700px; margin:0 auto; width:100%;
+    display:flex; flex-direction:column; gap:8px;
+}
+
+.lobby-header-row { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.lobby-title { font-size:24px; font-weight:bold; flex:1; }
+.lobby-header-controls { display:flex; align-items:center; gap:8px; }
+.lobby-public-toggle { display:flex; align-items:center; gap:4px; font-size:14px; cursor:pointer; }
+.lobby-gameid { color:var(--accent-blue); font-size:18px; font-weight:bold; text-align:center; }
+.lobby-config { color:var(--text-secondary); text-align:center; font-size:14px; }
+.lobby-hint { color:var(--text-secondary); text-align:center; font-size:13px; margin:4px 0; }
+
+.player-list-title { color:var(--accent-green); font-size:16px; font-weight:bold; margin-top:8px; }
+.pending-title { color:var(--accent-orange)!important; }
+
+.player-card {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 14px; border-radius:6px; gap:10px;
+    margin-bottom:6px;
+}
+.player-card .player-name { flex:1; font-weight:bold; }
+.player-card .player-status { font-size:13px; color:var(--text-secondary); }
+.player-card .kick-btn { width:auto; padding:4px 10px; font-size:12px; }
+
+.pending-card {
+    background: var(--bg-networkbar);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:8px 14px; border-radius:6px; gap:10px; margin-bottom:6px;
+}
+.pending-card .player-name { flex:1; }
+.pending-actions { display:flex; gap:6px; }
+.pending-actions .btn { width:auto; }
+
+/* Return to game / Join in progress */
+.btn-return-game { background:#9B59B6; font-size:18px; font-weight:bold; }
+.btn-join-progress { background:#27AE60; font-size:18px; font-weight:bold; }
+
+/* Pulse animation */
+.pulse-opacity {
+    animation: pulseOpacity 2s ease-in-out infinite;
+}
+@keyframes pulseOpacity {
+    0%,100% { opacity:0.8; }
+    50% { opacity:1; }
+}
+
+/* ====================================================================
+   GAME VIEW
+   ==================================================================== */
+#gameView { flex-direction:column; }
+
+/* Network bar */
+#networkBar {
+    display:none; flex-direction:column;
+    padding:8px 12px; background:var(--bg-networkbar);
+    min-height:34px; z-index:10; gap:6px;
+}
+#networkBar.visible { display:flex; }
+
+.netbar-header {
+    display:flex; align-items:center; gap:8px;
+}
+.netbar-role { font-size:14px; font-weight:bold; color:#fff; }
+.netbar-gameid { font-size:12px; color:var(--accent-blue); }
+.netbar-spacer { flex:1; }
+
+.net-lobby-btn {
+    background:var(--accent-blue); color:#fff;
+    border:none; border-radius:4px; padding:4px 12px;
+    font-size:12px; font-weight:bold; cursor:pointer;
+}
+.net-leave-btn {
+    background:var(--accent-red); color:#fff;
+    border:none; border-radius:4px; width:28px; height:28px;
+    font-size:14px; cursor:pointer; display:flex;
+    align-items:center; justify-content:center;
+}
+
+.netbar-players {
+    display:flex; flex-wrap:wrap; align-items:center; gap:4px;
+    font-size:11px;
+}
+.netbar-players-label { color:var(--text-secondary); margin-right:4px; }
+
+/* Player tag in network bar */
+.net-player-tag {
+    display:inline-flex; align-items:center; gap:3px;
+    padding:2px 8px; border-radius:3px;
+    font-size:11px; color:#fff; position:relative;
+}
+.net-player-tag .npt-icon { font-size:11px; }
+.net-player-tag .npt-name { font-size:11px; }
+.net-player-tag .npt-name.self { text-decoration:underline; }
+.net-player-tag .npt-name.host-player { font-weight:bold; }
+.net-player-tag .npt-state { font-size:11px; }
+.net-player-tag .npt-kick {
+    background:transparent; border:1px solid var(--accent-red);
+    border-radius:3px; width:18px; height:18px;
+    color:var(--accent-red); font-size:9px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; padding:0;
+}
+.net-player-tag .npt-ready {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:18px; height:18px; border-radius:2px;
+    font-size:11px; border:1px solid var(--ready-inactive);
+}
+.net-player-tag .npt-ready.ready {
+    background:var(--ready-active); border-color:var(--ready-active);
+    font-weight:bold;
+}
+
+/* Ready button in network bar */
+.netbar-ready-btn {
+    display:inline-flex; align-items:center; gap:4px;
+    padding:2px 8px; border-radius:3px;
+    background:var(--bg-lobby); border:2px solid var(--accent-blue);
+    color:#fff; font-size:11px; font-weight:bold; cursor:pointer;
+}
+.netbar-ready-btn.is-ready { border-color:var(--ready-active); }
+
+/* Pending players in network bar */
+.netbar-pending {
+    display:flex; flex-wrap:wrap; align-items:center; gap:4px;
+    font-size:11px;
+}
+.netbar-pending-label { color:var(--accent-orange); margin-right:4px; }
+.net-pending-tag {
+    display:inline-flex; align-items:center; gap:3px;
+    padding:2px 8px; border-radius:3px;
+    background:var(--bg-lobby); border:1px solid var(--accent-orange);
+    font-size:11px; color:#fff;
+}
+.net-pending-tag .npt-approve {
+    background:transparent; border:1px solid var(--accent-green);
+    border-radius:3px; width:18px; height:18px;
+    color:var(--accent-green); font-size:10px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; padding:0;
+}
+.net-pending-tag .npt-reject {
+    background:transparent; border:1px solid var(--accent-red);
+    border-radius:3px; width:18px; height:18px;
+    color:var(--accent-red); font-size:9px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; padding:0;
+}
+
+/* Status bar — modeled after the Qt StatusBar with LED displays */
+#statusBar {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:6px 10px; background:var(--bg-statusbar);
+    min-height:46px; z-index:10; gap:6px;
+}
+.status-left {
+    display:flex; align-items:center; gap:6px;
+}
+/* LED-style display (mine counter + timer) */
+.status-display {
+    background:var(--display-bg);
+    color:var(--display-text);
+    font-family:'Courier New', Courier, monospace;
+    font-weight:bold; font-size:18px;
+    padding:4px 10px; border-radius:4px;
+    min-width:80px; text-align:center;
+    letter-spacing:2px;
+    border:2px inset #444;
+}
+.status-btn {
+    background:none; border:none;
+    font-size:24px; cursor:pointer;
+    line-height:1;
+}
+
+/* Grid area — wrapper for own + opponent grid */
+#gridsWrapper { flex:1; display:flex; overflow:hidden; }
+#gridContainer { flex:1; position:relative; overflow:hidden; }
+#gridCanvas { position:absolute; top:0;left:0; width:100%;height:100%; }
+
+/* Opponent grid (PVP Duel) */
+#opponentGridContainer {
+    display:none; position:relative; overflow:hidden;
+    border-left:2px solid var(--duel-divider);
+}
+#opponentGridContainer.visible { display:block; flex:0 0 35%; }
+#opponentGridCanvas { position:absolute; top:0;left:0; width:100%;height:100%; }
+.opponent-label {
+    position:absolute; top:4px; left:50%; transform:translateX(-50%);
+    color:var(--text-muted); font-size:11px; font-weight:bold; z-index:5;
+    background:rgba(0,0,0,.5); padding:2px 10px; border-radius:3px;
+    pointer-events:none;
+}
+
+/* Freeze time overlay */
+#freezeOverlay {
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:200px; height:200px;
+    z-index:50;
+    display:flex; align-items:center; justify-content:center;
+    pointer-events:none;
+}
+#freezeOverlay.blocking { pointer-events:all; }
+#freezeCanvas { position:absolute; top:0;left:0; }
+#freezeText {
+    position:relative; z-index:1;
+    color:#fff; font-size:32px; font-weight:bold;
+    text-shadow:0 0 8px rgba(0,0,0,.5);
+}
+/* Freeze blocker covers entire grid */
+#freezeBlocker {
+    position:absolute; top:0;left:0; width:100%;height:100%;
+    z-index:49; cursor:not-allowed;
+}
+
+/* Spectator click feedback */
+#spectatorFeedback {
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    z-index:48;
+    pointer-events:none;
+}
+#spectatorEmoji {
+    font-size:100px;
+    opacity:0;
+    transition:opacity .8s ease-in;
+}
+#spectatorFeedback.show #spectatorEmoji {
+    opacity:0.8;
+}
+
+/* Level preview canvas (solo menu) */
+.level-preview-container {
+    width:100px; height:100px; flex-shrink:0;
+    background:var(--bg-grid); border-radius:4px;
+    overflow:hidden;
+}
+.level-preview-canvas {
+    display:block;
+}
+
+/* Claim victory */
+.btn-claim-victory {
+    position:absolute; bottom:16px; left:50%; transform:translateX(-50%);
+    background:var(--accent-orange); color:#fff;
+    border:none; border-radius:8px; padding:12px 24px;
+    font-size:16px; font-weight:bold; cursor:pointer;
+    z-index:55; box-shadow:0 4px 12px rgba(0,0,0,.4);
+}
+
+/* ====================================================================
+   GAME MODAL (pause / game-over / duel results)
+   ==================================================================== */
+#gameModal {
+    position:absolute; top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,.35);
+    z-index:60;
+    display:flex; align-items:center; justify-content:center;
+}
+.game-modal-card {
+    background:var(--bg-modal);
+    border:3px solid var(--modal-border);
+    border-radius:12px;
+    padding:20px 24px 18px;
+    max-width:420px; width:92%;
+    max-height:85vh; overflow-y:auto;
+    position:relative;
+    display:flex; flex-direction:column; gap:6px;
+}
+.gm-close-btn {
+    position:absolute; top:10px; right:10px;
+    background:var(--danger-default); border:none;
+    border-radius:4px; width:36px; height:36px;
+    font-size:16px; cursor:pointer; color:#fff;
+    display:flex; align-items:center; justify-content:center;
+}
+.gm-close-btn:hover { background:var(--danger-pressed); }
+
+.gm-title { font-size:26px; font-weight:bold; margin-right:44px; }
+.gm-alive { font-size:17px; text-align:center; }
+.gm-time  { font-size:17px; text-align:center; }
+
+/* Duel stats */
+.duel-score-row { display:flex; align-items:center; justify-content:center; gap:6px; margin:4px 0; }
+.duel-score { font-size:20px; font-weight:bold; color:var(--duel-score-text); }
+.duel-score-colon { font-size:20px; font-weight:bold; color:var(--duel-score-colon); }
+
+.duel-columns { display:flex; gap:0; margin-top:4px; }
+.duel-col { flex:1; display:flex; flex-direction:column; gap:3px; padding:4px 8px; }
+.duel-col-right { text-align:right; }
+.duel-divider { width:1px; background:var(--duel-divider); align-self:stretch; }
+
+.duel-col .duel-name { font-size:17px; font-weight:bold; text-decoration:underline; }
+.duel-col .duel-sublabel { font-size:11px; font-weight:bold; }
+.duel-col .duel-stat { font-size:13px; color:var(--duel-stat-text); }
+
+.duel-reason-box {
+    background:var(--reason-box-bg);
+    border:1px solid var(--reason-box-border);
+    border-radius:4px; padding:8px;
+    text-align:center; font-size:13px;
+    margin-top:8px;
+}
+
+.gm-bottom-buttons {
+    display:flex; flex-direction:column; gap:8px;
+    margin-top:10px; align-items:center;
+}
+.gm-btn { width:220px; text-align:center; }
+
+/* ====================================================================
+   MODAL DIALOGS  (host / join / settings / etc.)
+   ==================================================================== */
+.modal-backdrop {
+    display:none; position:fixed; top:0;left:0;
+    width:100%;height:100%;
+    background:var(--modal-overlay);
+    z-index:100; align-items:center; justify-content:center;
+}
+.modal-backdrop.active { display:flex; }
+
+.modal {
+    background:var(--bg-menu);
+    border-radius:12px; padding:24px;
+    max-width:440px; width:92%;
+    max-height:82vh; overflow-y:auto;
+    display:flex; flex-direction:column; gap:14px;
+}
+.modal-tall { max-height:88vh; }
+.modal-wide { max-width:600px; }
+
+.modal h3 { font-size:20px; text-align:center; }
+.modal-desc { color:var(--text-secondary); font-size:13px; text-align:center; }
+.modal label { color:var(--text-secondary); font-size:13px; display:block; margin-bottom:4px; }
+.form-group { display:flex; flex-direction:column; gap:4px; }
+.modal-actions { display:flex; gap:10px; margin-top:6px; }
+.modal-actions .btn { flex:1; width:auto; }
+
+.settings-warning { color:var(--accent-orange); font-size:12px; text-align:center; padding:6px; background:rgba(243,156,18,.1); border-radius:4px; }
+
+.toggle-row { display:flex; align-items:center; gap:10px; justify-content:space-between; }
+.toggle-row label { margin:0; }
+
+/* Standalone close/action buttons at bottom of tall dialogs */
+.modal-tall > .btn:last-child,
+.modal-wide > .btn:last-child { width:auto; max-width:200px; margin:4px auto 0; }
+.density-slider,.volume-slider { margin-top:4px; }
+
+/* ====================================================================
+   PUBLIC LOBBIES DIALOG
+   ==================================================================== */
+.lobby-list-header { display:flex; align-items:center; justify-content:space-between; }
+.scrollable-list { max-height:250px; overflow-y:auto; }
+.list-empty { color:var(--text-muted); text-align:center; padding:20px; }
+
+.lobby-list-entry {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:8px 12px; border-radius:6px;
+    background:var(--btn-default); cursor:pointer; margin-bottom:4px;
+}
+.lobby-list-entry:hover { filter:brightness(1.15); }
+.lobby-list-entry .host-name { font-weight:bold; flex:1; }
+.lobby-list-entry .lobby-meta { color:var(--text-secondary); font-size:13px; }
+
+.pagination-row { display:flex; align-items:center; justify-content:center; gap:12px; }
+
+/* ====================================================================
+   LEADERBOARD DIALOG
+   ==================================================================== */
+.lb-tabs-scroll { overflow-x:auto; overflow-y:hidden; padding-bottom:2px; }
+.lb-tabs {
+    display:flex; gap:4px; min-width:min-content;
+}
+.lb-tab {
+    padding:6px 12px; border-radius:4px;
+    background:var(--btn-default); cursor:pointer;
+    font-size:12px; white-space:nowrap; border:none;
+    color:var(--text-primary); transition:filter .12s;
+}
+.lb-tab:hover { filter:brightness(1.15); }
+.lb-tab.active { background:var(--accent-blue); font-weight:bold; }
+
+.lb-level-tabs .lb-tab { font-size:11px; }
+
+.lb-selection-row {
+    display:flex; align-items:center; gap:8px;
+    background:rgba(52,152,219,.12); border:1px solid rgba(52,152,219,.35);
+    border-radius:4px; padding:6px 10px;
+}
+.lb-selection-text { flex:1; font-size:12px; font-weight:bold; color:var(--accent-blue); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+.lb-list { max-height:300px; }
+.lb-entry {
+    display:flex; align-items:center;
+    padding:6px 10px; font-size:13px; gap:8px;
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+.lb-entry:nth-child(odd) { background:rgba(255,255,255,.03); }
+
+/* Medal highlights */
+.lb-entry.lb-gold   { background:rgba(255,215,0,.08); }
+.lb-entry.lb-silver { background:rgba(192,192,192,.08); }
+.lb-entry.lb-bronze { background:rgba(205,127,50,.08); }
+
+.lb-rank { width:40px; font-weight:bold; font-size:14px; text-align:center; }
+.lb-name { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.lb-time { font-family:monospace; color:var(--accent-green); white-space:nowrap; }
+.lb-date { font-size:10px; color:var(--text-dimmed); white-space:nowrap; }
+
+.lb-showing-info { font-size:10px; color:var(--text-dimmed); text-align:center; margin-top:4px; }
+
+/* Leaderboard notification */
+.lb-notif-modal { max-width:360px; text-align:center; }
+.lb-notif-modal .btn { width:auto; max-width:180px; margin:0 auto; }
+.lb-notif-header { font-size:22px; font-weight:bold; color:var(--win-green); }
+.lb-notif-body { color:var(--text-secondary); font-size:14px; display:flex; flex-direction:column; gap:8px; }
+.lb-notif-row { display:flex; justify-content:center; gap:8px; font-size:15px; }
+.lb-notif-label { font-weight:bold; color:#E0E0E0; }
+.lb-notif-value { color:#fff; }
+.lb-notif-desc { color:#E0E0E0; font-size:13px; }
+
+/* ====================================================================
+   TOAST NOTIFICATIONS
+   ==================================================================== */
+#toastContainer {
+    position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+    z-index:300; display:flex; flex-direction:column;
+    gap:8px; align-items:center;
+}
+.toast {
+    background:#323232; color:#fff;
+    padding:10px 20px; border-radius:8px; font-size:14px;
+    box-shadow:0 4px 12px rgba(0,0,0,.4);
+    animation:toastIn .3s ease-out, toastOut .3s ease-in 2.7s forwards;
+    max-width:90vw; text-align:center;
+}
+@keyframes toastIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes toastOut { from{opacity:1} to{opacity:0} }
+
+/* ====================================================================
+   RESPONSIVE
+   ==================================================================== */
+@media (max-width:500px) {
+    #mainMenu h1 { font-size:22px; }
+    .btn { font-size:14px; padding:10px 16px; }
+    .modal { padding:18px; }
+    .game-modal-card { padding:16px 14px 14px; }
+    .status-display { font-size:15px; min-width:65px; }
+}
