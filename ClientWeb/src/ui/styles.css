@@ -85,7 +85,8 @@ body {
     background: #1a1a2e;
     color: var(--text-primary);
     overflow: hidden;
-    height: 100vh; width: 100vw;
+    height: 100vh; width: 100vw;     /* fallback for older browsers */
+    height: 100dvh; width: 100dvw;  /* dynamic viewport — excludes mobile browser chrome */
     user-select: none; -webkit-user-select: none;
 }
 
