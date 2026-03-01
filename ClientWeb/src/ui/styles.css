@@ -165,6 +165,25 @@ input[type="checkbox"] {
     display:flex; flex-direction:column;
     gap:12px;
 }
+
+/* Desktop side ad — hidden by default (mobile), shown on wide screens */
+.menu-side-ad {
+    display:none;
+}
+@media (min-width: 900px) {
+    #mainMenu {
+        flex-direction:row;
+        gap:32px;
+    }
+    .menu-side-ad {
+        display:block;
+        width:300px;
+        min-width:160px;
+        flex-shrink:0;
+        align-self:center;
+    }
+}
+
 #mainMenu h1 { font-size:28px; text-align:center; margin-bottom:4px; }
 .subtitle { color:var(--text-secondary); text-align:center; font-size:16px; margin-bottom:8px; }
 .menu-separator { height:2px; background:var(--separator); margin:8px 0; }
