@@ -159,11 +159,15 @@ input[type="checkbox"] {
     background: var(--bg-menu);
     align-items:center; justify-content:center;
     padding: 30px;
+    overflow-y:auto;
 }
 .menu-content {
     max-width:400px; width:100%;
     display:flex; flex-direction:column;
     gap:12px;
+    margin-top:auto;
+    margin-bottom:auto;
+    flex-shrink:0;
 }
 
 /* Desktop side ad — hidden by default (mobile), shown on wide screens */
