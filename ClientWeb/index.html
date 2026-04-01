@@ -5,33 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Minesweeper Online</title>
     <link rel="stylesheet" href="src/ui/styles.css">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3159876123919520"
-     crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="app">
 
         
         <div id="mainMenu" class="screen active">
-            <!-- Desktop left ad (visible only on wide screens) -->
-            <div class="menu-side-ad">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-3159876123919520"
-                     data-ad-slot="7470804908"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-
             <div class="menu-content">
                 <h1>🎮 Minesweeper Online</h1>
                 <div id="menuSubtitle" class="subtitle">20×20 Grid • 20% Mines</div>
 
                 <div class="menu-row">
-                    <button id="btnGameSettings" class="btn btn-small">🎯 Game</button>
                     <button id="btnAppSettings" class="btn btn-small">⚙️ App</button>
                 </div>
 
@@ -44,25 +28,11 @@
 
                 <button id="btnCreateLobby" class="btn">🌍 Create Online Lobby</button>
                 <button id="btnBrowseLobbies" class="btn">🔍 Browse Public Lobbies</button>
+                <button id="btnCommunityGames" class="btn">🏘️ Community Games</button>
                 <button id="btnJoinByID" class="btn">🎯 Join by Game ID</button>
 
-                <div id="versionText" class="version-text"></div>
-
-                <div id="connectionIndicator"></div>
-                <div id="addressError" class="address-error" style="display:none;"></div>
-            </div>
-
-            <!-- Desktop right ad (visible only on wide screens) -->
-            <div class="menu-side-ad">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-3159876123919520"
-                     data-ad-slot="8783886573"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+                <div class="menu-separator"></div>
+                <button id="btnStats" class="btn">📊 Statistics</button>
             </div>
         </div>
 
@@ -70,12 +40,12 @@
         <div id="soloMenu" class="screen">
             <div class="solo-content">
                 <div class="solo-scroll-area" id="soloScrollArea">
-                    <!-- Continue saved game card (hidden when no save exists) -->
+                    <!-- Continue last game card (hidden when no save exists) -->
                     <div class="level-card continue-card" id="continueCard" style="display:none">
                         <div class="level-card-body" id="continueCardBody">
                             <div class="level-preview-container" id="continuePreview"></div>
                             <div class="level-info">
-                                <div class="level-name continue-title">Continue Game</div>
+                                <div class="level-name continue-title">Continue Last Game</div>
                                 <div class="level-detail" id="continueLevelName">Custom level</div>
                                 <div class="level-detail" id="continueSize">20 × 20</div>
                                 <div class="level-detail" id="continueDensity">Density: 20% (80 mines)</div>
@@ -100,6 +70,7 @@
                             <div class="level-actions">
                                 <button class="btn btn-icon" id="btnSoloStart">▶</button>
                                 <button class="btn btn-icon" id="btnSoloSettings">Settings</button>
+                                <button class="btn btn-icon" id="btnCustomContinue" style="display:none">Continue</button>
                             </div>
                         </div>
                     </div>
@@ -116,19 +87,6 @@
 
         
         <div id="wanLobby" class="screen">
-            <!-- Lobby side left ad (visible only on wide screens) -->
-            <div class="lobby-side-ad">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-3159876123919520"
-                     data-ad-slot="9370685290"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-
             <div class="lobby-content">
                 <div class="lobby-scroll">
                     <div class="lobby-header-row">
@@ -165,19 +123,6 @@
                     <button id="btnLobbyLeave" class="btn btn-danger">⬅️ Leave Lobby</button>
                 </div>
             </div>
-
-            <!-- Lobby side right ad (visible only on wide screens) -->
-            <div class="lobby-side-ad">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-3159876123919520"
-                     data-ad-slot="9905396557"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
         </div>
 
         
@@ -188,6 +133,10 @@
                     <span class="netbar-role" id="netRole">🔌 Connected</span>
                     <span class="netbar-gameid" id="netGameID"></span>
                     <span class="netbar-spacer"></span>
+                    <span class="net-chat-btn-wrapper">
+                        <button class="net-chat-btn" id="btnNetChat">💬</button>
+                        <span class="chat-unread-dot" id="chatUnreadDot"></span>
+                    </span>
                     <button class="net-lobby-btn" id="btnNetLobby">🏠 Lobby</button>
                     <button class="net-leave-btn" id="btnNetLeave">❌</button>
                 </div>
@@ -227,12 +176,42 @@
             </div>
 
             
+            <div id="chatPanel" class="chat-panel" style="display:none;">
+                <div class="chat-header">
+                    <span class="chat-title">💬 Chat</span>
+                    <button class="chat-close-btn" id="btnChatClose">✕</button>
+                </div>
+                <div class="chat-separator"></div>
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input-row">
+                    <input type="text" id="chatInput" class="chat-input" maxlength="128" placeholder="Type a message…" autocomplete="off">
+                    <button class="chat-send-btn" id="btnChatSend">Send</button>
+                </div>
+            </div>
+
+            
             <div id="gameModal" style="display:none;">
                 <div class="game-modal-card" id="gameModalCard">
                     <button class="gm-close-btn" id="btnModalClose">❌</button>
                     <h2 id="modalTitle" class="gm-title">PAUSED</h2>
                     <div id="modalAliveCount" class="gm-alive" style="display:none;"></div>
                     <div id="modalTimeDisplay" class="gm-time" style="display:none;"></div>
+
+                    <!-- Community game stats area -->
+                    <div id="communityStatsArea" style="display:none;">
+                        <table class="cs-table">
+                            <thead>
+                                <tr>
+                                    <th class="cs-th cs-th-name" data-sort="playerName">Name</th>
+                                    <th class="cs-th cs-th-num" data-sort="attemptCount">Attempts</th>
+                                    <th class="cs-th cs-th-num cs-sorted" data-sort="revealCount">Reveals ▼</th>
+                                    <th class="cs-th cs-th-num" data-sort="flagCount">Flags</th>
+                                    <th class="cs-th cs-th-num" data-sort="timeAliveMs">Time Alive</th>
+                                </tr>
+                            </thead>
+                            <tbody id="communityStatsBody"></tbody>
+                        </table>
+                    </div>
 
                     <!-- Duel stats area -->
                     <div id="duelStatsArea" style="display:none;">
@@ -327,6 +306,12 @@
                         <option value="3">PVP Duel</option>
                     </select>
                 </div>
+                <div class="form-group" id="levelPresetRow" style="display:none;">
+                    <label>Level Preset</label>
+                    <select id="settingsLevelPreset">
+                        <option value="">— Custom —</option>
+                    </select>
+                </div>
                 <div class="modal-actions">
                     <button class="btn btn-accent" onclick="app.handleSettingsConfirm()">Apply</button>
                     <button class="btn" onclick="app._hideModal('gameSettingsDialog')">Cancel</button>
@@ -338,26 +323,86 @@
         <div id="appSettingsDialog" class="modal-backdrop">
             <div class="modal">
                 <h3>⚙️ Application Settings</h3>
-                <div class="form-group">
-                    <label>Player Name</label>
-                    <input type="text" id="appPlayerName" maxlength="16" placeholder="Enter username">
+                <div class="settings-tabs">
+                    <button class="settings-tab active" data-tab="general">General</button>
+                    <button class="settings-tab" data-tab="audio">Audio</button>
+                    <button class="settings-tab" data-tab="controls">Controls</button>
+                    <button class="settings-tab" data-tab="misc">Misc</button>
                 </div>
-                <div class="form-group">
-                    <label id="appFlagVolumeLabel">Flag Place Volume: 1.00</label>
-                    <input type="range" id="appFlagVolume" min="0" max="100" value="100" class="volume-slider">
+
+                <!-- General tab -->
+                <div class="settings-tab-content active" id="settingsTab-general">
+                    <div class="form-group">
+                        <label>Player Name</label>
+                        <input type="text" id="appPlayerName" maxlength="16" placeholder="Enter username">
+                    </div>
+                    <div class="toggle-row">
+                        <label>Show Action Decals</label>
+                        <input type="checkbox" id="appShowDecals" checked>
+                    </div>
+                    <div class="toggle-row">
+                        <label>Digital Textures</label>
+                        <input type="checkbox" id="appDigitalTextures">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label id="appRevealVolumeLabel">Cell Reveal Volume: 1.00</label>
-                    <input type="range" id="appRevealVolume" min="0" max="100" value="100" class="volume-slider">
+
+                <!-- Audio tab -->
+                <div class="settings-tab-content" id="settingsTab-audio">
+                    <div class="form-group">
+                        <label id="appFlagVolumeLabel">Flag Place Volume: 1.00</label>
+                        <input type="range" id="appFlagVolume" min="0" max="100" value="100" class="volume-slider">
+                    </div>
+                    <div class="form-group">
+                        <label id="appRevealVolumeLabel">Cell Reveal Volume: 1.00</label>
+                        <input type="range" id="appRevealVolume" min="0" max="100" value="100" class="volume-slider">
+                    </div>
                 </div>
-                <div class="toggle-row">
-                    <label>Show Action Decals</label>
-                    <input type="checkbox" id="appShowDecals" checked>
+
+                <!-- Controls tab -->
+                <div class="settings-tab-content" id="settingsTab-controls">
+                    <div class="form-group">
+                        <label>Left Click</label>
+                        <select id="appLeftClickBehaviour" class="settings-select">
+                            <option value="0">Reveal</option>
+                            <option value="1">Flag</option>
+                            <option value="2">Primary Action</option>
+                            <option value="3">Secondary Action</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Right Click</label>
+                        <select id="appRightClickBehaviour" class="settings-select">
+                            <option value="0">Reveal</option>
+                            <option value="1">Flag</option>
+                            <option value="2">Primary Action</option>
+                            <option value="3">Secondary Action</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Long Press</label>
+                        <select id="appLongPressBehaviour" class="settings-select">
+                            <option value="0">Reveal</option>
+                            <option value="1">Flag</option>
+                            <option value="2">Primary Action</option>
+                            <option value="3">Secondary Action</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-top:10px">
+                        <button class="btn" onclick="app.resetControlsToDefaults()">Reset to Defaults</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Server Address</label>
-                    <input type="text" id="appServerAddress" placeholder="host:port or wss://host:port" class="server-input">
+
+                <!-- Misc tab -->
+                <div class="settings-tab-content" id="settingsTab-misc">
+                    <div class="form-group">
+                        <label>Server Address</label>
+                        <input type="text" id="appServerAddress" placeholder="host:port or wss://host:port" class="server-input">
+                        <div id="addressError" class="address-error" style="display:none;"></div>
+                    </div>
+                    <div id="connectionIndicator"></div>
+                    <div id="appVersionText" class="version-text"></div>
                 </div>
+
                 <div class="modal-actions">
                     <button class="btn btn-accent" onclick="app.handleAppSettingsConfirm()">Save</button>
                     <button class="btn" onclick="app._hideModal('appSettingsDialog')">Cancel</button>
@@ -368,7 +413,7 @@
         
         <div id="publicLobbiesDialog" class="modal-backdrop">
             <div class="modal modal-tall">
-                <h3>🔍 Public Lobbies</h3>
+                <h3 id="publicLobbiesTitle">🔍 Public Lobbies</h3>
                 <div class="lobby-list-header">
                     <span>Available Games</span>
                     <button class="btn btn-small" id="btnPublicRefresh">🔄 Refresh</button>
@@ -446,7 +491,7 @@
                 <p class="modal-desc">Please connect to the server before using online features.</p>
                 <div id="notConnectedIndicator" class="connection-indicator-embed"></div>
                 <div class="modal-actions">
-                    <button class="btn" onclick="app._hideModal('notConnectedDialog')">Close</button>
+                    <button class="btn" onclick="app.connection._pendingAction = null; app._hideModal('notConnectedDialog')">Close</button>
                 </div>
             </div>
         </div>
@@ -471,6 +516,28 @@
                 <div class="spinner"></div>
                 <div class="modal-actions">
                     <button class="btn" onclick="app._hideModal('waitingApprovalDialog'); app.lobbyHandler.leaveLobby();">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="statsMenu" class="screen">
+            <div class="stats-content">
+                <div class="stats-header">
+                    <h2>📊 Statistics</h2>
+                </div>
+                <div class="stats-tab-bar" id="statsTabBar">
+                    <button class="stats-tab active" data-mode="total">Total</button>
+                    <button class="stats-tab" data-mode="solo">Solo</button>
+                    <button class="stats-tab" data-mode="soloRated">Solo Rated</button>
+                    <button class="stats-tab" data-mode="coopHard">Co-Op Hard</button>
+                    <button class="stats-tab" data-mode="coopSoft">Co-Op Soft</button>
+                    <button class="stats-tab" data-mode="pvpDuel">PVP Duel</button>
+                    <button class="stats-tab" data-mode="community">Community</button>
+                </div>
+                <div class="stats-cards" id="statsCards"></div>
+                <div class="stats-bottom-row">
+                    <button id="btnStatsBack" class="btn">⬅️ Back to Main Menu</button>
                 </div>
             </div>
         </div>
