@@ -66,6 +66,56 @@
         a.play:hover {
             background: linear-gradient(135deg, #2563eb, #4f46e5);
         }
+        a.builds {
+            background: linear-gradient(135deg, #059669, #10b981);
+            border: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        a.builds:hover {
+            background: linear-gradient(135deg, #047857, #059669);
+        }
+        .builds-panel {
+            display: none;
+            margin-top: 1rem;
+            background: rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 1.2rem;
+            text-align: left;
+        }
+        .builds-panel.open {
+            display: block;
+        }
+        .builds-panel h3 {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin-bottom: 0.6rem;
+        }
+        .builds-panel .folder {
+            margin-bottom: 0.5rem;
+        }
+        .builds-panel .folder-name {
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+        .builds-panel .dl-link {
+            display: inline-block;
+            padding: 0.45rem 0.9rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+        .builds-panel .dl-link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: none;
+        }
     </style>
 </head>
 <body>
@@ -73,10 +123,24 @@
         <h1>Vladimir Januš</h1>
         <p class="tagline">I make cool stuff.</p>
         <div class="links">
-            <a class="play" href="ClientWeb/index.html">💣 Minesweeper Online</a>
+            <a class="play" href="ClientWeb/index.html">💣 Minesweeper Online Web</a>
+            <a class="builds" href="#" id="buildsToggle" onclick="toggleBuilds(event)">📦 MinesweeperOnline Builds</a>
+            <div class="builds-panel" id="buildsPanel">
+                <h3>ClientQtBuilds</h3>
+                <div class="folder">
+                    <div class="folder-name">📁 Windows</div>
+                    <a class="dl-link" href="ClientQtBuilds/Windows/MinesweeperOnline-6.0-Windows.zip" download>⬇ MinesweeperOnline-6.0-Windows.zip</a>
+                </div>
+            </div>
             <a href="https://github.com/VladimirJanus/Motorola-M68XX-Microprocessor-Emulator">Motorola M68XX Emulator</a>
             <a href="https://github.com/VladimirJanus">GitHub</a>
         </div>
     </div>
+    <script>
+        function toggleBuilds(e) {
+            e.preventDefault();
+            document.getElementById('buildsPanel').classList.toggle('open');
+        }
+    </script>
 </body>
 </html>
