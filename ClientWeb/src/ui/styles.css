@@ -175,6 +175,9 @@ input[type="checkbox"] {
 
 /* Server address row at bottom of main menu */
 .server-address-row { display:flex; gap:8px; margin-top:4px; }
+.server-addr-row { display:flex; gap:8px; align-items:center; margin-top:4px; }
+.server-addr-row .server-input { flex:1; }
+.refetch-btn { white-space:nowrap; flex-shrink:0; font-size:12px; padding:6px 10px; width:auto; }
 .server-input { font-size:13px; padding:8px 10px; text-align:center; }
 .address-error { color:var(--accent-red); font-size:12px; text-align:center; }
 
@@ -291,6 +294,17 @@ input[type="checkbox"] {
 /* Level items inside expanded category */
 .category-levels { display:none; padding-left:8px; margin-bottom:10px; }
 .category-levels.expanded { display:block; }
+
+/* Game mode cards */
+.game-mode-card { cursor:pointer; }
+.game-mode-card .level-card-body { padding:12px 16px; }
+.game-mode-back {
+    background:var(--card-primary); border-radius:6px; padding:14px 16px;
+    cursor:pointer; display:flex; align-items:center; gap:10px;
+    margin-bottom:10px;
+}
+.game-mode-back:hover { background:var(--card-active); }
+.game-mode-title { font-size:18px; font-weight:bold; margin-left:auto; }
 
 .level-card-preset {
     border-radius:6px; margin-bottom:8px; overflow:hidden;
@@ -597,6 +611,12 @@ input[type="checkbox"] {
     background:none; border:none;
     font-size:24px; cursor:pointer;
     line-height:1;
+}
+
+/* Fog of war countdown bar */
+#fogCounterBar {
+    text-align:center; font-size:12px; color:#aaaacc;
+    background:#1a1a2e; padding:3px 0; line-height:1;
 }
 
 /* Grid area — wrapper for own + opponent grid */
