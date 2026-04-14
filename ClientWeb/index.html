@@ -14,11 +14,10 @@
         <div id="mainMenu" class="screen active">
             <div class="menu-content">
                 <h1>🎮 Minesweeper Online</h1>
-                <div id="menuSubtitle" class="subtitle">20×20 Grid • 20% Mines</div>
 
-                <div class="menu-row">
-                    <button id="btnAppSettings" class="btn btn-small">⚙️ App</button>
-                </div>
+                <div class="menu-separator"></div>
+
+                <button id="btnAppSettings" class="btn">⚙️ App Settings</button>
 
                 <div class="menu-separator"></div>
 
@@ -28,8 +27,7 @@
                 <div class="menu-section-title">Online Multiplayer</div>
 
                 <button id="btnCreateLobby" class="btn">🌍 Create Online Lobby</button>
-                <button id="btnBrowseLobbies" class="btn">🔍 Browse Public Lobbies</button>
-                <button id="btnCommunityGames" class="btn">🏘️ Community Games</button>
+                <button id="btnBrowseLobbies" class="btn">🧭 Game Browser</button>
                 <button id="btnJoinByID" class="btn">🎯 Join by Game ID</button>
 
                 <div class="menu-separator"></div>
@@ -40,6 +38,13 @@
         
         <div id="soloMenu" class="screen">
             <div class="solo-content">
+                <div class="solo-header">
+                    <div class="screen-header-row">
+                        <button id="btnSoloBack" class="screen-back-btn">⬅️</button>
+                        <h2 class="solo-title" id="soloMenuTitle">🎲 Solo Play</h2>
+                        <div class="screen-header-spacer"></div>
+                    </div>
+                </div>
                 <div class="solo-scroll-area" id="soloScrollArea">
                     <!-- Continue last game card (hidden when no save exists) -->
                     <div class="level-card continue-card" id="continueCard" style="display:none">
@@ -93,9 +98,7 @@
                     </div>
                 </div>
 
-                <div class="solo-bottom-row">
-                    <button id="btnSoloBack" class="btn">⬅️ Back to Main Menu</button>
-                </div>
+
             </div>
         </div>
 
@@ -106,10 +109,6 @@
                     <div class="lobby-header-row">
                         <div id="lobbyTitle" class="lobby-title">🌍 Lobby</div>
                         <div class="lobby-header-controls">
-                            <label id="lobbyPublicToggle" class="lobby-public-toggle" style="display:none;">
-                                <input type="checkbox" id="lobbyPublicCheck">
-                                <span>Public</span>
-                            </label>
                             <button id="btnLobbySettings" class="btn btn-icon" style="display:none;">⚙️</button>
                         </div>
                     </div>
@@ -176,7 +175,11 @@
             <div id="gridsWrapper">
                 <div id="gridContainer">
                     <canvas id="gridCanvas"></canvas>
+                    <canvas id="infiniteCanvas" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%"></canvas>
                     <canvas id="grid3DCanvas" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%"></canvas>
+
+                    <div id="kbdPositionBadge" class="kbd-pos-badge" style="display:none;"></div>
+                    <div id="chatToastStack" class="chat-toast-stack" style="display:none;"></div>
                     
                     <div id="freezeOverlay" style="display:none;">
                         <canvas id="freezeCanvas" width="200" height="200"></canvas>
@@ -186,11 +189,10 @@
                     <div id="spectatorFeedback" style="display:none;">
                         <span id="spectatorEmoji">👁️</span>
                     </div>
-                </div>
-                
-                <div id="opponentGridContainer">
-                    <canvas id="opponentGridCanvas"></canvas>
-                    <div class="opponent-label">Opponent</div>
+                    <div id="opponentGridContainer">
+                        <div class="opponent-label">Opponent Grid</div>
+                        <canvas id="opponentGridCanvas"></canvas>
+                    </div>
                 </div>
             </div>
 
@@ -213,6 +215,10 @@
                 <div class="game-modal-card" id="gameModalCard">
                     <button class="gm-close-btn" id="btnModalClose">❌</button>
                     <h2 id="modalTitle" class="gm-title">PAUSED</h2>
+                    <div id="modalPauseInfo" class="gm-pause-info" style="display:none;">
+                        <div id="modalPauseCategory" class="gm-pause-category"></div>
+                        <div id="modalPauseSpecs" class="gm-pause-specs"></div>
+                    </div>
                     <div id="modalAliveCount" class="gm-alive" style="display:none;"></div>
                     <div id="modalTimeDisplay" class="gm-time" style="display:none;"></div>
 
@@ -225,7 +231,7 @@
                                     <th class="cs-th cs-th-num" data-sort="attemptCount">Attempts</th>
                                     <th class="cs-th cs-th-num cs-sorted" data-sort="revealCount">Reveals ▼</th>
                                     <th class="cs-th cs-th-num" data-sort="flagCount">Flags</th>
-                                    <th class="cs-th cs-th-num" data-sort="timeAliveMs">Time Alive</th>
+                                    <th class="cs-th cs-th-num" data-sort="timeAliveMs">Alive</th>
                                 </tr>
                             </thead>
                             <tbody id="communityStatsBody"></tbody>
@@ -248,7 +254,10 @@
                     </div>
 
                     <div class="gm-bottom-buttons">
-                        <button id="btnModalPrimary" class="btn btn-accent gm-btn">Resume</button>
+                        <div id="modalActionRow" class="gm-action-row">
+                            <button id="btnModalPrimary" class="btn btn-accent gm-btn gm-primary-btn">Resume</button>
+                            <button id="btnModalNext" class="btn gm-next-btn">Next</button>
+                        </div>
                         <button id="btnModalMenu" class="btn gm-btn">Main Menu</button>
                     </div>
                 </div>
@@ -320,8 +329,8 @@
                 <div class="form-group" id="gameTypeRow" style="display:none;">
                     <label>Online Game Mode</label>
                     <select id="settingsGameType">
-                        <option value="0">Co-Op Hard</option>
-                        <option value="1">Co-Op Soft</option>
+                        <option value="0">Cooperative Hardcore</option>
+                        <option value="1">Cooperative Softcore</option>
                         <option value="3">PVP Duel</option>
                     </select>
                 </div>
@@ -330,6 +339,14 @@
                     <select id="settingsLevelPreset">
                         <option value="">— Custom —</option>
                     </select>
+                </div>
+                <div class="toggle-row" id="lobbyPublicRow" style="display:none;">
+                    <label>Public Lobby</label>
+                    <input type="checkbox" id="settingsLobbyPublic" checked>
+                </div>
+                <div class="toggle-row" id="autoApproveRow" style="display:none;">
+                    <label>Auto-approve pending players</label>
+                    <input type="checkbox" id="settingsAutoApprove">
                 </div>
                 <div class="modal-actions">
                     <button class="btn btn-accent" onclick="app.handleSettingsConfirm()">Apply</button>
@@ -397,6 +414,10 @@
                         <label>Digital Textures</label>
                         <input type="checkbox" id="appDigitalTextures">
                     </div>
+                    <div class="toggle-row">
+                        <label>Show chat pop-up notifications</label>
+                        <input type="checkbox" id="appChatNotifications">
+                    </div>
                 </div>
 
                 <!-- Audio tab -->
@@ -440,6 +461,9 @@
                             <option value="3">Secondary Action</option>
                         </select>
                     </div>
+                    <div id="appClickMappingWarning" class="settings-warning click-mapping-warning" style="display:none;">
+                        Since primary/seconday is not used the button wont be visible in game
+                    </div>
                     <div class="form-group" style="margin-top:10px">
                         <button class="btn" onclick="app.resetControlsToDefaults()">Reset to Defaults</button>
                     </div>
@@ -447,6 +471,7 @@
 
                 <!-- Misc tab -->
                 <div class="settings-tab-content" id="settingsTab-misc">
+                    <div class="settings-section-title">Server Connection</div>
                     <div class="form-group">
                         <label>Server Address</label>
                         <div class="server-addr-row">
@@ -456,8 +481,19 @@
                         <div id="addressError" class="address-error" style="display:none;"></div>
                     </div>
                     <div id="connectionIndicator"></div>
+
+                    <div class="settings-section-title">Local Data</div>
+
+                    <button id="btnClearProgress" class="btn" style="margin-bottom:4px;">🗑 Delete All Solo Progress</button>
+                    <p class="settings-desc-text">Deletes saved level progress and local run data. This cannot be undone.</p>
+
+                    <button id="btnResetSettings" class="btn" style="margin-bottom:4px;">↺ Reset All Settings</button>
+                    <p class="settings-desc-text">Resets all app settings to their defaults. This cannot be undone.</p>
+
                     <div id="appVersionText" class="version-text"></div>
+                    <a href="https://vladimirjanus.github.io/privacy.html" target="_blank" rel="noopener" class="privacy-link">Privacy Policy</a>
                 </div>
+
 
                 <div class="modal-actions">
                     <button class="btn btn-accent" onclick="app.handleAppSettingsConfirm()">Save</button>
@@ -469,16 +505,21 @@
         
         <div id="publicLobbiesDialog" class="modal-backdrop">
             <div class="modal modal-tall">
-                <h3 id="publicLobbiesTitle">🔍 Public Lobbies</h3>
-                <div class="lobby-list-header">
-                    <span>Available Games</span>
-                    <button class="btn btn-small" id="btnPublicRefresh">🔄 Refresh</button>
+                <h3>🧭 Game Browser</h3>
+                <div class="browser-tabs">
+                    <button class="browser-tab active" id="browserTabPlayerLobbies">Player Lobbies</button>
+                    <button class="browser-tab" id="browserTabCommunity">Community</button>
+                    <button class="btn btn-small" id="btnPublicRefresh" style="margin-left:auto;">🔄</button>
                 </div>
-                <div class="menu-separator"></div>
+                <div class="browser-filters" id="browserFilters">
+                    <button class="browser-filter active" id="browserFilterAll">All</button>
+                    <button class="browser-filter" id="browserFilterCoOpSoft">Co-Op Soft</button>
+                    <button class="browser-filter" id="browserFilterCoOpHard">Co-Op Hard</button>
+                    <button class="browser-filter" id="browserFilterPVP">PVP Duel</button>
+                </div>
                 <div id="publicLobbyList" class="scrollable-list">
                     <div class="list-empty">No public games available</div>
                 </div>
-                <div class="menu-separator"></div>
                 <div class="pagination-row" id="publicLobbyPagination">
                     <button class="btn btn-small" id="btnPublicPrev" disabled>◀</button>
                     <span id="publicPageInfo">Page 1</span>
@@ -580,7 +621,11 @@
         <div id="statsMenu" class="screen">
             <div class="stats-content">
                 <div class="stats-header">
-                    <h2>📊 Statistics</h2>
+                    <div class="screen-header-row">
+                        <button id="btnStatsBack" class="screen-back-btn">⬅️</button>
+                        <h2>📊 Statistics</h2>
+                        <div class="screen-header-spacer"></div>
+                    </div>
                 </div>
                 <div class="stats-tab-bar" id="statsTabBar">
                     <button class="stats-tab active" data-mode="total">Total</button>
@@ -592,10 +637,16 @@
                     <button class="stats-tab" data-mode="pvpDuel">PVP Duel</button>
                     <button class="stats-tab" data-mode="community">Community</button>
                 </div>
-                <div class="stats-cards" id="statsCards"></div>
-                <div class="stats-bottom-row">
-                    <button id="btnStatsBack" class="btn">⬅️ Back to Main Menu</button>
+                <div class="stats-variant-bar" id="statsVariantBar" style="display:none;">
+                    <span class="stats-variant-label">Game Variant:</span>
+                    <button class="stats-variant-tab active" data-variant="all">All</button>
+                    <button class="stats-variant-tab" data-variant="normal">Normal</button>
+                    <button class="stats-variant-tab" data-variant="fog_of_war">Fog of War</button>
+                    <button class="stats-variant-tab" data-variant="minesweeper_3d">Minesweeper 3D</button>
+                    <button class="stats-variant-tab" data-variant="infinite_minesweeper">Infinite</button>
                 </div>
+                <div class="stats-cards" id="statsCards"></div>
+
             </div>
         </div>
 
@@ -607,6 +658,30 @@
                 <div class="modal-actions">
                     <button class="btn btn-danger" onclick="app._confirmLeave()">Yes</button>
                     <button class="btn" onclick="app._hideModal('leaveConfirmDialog')">No</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="clearProgressConfirmDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>⚠️ Delete All Progress</h3>
+                <p class="modal-desc">Are you sure you want to delete all level progress? This cannot be undone.</p>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" id="btnClearProgressConfirm">Yes</button>
+                    <button class="btn" onclick="app._hideModal('clearProgressConfirmDialog')">No</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="resetSettingsConfirmDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>⚠️ Reset All Settings</h3>
+                <p class="modal-desc">Are you sure you want to reset all settings to their defaults? This cannot be undone.</p>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" id="btnResetSettingsConfirm">Yes</button>
+                    <button class="btn" onclick="app._hideModal('resetSettingsConfirmDialog')">No</button>
                 </div>
             </div>
         </div>
