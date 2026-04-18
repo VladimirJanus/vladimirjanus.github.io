@@ -1,1 +1,1364 @@
-const a26_0x55fc15=a26_0x3705;(function(_0x183893,_0x46eea1){const _0x16703a=a26_0x3705,_0x43dd54=_0x183893();while(!![]){try{const _0x45d900=parseInt(_0x16703a(0xad))/0x1+parseInt(_0x16703a(0x182))/0x2+parseInt(_0x16703a(0x10c))/0x3*(parseInt(_0x16703a(0xf5))/0x4)+parseInt(_0x16703a(0x1bf))/0x5+-parseInt(_0x16703a(0x11b))/0x6*(parseInt(_0x16703a(0x1ab))/0x7)+-parseInt(_0x16703a(0x15a))/0x8+parseInt(_0x16703a(0xc0))/0x9*(-parseInt(_0x16703a(0x1d8))/0xa);if(_0x45d900===_0x46eea1)break;else _0x43dd54['push'](_0x43dd54['shift']());}catch(_0x1411c2){_0x43dd54['push'](_0x43dd54['shift']());}}}(a26_0xa510,0x7e510));import{CellContent,CellState,GameState,PlayerAction,ClickType,GameType}from'../../core/CoreEnums.js';import{getPlayerColorHex}from'../../core/CoreTypes.js';const BG_COLOR_RGB=[0.2,0.2,0.2],HIDDEN_CLR=a26_0x55fc15(0x15f),REVEAL_CLR='#BBBBBB',MINE_BG=a26_0x55fc15(0x1ae),NUMBER_TEXT_COLORS=[a26_0x55fc15(0x152),a26_0x55fc15(0x1d4),a26_0x55fc15(0xd8),a26_0x55fc15(0x1d1),'#800000','#008080',a26_0x55fc15(0x170),'#808080'],DEFAULT_CELL_SIZE=0x1e,CELL_SPACING=0x1,DECAL_TOTAL_MS=0x5dc,DECAL_VISIBLE_MS=0x1f4,S_HIDDEN=0x0,S_EMPTY=0x1,S_N1=0x2,S_FLAG=0xa,S_MINE=0xb,S_WRONG=0xc,S_DARK_EMPTY=0xd,S_N0=0xe,S_DIM_N0=0xf,S_DIM_N1=0x10,N_SPRITES=0x18,GRID_SVG_ASSETS={'n0':'src/assets/grid/0.svg','n1':a26_0x55fc15(0xb0),'n2':a26_0x55fc15(0x179),'n3':a26_0x55fc15(0x1a7),'n4':a26_0x55fc15(0x17d),'n5':a26_0x55fc15(0xeb),'n6':a26_0x55fc15(0xe5),'n7':a26_0x55fc15(0x133),'n8':a26_0x55fc15(0x11f),'flag':a26_0x55fc15(0x17a),'mine':'src/assets/grid/mine.svg','wrong':a26_0x55fc15(0x1c1),'exploded':a26_0x55fc15(0x1ce)},VERT_SRC='\x0aattribute\x20vec2\x20a_pos;\x20\x20\x20\x20\x20\x20\x20\x20//\x20quad\x20corner\x20(0,0)→(1,1)\x0aattribute\x20vec2\x20a_cellXY;\x20\x20\x20\x20\x20//\x20grid\x20column,\x20row\x0aattribute\x20float\x20a_sprite;\x20\x20\x20\x20//\x20sprite\x20index\x20into\x20atlas\x0a\x0auniform\x20vec2\x20u_viewSize;\x20\x20\x20\x20\x20//\x20canvas\x20size\x20in\x20logical\x20px\x0auniform\x20vec2\x20u_offset;\x20\x20\x20\x20\x20\x20\x20//\x20pan\x20offset\x20in\x20logical\x20px\x0auniform\x20float\x20u_cellSize;\x20\x20\x20\x20//\x20cell\x20size\x20in\x20logical\x20px\x0auniform\x20float\x20u_stride;\x20\x20\x20\x20\x20\x20//\x20cellSize\x20+\x20spacing\x0auniform\x20float\x20u_atlasInv;\x20\x20\x20\x20//\x201.0\x20/\x20N_SPRITES\x0auniform\x20float\x20u_uvInsetX;\x20\x20\x20\x20//\x20normalized\x20inset\x20in\x20atlas\x20X\x0auniform\x20float\x20u_uvInsetY;\x20\x20\x20\x20//\x20normalized\x20inset\x20in\x20atlas\x20Y\x0a\x0avarying\x20vec2\x20v_uv;\x0a\x0avoid\x20main()\x20{\x0a\x20\x20\x20\x20//\x20World\x20position\x20of\x20this\x20vertex\x0a\x20\x20\x20\x20vec2\x20world\x20=\x20vec2(\x0a\x20\x20\x20\x20\x20\x20\x20\x20u_offset.x\x20+\x20a_cellXY.x\x20*\x20u_stride\x20+\x20a_pos.x\x20*\x20u_cellSize,\x0a\x20\x20\x20\x20\x20\x20\x20\x20u_offset.y\x20+\x20a_cellXY.y\x20*\x20u_stride\x20+\x20a_pos.y\x20*\x20u_cellSize\x0a\x20\x20\x20\x20);\x0a\x0a\x20\x20\x20\x20//\x20Map\x20to\x20clip\x20space\x20\x20(-1..+1),\x20\x20Y\x20flipped\x20for\x20screen\x20coords\x0a\x20\x20\x20\x20vec2\x20clip\x20=\x20(world\x20/\x20u_viewSize)\x20*\x202.0\x20-\x201.0;\x0a\x20\x20\x20\x20clip.y\x20=\x20-clip.y;\x0a\x20\x20\x20\x20gl_Position\x20=\x20vec4(clip,\x200.0,\x201.0);\x0a\x0a\x20\x20\x20\x20//\x20UV\x20into\x20atlas\x20row\x20(sprite\x20index\x20selects\x20horizontal\x20slice)\x0a\x20\x20\x20\x20float\x20u0\x20=\x20a_sprite\x20*\x20u_atlasInv\x20+\x20u_uvInsetX;\x0a\x20\x20\x20\x20float\x20u1\x20=\x20(a_sprite\x20+\x201.0)\x20*\x20u_atlasInv\x20-\x20u_uvInsetX;\x0a\x20\x20\x20\x20float\x20v0\x20=\x20u_uvInsetY;\x0a\x20\x20\x20\x20float\x20v1\x20=\x201.0\x20-\x20u_uvInsetY;\x0a\x20\x20\x20\x20v_uv\x20=\x20vec2(mix(u0,\x20u1,\x20a_pos.x),\x20mix(v0,\x20v1,\x20a_pos.y));\x0a}\x0a',FRAG_SRC='\x0aprecision\x20mediump\x20float;\x0auniform\x20sampler2D\x20u_atlas;\x0avarying\x20vec2\x20v_uv;\x0avoid\x20main()\x20{\x0a\x20\x20\x20\x20gl_FragColor\x20=\x20texture2D(u_atlas,\x20v_uv);\x0a}\x0a';function makeCanvas2D(_0x1b3a3b,_0x26fe13){const _0x43c976=a26_0x55fc15;try{return new OffscreenCanvas(_0x1b3a3b,_0x26fe13);}catch(_0x3f9cfb){}const _0x188577=document[_0x43c976(0x14b)]('canvas');return _0x188577[_0x43c976(0x164)]=_0x1b3a3b,_0x188577[_0x43c976(0x10a)]=_0x26fe13,_0x188577;}function getDPR(){const _0x375ffc=a26_0x55fc15;return window[_0x375ffc(0x155)]||0x1;}function a26_0x3705(_0x4ce55d,_0x52c9a7){_0x4ce55d=_0x4ce55d-0xa1;const _0xa510fa=a26_0xa510();let _0x3705b5=_0xa510fa[_0x4ce55d];return _0x3705b5;}function compileShader(_0x295cb4,_0x532ea3,_0x4cfc1f){const _0x162104=a26_0x55fc15,_0x23479b=_0x295cb4[_0x162104(0xaf)](_0x532ea3);_0x295cb4[_0x162104(0x1ac)](_0x23479b,_0x4cfc1f),_0x295cb4[_0x162104(0xa2)](_0x23479b);if(!_0x295cb4['getShaderParameter'](_0x23479b,_0x295cb4[_0x162104(0x14f)]))return console['error'](_0x162104(0x119),_0x295cb4[_0x162104(0x115)](_0x23479b)),_0x295cb4[_0x162104(0x172)](_0x23479b),null;return _0x23479b;}function a26_0xa510(){const _0x49d999=['#0000FF','u_atlas','requestRedraw','devicePixelRatio','offsetX','fog_of_war','_mouseDown','COLOR_BUFFER_BIT','683504KaTkeB','uniform2f','textAlign','u_viewSize','state','#888888','webgl','a_pos','ARRAY_BUFFER','TEXTURE_MAG_FILTER','width','fillText','gameVariant','floor','_bufCapacity','_spriteVBO','font','_dragging','UNSIGNED_BYTE','clearFalseFlags','bindTexture','Flagged','#000000','RGBA','deleteShader','now','preventDefault','_scheduleFrame','startKbdShiftPan','px\x20sans-serif','_dragOX','src/assets/grid/2.svg','src/assets/grid/flag.svg','_aSprite','_pinchStartOY','src/assets/grid/4.svg','ensureKbdSelection','_reuseTchPos','min','_atlasDPR','1876118hZrzGw','LONG_PRESS_MS','centerGrid','_dragSY','TEXTURE_MIN_FILTER','touchstart','_hasKbdSel','adj','_mouseUp','_aPos','_ensureInstanceCapacity','texImage2D','TEXTURE_WRAP_T','lineWidth','_dragSX','_shiftPanDown','flag','position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;','useProgram','_drawKbdCursor','content','touchcancel','getParameter','u_atlasInv','u_uvInsetX','getAttribLocation','LINK_STATUS','createBuffer','keyboardZoomOut','gameType','touchend','gameManager','stopAllKbdShiftPan','getContext','naturalWidth','globalAlpha','_isRightClick','src/assets/grid/3.svg','_cellVBO','_shiftPanRight','_decals','15848AqPzBN','shaderSource','u_cellSize','#FF4444','left','_pinchStartCX','_spriteBuf','getBoundingClientRect','_frame','deleteProgram','cssText','_atlasCS','vertexAttribDivisorANGLE','ArrowDown','drawArraysInstancedANGLE','_spectatorMode','_reuseCellPos','_cancelLongPress','minZoom','textBaseline','4004975ttUaUT','_tchPos','src/assets/grid/wrong_flag.svg','clearColor','startRenderLoop','playerID','_atlasUnitPx','_uUvInsetX','gameState','keyboardZoomIn','appendChild','getExtension','_clampOffset','ceil','isFlag','src/assets/grid/mine_exploded.svg','stopRenderLoop','_showDecals','#000080','bindBuffer','FlagClear','#008000','FRAGMENT_SHADER','activeTexture','getUniformLocation','3712090rtOeXI','_uStride','CoOpHard','_gridDirty','enableVertexAttribArray','ArrowRight','_uUvInsetY','_uAtlasInv','compileShader','clear','createTexture','_atlasTex','TEXTURE_2D','FlagSet','_stopKbdPanTimer','style','setTransform','_gl','_anyShiftPanKey','614240gwhJbp','_lpTimer','createShader','src/assets/grid/1.svg','_isPinching','push','FLOAT','fillStyle','_decalCanvas','toUpperCase','gridData','maxZoom','revealFalseFlags','_inert','touches','_kbdPanLastTime','_prog','#808080','fogCache','45FsDUUN','wheel','_touchEvent','vertexAttribPointer','keys','parentElement','top','_initDecalOverlay','beginPath','offsetY','MAX_TEXTURE_SIZE','_quadVBO','_uOffset','_buildAtlas','_pinchStartDist','_uCellSize','uniform1f','center','Lost','_cachedRect','_instanceCount','mine','src','subarray','#FF0000','_aCellXY','_decalCtx','_ext','_buildInstances','a_sprite','decoding','#464646','_uAtlas','contextmenu','arc','[GridRenderer]\x20Program\x20link\x20error:','LeftClick','src/assets/grid/6.svg','get','DYNAMIC_DRAW','ArrowUp','_drawDecals','stopKbdShiftPan','src/assets/grid/5.svg','_kbdSelY','_spriteImages','VERTEX_SHADER','texParameteri','error','round','bufferData','_ensureAtlas','LongLeftClick','20tQpDcA','_mouseMove','getProgramParameter','middle','_initGL','CLICK_THRESHOLD','ANGLE_instanced_arrays','_bindEvents','_moved','#000','createProgram','#fff','Mine','hideKbdSelection','ArrowLeft','_startLongPress','length','#282828','setDigitalTexturesEnabled','grid','Revealed','height','fillRect','363555Pbyktu','set','_rafId','_paintFalseFlags','button','high','700\x20','_shiftPanUp','_digitalNumbersEnabled','getShaderInfoLog','a_cellXY','_mouseIsDown','initialized','[GridRenderer]\x20Shader\x20compile\x20error:','addDecal','1326gRbacy','touchmove','_pinchTouchCount','moveKbdSelection','src/assets/grid/8.svg','strokeStyle','addEventListener','resize','setGameManager','onCellClick','_cellBuf','u_offset','clientY','_kbdSelX','className','clearRect','_pinchStartOX','mousemove','sqrt','_stepKbdPan','_uViewSize','canvas','_loadGridSprites','LINEAR','src/assets/grid/7.svg','imageSmoothingEnabled','_lpFired','strokeRect','[GridRenderer]\x20WebGL\x20not\x20available','_kbdPanTimer','attachShader','complete','onKbdSelChanged','_zoomAt','_shiftPanLeft','deltaY','type','px\x20\x22Segoe\x20UI\x22,\x20sans-serif','cellSize','CLAMP_TO_EDGE','some','imageSmoothingQuality','_pinchStartScale','markDirty','max','_dragOY','mousedown','_digitalTexturesEnabled','createElement','_screenToCell','name','_running','COMPILE_STATUS','naturalHeight','px\x20serif'];a26_0xa510=function(){return _0x49d999;};return a26_0xa510();}function createProgram(_0x162eec,_0x574bc1,_0x494dde){const _0x333e7e=a26_0x55fc15,_0x4f8389=_0x162eec[_0x333e7e(0xff)]();_0x162eec[_0x333e7e(0x139)](_0x4f8389,_0x574bc1),_0x162eec['attachShader'](_0x4f8389,_0x494dde),_0x162eec['linkProgram'](_0x4f8389);if(!_0x162eec[_0x333e7e(0xf7)](_0x4f8389,_0x162eec[_0x333e7e(0x19c)]))return console['error'](_0x333e7e(0xe3),_0x162eec['getProgramInfoLog'](_0x4f8389)),_0x162eec[_0x333e7e(0x1b4)](_0x4f8389),null;return _0x4f8389;}export class GridRenderer{constructor(_0x3aaf06){const _0x4ade91=a26_0x55fc15;this[_0x4ade91(0x130)]=_0x3aaf06,this['gameManager']=null,this[_0x4ade91(0x141)]=DEFAULT_CELL_SIZE,this['offsetX']=0x0,this['offsetY']=0x0,this[_0x4ade91(0x1bd)]=0xa,this[_0x4ade91(0xb8)]=0xb4,this['_gridDirty']=!![],this[_0x4ade91(0x14e)]=![],this[_0x4ade91(0x10e)]=0x0,this[_0x4ade91(0x1aa)]=[],this[_0x4ade91(0x10f)]=![],this[_0x4ade91(0x1ba)]=![],this[_0x4ade91(0xba)]=![],this[_0x4ade91(0x1d0)]=!![],this[_0x4ade91(0x114)]=![],this[_0x4ade91(0x14a)]=![],this[_0x4ade91(0x117)]=![],this[_0x4ade91(0x16b)]=![],this['_dragSX']=0x0,this['_dragSY']=0x0,this[_0x4ade91(0x178)]=0x0,this[_0x4ade91(0x148)]=0x0,this[_0x4ade91(0xfd)]=![],this[_0x4ade91(0xae)]=null,this[_0x4ade91(0x135)]=![],this[_0x4ade91(0x1a6)]=![],this[_0x4ade91(0xb1)]=![],this[_0x4ade91(0x11d)]=0x0,this[_0x4ade91(0x1b0)]=0x0,this['_pinchStartCY']=0x0,this[_0x4ade91(0x145)]=0x0,this['_pinchStartDist']=0x1,this[_0x4ade91(0x12b)]=0x0,this[_0x4ade91(0x17c)]=0x0,this['_hasKbdSel']=![],this[_0x4ade91(0x128)]=-0x1,this[_0x4ade91(0xec)]=-0x1,this['_shiftPanLeft']=![],this[_0x4ade91(0x1a9)]=![],this['_shiftPanUp']=![],this['_shiftPanDown']=![],this[_0x4ade91(0x138)]=null,this['_kbdPanLastTime']=0x0,this['onCellClick']=null,this[_0x4ade91(0x13b)]=null,this[_0x4ade91(0x17f)]={'x':0x0,'y':0x0},this[_0x4ade91(0x1bb)]={'x':0x0,'y':0x0},this[_0x4ade91(0xd3)]=null;const _0x4ce94b=_0x3aaf06['getContext'](_0x4ade91(0x160),{'alpha':![],'antialias':![],'depth':![],'stencil':![],'premultipliedAlpha':![],'preserveDrawingBuffer':![]});this['_gl']=_0x4ce94b;!_0x4ce94b&&console[_0x4ade91(0xf0)](_0x4ade91(0x137));this['_decalCanvas']=null,this[_0x4ade91(0xda)]=null,this[_0x4ade91(0xc7)](),this[_0x4ade91(0xbd)]=null,this[_0x4ade91(0x18b)]=-0x1,this['_aCellXY']=-0x1,this['_aSprite']=-0x1,this[_0x4ade91(0x12f)]=null,this[_0x4ade91(0xcc)]=null,this[_0x4ade91(0xcf)]=null,this[_0x4ade91(0x1d9)]=null,this[_0x4ade91(0xa1)]=null,this[_0x4ade91(0x1c6)]=null,this[_0x4ade91(0x1de)]=null,this['_uAtlas']=null,this[_0x4ade91(0xcb)]=null,this[_0x4ade91(0x1a8)]=null,this[_0x4ade91(0x169)]=null,this['_cellBuf']=null,this[_0x4ade91(0x1b1)]=null,this[_0x4ade91(0xd4)]=0x0,this[_0x4ade91(0x168)]=0x0,this[_0x4ade91(0xa5)]=null,this[_0x4ade91(0x1b6)]=0x0,this['_atlasDPR']=0x0,this[_0x4ade91(0x1c5)]=0x0,this[_0x4ade91(0xed)]=new Map(),this[_0x4ade91(0xdb)]=null;if(_0x4ce94b)this[_0x4ade91(0xf9)]();this[_0x4ade91(0x131)](),this[_0x4ade91(0xfc)]();}[a26_0x55fc15(0x131)](){const _0x22fa55=a26_0x55fc15,_0x36f538=Object[_0x22fa55(0xc4)](GRID_SVG_ASSETS);for(const _0x15c0a9 of _0x36f538){const _0x352eec=new Image();_0x352eec[_0x22fa55(0xde)]='async',_0x352eec['onload']=()=>{const _0x339241=_0x22fa55;this[_0x339241(0x1db)]=!![],this[_0x339241(0x1b6)]=0x0,this[_0x339241(0x175)]();},_0x352eec[_0x22fa55(0xd6)]=GRID_SVG_ASSETS[_0x15c0a9],this[_0x22fa55(0xed)][_0x22fa55(0x10d)](_0x15c0a9,_0x352eec);}}[a26_0x55fc15(0xf9)](){const _0x545944=a26_0x55fc15,_0x287deb=this[_0x545944(0xab)];this['_ext']=_0x287deb[_0x545944(0x1ca)](_0x545944(0xfb));if(!this[_0x545944(0xdb)]){console[_0x545944(0xf0)]('[GridRenderer]\x20ANGLE_instanced_arrays\x20unavailable'),this[_0x545944(0xab)]=null;return;}const _0x2bc2c5=compileShader(_0x287deb,_0x287deb[_0x545944(0xee)],VERT_SRC),_0x1b661c=compileShader(_0x287deb,_0x287deb[_0x545944(0x1d5)],FRAG_SRC);if(!_0x2bc2c5||!_0x1b661c){this['_gl']=null;return;}this[_0x545944(0xbd)]=createProgram(_0x287deb,_0x2bc2c5,_0x1b661c),_0x287deb['deleteShader'](_0x2bc2c5),_0x287deb[_0x545944(0x172)](_0x1b661c);if(!this[_0x545944(0xbd)]){this[_0x545944(0xab)]=null;return;}_0x287deb[_0x545944(0x194)](this[_0x545944(0xbd)]),this[_0x545944(0x18b)]=_0x287deb[_0x545944(0x19b)](this[_0x545944(0xbd)],_0x545944(0x161)),this[_0x545944(0xd9)]=_0x287deb[_0x545944(0x19b)](this[_0x545944(0xbd)],_0x545944(0x116)),this['_aSprite']=_0x287deb[_0x545944(0x19b)](this[_0x545944(0xbd)],_0x545944(0xdd)),this['_uViewSize']=_0x287deb['getUniformLocation'](this[_0x545944(0xbd)],_0x545944(0x15d)),this['_uOffset']=_0x287deb['getUniformLocation'](this[_0x545944(0xbd)],_0x545944(0x126)),this['_uCellSize']=_0x287deb[_0x545944(0x1d7)](this[_0x545944(0xbd)],_0x545944(0x1ad)),this[_0x545944(0x1d9)]=_0x287deb[_0x545944(0x1d7)](this[_0x545944(0xbd)],'u_stride'),this[_0x545944(0xa1)]=_0x287deb[_0x545944(0x1d7)](this[_0x545944(0xbd)],_0x545944(0x199)),this[_0x545944(0x1c6)]=_0x287deb['getUniformLocation'](this[_0x545944(0xbd)],_0x545944(0x19a)),this[_0x545944(0x1de)]=_0x287deb[_0x545944(0x1d7)](this[_0x545944(0xbd)],'u_uvInsetY'),this[_0x545944(0xe0)]=_0x287deb[_0x545944(0x1d7)](this[_0x545944(0xbd)],_0x545944(0x153)),this[_0x545944(0xcb)]=_0x287deb[_0x545944(0x19d)](),_0x287deb[_0x545944(0x1d2)](_0x287deb[_0x545944(0x162)],this[_0x545944(0xcb)]),_0x287deb[_0x545944(0xf2)](_0x287deb[_0x545944(0x162)],new Float32Array([0x0,0x0,0x1,0x0,0x1,0x1,0x0,0x0,0x1,0x1,0x0,0x1]),_0x287deb['STATIC_DRAW']),this[_0x545944(0x1a8)]=_0x287deb[_0x545944(0x19d)](),this['_spriteVBO']=_0x287deb[_0x545944(0x19d)](),this['_atlasTex']=_0x287deb[_0x545944(0xa4)](),_0x287deb[_0x545944(0x16e)](_0x287deb['TEXTURE_2D'],this[_0x545944(0xa5)]),_0x287deb['texParameteri'](_0x287deb[_0x545944(0xa6)],_0x287deb[_0x545944(0x186)],_0x287deb[_0x545944(0x132)]),_0x287deb[_0x545944(0xef)](_0x287deb[_0x545944(0xa6)],_0x287deb[_0x545944(0x163)],_0x287deb['LINEAR']),_0x287deb[_0x545944(0xef)](_0x287deb['TEXTURE_2D'],_0x287deb['TEXTURE_WRAP_S'],_0x287deb[_0x545944(0x142)]),_0x287deb[_0x545944(0xef)](_0x287deb['TEXTURE_2D'],_0x287deb[_0x545944(0x18e)],_0x287deb[_0x545944(0x142)]),_0x287deb[_0x545944(0x1c2)](BG_COLOR_RGB[0x0],BG_COLOR_RGB[0x1],BG_COLOR_RGB[0x2],0x1);}[a26_0x55fc15(0xc7)](){const _0x200d60=a26_0x55fc15,_0x5398b3=this[_0x200d60(0x130)][_0x200d60(0xc5)];if(!_0x5398b3)return;const _0xef17b0='decal-overlay-'+this[_0x200d60(0x130)]['id'];let _0x2c6858=_0x5398b3['querySelector']('.'+_0xef17b0);!_0x2c6858&&(_0x2c6858=document[_0x200d60(0x14b)](_0x200d60(0x130)),_0x2c6858[_0x200d60(0x129)]=_0xef17b0,_0x2c6858[_0x200d60(0xa9)][_0x200d60(0x1b5)]=_0x200d60(0x193),_0x5398b3[_0x200d60(0x1c9)](_0x2c6858)),this[_0x200d60(0xb5)]=_0x2c6858,this[_0x200d60(0xda)]=_0x2c6858[_0x200d60(0x1a3)]('2d');}['_ensureAtlas'](){const _0x4bc131=a26_0x55fc15,_0x42a459=getDPR();if(this[_0x4bc131(0x1b6)]===this[_0x4bc131(0x141)]&&this[_0x4bc131(0x181)]===_0x42a459)return;if(this['_isPinching']&&this['_atlasCS']!==0x0)return;this[_0x4bc131(0xcd)](_0x42a459);}[a26_0x55fc15(0xcd)](_0x45c36a){const _0xa157f2=a26_0x55fc15,_0x4393f4=this[_0xa157f2(0x141)];this[_0xa157f2(0x1b6)]=_0x4393f4,this[_0xa157f2(0x181)]=_0x45c36a;let _0x17e2f2=Math[_0xa157f2(0x1cc)](_0x4393f4*_0x45c36a*(this['_digitalNumbersEnabled']||this['_digitalTexturesEnabled']?0x2:1.5));if(this[_0xa157f2(0xab)]){const _0x5e5c2b=this[_0xa157f2(0xab)][_0xa157f2(0x198)](this[_0xa157f2(0xab)][_0xa157f2(0xca)])||0x1000,_0x481e5e=Math[_0xa157f2(0x147)](0x10,Math[_0xa157f2(0x167)](_0x5e5c2b/N_SPRITES));_0x17e2f2=Math[_0xa157f2(0x180)](_0x17e2f2,_0x481e5e);}_0x17e2f2=Math['max'](0x10,_0x17e2f2),this[_0xa157f2(0x1c5)]=_0x17e2f2;const _0x5356a3=makeCanvas2D(N_SPRITES*_0x17e2f2,_0x17e2f2),_0x519f0a=_0x5356a3[_0xa157f2(0x1a3)]('2d');_0x519f0a[_0xa157f2(0x134)]=!![];if(_0xa157f2(0x144)in _0x519f0a)_0x519f0a['imageSmoothingQuality']=_0xa157f2(0x111);const _0x4f81eb=_0x47f35c=>{const _0x53df27=_0xa157f2;_0x519f0a['fillStyle']=HIDDEN_CLR,_0x519f0a[_0x53df27(0x10b)](_0x47f35c,0x0,_0x17e2f2,_0x17e2f2);},_0x3c2fa6=_0x4eae4b=>{const _0x342358=_0xa157f2;_0x519f0a[_0x342358(0xb4)]=REVEAL_CLR,_0x519f0a['fillRect'](_0x4eae4b,0x0,_0x17e2f2,_0x17e2f2);},_0x300712=_0x1fdb4=>{const _0x24b666=_0xa157f2;_0x519f0a['fillStyle']=_0x24b666(0xdf),_0x519f0a['fillRect'](_0x1fdb4,0x0,_0x17e2f2,_0x17e2f2);},_0x1e037b=(_0x36a17c,_0x19a7b3)=>{const _0x13f4b8=_0xa157f2,_0x245b9a=this['_spriteImages'][_0x13f4b8(0xe6)](_0x36a17c);if(!_0x245b9a||!_0x245b9a['complete']||_0x245b9a[_0x13f4b8(0x1a4)]===0x0||_0x245b9a[_0x13f4b8(0x150)]===0x0)return;_0x519f0a['drawImage'](_0x245b9a,_0x19a7b3+_0x17e2f2*0.1,_0x17e2f2*0.1,_0x17e2f2*0.8,_0x17e2f2*0.8);},_0x1a72ba=(_0x169a29,_0x56e615)=>{const _0x9154db=_0xa157f2;_0x519f0a[_0x9154db(0xb4)]=NUMBER_TEXT_COLORS[_0x169a29-0x1]||_0x9154db(0x170),_0x519f0a['font']=_0x9154db(0x112)+Math[_0x9154db(0x167)](_0x17e2f2*0.68)+_0x9154db(0x140),_0x519f0a['textAlign']=_0x9154db(0xd1),_0x519f0a[_0x9154db(0x1be)]=_0x9154db(0xf8),_0x519f0a['fillText'](String(_0x169a29),_0x56e615+_0x17e2f2*0.5,_0x17e2f2*0.54);},_0x3f14d9=(_0x19a08b,_0x414110)=>{const _0x2ff408=_0xa157f2;_0x519f0a[_0x2ff408(0x16a)]=Math[_0x2ff408(0x167)](_0x17e2f2*0.68)+_0x2ff408(0x151),_0x519f0a[_0x2ff408(0x15c)]=_0x2ff408(0xd1),_0x519f0a['textBaseline']='middle',_0x519f0a[_0x2ff408(0x165)](_0x19a08b,_0x414110+_0x17e2f2*0.5,_0x17e2f2*0.54);},_0x3f98f5=_0x4440fa=>{const _0x509153=_0xa157f2;_0x519f0a['fillStyle']=_0x509153(0x106),_0x519f0a['fillRect'](_0x4440fa,0x0,_0x17e2f2,_0x17e2f2);};_0x4f81eb(0x0),_0x3c2fa6(_0x17e2f2),_0x3f98f5(S_DARK_EMPTY*_0x17e2f2);{const _0x4461c8=S_N0*_0x17e2f2;_0x3c2fa6(_0x4461c8),this[_0xa157f2(0x114)]?_0x1e037b('n0',_0x4461c8):(_0x519f0a[_0xa157f2(0xb4)]=_0xa157f2(0xbe),_0x519f0a[_0xa157f2(0x16a)]=_0xa157f2(0x112)+Math[_0xa157f2(0x167)](_0x17e2f2*0.68)+_0xa157f2(0x140),_0x519f0a[_0xa157f2(0x15c)]='center',_0x519f0a[_0xa157f2(0x1be)]='middle',_0x519f0a['fillText']('0',_0x4461c8+_0x17e2f2*0.5,_0x17e2f2*0.54));}for(let _0xfb6a74=0x1;_0xfb6a74<=0x8;_0xfb6a74++){const _0x4a283a=(S_N1+_0xfb6a74-0x1)*_0x17e2f2;_0x3c2fa6(_0x4a283a),this[_0xa157f2(0x114)]?_0x1e037b('n'+_0xfb6a74,_0x4a283a):_0x1a72ba(_0xfb6a74,_0x4a283a);}_0x4f81eb(S_FLAG*_0x17e2f2);this[_0xa157f2(0x14a)]?_0x1e037b(_0xa157f2(0x192),S_FLAG*_0x17e2f2):_0x3f14d9('🚩',S_FLAG*_0x17e2f2);_0x519f0a[_0xa157f2(0xb4)]=MINE_BG,_0x519f0a[_0xa157f2(0x10b)](S_MINE*_0x17e2f2,0x0,_0x17e2f2,_0x17e2f2);this[_0xa157f2(0x14a)]?_0x1e037b(_0xa157f2(0xd5),S_MINE*_0x17e2f2):_0x3f14d9('💣',S_MINE*_0x17e2f2);_0x4f81eb(S_WRONG*_0x17e2f2);this[_0xa157f2(0x14a)]?_0x1e037b('wrong',S_WRONG*_0x17e2f2):_0x3f14d9('❌',S_WRONG*_0x17e2f2);{const _0x51fae2=S_DIM_N0*_0x17e2f2;_0x300712(_0x51fae2),this[_0xa157f2(0x114)]?_0x1e037b('n0',_0x51fae2):(_0x519f0a['fillStyle']=_0xa157f2(0xbe),_0x519f0a[_0xa157f2(0x16a)]='700\x20'+Math[_0xa157f2(0x167)](_0x17e2f2*0.68)+_0xa157f2(0x140),_0x519f0a[_0xa157f2(0x15c)]=_0xa157f2(0xd1),_0x519f0a['textBaseline']=_0xa157f2(0xf8),_0x519f0a['fillText']('0',_0x51fae2+_0x17e2f2*0.5,_0x17e2f2*0.54));}for(let _0x3c75be=0x1;_0x3c75be<=0x8;_0x3c75be++){const _0x1094ae=(S_DIM_N1+_0x3c75be-0x1)*_0x17e2f2;_0x300712(_0x1094ae),this[_0xa157f2(0x114)]?_0x1e037b('n'+_0x3c75be,_0x1094ae):_0x1a72ba(_0x3c75be,_0x1094ae);}if(!this[_0xa157f2(0xab)])return;const _0x5d538f=this[_0xa157f2(0xab)];_0x5d538f[_0xa157f2(0x16e)](_0x5d538f['TEXTURE_2D'],this[_0xa157f2(0xa5)]),_0x5d538f[_0xa157f2(0x18d)](_0x5d538f[_0xa157f2(0xa6)],0x0,_0x5d538f[_0xa157f2(0x171)],_0x5d538f[_0xa157f2(0x171)],_0x5d538f[_0xa157f2(0x16c)],_0x5356a3);}[a26_0x55fc15(0x18c)](_0x2150e1){const _0x49638f=a26_0x55fc15;if(_0x2150e1<=this[_0x49638f(0x168)])return;const _0x5aceb7=Math[_0x49638f(0x147)](_0x2150e1,Math[_0x49638f(0x1cc)](this[_0x49638f(0x168)]*1.5),0x100);this[_0x49638f(0x125)]=new Float32Array(_0x5aceb7*0x2),this[_0x49638f(0x1b1)]=new Float32Array(_0x5aceb7),this[_0x49638f(0x168)]=_0x5aceb7;}[a26_0x55fc15(0xdc)](){const _0x726dee=a26_0x55fc15,_0x52cfb4=this[_0x726dee(0x1a1)];if(!_0x52cfb4||!_0x52cfb4[_0x726dee(0x118)]){this[_0x726dee(0xd4)]=0x0;return;}const _0x242fdd=this[_0x726dee(0xab)],_0x153c07=getDPR(),_0x3259db=this[_0x726dee(0x130)]['width']/_0x153c07,_0x468e94=this['canvas'][_0x726dee(0x10a)]/_0x153c07,_0x42c3ea=this[_0x726dee(0x141)]+CELL_SPACING,_0x7b2607=this['offsetX'],_0x1b2eb4=this['offsetY'],_0x4fb092=_0x52cfb4[_0x726dee(0x108)],_0x9543ee=this['_paintFalseFlags'],_0x524b59=Math['max'](0x0,Math[_0x726dee(0x167)](-_0x7b2607/_0x42c3ea)),_0x2a364b=Math[_0x726dee(0x147)](0x0,Math[_0x726dee(0x167)](-_0x1b2eb4/_0x42c3ea)),_0x3334b3=Math[_0x726dee(0x180)](_0x52cfb4[_0x726dee(0xb7)]['w'],Math[_0x726dee(0x1cc)]((_0x3259db-_0x7b2607)/_0x42c3ea)+0x1),_0x435469=Math['min'](_0x52cfb4['gridData']['h'],Math['ceil']((_0x468e94-_0x1b2eb4)/_0x42c3ea)+0x1),_0x3d127e=_0x3334b3-_0x524b59,_0x402098=_0x435469-_0x2a364b;if(_0x3d127e<=0x0||_0x402098<=0x0){this[_0x726dee(0xd4)]=0x0;return;}const _0x33350e=_0x3d127e*_0x402098;this[_0x726dee(0x18c)](_0x33350e);const _0x21d696=this[_0x726dee(0x125)],_0x20affc=this['_spriteBuf'];let _0x12ec60=0x0;for(let _0x384420=_0x2a364b;_0x384420<_0x435469;_0x384420++){const _0x2b3906=_0x4fb092[_0x384420];for(let _0x3c986a=_0x524b59;_0x3c986a<_0x3334b3;_0x3c986a++){const _0x50f84e=_0x2b3906[_0x3c986a];let _0x380478;if(_0x50f84e[_0x726dee(0x15e)]===CellState[_0x726dee(0x109)]){const _0x59e03c=_0x52cfb4[_0x726dee(0x166)]===_0x726dee(0x157)&&!_0x52cfb4[_0x726dee(0xbf)][_0x726dee(0x143)](_0x5e12de=>_0x5e12de['x']===_0x3c986a&&_0x5e12de['y']===_0x384420);if(_0x59e03c){const _0x3c6204=_0x52cfb4[_0x726dee(0x1c7)]===GameState[_0x726dee(0xd2)]||_0x52cfb4['gameState']===GameState['Won'];if(_0x3c6204&&_0x50f84e[_0x726dee(0x196)]===CellContent[_0x726dee(0x101)])_0x380478=S_MINE;else{if(_0x3c6204){const _0x48f1c0=_0x50f84e[_0x726dee(0x189)];_0x380478=_0x48f1c0>0x0?S_DIM_N1+_0x48f1c0-0x1:S_DIM_N0;}else _0x380478=S_DARK_EMPTY;}}else{if(_0x50f84e['content']===CellContent['Mine'])_0x380478=S_MINE;else{const _0x1a9398=_0x50f84e['adj'];_0x1a9398>0x0?_0x380478=S_N1+_0x1a9398-0x1:_0x380478=_0x52cfb4[_0x726dee(0x166)]==='fog_of_war'?S_N0:S_EMPTY;}}}else _0x50f84e[_0x726dee(0x15e)]===CellState[_0x726dee(0x16f)]?_0x380478=_0x9543ee&&_0x50f84e[_0x726dee(0x196)]!==CellContent[_0x726dee(0x101)]?S_WRONG:S_FLAG:_0x380478=S_HIDDEN;_0x21d696[_0x12ec60*0x2]=_0x3c986a,_0x21d696[_0x12ec60*0x2+0x1]=_0x384420,_0x20affc[_0x12ec60]=_0x380478,_0x12ec60++;}}this['_instanceCount']=_0x12ec60,_0x242fdd[_0x726dee(0x1d2)](_0x242fdd['ARRAY_BUFFER'],this['_cellVBO']),_0x242fdd[_0x726dee(0xf2)](_0x242fdd[_0x726dee(0x162)],_0x21d696[_0x726dee(0xd7)](0x0,_0x12ec60*0x2),_0x242fdd[_0x726dee(0xe7)]),_0x242fdd[_0x726dee(0x1d2)](_0x242fdd[_0x726dee(0x162)],this['_spriteVBO']),_0x242fdd['bufferData'](_0x242fdd[_0x726dee(0x162)],_0x20affc[_0x726dee(0xd7)](0x0,_0x12ec60),_0x242fdd['DYNAMIC_DRAW']);}[a26_0x55fc15(0x123)](_0x484845){const _0x40f700=a26_0x55fc15;this['gameManager']=_0x484845,this[_0x40f700(0x1db)]=!![],this[_0x40f700(0x175)]();}['setDigitalNumbersEnabled'](_0x12d1a6){const _0x4d0d1a=a26_0x55fc15,_0x4cefdd=!!_0x12d1a6;if(this[_0x4d0d1a(0x114)]===_0x4cefdd)return;this[_0x4d0d1a(0x114)]=_0x4cefdd,this[_0x4d0d1a(0x1b6)]=0x0,this[_0x4d0d1a(0x1db)]=!![],this[_0x4d0d1a(0x175)]();}[a26_0x55fc15(0x107)](_0x1050c4){const _0x22a15a=a26_0x55fc15,_0x44ed2e=!!_0x1050c4;if(this['_digitalTexturesEnabled']===_0x44ed2e)return;this[_0x22a15a(0x14a)]=_0x44ed2e,this['_atlasCS']=0x0,this[_0x22a15a(0x1db)]=!![],this[_0x22a15a(0x175)]();}[a26_0x55fc15(0x146)](){const _0x4c6d5f=a26_0x55fc15;this[_0x4c6d5f(0x1db)]=!![],this[_0x4c6d5f(0x175)]();}[a26_0x55fc15(0x154)](){this['_gridDirty']=!![],this['_scheduleFrame']();}[a26_0x55fc15(0x184)](){const _0x52f85a=a26_0x55fc15,_0x5c6407=this[_0x52f85a(0x1a1)];if(!_0x5c6407)return;const _0xf4b3fc=getDPR(),_0x3a8556=this['canvas'][_0x52f85a(0x164)]/_0xf4b3fc,_0x3c5072=this[_0x52f85a(0x130)][_0x52f85a(0x10a)]/_0xf4b3fc,_0x176f55=0x10,_0x3ad5a2=Math['floor'](Math[_0x52f85a(0x180)]((_0x3a8556-_0x176f55*0x2+CELL_SPACING)/_0x5c6407[_0x52f85a(0xb7)]['w']-CELL_SPACING,(_0x3c5072-_0x176f55*0x2+CELL_SPACING)/_0x5c6407[_0x52f85a(0xb7)]['h']-CELL_SPACING));this[_0x52f85a(0x141)]=Math[_0x52f85a(0x147)](this[_0x52f85a(0x1bd)],Math[_0x52f85a(0x180)](this[_0x52f85a(0xb8)],_0x3ad5a2));const _0x54a4a2=this[_0x52f85a(0x141)]+CELL_SPACING;this[_0x52f85a(0x156)]=(_0x3a8556-(_0x5c6407['gridData']['w']*_0x54a4a2-CELL_SPACING))/0x2,this[_0x52f85a(0xc9)]=(_0x3c5072-(_0x5c6407[_0x52f85a(0xb7)]['h']*_0x54a4a2-CELL_SPACING))/0x2,this[_0x52f85a(0x1cb)](),this[_0x52f85a(0x1db)]=!![],this[_0x52f85a(0x175)]();}[a26_0x55fc15(0x122)](){const _0x3e2385=a26_0x55fc15,_0x530dd7=this[_0x3e2385(0x130)][_0x3e2385(0xc5)][_0x3e2385(0x1b2)](),_0xe003bb=getDPR(),_0x5e8dfa=Math[_0x3e2385(0xf1)](_0x530dd7['width']*_0xe003bb),_0x3cce4f=Math[_0x3e2385(0xf1)](_0x530dd7['height']*_0xe003bb);this[_0x3e2385(0x130)][_0x3e2385(0x164)]=_0x5e8dfa,this[_0x3e2385(0x130)]['height']=_0x3cce4f,this[_0x3e2385(0x130)][_0x3e2385(0xa9)]['width']=_0x530dd7[_0x3e2385(0x164)]+'px',this[_0x3e2385(0x130)][_0x3e2385(0xa9)][_0x3e2385(0x10a)]=_0x530dd7[_0x3e2385(0x10a)]+'px',this['_gl']&&this['_gl']['viewport'](0x0,0x0,_0x5e8dfa,_0x3cce4f),this[_0x3e2385(0xb5)]&&(this[_0x3e2385(0xb5)][_0x3e2385(0x164)]=_0x5e8dfa,this['_decalCanvas'][_0x3e2385(0x10a)]=_0x3cce4f,this[_0x3e2385(0xb5)][_0x3e2385(0xa9)][_0x3e2385(0x164)]=_0x530dd7[_0x3e2385(0x164)]+'px',this[_0x3e2385(0xb5)][_0x3e2385(0xa9)][_0x3e2385(0x10a)]=_0x530dd7[_0x3e2385(0x10a)]+'px'),this[_0x3e2385(0x1db)]=!![],this['_scheduleFrame']();}[a26_0x55fc15(0x1c3)](){const _0x92a481=a26_0x55fc15;this[_0x92a481(0x14e)]=!![],this[_0x92a481(0x1db)]=!![],this['_scheduleFrame']();}[a26_0x55fc15(0x1cf)](){const _0x296a54=a26_0x55fc15;this['_running']=![],this[_0x296a54(0x10e)]&&(cancelAnimationFrame(this[_0x296a54(0x10e)]),this[_0x296a54(0x10e)]=0x0),this[_0x296a54(0x1a2)](),this[_0x296a54(0x102)]();}[a26_0x55fc15(0x11a)](_0x4a2d9b,_0x358f41,_0x195018,_0x411fa2,_0xb9e3d7,_0x5227a4,_0x55244a=GameType[a26_0x55fc15(0x1da)]){const _0x50f6a2=a26_0x55fc15;if(_0x411fa2===_0x5227a4)return;if(!this[_0x50f6a2(0x1d0)])return;this[_0x50f6a2(0x1aa)][_0x50f6a2(0xb2)]({'x':_0x4a2d9b,'y':_0x358f41,'playerID':_0x411fa2,'gameType':_0x55244a,'name':_0xb9e3d7||'','isFlag':_0x195018===PlayerAction[_0x50f6a2(0xa7)]||_0x195018===PlayerAction[_0x50f6a2(0x1d3)],'t':performance[_0x50f6a2(0x173)]()}),this[_0x50f6a2(0x175)]();}[a26_0x55fc15(0xb9)](){const _0x399afe=a26_0x55fc15;this[_0x399afe(0x10f)]=!![],this[_0x399afe(0x1db)]=!![],this[_0x399afe(0x175)]();}[a26_0x55fc15(0x16d)](){const _0x345304=a26_0x55fc15;this[_0x345304(0x10f)]=![],this[_0x345304(0x1db)]=!![],this['_scheduleFrame']();}[a26_0x55fc15(0x175)](){const _0x2e9d16=a26_0x55fc15;if(this[_0x2e9d16(0x10e)]||!this[_0x2e9d16(0x14e)])return;this[_0x2e9d16(0x10e)]=requestAnimationFrame(()=>{const _0x2ddc5c=_0x2e9d16;this[_0x2ddc5c(0x10e)]=0x0;if(!this[_0x2ddc5c(0x14e)])return;this[_0x2ddc5c(0x1b3)]();});}['_frame'](){const _0x6e0c07=a26_0x55fc15,_0xad8e7=this[_0x6e0c07(0x1aa)][_0x6e0c07(0x105)]>0x0;if(!this[_0x6e0c07(0x1db)]&&!_0xad8e7)return;if(!this[_0x6e0c07(0xab)])return;this[_0x6e0c07(0xf3)]();const _0xb3110e=this['_gl'],_0x1f1de0=this['_ext'],_0x1698f7=getDPR(),_0xb0e669=this[_0x6e0c07(0x130)]['width']/_0x1698f7,_0x4830eb=this[_0x6e0c07(0x130)][_0x6e0c07(0x10a)]/_0x1698f7;this[_0x6e0c07(0x1db)]&&(this[_0x6e0c07(0xdc)](),this[_0x6e0c07(0x1db)]=![]);_0xb3110e['viewport'](0x0,0x0,this['canvas'][_0x6e0c07(0x164)],this[_0x6e0c07(0x130)][_0x6e0c07(0x10a)]),_0xb3110e[_0x6e0c07(0xa3)](_0xb3110e[_0x6e0c07(0x159)]);if(this[_0x6e0c07(0xd4)]>0x0){_0xb3110e[_0x6e0c07(0x194)](this['_prog']),_0xb3110e['uniform2f'](this['_uViewSize'],_0xb0e669,_0x4830eb),_0xb3110e[_0x6e0c07(0x15b)](this[_0x6e0c07(0xcc)],this[_0x6e0c07(0x156)],this[_0x6e0c07(0xc9)]),_0xb3110e[_0x6e0c07(0xd0)](this[_0x6e0c07(0xcf)],this[_0x6e0c07(0x141)]),_0xb3110e[_0x6e0c07(0xd0)](this[_0x6e0c07(0x1d9)],this[_0x6e0c07(0x141)]+CELL_SPACING),_0xb3110e[_0x6e0c07(0xd0)](this['_uAtlasInv'],0x1/N_SPRITES);const _0xfcfed3=this[_0x6e0c07(0x1c5)]||Math[_0x6e0c07(0x147)](0x10,Math[_0x6e0c07(0x1cc)](this[_0x6e0c07(0x141)]*_0x1698f7)),_0x3eebd5=N_SPRITES*_0xfcfed3;_0xb3110e[_0x6e0c07(0xd0)](this[_0x6e0c07(0x1c6)],0.75/_0x3eebd5),_0xb3110e['uniform1f'](this[_0x6e0c07(0x1de)],0.75/_0xfcfed3),_0xb3110e[_0x6e0c07(0x1d6)](_0xb3110e['TEXTURE0']),_0xb3110e['bindTexture'](_0xb3110e[_0x6e0c07(0xa6)],this[_0x6e0c07(0xa5)]),_0xb3110e['uniform1i'](this[_0x6e0c07(0xe0)],0x0),_0xb3110e[_0x6e0c07(0x1d2)](_0xb3110e[_0x6e0c07(0x162)],this[_0x6e0c07(0xcb)]),_0xb3110e['enableVertexAttribArray'](this[_0x6e0c07(0x18b)]),_0xb3110e[_0x6e0c07(0xc3)](this[_0x6e0c07(0x18b)],0x2,_0xb3110e[_0x6e0c07(0xb3)],![],0x0,0x0),_0x1f1de0[_0x6e0c07(0x1b7)](this[_0x6e0c07(0x18b)],0x0),_0xb3110e[_0x6e0c07(0x1d2)](_0xb3110e[_0x6e0c07(0x162)],this[_0x6e0c07(0x1a8)]),_0xb3110e[_0x6e0c07(0x1dc)](this[_0x6e0c07(0xd9)]),_0xb3110e[_0x6e0c07(0xc3)](this[_0x6e0c07(0xd9)],0x2,_0xb3110e[_0x6e0c07(0xb3)],![],0x0,0x0),_0x1f1de0[_0x6e0c07(0x1b7)](this['_aCellXY'],0x1),_0xb3110e[_0x6e0c07(0x1d2)](_0xb3110e[_0x6e0c07(0x162)],this[_0x6e0c07(0x169)]),_0xb3110e[_0x6e0c07(0x1dc)](this[_0x6e0c07(0x17b)]),_0xb3110e['vertexAttribPointer'](this[_0x6e0c07(0x17b)],0x1,_0xb3110e[_0x6e0c07(0xb3)],![],0x0,0x0),_0x1f1de0[_0x6e0c07(0x1b7)](this['_aSprite'],0x1),_0x1f1de0[_0x6e0c07(0x1b9)](_0xb3110e['TRIANGLES'],0x0,0x6,this[_0x6e0c07(0xd4)]);}if(this[_0x6e0c07(0xda)]){const _0x2eeb86=this[_0x6e0c07(0xb5)],_0x4aee0b=this[_0x6e0c07(0xda)];if(_0xad8e7||this[_0x6e0c07(0x188)]){_0x4aee0b[_0x6e0c07(0xaa)](_0x1698f7,0x0,0x0,_0x1698f7,0x0,0x0),_0x4aee0b[_0x6e0c07(0x12a)](0x0,0x0,_0xb0e669,_0x4830eb);if(_0xad8e7)this[_0x6e0c07(0xe9)](_0x4aee0b);if(this[_0x6e0c07(0x188)])this[_0x6e0c07(0x195)](_0x4aee0b);}else _0x4aee0b['setTransform'](0x1,0x0,0x0,0x1,0x0,0x0),_0x4aee0b[_0x6e0c07(0x12a)](0x0,0x0,_0x2eeb86[_0x6e0c07(0x164)],_0x2eeb86[_0x6e0c07(0x10a)]);}this['_decals']['length']>0x0&&this['_scheduleFrame']();}[a26_0x55fc15(0xe9)](_0x446490){const _0x564136=a26_0x55fc15,_0x1f3a98=performance[_0x564136(0x173)]();let _0x16bf62=0x0;for(let _0x51fb3f=0x0;_0x51fb3f<this['_decals'][_0x564136(0x105)];_0x51fb3f++){_0x1f3a98-this[_0x564136(0x1aa)][_0x51fb3f]['t']<DECAL_TOTAL_MS&&(this['_decals'][_0x16bf62++]=this[_0x564136(0x1aa)][_0x51fb3f]);}this['_decals'][_0x564136(0x105)]=_0x16bf62;const _0x3d2665=this['cellSize'],_0xd613b=_0x3d2665+CELL_SPACING;for(const _0x58124f of this[_0x564136(0x1aa)]){const _0x2f4f0a=_0x1f3a98-_0x58124f['t'];let _0x3dd2bc=0x1;_0x2f4f0a>DECAL_VISIBLE_MS&&(_0x3dd2bc=0x1-(_0x2f4f0a-DECAL_VISIBLE_MS)/(DECAL_TOTAL_MS-DECAL_VISIBLE_MS));const _0x57ce75=_0x3d2665*0.175,_0x4196e6=_0x3d2665*0.04,_0xc14141=this['offsetX']+_0x58124f['x']*_0xd613b+_0x3d2665-_0x57ce75-_0x4196e6,_0x4f6f0c=this[_0x564136(0xc9)]+_0x58124f['y']*_0xd613b+_0x3d2665-_0x57ce75-_0x4196e6;_0x446490['globalAlpha']=_0x3dd2bc*0.85,_0x446490['fillStyle']=getPlayerColorHex(_0x58124f[_0x564136(0x1c4)],_0x58124f[_0x564136(0x19f)]),_0x446490[_0x564136(0xc8)](),_0x446490['arc'](_0xc14141,_0x4f6f0c,_0x57ce75,0x0,Math['PI']*0x2),_0x446490['fill'](),_0x446490[_0x564136(0x1a5)]=_0x3dd2bc,_0x446490['fillStyle']=_0x564136(0xfe);const _0x406071=Math[_0x564136(0x147)](0x6,Math['floor'](_0x57ce75*1.4));_0x446490['font']='bold\x20'+_0x406071+_0x564136(0x177),_0x446490[_0x564136(0x15c)]=_0x564136(0xd1),_0x446490['textBaseline']=_0x564136(0xf8),_0x446490[_0x564136(0x165)](_0x58124f[_0x564136(0x14d)]?_0x58124f['name'][0x0][_0x564136(0xb6)]():'?',_0xc14141,_0x4f6f0c);const _0x31cde7=Math[_0x564136(0x147)](0x4,Math[_0x564136(0x167)](_0x57ce75*1.2)),_0x270a5a=_0xc14141+_0x57ce75*0.55-_0x31cde7/0x2,_0x3b2bb9=_0x4f6f0c+_0x57ce75*0.55-_0x31cde7/0x2;if(_0x58124f[_0x564136(0x1cd)]){const _0x321e3f=this[_0x564136(0xed)][_0x564136(0xe6)](_0x564136(0x192));_0x321e3f&&_0x321e3f[_0x564136(0x13a)]&&_0x321e3f['naturalWidth']>0x0&&_0x446490['drawImage'](_0x321e3f,_0x270a5a,_0x3b2bb9,_0x31cde7,_0x31cde7);}else _0x446490[_0x564136(0xc8)](),_0x446490[_0x564136(0xb4)]=_0x564136(0x100),_0x446490[_0x564136(0xe2)](_0x270a5a+_0x31cde7*0.5,_0x3b2bb9+_0x31cde7*0.5,_0x31cde7*0.18,0x0,Math['PI']*0x2),_0x446490['fill']();}_0x446490[_0x564136(0x1a5)]=0x1;}[a26_0x55fc15(0x195)](_0x1c2bb0){const _0x1e4888=a26_0x55fc15,_0x313579=this[_0x1e4888(0x1a1)];if(!_0x313579||!this[_0x1e4888(0x188)])return;const _0xe2e3c1=this[_0x1e4888(0x128)],_0x14d7d0=this[_0x1e4888(0xec)];if(_0xe2e3c1<0x0||_0x14d7d0<0x0||_0xe2e3c1>=_0x313579[_0x1e4888(0xb7)]['w']||_0x14d7d0>=_0x313579[_0x1e4888(0xb7)]['h'])return;const _0x5a0517=this['cellSize'],_0x1c8c9b=_0x5a0517+CELL_SPACING,_0x9f009d=this[_0x1e4888(0x156)]+_0xe2e3c1*_0x1c8c9b,_0x2d3165=this[_0x1e4888(0xc9)]+_0x14d7d0*_0x1c8c9b,_0x153f5a=Math['max'](0x2,0x1);_0x1c2bb0[_0x1e4888(0x120)]='rgba(255,\x20230,\x20120,\x200.90)',_0x1c2bb0[_0x1e4888(0x18f)]=_0x153f5a,_0x1c2bb0[_0x1e4888(0x136)](_0x9f009d+_0x153f5a*0.5,_0x2d3165+_0x153f5a*0.5,_0x5a0517-_0x153f5a,_0x5a0517-_0x153f5a);}[a26_0x55fc15(0x17e)](){const _0x57866c=a26_0x55fc15,_0x53cf87=this[_0x57866c(0x1a1)];if(!_0x53cf87||_0x53cf87[_0x57866c(0xb7)]['w']<=0x0||_0x53cf87[_0x57866c(0xb7)]['h']<=0x0)return![];const _0x31d76c=_0x53cf87[_0x57866c(0xb7)]['w']-0x1,_0x4c1d37=_0x53cf87[_0x57866c(0xb7)]['h']-0x1;if(this[_0x57866c(0x188)]&&this[_0x57866c(0x128)]>=0x0&&this[_0x57866c(0x128)]<=_0x31d76c&&this[_0x57866c(0xec)]>=0x0&&this[_0x57866c(0xec)]<=_0x4c1d37)return!![];if(this[_0x57866c(0x128)]<0x0||this['_kbdSelX']>_0x31d76c||this['_kbdSelY']<0x0||this[_0x57866c(0xec)]>_0x4c1d37){const _0x10bbde=getDPR(),_0x18a776=this['canvas'][_0x57866c(0x164)]/_0x10bbde,_0x33381f=this['canvas'][_0x57866c(0x10a)]/_0x10bbde,_0x2e14d1=this[_0x57866c(0x141)]+CELL_SPACING;this[_0x57866c(0x128)]=Math['max'](0x0,Math['min'](_0x31d76c,Math[_0x57866c(0x167)]((_0x18a776/0x2-this[_0x57866c(0x156)])/_0x2e14d1))),this[_0x57866c(0xec)]=Math[_0x57866c(0x147)](0x0,Math[_0x57866c(0x180)](_0x4c1d37,Math[_0x57866c(0x167)]((_0x33381f/0x2-this['offsetY'])/_0x2e14d1)));}this[_0x57866c(0x188)]=!![],this[_0x57866c(0x1db)]=!![],this[_0x57866c(0x175)]();if(this[_0x57866c(0x13b)])this[_0x57866c(0x13b)](!![],this[_0x57866c(0x128)],this[_0x57866c(0xec)]);return!![];}[a26_0x55fc15(0x11e)](_0x454b15,_0x17c4af){const _0x2bb277=a26_0x55fc15;if(!this['ensureKbdSelection']())return;const _0x2e68e2=this['gameManager'],_0x1ebca9=this[_0x2bb277(0x128)]+_0x454b15,_0x5bd54d=this[_0x2bb277(0xec)]+_0x17c4af;if(_0x1ebca9<0x0||_0x1ebca9>=_0x2e68e2[_0x2bb277(0xb7)]['w']||_0x5bd54d<0x0||_0x5bd54d>=_0x2e68e2[_0x2bb277(0xb7)]['h'])return;this[_0x2bb277(0x128)]=_0x1ebca9,this['_kbdSelY']=_0x5bd54d,this['_keepKbdSelVisible'](),this['_gridDirty']=!![],this[_0x2bb277(0x175)]();if(this['onKbdSelChanged'])this[_0x2bb277(0x13b)](!![],this['_kbdSelX'],this[_0x2bb277(0xec)]);}[a26_0x55fc15(0x102)](){const _0x94f495=a26_0x55fc15;if(!this[_0x94f495(0x188)])return;this[_0x94f495(0x188)]=![],this[_0x94f495(0x1db)]=!![],this[_0x94f495(0x175)]();if(this[_0x94f495(0x13b)])this[_0x94f495(0x13b)](![],-0x1,-0x1);}['_keepKbdSelVisible'](){const _0x36d87e=a26_0x55fc15;if(!this[_0x36d87e(0x188)])return;const _0xedc239=getDPR(),_0x581ec1=this[_0x36d87e(0x130)][_0x36d87e(0x164)]/_0xedc239,_0x433ec6=this[_0x36d87e(0x130)][_0x36d87e(0x10a)]/_0xedc239,_0x2840c9=this[_0x36d87e(0x141)]+CELL_SPACING,_0x1fd1bf=this[_0x36d87e(0x156)]+this['_kbdSelX']*_0x2840c9,_0x52524d=this['offsetY']+this['_kbdSelY']*_0x2840c9,_0x21be58=this[_0x36d87e(0x141)],_0x231bef=_0x2840c9;if(_0x1fd1bf<_0x231bef)this[_0x36d87e(0x156)]+=_0x231bef-_0x1fd1bf;else{if(_0x1fd1bf+_0x21be58>_0x581ec1-_0x231bef)this[_0x36d87e(0x156)]-=_0x1fd1bf+_0x21be58-(_0x581ec1-_0x231bef);}if(_0x52524d<_0x231bef)this[_0x36d87e(0xc9)]+=_0x231bef-_0x52524d;else{if(_0x52524d+_0x21be58>_0x433ec6-_0x231bef)this[_0x36d87e(0xc9)]-=_0x52524d+_0x21be58-(_0x433ec6-_0x231bef);}this['_clampOffset']();}['_clampOffset'](){const _0x3e8460=a26_0x55fc15,_0x479cf2=this[_0x3e8460(0x1a1)];if(!_0x479cf2)return;const _0x18cb7a=getDPR(),_0x597228=this[_0x3e8460(0x130)][_0x3e8460(0x164)]/_0x18cb7a,_0x219d17=this['canvas'][_0x3e8460(0x10a)]/_0x18cb7a,_0x359f7a=this[_0x3e8460(0x141)]+CELL_SPACING,_0x4325c3=_0x479cf2[_0x3e8460(0xb7)]['w']*_0x359f7a-CELL_SPACING,_0x39394e=_0x479cf2[_0x3e8460(0xb7)]['h']*_0x359f7a-CELL_SPACING,_0x20274a=_0x597228/0x2,_0x13b575=_0x219d17/0x2;if(this[_0x3e8460(0x156)]>_0x20274a)this['offsetX']=_0x20274a;if(this['offsetX']+_0x4325c3<_0x20274a)this[_0x3e8460(0x156)]=_0x20274a-_0x4325c3;if(this['offsetY']>_0x13b575)this[_0x3e8460(0xc9)]=_0x13b575;if(this[_0x3e8460(0xc9)]+_0x39394e<_0x13b575)this[_0x3e8460(0xc9)]=_0x13b575-_0x39394e;}[a26_0x55fc15(0x14c)](_0x294e71,_0x4956c1){const _0x466691=a26_0x55fc15,_0x376f9c=this[_0x466691(0x141)]+CELL_SPACING,_0x467fce=Math[_0x466691(0x167)]((_0x294e71-this[_0x466691(0x156)])/_0x376f9c),_0x4ed90c=Math[_0x466691(0x167)]((_0x4956c1-this['offsetY'])/_0x376f9c),_0x4c6822=this[_0x466691(0x1a1)];return!_0x4c6822||_0x467fce<0x0||_0x467fce>=_0x4c6822[_0x466691(0xb7)]['w']||_0x4ed90c<0x0||_0x4ed90c>=_0x4c6822[_0x466691(0xb7)]['h']?(this[_0x466691(0x1bb)]['x']=-0x1,this[_0x466691(0x1bb)]['y']=-0x1):(this['_reuseCellPos']['x']=_0x467fce,this[_0x466691(0x1bb)]['y']=_0x4ed90c),this[_0x466691(0x1bb)];}static get[a26_0x55fc15(0xfa)](){return 0xa;}static get[a26_0x55fc15(0x183)](){return 0x12c;}[a26_0x55fc15(0xfc)](){const _0x4a931c=a26_0x55fc15,_0x2c4e28=this['canvas'];_0x2c4e28[_0x4a931c(0x121)](_0x4a931c(0x149),_0xabfa19=>this[_0x4a931c(0x158)](_0xabfa19)),_0x2c4e28[_0x4a931c(0x121)](_0x4a931c(0x12c),_0x4e3a43=>this[_0x4a931c(0xf6)](_0x4e3a43)),_0x2c4e28[_0x4a931c(0x121)]('mouseup',_0x208f46=>this[_0x4a931c(0x18a)](_0x208f46)),_0x2c4e28[_0x4a931c(0x121)](_0x4a931c(0xe1),_0x174844=>_0x174844[_0x4a931c(0x174)]()),_0x2c4e28[_0x4a931c(0x121)](_0x4a931c(0xc1),_0x393741=>{const _0x20b46d=_0x4a931c;_0x393741[_0x20b46d(0x174)]();if(this['_spectatorMode']||this[_0x20b46d(0xba)])return;const _0x408daa=_0x393741[_0x20b46d(0x13e)]<0x0?1.1:0x1/1.1;this[_0x20b46d(0x13c)](_0x408daa,_0x393741[_0x20b46d(0x156)],_0x393741[_0x20b46d(0xc9)]);},{'passive':![]}),_0x2c4e28[_0x4a931c(0x121)](_0x4a931c(0x187),_0xf0dda0=>this['_touchEvent'](_0xf0dda0),{'passive':![]}),_0x2c4e28[_0x4a931c(0x121)](_0x4a931c(0x11c),_0x3e9687=>this[_0x4a931c(0xc2)](_0x3e9687),{'passive':![]}),_0x2c4e28[_0x4a931c(0x121)](_0x4a931c(0x1a0),_0x88d8a7=>this[_0x4a931c(0xc2)](_0x88d8a7),{'passive':![]}),_0x2c4e28[_0x4a931c(0x121)](_0x4a931c(0x197),_0x35c428=>this[_0x4a931c(0xc2)](_0x35c428),{'passive':![]});}[a26_0x55fc15(0x158)](_0x44c59f){const _0x29267c=a26_0x55fc15;if(this[_0x29267c(0x1ba)]||this[_0x29267c(0xba)])return;this['hideKbdSelection'](),this[_0x29267c(0x117)]=!![];const _0x487fb0=_0x44c59f[_0x29267c(0x156)],_0x3d8a30=_0x44c59f[_0x29267c(0xc9)];this[_0x29267c(0x190)]=_0x487fb0,this[_0x29267c(0x185)]=_0x3d8a30,this[_0x29267c(0x178)]=this['offsetX'],this[_0x29267c(0x148)]=this['offsetY'],this['_moved']=![],this[_0x29267c(0x135)]=![],this[_0x29267c(0x1a6)]=_0x44c59f[_0x29267c(0x110)]===0x2;if(this[_0x29267c(0x1a6)]){const {x:_0x541f70,y:_0x34c9be}=this[_0x29267c(0x14c)](_0x487fb0,_0x3d8a30);if(_0x541f70>=0x0&&_0x34c9be>=0x0&&this[_0x29267c(0x124)])this[_0x29267c(0x124)](_0x541f70,_0x34c9be,ClickType['RightClick']);}else!this[_0x29267c(0xb1)]&&this[_0x29267c(0x104)](_0x487fb0,_0x3d8a30);}[a26_0x55fc15(0xf6)](_0x567c7b){const _0x468bcb=a26_0x55fc15;if(!this[_0x468bcb(0x117)])return;if(this[_0x468bcb(0x1ba)]||this['_inert'])return;if(this[_0x468bcb(0x1a6)]||this[_0x468bcb(0xb1)])return;const _0x48897c=_0x567c7b[_0x468bcb(0x156)],_0x13c39e=_0x567c7b[_0x468bcb(0xc9)],_0x59fdc6=_0x48897c-this[_0x468bcb(0x190)],_0x2e6bef=_0x13c39e-this[_0x468bcb(0x185)];this[_0x468bcb(0x16b)]=!![],this[_0x468bcb(0x156)]=this[_0x468bcb(0x178)]+_0x59fdc6,this[_0x468bcb(0xc9)]=this[_0x468bcb(0x148)]+_0x2e6bef,this[_0x468bcb(0x1cb)](),this['_gridDirty']=!![],this[_0x468bcb(0x175)]();if(!this[_0x468bcb(0xfd)]){const _0x115f84=Math[_0x468bcb(0x12d)](_0x59fdc6*_0x59fdc6+_0x2e6bef*_0x2e6bef);_0x115f84>GridRenderer[_0x468bcb(0xfa)]&&(this[_0x468bcb(0xfd)]=!![],this['_cancelLongPress']());}}['_mouseUp'](_0x26506a){const _0x7c55ad=a26_0x55fc15;this[_0x7c55ad(0x117)]=![];if(this['_spectatorMode']||this['_inert'])return;this[_0x7c55ad(0x16b)]=![],this[_0x7c55ad(0x1bc)]();if(!this['_isRightClick']&&!this[_0x7c55ad(0xfd)]&&!this[_0x7c55ad(0x135)]&&!this[_0x7c55ad(0xb1)]){const {x:_0x3dfee7,y:_0x10dfb8}=this[_0x7c55ad(0x14c)](_0x26506a[_0x7c55ad(0x156)],_0x26506a[_0x7c55ad(0xc9)]);if(_0x3dfee7>=0x0&&_0x10dfb8>=0x0&&this[_0x7c55ad(0x124)])this[_0x7c55ad(0x124)](_0x3dfee7,_0x10dfb8,ClickType[_0x7c55ad(0xe4)]);}}[a26_0x55fc15(0xc2)](_0x484ce9){const _0x50ac8b=a26_0x55fc15;_0x484ce9[_0x50ac8b(0x174)]();if(this[_0x50ac8b(0x1ba)]||this[_0x50ac8b(0xba)])return;const _0x255b13=_0x484ce9[_0x50ac8b(0xbb)],_0x577942=_0x255b13['length'],_0x505068=_0x484ce9[_0x50ac8b(0x13f)];_0x505068===_0x50ac8b(0x187)&&(this['_cachedRect']=this[_0x50ac8b(0x130)][_0x50ac8b(0x1b2)]());if(_0x577942===0x2){const _0x253475=this[_0x50ac8b(0x1c0)](_0x255b13[0x0]),_0x206500=_0x253475['x'],_0x494cc5=_0x253475['y'],_0x14e665=this[_0x50ac8b(0x1c0)](_0x255b13[0x1]),_0x12d34a=_0x14e665['x'],_0x1a7b56=_0x14e665['y'];this[_0x50ac8b(0x11d)]!==0x2&&(this[_0x50ac8b(0xb1)]=!![],this['_pinchTouchCount']=0x2,this[_0x50ac8b(0x1bc)](),this['_pinchStartScale']=this[_0x50ac8b(0x141)],this[_0x50ac8b(0x12b)]=this[_0x50ac8b(0x156)],this[_0x50ac8b(0x17c)]=this['offsetY'],this[_0x50ac8b(0x1b0)]=(_0x206500+_0x12d34a)/0x2,this['_pinchStartCY']=(_0x494cc5+_0x1a7b56)/0x2,this[_0x50ac8b(0xce)]=Math['max'](0x1,Math[_0x50ac8b(0x12d)]((_0x12d34a-_0x206500)*(_0x12d34a-_0x206500)+(_0x1a7b56-_0x494cc5)*(_0x1a7b56-_0x494cc5))));const _0x256cba=(_0x206500+_0x12d34a)/0x2,_0x3dcf7d=(_0x494cc5+_0x1a7b56)/0x2,_0x54dcbb=Math[_0x50ac8b(0x12d)]((_0x12d34a-_0x206500)*(_0x12d34a-_0x206500)+(_0x1a7b56-_0x494cc5)*(_0x1a7b56-_0x494cc5)),_0x3e52f8=_0x54dcbb/this[_0x50ac8b(0xce)],_0x23acab=Math['max'](this['minZoom'],Math[_0x50ac8b(0x180)](this[_0x50ac8b(0xb8)],Math['round'](this['_pinchStartScale']*_0x3e52f8))),_0x5260b3=this[_0x50ac8b(0x145)]+CELL_SPACING,_0x40216e=(this['_pinchStartCX']-this['_pinchStartOX'])/_0x5260b3,_0x55f98c=(this['_pinchStartCY']-this['_pinchStartOY'])/_0x5260b3,_0x2b3337=_0x23acab+CELL_SPACING;this[_0x50ac8b(0x141)]=_0x23acab,this[_0x50ac8b(0x156)]=_0x256cba-_0x40216e*_0x2b3337,this[_0x50ac8b(0xc9)]=_0x3dcf7d-_0x55f98c*_0x2b3337,this[_0x50ac8b(0x1cb)](),this[_0x50ac8b(0x1db)]=!![],this[_0x50ac8b(0x175)]();return;}if(_0x577942===0x1&&this['_isPinching']){this[_0x50ac8b(0xb1)]=![],this[_0x50ac8b(0x11d)]=0x1,this['_dragging']=!![],this[_0x50ac8b(0xfd)]=!![],this[_0x50ac8b(0x135)]=![],this[_0x50ac8b(0x1a6)]=![];const _0x1bfbc1=this[_0x50ac8b(0x1c0)](_0x255b13[0x0]);this[_0x50ac8b(0x190)]=_0x1bfbc1['x'],this[_0x50ac8b(0x185)]=_0x1bfbc1['y'],this[_0x50ac8b(0x178)]=this[_0x50ac8b(0x156)],this[_0x50ac8b(0x148)]=this[_0x50ac8b(0xc9)],this[_0x50ac8b(0xcd)](getDPR()),this[_0x50ac8b(0x1db)]=!![],this[_0x50ac8b(0x175)]();return;}if(_0x577942===0x1){const _0x5052b1=this[_0x50ac8b(0x1c0)](_0x255b13[0x0]),_0x1734ad=_0x5052b1['x'],_0x473156=_0x5052b1['y'];if(_0x505068==='touchstart')this[_0x50ac8b(0x102)](),this['_dragSX']=_0x1734ad,this[_0x50ac8b(0x185)]=_0x473156,this['_dragOX']=this['offsetX'],this['_dragOY']=this[_0x50ac8b(0xc9)],this[_0x50ac8b(0xfd)]=![],this[_0x50ac8b(0x16b)]=![],this[_0x50ac8b(0x135)]=![],this['_isRightClick']=![],this['_pinchTouchCount']=0x1,this[_0x50ac8b(0x104)](_0x1734ad,_0x473156);else{if(_0x505068===_0x50ac8b(0x11c)){const _0x3c19a5=_0x1734ad-this[_0x50ac8b(0x190)],_0x9a7873=_0x473156-this[_0x50ac8b(0x185)];this['_dragging']=!![],this[_0x50ac8b(0x156)]=this[_0x50ac8b(0x178)]+_0x3c19a5,this[_0x50ac8b(0xc9)]=this[_0x50ac8b(0x148)]+_0x9a7873,this[_0x50ac8b(0x1cb)](),this[_0x50ac8b(0x1db)]=!![],this[_0x50ac8b(0x175)]();if(!this[_0x50ac8b(0xfd)]){const _0x262f0d=Math[_0x50ac8b(0x12d)](_0x3c19a5*_0x3c19a5+_0x9a7873*_0x9a7873);_0x262f0d>GridRenderer[_0x50ac8b(0xfa)]&&(this[_0x50ac8b(0xfd)]=!![],this[_0x50ac8b(0x1bc)]());}}else{if(_0x505068==='touchend'||_0x505068==='touchcancel'){this[_0x50ac8b(0x16b)]=![],this[_0x50ac8b(0x1bc)](),this[_0x50ac8b(0x11d)]=0x0;if(!this[_0x50ac8b(0x1a6)]&&!this[_0x50ac8b(0xfd)]&&!this[_0x50ac8b(0x135)]){const {x:_0x12f654,y:_0x3844bc}=this[_0x50ac8b(0x14c)](_0x1734ad,_0x473156);if(_0x12f654>=0x0&&_0x3844bc>=0x0&&this['onCellClick'])this[_0x50ac8b(0x124)](_0x12f654,_0x3844bc,ClickType[_0x50ac8b(0xe4)]);}}}}return;}if(_0x577942===0x0){const _0x14e5d8=this[_0x50ac8b(0xb1)];this[_0x50ac8b(0xb1)]&&(this['_isPinching']=![],this['_pinchTouchCount']=0x0,this[_0x50ac8b(0xfd)]=!![],this['_buildAtlas'](getDPR()),this[_0x50ac8b(0x1db)]=!![],this[_0x50ac8b(0x175)]());this['_dragging']=![],this[_0x50ac8b(0x1bc)](),this['_pinchTouchCount']=0x0;if(!_0x14e5d8&&!this[_0x50ac8b(0x1a6)]&&!this[_0x50ac8b(0xfd)]&&!this['_lpFired']){const {x:_0x28f431,y:_0x542b1e}=this[_0x50ac8b(0x14c)](this[_0x50ac8b(0x190)],this[_0x50ac8b(0x185)]);if(_0x28f431>=0x0&&_0x542b1e>=0x0&&this[_0x50ac8b(0x124)])this[_0x50ac8b(0x124)](_0x28f431,_0x542b1e,!![]);}this[_0x50ac8b(0xd3)]=null;}}['_startLongPress'](_0x4713a4,_0x4e6dd7){const _0x27102d=a26_0x55fc15;this[_0x27102d(0x1bc)](),this[_0x27102d(0xae)]=setTimeout(()=>{const _0x31b390=_0x27102d;if(!this[_0x31b390(0x1ba)]&&!this['_inert']&&!this[_0x31b390(0xfd)]&&!this['_lpFired']&&!this[_0x31b390(0x1a6)]&&!this[_0x31b390(0xb1)]){this['_lpFired']=!![];const {x:_0x506589,y:_0x1ee538}=this[_0x31b390(0x14c)](_0x4713a4,_0x4e6dd7);if(_0x506589>=0x0&&_0x1ee538>=0x0&&this[_0x31b390(0x124)])this['onCellClick'](_0x506589,_0x1ee538,ClickType[_0x31b390(0xf4)]);}this[_0x31b390(0xae)]=null;},GridRenderer['LONG_PRESS_MS']);}[a26_0x55fc15(0x1bc)](){const _0x2d785e=a26_0x55fc15;this[_0x2d785e(0xae)]&&(clearTimeout(this[_0x2d785e(0xae)]),this[_0x2d785e(0xae)]=null);}[a26_0x55fc15(0x1c0)](_0x48347f){const _0x481e7e=a26_0x55fc15,_0x82536b=this['_cachedRect']||this[_0x481e7e(0x130)][_0x481e7e(0x1b2)]();return this[_0x481e7e(0x17f)]['x']=_0x48347f['clientX']-_0x82536b[_0x481e7e(0x1af)],this[_0x481e7e(0x17f)]['y']=_0x48347f[_0x481e7e(0x127)]-_0x82536b[_0x481e7e(0xc6)],this[_0x481e7e(0x17f)];}[a26_0x55fc15(0x13c)](_0x436978,_0x12950b,_0x228b8c){const _0x5cd473=a26_0x55fc15,_0x4d6404=this[_0x5cd473(0x141)],_0x272a90=Math[_0x5cd473(0x147)](this['minZoom'],Math[_0x5cd473(0x180)](this[_0x5cd473(0xb8)],Math[_0x5cd473(0xf1)](_0x4d6404*_0x436978)));if(_0x272a90===_0x4d6404)return;const _0x51844a=_0x272a90/_0x4d6404;this[_0x5cd473(0x141)]=_0x272a90,this['offsetX']=_0x12950b-(_0x12950b-this[_0x5cd473(0x156)])*_0x51844a,this[_0x5cd473(0xc9)]=_0x228b8c-(_0x228b8c-this[_0x5cd473(0xc9)])*_0x51844a,this[_0x5cd473(0x1cb)](),this[_0x5cd473(0x1db)]=!![],this[_0x5cd473(0x175)]();}[a26_0x55fc15(0x1c8)](){const _0x352703=a26_0x55fc15,_0x28a8e5=getDPR();this['_zoomAt'](1.1,this['canvas'][_0x352703(0x164)]/_0x28a8e5/0x2,this[_0x352703(0x130)][_0x352703(0x10a)]/_0x28a8e5/0x2);}[a26_0x55fc15(0x19e)](){const _0x344daf=a26_0x55fc15,_0x295871=getDPR();this[_0x344daf(0x13c)](0x1/1.1,this[_0x344daf(0x130)][_0x344daf(0x164)]/_0x295871/0x2,this['canvas'][_0x344daf(0x10a)]/_0x295871/0x2);}[a26_0x55fc15(0x176)](_0x5db333){const _0x35d605=a26_0x55fc15;switch(_0x5db333){case'ArrowLeft':this[_0x35d605(0x13d)]=!![];break;case _0x35d605(0x1dd):this[_0x35d605(0x1a9)]=!![];break;case _0x35d605(0xe8):this[_0x35d605(0x113)]=!![];break;case _0x35d605(0x1b8):this['_shiftPanDown']=!![];break;}!this['_kbdPanTimer']&&this[_0x35d605(0xac)]()&&(this[_0x35d605(0xbc)]=performance[_0x35d605(0x173)](),this[_0x35d605(0x138)]=setInterval(()=>this[_0x35d605(0x12e)](),0x10));}[a26_0x55fc15(0xea)](_0x3d4b54){const _0x48d8d1=a26_0x55fc15;switch(_0x3d4b54){case _0x48d8d1(0x103):this['_shiftPanLeft']=![];break;case _0x48d8d1(0x1dd):this['_shiftPanRight']=![];break;case _0x48d8d1(0xe8):this[_0x48d8d1(0x113)]=![];break;case _0x48d8d1(0x1b8):this[_0x48d8d1(0x191)]=![];break;}if(!this[_0x48d8d1(0xac)]())this['_stopKbdPanTimer']();}['stopAllKbdShiftPan'](){const _0x455284=a26_0x55fc15;this[_0x455284(0x13d)]=this[_0x455284(0x1a9)]=this['_shiftPanUp']=this[_0x455284(0x191)]=![],this[_0x455284(0xa8)]();}['_anyShiftPanKey'](){const _0x5cf0cb=a26_0x55fc15;return this[_0x5cf0cb(0x13d)]||this['_shiftPanRight']||this[_0x5cf0cb(0x113)]||this[_0x5cf0cb(0x191)];}['_stopKbdPanTimer'](){const _0x2e70b8=a26_0x55fc15;this['_kbdPanTimer']&&(clearInterval(this['_kbdPanTimer']),this[_0x2e70b8(0x138)]=null);}[a26_0x55fc15(0x12e)](){const _0x419d55=a26_0x55fc15;if(!this[_0x419d55(0x1a1)]||!this['_anyShiftPanKey']()){this[_0x419d55(0xa8)]();return;}const _0xfc185f=performance[_0x419d55(0x173)](),_0x51e950=Math[_0x419d55(0x180)]((_0xfc185f-this['_kbdPanLastTime'])/0x3e8,0.05);this['_kbdPanLastTime']=_0xfc185f;const _0x2d43f5=this[_0x419d55(0x141)]+CELL_SPACING,_0x58d815=Math[_0x419d55(0x147)](0x1a4,0xe*_0x2d43f5),_0x38a935=((this['_shiftPanRight']?0x1:0x0)-(this[_0x419d55(0x13d)]?0x1:0x0))*_0x58d815*_0x51e950,_0x319089=((this[_0x419d55(0x191)]?0x1:0x0)-(this['_shiftPanUp']?0x1:0x0))*_0x58d815*_0x51e950;this['offsetX']-=_0x38a935,this['offsetY']-=_0x319089,this['_clampOffset'](),this[_0x419d55(0x1db)]=!![],this[_0x419d55(0x175)]();}}
+// GridRenderer.js — WebGL-accelerated minesweeper grid renderer
+// ============================================================================
+//
+// All visible cells are drawn in a SINGLE batched WebGL draw call using a
+// sprite-atlas texture.  Pan and zoom only update uniforms — zero per-cell
+// Canvas API calls.  Decals are rendered on a thin transparent 2D-canvas
+// overlay so we can still use fillText / arc for player indicators.
+//
+// Public API is identical to the previous Canvas-2D GridRenderer so UIManager
+// needs zero changes.
+//
+// ============================================================================
+
+import { CellContent, CellState, GameState, PlayerAction, ClickType, GameType } from '../../core/CoreEnums.js';
+import { getPlayerColorHex } from '../../core/CoreTypes.js';
+
+// ─── Visual constants ───────────────────────────────────────────────────────
+
+const BG_COLOR_RGB = [0.2, 0.2, 0.2];  // #333333
+const HIDDEN_CLR   = '#888888';
+const REVEAL_CLR   = '#BBBBBB';
+const MINE_BG      = '#FF4444';
+const NUMBER_TEXT_COLORS = ['#0000FF', '#008000', '#FF0000', '#000080', '#800000', '#008080', '#000000', '#808080'];
+
+const DEFAULT_CELL_SIZE = 30;
+const CELL_SPACING      = 1;
+const DECAL_TOTAL_MS    = 1500;
+const DECAL_VISIBLE_MS  = 500;
+
+// Atlas sprite indices
+const S_HIDDEN = 0;
+const S_EMPTY  = 1;
+const S_N1     = 2;   // 2–9 → numbers 1–8
+const S_FLAG   = 10;
+const S_MINE   = 11;
+const S_WRONG  = 12;
+const S_DARK_EMPTY = 13;
+const S_N0 = 14;
+const S_DIM_N0 = 15;      // dim fog (game over), adj=0
+const S_DIM_N1 = 16;      // 16–23 → dim numbers 1–8
+const N_SPRITES = 24;
+
+const GRID_SVG_ASSETS = {
+    n0: 'src/assets/grid/0.svg',
+    n1: 'src/assets/grid/1.svg',
+    n2: 'src/assets/grid/2.svg',
+    n3: 'src/assets/grid/3.svg',
+    n4: 'src/assets/grid/4.svg',
+    n5: 'src/assets/grid/5.svg',
+    n6: 'src/assets/grid/6.svg',
+    n7: 'src/assets/grid/7.svg',
+    n8: 'src/assets/grid/8.svg',
+    flag: 'src/assets/grid/flag.svg',
+    mine: 'src/assets/grid/mine.svg',
+    wrong: 'src/assets/grid/wrong_flag.svg',
+    exploded: 'src/assets/grid/mine_exploded.svg',
+};
+
+// ─── Shader sources ─────────────────────────────────────────────────────────
+
+const VERT_SRC = `
+attribute vec2 a_pos;        // quad corner (0,0)→(1,1)
+attribute vec2 a_cellXY;     // grid column, row
+attribute float a_sprite;    // sprite index into atlas
+
+uniform vec2 u_viewSize;     // canvas size in logical px
+uniform vec2 u_offset;       // pan offset in logical px
+uniform float u_cellSize;    // cell size in logical px
+uniform float u_stride;      // cellSize + spacing
+uniform float u_atlasInv;    // 1.0 / N_SPRITES
+uniform float u_uvInsetX;    // normalized inset in atlas X
+uniform float u_uvInsetY;    // normalized inset in atlas Y
+
+varying vec2 v_uv;
+
+void main() {
+    // World position of this vertex
+    vec2 world = vec2(
+        u_offset.x + a_cellXY.x * u_stride + a_pos.x * u_cellSize,
+        u_offset.y + a_cellXY.y * u_stride + a_pos.y * u_cellSize
+    );
+
+    // Map to clip space  (-1..+1),  Y flipped for screen coords
+    vec2 clip = (world / u_viewSize) * 2.0 - 1.0;
+    clip.y = -clip.y;
+    gl_Position = vec4(clip, 0.0, 1.0);
+
+    // UV into atlas row (sprite index selects horizontal slice)
+    float u0 = a_sprite * u_atlasInv + u_uvInsetX;
+    float u1 = (a_sprite + 1.0) * u_atlasInv - u_uvInsetX;
+    float v0 = u_uvInsetY;
+    float v1 = 1.0 - u_uvInsetY;
+    v_uv = vec2(mix(u0, u1, a_pos.x), mix(v0, v1, a_pos.y));
+}
+`;
+
+const FRAG_SRC = `
+precision mediump float;
+uniform sampler2D u_atlas;
+varying vec2 v_uv;
+void main() {
+    gl_FragColor = texture2D(u_atlas, v_uv);
+}
+`;
+
+// ─── Helpers ────────────────────────────────────────────────────────────────
+
+function makeCanvas2D(w, h) {
+    try { return new OffscreenCanvas(w, h); } catch (_) { /* fallback */ }
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    return c;
+}
+
+function getDPR() { return window.devicePixelRatio || 1; }
+
+function compileShader(gl, type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+        console.error('[GridRenderer] Shader compile error:', gl.getShaderInfoLog(s));
+        gl.deleteShader(s);
+        return null;
+    }
+    return s;
+}
+
+function createProgram(gl, vs, fs) {
+    const p = gl.createProgram();
+    gl.attachShader(p, vs);
+    gl.attachShader(p, fs);
+    gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
+        console.error('[GridRenderer] Program link error:', gl.getProgramInfoLog(p));
+        gl.deleteProgram(p);
+        return null;
+    }
+    return p;
+}
+
+// ─── GridRenderer (WebGL) ───────────────────────────────────────────────────
+
+export class GridRenderer {
+
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.gridManager = null;
+
+        // Viewport (logical pixels)
+        this.cellSize = DEFAULT_CELL_SIZE;
+        this.offsetX  = 0;
+        this.offsetY  = 0;
+        this.minZoom  = 10;
+        this.maxZoom  = 180;
+
+        // Dirty / scheduling
+        this._gridDirty = true;
+        this._running   = false;
+        this._rafId     = 0;
+
+        // Decals
+        this._decals = [];
+
+        // State flags
+        this._paintFalseFlags = false;
+        this._spectatorMode   = false;
+        this._inert           = false;
+        this._showDecals      = true;
+        this._digitalNumbersEnabled  = false;
+        this._digitalTexturesEnabled = false;
+
+        // Interaction state — mirrors Qt GridRenderer exactly
+        this._mouseIsDown = false;       // true while a mouse button is held
+        this._dragging   = false;        // m_isDragging
+        this._dragSX     = 0;            // m_dragStartPos.x
+        this._dragSY     = 0;            // m_dragStartPos.y
+        this._dragOX     = 0;            // m_offsetAtDragStart.x
+        this._dragOY     = 0;            // m_offsetAtDragStart.y
+        this._moved      = false;        // m_hasMoved
+        this._lpTimer    = null;         // m_longPressTimer
+        this._lpFired    = false;        // m_longPressTriggered
+        this._isRightClick = false;      // m_isRightClick
+
+        // Touch / pinch state — mirrors Qt
+        this._isPinching      = false;   // m_isPinching
+        this._pinchTouchCount = 0;       // m_pinchTouchCount
+        this._pinchStartCX    = 0;       // m_pinchStartCenter.x
+        this._pinchStartCY    = 0;       // m_pinchStartCenter.y
+        this._pinchStartScale = 0;       // m_pinchStartScale  (cellSize at pinch start)
+        this._pinchStartDist  = 1;       // m_pinchStartDist
+        this._pinchStartOX    = 0;       // m_pinchStartOffset.x
+        this._pinchStartOY    = 0;       // m_pinchStartOffset.y
+
+        // Keyboard selection (mirrors Qt GridRenderer::m_hasKeyboardSelection)
+        this._hasKbdSel = false;
+        this._kbdSelX   = -1;
+        this._kbdSelY   = -1;
+
+        // Shift+Arrow smooth pan state (mirrors Qt GridRenderer shift-pan)
+        this._shiftPanLeft  = false;
+        this._shiftPanRight = false;
+        this._shiftPanUp    = false;
+        this._shiftPanDown  = false;
+        this._kbdPanTimer    = null;
+        this._kbdPanLastTime = 0;
+
+        // Public callbacks
+        this.onCellClick      = null;
+        this.onKbdSelChanged  = null; // (visible: bool, x: int, y: int)
+
+        // Reusable objects
+        this._reuseTchPos  = { x: 0, y: 0 };
+        this._reuseCellPos = { x: 0, y: 0 };
+        this._cachedRect   = null;
+
+        // ── WebGL init ──
+        const gl = canvas.getContext('webgl', {
+            alpha: false,
+            antialias: false,
+            depth: false,
+            stencil: false,
+            premultipliedAlpha: false,
+            preserveDrawingBuffer: false,
+        });
+        this._gl = gl;
+
+        if (!gl) {
+            console.error('[GridRenderer] WebGL not available');
+        }
+
+        // Decal overlay (2D canvas stacked on top of the WebGL canvas)
+        this._decalCanvas = null;
+        this._decalCtx    = null;
+        this._initDecalOverlay();
+
+        // Shader program + locations
+        this._prog     = null;
+        this._aPos     = -1;
+        this._aCellXY  = -1;
+        this._aSprite  = -1;
+        this._uViewSize = null;
+        this._uOffset   = null;
+        this._uCellSize = null;
+        this._uStride   = null;
+        this._uAtlasInv = null;
+        this._uUvInsetX = null;
+        this._uUvInsetY = null;
+        this._uAtlas    = null;
+
+        // GPU buffers
+        this._quadVBO   = null;
+        this._cellVBO   = null;
+        this._spriteVBO = null;
+        this._cellBuf   = null;   // Float32Array backing
+        this._spriteBuf = null;
+        this._instanceCount = 0;
+        this._bufCapacity   = 0;
+
+        // Atlas texture
+        this._atlasTex = null;
+        this._atlasCS  = 0;
+        this._atlasDPR = 0;
+        this._atlasUnitPx = 0;
+        this._spriteImages = new Map();
+
+        // Instanced rendering extension
+        this._ext = null;
+
+        if (gl) this._initGL();
+        this._loadGridSprites();
+        this._bindEvents();
+    }
+
+    _loadGridSprites() {
+        const keys = Object.keys(GRID_SVG_ASSETS);
+        for (const key of keys) {
+            const img = new Image();
+            img.decoding = 'async';
+            img.onload = () => {
+                this._gridDirty = true;
+                this._atlasCS = 0;
+                this._scheduleFrame();
+            };
+            img.src = GRID_SVG_ASSETS[key];
+            this._spriteImages.set(key, img);
+        }
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    // WebGL bootstrap
+    // ════════════════════════════════════════════════════════════════════════
+
+    _initGL() {
+        const gl = this._gl;
+
+        this._ext = gl.getExtension('ANGLE_instanced_arrays');
+        if (!this._ext) {
+            console.error('[GridRenderer] ANGLE_instanced_arrays unavailable');
+            this._gl = null;
+            return;
+        }
+
+        const vs = compileShader(gl, gl.VERTEX_SHADER, VERT_SRC);
+        const fs = compileShader(gl, gl.FRAGMENT_SHADER, FRAG_SRC);
+        if (!vs || !fs) { this._gl = null; return; }
+        this._prog = createProgram(gl, vs, fs);
+        gl.deleteShader(vs);
+        gl.deleteShader(fs);
+        if (!this._prog) { this._gl = null; return; }
+
+        gl.useProgram(this._prog);
+
+        this._aPos      = gl.getAttribLocation(this._prog, 'a_pos');
+        this._aCellXY   = gl.getAttribLocation(this._prog, 'a_cellXY');
+        this._aSprite   = gl.getAttribLocation(this._prog, 'a_sprite');
+        this._uViewSize = gl.getUniformLocation(this._prog, 'u_viewSize');
+        this._uOffset   = gl.getUniformLocation(this._prog, 'u_offset');
+        this._uCellSize = gl.getUniformLocation(this._prog, 'u_cellSize');
+        this._uStride   = gl.getUniformLocation(this._prog, 'u_stride');
+        this._uAtlasInv = gl.getUniformLocation(this._prog, 'u_atlasInv');
+        this._uUvInsetX = gl.getUniformLocation(this._prog, 'u_uvInsetX');
+        this._uUvInsetY = gl.getUniformLocation(this._prog, 'u_uvInsetY');
+        this._uAtlas    = gl.getUniformLocation(this._prog, 'u_atlas');
+
+        // Static unit-quad (two triangles: [0,0]→[1,1])
+        this._quadVBO = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, this._quadVBO);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+            0, 0,  1, 0,  1, 1,
+            0, 0,  1, 1,  0, 1,
+        ]), gl.STATIC_DRAW);
+
+        // Per-instance buffers (sized dynamically)
+        this._cellVBO   = gl.createBuffer();
+        this._spriteVBO = gl.createBuffer();
+
+        // Atlas texture
+        this._atlasTex = gl.createTexture();
+        gl.bindTexture(gl.TEXTURE_2D, this._atlasTex);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+        gl.clearColor(BG_COLOR_RGB[0], BG_COLOR_RGB[1], BG_COLOR_RGB[2], 1.0);
+    }
+
+    /** Create transparent 2D overlay canvas for decals, stacked over the WebGL canvas. */
+    _initDecalOverlay() {
+        const parent = this.canvas.parentElement;
+        if (!parent) return;
+
+        const id = 'decal-overlay-' + this.canvas.id;
+        let overlay = parent.querySelector('.' + id);
+        if (!overlay) {
+            overlay = document.createElement('canvas');
+            overlay.className = id;
+            overlay.style.cssText =
+                'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;';
+            parent.appendChild(overlay);
+        }
+        this._decalCanvas = overlay;
+        this._decalCtx = overlay.getContext('2d');
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Atlas — rendered to a 2D canvas, uploaded as WebGL texture
+    // ════════════════════════════════════════════════════════════════════════
+
+    _ensureAtlas() {
+        const d = getDPR();
+        if (this._atlasCS === this.cellSize && this._atlasDPR === d) return;
+        if (this._isPinching && this._atlasCS !== 0) return;
+        this._buildAtlas(d);
+    }
+
+    _buildAtlas(deviceRatio) {
+        const cs = this.cellSize;
+        this._atlasCS  = cs;
+        this._atlasDPR = deviceRatio;
+
+        let u = Math.ceil(cs * deviceRatio * ((this._digitalNumbersEnabled || this._digitalTexturesEnabled) ? 2.0 : 1.5));
+        if (this._gl) {
+            const maxTex = this._gl.getParameter(this._gl.MAX_TEXTURE_SIZE) || 4096;
+            const maxU = Math.max(16, Math.floor(maxTex / N_SPRITES));
+            u = Math.min(u, maxU);
+        }
+        u = Math.max(16, u);
+        this._atlasUnitPx = u;
+        const c2d = makeCanvas2D(N_SPRITES * u, u);
+        const g = c2d.getContext('2d');
+        g.imageSmoothingEnabled = true;
+        if ('imageSmoothingQuality' in g) g.imageSmoothingQuality = 'high';
+
+        const hiddenBg = (ox) => { g.fillStyle = HIDDEN_CLR; g.fillRect(ox, 0, u, u); };
+        const revealBg = (ox) => { g.fillStyle = REVEAL_CLR; g.fillRect(ox, 0, u, u); };
+        const dimBg    = (ox) => { g.fillStyle = '#464646';   g.fillRect(ox, 0, u, u); };
+        const drawSvg = (key, ox) => {
+            const img = this._spriteImages.get(key);
+            if (!img || !img.complete || img.naturalWidth === 0 || img.naturalHeight === 0) return;
+            g.drawImage(img, ox + u * 0.1, u * 0.1, u * 0.8, u * 0.8);
+        };
+        const drawNativeNumber = (n, ox) => {
+            g.fillStyle = NUMBER_TEXT_COLORS[n - 1] || '#000000';
+            g.font = `700 ${Math.floor(u * 0.68)}px "Segoe UI", sans-serif`;
+            g.textAlign = 'center';
+            g.textBaseline = 'middle';
+            g.fillText(String(n), ox + u * 0.5, u * 0.54);
+        };
+
+        const drawEmoji = (emoji, ox) => {
+            g.font = `${Math.floor(u * 0.68)}px serif`;
+            g.textAlign = 'center';
+            g.textBaseline = 'middle';
+            g.fillText(emoji, ox + u * 0.5, u * 0.54);
+        };
+
+        const darkBg = (ox) => { g.fillStyle = '#282828'; g.fillRect(ox, 0, u, u); };
+        hiddenBg(0);                              // 0: Hidden
+        revealBg(u);                              // 1: Empty revealed
+        darkBg(S_DARK_EMPTY * u);
+        // S_N0: revealed cell with 0 adjacent mines (fog of war mode)
+        {
+            const ox0 = S_N0 * u;
+            revealBg(ox0);
+            if (this._digitalNumbersEnabled) {
+                drawSvg('n0', ox0);
+            } else {
+                g.fillStyle = '#808080';
+                g.font = `700 ${Math.floor(u * 0.68)}px "Segoe UI", sans-serif`;
+                g.textAlign = 'center';
+                g.textBaseline = 'middle';
+                g.fillText('0', ox0 + u * 0.5, u * 0.54);
+            }
+        }
+        for (let n = 1; n <= 8; n++) {            // 2–9: Numbers
+            const ox = (S_N1 + n - 1) * u;
+            revealBg(ox);
+            if (this._digitalNumbersEnabled) {
+                drawSvg(`n${n}`, ox);
+            } else {
+                drawNativeNumber(n, ox);
+            }
+        }
+        hiddenBg(S_FLAG * u);                     // 10: Flag
+        if (this._digitalTexturesEnabled) {
+            drawSvg('flag', S_FLAG * u);
+        } else {
+            drawEmoji('\uD83D\uDEA9', S_FLAG * u);
+        }
+        g.fillStyle = MINE_BG;                    // 11: Mine
+        g.fillRect(S_MINE * u, 0, u, u);
+        if (this._digitalTexturesEnabled) {
+            drawSvg('mine', S_MINE * u);
+        } else {
+            drawEmoji('\uD83D\uDCA3', S_MINE * u);
+        }
+        hiddenBg(S_WRONG * u);                    // 12: Wrong flag
+        if (this._digitalTexturesEnabled) {
+            drawSvg('wrong', S_WRONG * u);
+        } else {
+            drawEmoji('\u274C', S_WRONG * u);
+        }
+
+        // S_DIM_N0: dim fog (game over), 0 adjacent mines
+        {
+            const ox = S_DIM_N0 * u;
+            dimBg(ox);
+            if (this._digitalNumbersEnabled) {
+                drawSvg('n0', ox);
+            } else {
+                g.fillStyle = '#808080';
+                g.font = `700 ${Math.floor(u * 0.68)}px "Segoe UI", sans-serif`;
+                g.textAlign = 'center';
+                g.textBaseline = 'middle';
+                g.fillText('0', ox + u * 0.5, u * 0.54);
+            }
+        }
+        for (let n = 1; n <= 8; n++) {             // S_DIM_N1..N8: dim fog numbers
+            const ox = (S_DIM_N1 + n - 1) * u;
+            dimBg(ox);
+            if (this._digitalNumbersEnabled) {
+                drawSvg(`n${n}`, ox);
+            } else {
+                drawNativeNumber(n, ox);
+            }
+        }
+
+        // Upload to GPU
+        if (!this._gl) return;
+        const gl = this._gl;
+        gl.bindTexture(gl.TEXTURE_2D, this._atlasTex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, c2d);
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Instance buffer management
+    // ════════════════════════════════════════════════════════════════════════
+
+    _ensureInstanceCapacity(count) {
+        if (count <= this._bufCapacity) return;
+        const cap = Math.max(count, Math.ceil(this._bufCapacity * 1.5), 256);
+        this._cellBuf   = new Float32Array(cap * 2);
+        this._spriteBuf = new Float32Array(cap);
+        this._bufCapacity = cap;
+    }
+
+    _buildInstances() {
+        const gm = this.gridManager;
+        if (!gm || !gm.initialized) { this._instanceCount = 0; return; }
+
+        const gl = this._gl;
+        const d  = getDPR();
+        const vw = this.canvas.width  / d;
+        const vh = this.canvas.height / d;
+        const stride = this.cellSize + CELL_SPACING;
+        const ox = this.offsetX;
+        const oy = this.offsetY;
+        const grid = gm.grid;
+        const ff = this._paintFalseFlags;
+
+        // Viewport culling
+        const x0 = Math.max(0, Math.floor(-ox / stride));
+        const y0 = Math.max(0, Math.floor(-oy / stride));
+        const x1 = Math.min(gm.gridData.w, Math.ceil((vw - ox) / stride) + 1);
+        const y1 = Math.min(gm.gridData.h, Math.ceil((vh - oy) / stride) + 1);
+
+        const visW = x1 - x0;
+        const visH = y1 - y0;
+        if (visW <= 0 || visH <= 0) { this._instanceCount = 0; return; }
+
+        const count = visW * visH;
+        this._ensureInstanceCapacity(count);
+
+        const cellBuf   = this._cellBuf;
+        const spriteBuf = this._spriteBuf;
+        let idx = 0;
+
+        for (let y = y0; y < y1; y++) {
+            const row = grid[y];
+            for (let x = x0; x < x1; x++) {
+                const cell = row[x];
+
+                let si;
+                if (cell.state === CellState.Revealed) {
+                    const inFog = gm.gameVariant === "fog_of_war" && !gm.fogCache.some(p => p.x === x && p.y === y);
+                    if (inFog) {
+                        const gameOver = gm.gameState === GameState.Lost || gm.gameState === GameState.Won;
+                        if (gameOver && cell.content === CellContent.Mine) {
+                            si = S_MINE; // mines always show on game over
+                        } else if (gameOver) {
+                            const adj = cell.adj;
+                            si = adj > 0 ? S_DIM_N1 + adj - 1 : S_DIM_N0;
+                        } else {
+                            si = S_DARK_EMPTY;
+                        }
+                    } else if (cell.content === CellContent.Mine) {
+                        si = S_MINE;
+                    } else {
+                        const adj = cell.adj;
+                        if (adj > 0) {
+                            si = S_N1 + adj - 1;
+                        } else {
+                            si = (gm.gameVariant === 'fog_of_war') ? S_N0 : S_EMPTY;
+                        }
+                    }
+                } else if (cell.state === CellState.Flagged) {
+                    si = (ff && cell.content !== CellContent.Mine) ? S_WRONG : S_FLAG;
+                } else {
+                    si = S_HIDDEN;
+                }
+
+                cellBuf[idx * 2]     = x;
+                cellBuf[idx * 2 + 1] = y;
+                spriteBuf[idx]       = si;
+                idx++;
+            }
+        }
+        this._instanceCount = idx;
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, this._cellVBO);
+        gl.bufferData(gl.ARRAY_BUFFER, cellBuf.subarray(0, idx * 2), gl.DYNAMIC_DRAW);
+        gl.bindBuffer(gl.ARRAY_BUFFER, this._spriteVBO);
+        gl.bufferData(gl.ARRAY_BUFFER, spriteBuf.subarray(0, idx), gl.DYNAMIC_DRAW);
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Public API  (identical surface to previous Canvas-2D GridRenderer)
+    // ════════════════════════════════════════════════════════════════════════
+
+    setGridManager(gm) {
+        this.gridManager = gm;
+        this._gridDirty = true;
+        this._scheduleFrame();
+    }
+
+    setDigitalNumbersEnabled(enabled) {
+        const normalized = !!enabled;
+        if (this._digitalNumbersEnabled === normalized) return;
+        this._digitalNumbersEnabled = normalized;
+        this._atlasCS = 0;
+        this._gridDirty = true;
+        this._scheduleFrame();
+    }
+
+    setDigitalTexturesEnabled(enabled) {
+        const normalized = !!enabled;
+        if (this._digitalTexturesEnabled === normalized) return;
+        this._digitalTexturesEnabled = normalized;
+        this._atlasCS = 0;
+        this._gridDirty = true;
+        this._scheduleFrame();
+    }
+
+    markDirty() {
+        this._gridDirty = true;
+        this._scheduleFrame();
+    }
+
+    requestRedraw() {
+        this._gridDirty = true;
+        this._scheduleFrame();
+    }
+
+    centerGrid() {
+        const gm = this.gridManager;
+        if (!gm) return;
+        const d  = getDPR();
+        const vw = this.canvas.width  / d;
+        const vh = this.canvas.height / d;
+
+        const PAD = 16;
+        const fitCS = Math.floor(Math.min(
+            (vw - PAD * 2 + CELL_SPACING) / gm.gridData.w - CELL_SPACING,
+            (vh - PAD * 2 + CELL_SPACING) / gm.gridData.h - CELL_SPACING
+        ));
+        this.cellSize = Math.max(this.minZoom, Math.min(this.maxZoom, fitCS));
+
+        const stride = this.cellSize + CELL_SPACING;
+        this.offsetX = (vw - (gm.gridData.w * stride - CELL_SPACING)) / 2;
+        this.offsetY = (vh - (gm.gridData.h * stride - CELL_SPACING)) / 2;
+        this._clampOffset();
+        this._gridDirty = true;
+        this._scheduleFrame();
+    }
+
+    resize() {
+        const r = this.canvas.parentElement.getBoundingClientRect();
+        const d = getDPR();
+        const pw = Math.round(r.width  * d);
+        const ph = Math.round(r.height * d);
+
+        this.canvas.width  = pw;
+        this.canvas.height = ph;
+        this.canvas.style.width  = r.width  + 'px';
+        this.canvas.style.height = r.height + 'px';
+
+        if (this._gl) {
+            this._gl.viewport(0, 0, pw, ph);
+        }
+
+        // Match decal overlay size
+        if (this._decalCanvas) {
+            this._decalCanvas.width  = pw;
+            this._decalCanvas.height = ph;
+            this._decalCanvas.style.width  = r.width  + 'px';
+            this._decalCanvas.style.height = r.height + 'px';
+        }
+
+        this._gridDirty = true;
+        this._scheduleFrame();
+    }
+
+    startRenderLoop() {
+        this._running   = true;
+        this._gridDirty = true;
+        this._scheduleFrame();
+    }
+
+    stopRenderLoop() {
+        this._running = false;
+        if (this._rafId) {
+            cancelAnimationFrame(this._rafId);
+            this._rafId = 0;
+        }
+        this.stopAllKbdShiftPan();
+        this.hideKbdSelection();
+    }
+
+    addDecal(x, y, action, playerID, playerName, ownPlayerID, gameType = GameType.CoOpHard) {
+        if (playerID === ownPlayerID) return;
+        if (!this._showDecals) return;
+        this._decals.push({
+            x, y, playerID,
+            gameType,
+            name: playerName || '',
+            isFlag: (action === PlayerAction.FlagSet || action === PlayerAction.FlagClear),
+            t: performance.now(),
+        });
+        this._scheduleFrame();
+    }
+
+    revealFalseFlags() {
+        this._paintFalseFlags = true;
+        this._gridDirty = true;
+        this._scheduleFrame();
+    }
+
+    clearFalseFlags() {
+        this._paintFalseFlags = false;
+        this._gridDirty = true;
+        this._scheduleFrame();
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Frame scheduling
+    // ════════════════════════════════════════════════════════════════════════
+
+    _scheduleFrame() {
+        if (this._rafId || !this._running) return;
+        this._rafId = requestAnimationFrame(() => {
+            this._rafId = 0;
+            if (!this._running) return;
+            this._frame();
+        });
+    }
+
+    _frame() {
+        const hasDecals = this._decals.length > 0;
+        if (!this._gridDirty && !hasDecals) return;
+        if (!this._gl) return;
+
+        this._ensureAtlas();
+
+        const gl  = this._gl;
+        const ext = this._ext;
+        const d   = getDPR();
+        const vw  = this.canvas.width  / d;
+        const vh  = this.canvas.height / d;
+
+        if (this._gridDirty) {
+            this._buildInstances();
+            this._gridDirty = false;
+        }
+
+        // ── WebGL draw ──
+        gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
+        if (this._instanceCount > 0) {
+            gl.useProgram(this._prog);
+
+            // Uniforms
+            gl.uniform2f(this._uViewSize, vw, vh);
+            gl.uniform2f(this._uOffset, this.offsetX, this.offsetY);
+            gl.uniform1f(this._uCellSize, this.cellSize);
+            gl.uniform1f(this._uStride, this.cellSize + CELL_SPACING);
+            gl.uniform1f(this._uAtlasInv, 1.0 / N_SPRITES);
+            const atlasUnit = this._atlasUnitPx || Math.max(16, Math.ceil(this.cellSize * d));
+            const atlasWidth = N_SPRITES * atlasUnit;
+            gl.uniform1f(this._uUvInsetX, 0.75 / atlasWidth);
+            gl.uniform1f(this._uUvInsetY, 0.75 / atlasUnit);
+
+            gl.activeTexture(gl.TEXTURE0);
+            gl.bindTexture(gl.TEXTURE_2D, this._atlasTex);
+            gl.uniform1i(this._uAtlas, 0);
+
+            // Attr 0: quad vertex (per-vertex)
+            gl.bindBuffer(gl.ARRAY_BUFFER, this._quadVBO);
+            gl.enableVertexAttribArray(this._aPos);
+            gl.vertexAttribPointer(this._aPos, 2, gl.FLOAT, false, 0, 0);
+            ext.vertexAttribDivisorANGLE(this._aPos, 0);
+
+            // Attr 1: cell XY (per-instance)
+            gl.bindBuffer(gl.ARRAY_BUFFER, this._cellVBO);
+            gl.enableVertexAttribArray(this._aCellXY);
+            gl.vertexAttribPointer(this._aCellXY, 2, gl.FLOAT, false, 0, 0);
+            ext.vertexAttribDivisorANGLE(this._aCellXY, 1);
+
+            // Attr 2: sprite index (per-instance)
+            gl.bindBuffer(gl.ARRAY_BUFFER, this._spriteVBO);
+            gl.enableVertexAttribArray(this._aSprite);
+            gl.vertexAttribPointer(this._aSprite, 1, gl.FLOAT, false, 0, 0);
+            ext.vertexAttribDivisorANGLE(this._aSprite, 1);
+
+            // ONE draw call for ALL visible cells
+            ext.drawArraysInstancedANGLE(gl.TRIANGLES, 0, 6, this._instanceCount);
+        }
+
+        // ── Decals on 2D overlay ──
+        if (this._decalCtx) {
+            const oc   = this._decalCanvas;
+            const octx = this._decalCtx;
+            if (hasDecals || this._hasKbdSel) {
+                octx.setTransform(d, 0, 0, d, 0, 0);
+                octx.clearRect(0, 0, vw, vh);
+                if (hasDecals) this._drawDecals(octx);
+                if (this._hasKbdSel) this._drawKbdCursor(octx);
+            } else {
+                octx.setTransform(1, 0, 0, 1, 0, 0);
+                octx.clearRect(0, 0, oc.width, oc.height);
+            }
+        }
+
+        if (this._decals.length > 0) {
+            this._scheduleFrame();
+        }
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Decals (2D canvas overlay — identical to previous implementation)
+    // ════════════════════════════════════════════════════════════════════════
+
+    _drawDecals(ctx) {
+        const now = performance.now();
+        let writeIdx = 0;
+        for (let i = 0; i < this._decals.length; i++) {
+            if (now - this._decals[i].t < DECAL_TOTAL_MS) {
+                this._decals[writeIdx++] = this._decals[i];
+            }
+        }
+        this._decals.length = writeIdx;
+
+        const cs     = this.cellSize;
+        const stride = cs + CELL_SPACING;
+
+        for (const d of this._decals) {
+            const elapsed = now - d.t;
+            let alpha = 1;
+            if (elapsed > DECAL_VISIBLE_MS) {
+                alpha = 1 - (elapsed - DECAL_VISIBLE_MS) / (DECAL_TOTAL_MS - DECAL_VISIBLE_MS);
+            }
+
+            const radius = cs * 0.175;
+            const mg     = cs * 0.04;
+            const cx     = this.offsetX + d.x * stride + cs - radius - mg;
+            const cy     = this.offsetY + d.y * stride + cs - radius - mg;
+
+            ctx.globalAlpha = alpha * 0.85;
+            ctx.fillStyle = getPlayerColorHex(d.playerID, d.gameType);
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = '#000';
+            const fs = Math.max(6, Math.floor(radius * 1.4));
+            ctx.font = `bold ${fs}px sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(d.name ? d.name[0].toUpperCase() : '?', cx, cy);
+
+            const iconSize = Math.max(4, Math.floor(radius * 1.2));
+            const iconX = cx + radius * 0.55 - iconSize / 2;
+            const iconY = cy + radius * 0.55 - iconSize / 2;
+            if (d.isFlag) {
+                const flagIcon = this._spriteImages.get('flag');
+                if (flagIcon && flagIcon.complete && flagIcon.naturalWidth > 0) {
+                    ctx.drawImage(flagIcon, iconX, iconY, iconSize, iconSize);
+                }
+            } else {
+                // Use a lightweight vector marker for reveal action decals.
+                ctx.beginPath();
+                ctx.fillStyle = '#fff';
+                ctx.arc(iconX + iconSize * 0.5, iconY + iconSize * 0.5, iconSize * 0.18, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Keyboard selection (mirrors Qt GridRenderer keyboard cursor)
+    // ════════════════════════════════════════════════════════════════════════
+
+    _drawKbdCursor(ctx) {
+        const gm = this.gridManager;
+        if (!gm || !this._hasKbdSel) return;
+        const x = this._kbdSelX, y = this._kbdSelY;
+        if (x < 0 || y < 0 || x >= gm.gridData.w || y >= gm.gridData.h) return;
+        const cs     = this.cellSize;
+        const stride = cs + CELL_SPACING;
+        const lx     = this.offsetX + x * stride;
+        const ly     = this.offsetY + y * stride;
+        const bw     = Math.max(2, 1);
+        ctx.strokeStyle = 'rgba(255, 230, 120, 0.90)';
+        ctx.lineWidth   = bw;
+        ctx.strokeRect(lx + bw * 0.5, ly + bw * 0.5, cs - bw, cs - bw);
+    }
+
+    ensureKbdSelection() {
+        const gm = this.gridManager;
+        if (!gm || gm.gridData.w <= 0 || gm.gridData.h <= 0) return false;
+        const maxX = gm.gridData.w - 1;
+        const maxY = gm.gridData.h - 1;
+        if (this._hasKbdSel && this._kbdSelX >= 0 && this._kbdSelX <= maxX &&
+            this._kbdSelY >= 0 && this._kbdSelY <= maxY) return true;
+        if (this._kbdSelX < 0 || this._kbdSelX > maxX ||
+            this._kbdSelY < 0 || this._kbdSelY > maxY) {
+            const d = getDPR();
+            const vw = this.canvas.width / d, vh = this.canvas.height / d;
+            const stride = this.cellSize + CELL_SPACING;
+            this._kbdSelX = Math.max(0, Math.min(maxX, Math.floor((vw / 2 - this.offsetX) / stride)));
+            this._kbdSelY = Math.max(0, Math.min(maxY, Math.floor((vh / 2 - this.offsetY) / stride)));
+        }
+        this._hasKbdSel = true;
+        this._gridDirty = true;
+        this._scheduleFrame();
+        if (this.onKbdSelChanged) this.onKbdSelChanged(true, this._kbdSelX, this._kbdSelY);
+        return true;
+    }
+
+    moveKbdSelection(dx, dy) {
+        if (!this.ensureKbdSelection()) return;
+        const gm = this.gridManager;
+        const nx = this._kbdSelX + dx;
+        const ny = this._kbdSelY + dy;
+        if (nx < 0 || nx >= gm.gridData.w || ny < 0 || ny >= gm.gridData.h) return;
+        this._kbdSelX = nx;
+        this._kbdSelY = ny;
+        this._keepKbdSelVisible();
+        this._gridDirty = true;
+        this._scheduleFrame();
+        if (this.onKbdSelChanged) this.onKbdSelChanged(true, this._kbdSelX, this._kbdSelY);
+    }
+
+    hideKbdSelection() {
+        if (!this._hasKbdSel) return;
+        this._hasKbdSel = false;
+        this._gridDirty = true;
+        this._scheduleFrame();
+        if (this.onKbdSelChanged) this.onKbdSelChanged(false, -1, -1);
+    }
+
+    _keepKbdSelVisible() {
+        if (!this._hasKbdSel) return;
+        const d = getDPR();
+        const vw = this.canvas.width / d, vh = this.canvas.height / d;
+        const stride = this.cellSize + CELL_SPACING;
+        const cx = this.offsetX + this._kbdSelX * stride;
+        const cy = this.offsetY + this._kbdSelY * stride;
+        const cs = this.cellSize;
+        const margin = stride;
+        if (cx < margin)            this.offsetX += margin - cx;
+        else if (cx + cs > vw - margin) this.offsetX -= (cx + cs) - (vw - margin);
+        if (cy < margin)            this.offsetY += margin - cy;
+        else if (cy + cs > vh - margin) this.offsetY -= (cy + cs) - (vh - margin);
+        this._clampOffset();
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Viewport helpers
+    // ════════════════════════════════════════════════════════════════════════
+
+    _clampOffset() {
+        const gm = this.gridManager;
+        if (!gm) return;
+        const d  = getDPR();
+        const vw = this.canvas.width  / d;
+        const vh = this.canvas.height / d;
+        const stride = this.cellSize + CELL_SPACING;
+        const gw = gm.gridData.w * stride - CELL_SPACING;
+        const gh = gm.gridData.h * stride - CELL_SPACING;
+        const cx = vw / 2;
+        const cy = vh / 2;
+
+        if (this.offsetX > cx)      this.offsetX = cx;
+        if (this.offsetX + gw < cx) this.offsetX = cx - gw;
+        if (this.offsetY > cy)      this.offsetY = cy;
+        if (this.offsetY + gh < cy) this.offsetY = cy - gh;
+    }
+
+    _screenToCell(sx, sy) {
+        const stride = this.cellSize + CELL_SPACING;
+        const x = Math.floor((sx - this.offsetX) / stride);
+        const y = Math.floor((sy - this.offsetY) / stride);
+        const gm = this.gridManager;
+        if (!gm || x < 0 || x >= gm.gridData.w || y < 0 || y >= gm.gridData.h) {
+            this._reuseCellPos.x = -1;
+            this._reuseCellPos.y = -1;
+        } else {
+            this._reuseCellPos.x = x;
+            this._reuseCellPos.y = y;
+        }
+        return this._reuseCellPos;
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Input events — ported from Qt GridRenderer::touchEvent / mouse*Event
+    // ════════════════════════════════════════════════════════════════════════
+
+    static get CLICK_THRESHOLD() { return 10; }
+    static get LONG_PRESS_MS()   { return 300; }
+
+    _bindEvents() {
+        const c = this.canvas;
+
+        // Mouse events (desktop)
+        c.addEventListener('mousedown',   e => this._mouseDown(e));
+        c.addEventListener('mousemove',   e => this._mouseMove(e));
+        c.addEventListener('mouseup',     e => this._mouseUp(e));
+        c.addEventListener('contextmenu', e => e.preventDefault());
+        c.addEventListener('wheel', e => {
+            e.preventDefault();
+            if (this._spectatorMode || this._inert) return;
+            // Zoom toward cursor position (matches Qt Ctrl+wheel behavior)
+            const factor = e.deltaY < 0 ? 1.1 : (1 / 1.1);
+            this._zoomAt(factor, e.offsetX, e.offsetY);
+        }, { passive: false });
+
+        // Touch events (mobile)
+        c.addEventListener('touchstart',  e => this._touchEvent(e), { passive: false });
+        c.addEventListener('touchmove',   e => this._touchEvent(e), { passive: false });
+        c.addEventListener('touchend',    e => this._touchEvent(e), { passive: false });
+        c.addEventListener('touchcancel', e => this._touchEvent(e), { passive: false });
+    }
+
+    // ── Mouse handlers (desktop, mirrors Qt mousePressEvent etc.) ──
+
+    _mouseDown(e) {
+        if (this._spectatorMode || this._inert) return;
+        this.hideKbdSelection();
+        this._mouseIsDown = true;
+
+        const sx = e.offsetX, sy = e.offsetY;
+        this._dragSX = sx;
+        this._dragSY = sy;
+        this._dragOX = this.offsetX;
+        this._dragOY = this.offsetY;
+        this._moved  = false;
+        this._lpFired = false;
+        this._isRightClick = (e.button === 2);
+
+        if (this._isRightClick) {
+            // Right-click → immediate flag
+            const { x, y } = this._screenToCell(sx, sy);
+            if (x >= 0 && y >= 0 && this.onCellClick) this.onCellClick(x, y, ClickType.RightClick);
+        } else if (!this._isPinching) {
+            this._startLongPress(sx, sy);
+        }
+    }
+
+    _mouseMove(e) {
+        if (!this._mouseIsDown) return;
+        if (this._spectatorMode || this._inert) return;
+        if (this._isRightClick || this._isPinching) return;
+
+        const sx = e.offsetX, sy = e.offsetY;
+        const dx = sx - this._dragSX;
+        const dy = sy - this._dragSY;
+
+        // Pan immediately on every move (matches Qt handleMouseMove)
+        this._dragging = true;
+        this.offsetX = this._dragOX + dx;
+        this.offsetY = this._dragOY + dy;
+        this._clampOffset();
+        this._gridDirty = true;
+        this._scheduleFrame();
+
+        if (!this._moved) {
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist > GridRenderer.CLICK_THRESHOLD) {
+                this._moved = true;
+                this._cancelLongPress();
+            }
+        }
+    }
+
+    _mouseUp(e) {
+        this._mouseIsDown = false;
+        if (this._spectatorMode || this._inert) return;
+
+        this._dragging = false;
+        this._cancelLongPress();
+
+        if (!this._isRightClick && !this._moved && !this._lpFired && !this._isPinching) {
+            const { x, y } = this._screenToCell(e.offsetX, e.offsetY);
+            if (x >= 0 && y >= 0 && this.onCellClick) this.onCellClick(x, y, ClickType.LeftClick);
+        }
+    }
+
+    // ── Unified touch handler (mirrors Qt GridRenderer::touchEvent exactly) ──
+
+    _touchEvent(e) {
+        e.preventDefault();
+        if (this._spectatorMode || this._inert) return;
+
+        const touches = e.touches;
+        const fingerCount = touches.length;
+        const type = e.type; // touchstart, touchmove, touchend, touchcancel
+
+        // Cache bounding rect on first contact for the gesture
+        if (type === 'touchstart') {
+            this._cachedRect = this.canvas.getBoundingClientRect();
+        }
+
+        // ── Two-finger pinch-zoom ──
+        if (fingerCount === 2) {
+            const p1 = this._tchPos(touches[0]);
+            const p1x = p1.x, p1y = p1.y;
+            const p2 = this._tchPos(touches[1]);
+            const p2x = p2.x, p2y = p2.y;
+
+            // (Re)capture pinch origin on first 2-finger contact
+            // or after a finger was released and re-pressed
+            if (this._pinchTouchCount !== 2) {
+                this._isPinching = true;
+                this._pinchTouchCount = 2;
+                this._cancelLongPress();
+                this._pinchStartScale = this.cellSize;
+                this._pinchStartOX    = this.offsetX;
+                this._pinchStartOY    = this.offsetY;
+                this._pinchStartCX    = (p1x + p2x) / 2;
+                this._pinchStartCY    = (p1y + p2y) / 2;
+                this._pinchStartDist  = Math.max(1, Math.sqrt(
+                    (p2x - p1x) * (p2x - p1x) + (p2y - p1y) * (p2y - p1y)
+                ));
+            }
+
+            const currentCX = (p1x + p2x) / 2;
+            const currentCY = (p1y + p2y) / 2;
+            const currentDist = Math.sqrt(
+                (p2x - p1x) * (p2x - p1x) + (p2y - p1y) * (p2y - p1y)
+            );
+            const scaleFactor = currentDist / this._pinchStartDist;
+            const newSize = Math.max(this.minZoom, Math.min(this.maxZoom,
+                Math.round(this._pinchStartScale * scaleFactor)));
+
+            // Compute new offset so the grid point under pinch center stays fixed
+            // gridPoint = (pinchStartCenter - pinchStartOffset) / startStride
+            const stride0 = this._pinchStartScale + CELL_SPACING;
+            const gx = (this._pinchStartCX - this._pinchStartOX) / stride0;
+            const gy = (this._pinchStartCY - this._pinchStartOY) / stride0;
+
+            const strideN = newSize + CELL_SPACING;
+
+            this.cellSize = newSize;
+            this.offsetX = currentCX - gx * strideN;
+            this.offsetY = currentCY - gy * strideN;
+            this._clampOffset();
+            this._gridDirty = true;
+            this._scheduleFrame();
+            return;
+        }
+
+        // ── Transition: pinch ended, one finger remains ──
+        // In the browser, touchend with touches.length===1 means one finger
+        // was LIFTED and one REMAINS (touches only lists active fingers).
+        // So fingerCount===1 while _isPinching always means "transition to pan".
+        if (fingerCount === 1 && this._isPinching) {
+            this._isPinching = false;
+            this._pinchTouchCount = 1;
+            this._dragging = true;
+            this._moved = true;           // prevent tap on release
+            this._lpFired = false;
+            this._isRightClick = false;
+            const pt = this._tchPos(touches[0]);
+            this._dragSX = pt.x;
+            this._dragSY = pt.y;
+            this._dragOX = this.offsetX;
+            this._dragOY = this.offsetY;
+            // Rebuild atlas at final zoom level (pinch is over)
+            this._buildAtlas(getDPR());
+            this._gridDirty = true;
+            this._scheduleFrame();
+            return;
+        }
+
+        // ── Single-finger tap / pan ──
+        if (fingerCount === 1) {
+            const pt = this._tchPos(touches[0]);
+            const px = pt.x, py = pt.y;
+
+            if (type === 'touchstart') {
+                this.hideKbdSelection();
+                this._dragSX = px;
+                this._dragSY = py;
+                this._dragOX = this.offsetX;
+                this._dragOY = this.offsetY;
+                this._moved  = false;
+                this._dragging = false;
+                this._lpFired = false;
+                this._isRightClick = false;
+                this._pinchTouchCount = 1;
+                this._startLongPress(px, py);
+
+            } else if (type === 'touchmove') {
+                const dx = px - this._dragSX;
+                const dy = py - this._dragSY;
+
+                // Pan immediately on every move (matches Qt TouchUpdate)
+                this._dragging = true;
+                this.offsetX = this._dragOX + dx;
+                this.offsetY = this._dragOY + dy;
+                this._clampOffset();
+                this._gridDirty = true;
+                this._scheduleFrame();
+
+                if (!this._moved) {
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist > GridRenderer.CLICK_THRESHOLD) {
+                        this._moved = true;
+                        this._cancelLongPress();
+                    }
+                }
+
+            } else if (type === 'touchend' || type === 'touchcancel') {
+                this._dragging = false;
+                this._cancelLongPress();
+                this._pinchTouchCount = 0;
+
+                if (!this._isRightClick && !this._moved && !this._lpFired) {
+                    const { x, y } = this._screenToCell(px, py);
+                    if (x >= 0 && y >= 0 && this.onCellClick) this.onCellClick(x, y, ClickType.LeftClick);
+                }
+            }
+            return;
+        }
+
+        // ── All fingers lifted (fingerCount === 0) ──
+        if (fingerCount === 0) {
+            const wasPinching = this._isPinching;
+            if (this._isPinching) {
+                this._isPinching = false;
+                this._pinchTouchCount = 0;
+                this._moved = true;           // prevent accidental click after pinch
+                this._buildAtlas(getDPR());
+                this._gridDirty = true;
+                this._scheduleFrame();
+            }
+            this._dragging = false;
+            this._cancelLongPress();
+            this._pinchTouchCount = 0;
+
+            // Only fire a click if this was a clean single-finger tap
+            // (no drag, no pinch, no long-press)
+            if (!wasPinching && !this._isRightClick && !this._moved && !this._lpFired) {
+                const { x, y } = this._screenToCell(this._dragSX, this._dragSY);
+                if (x >= 0 && y >= 0 && this.onCellClick) this.onCellClick(x, y, true);
+            }
+            this._cachedRect = null;
+        }
+    }
+
+    // ── Long-press helpers ──
+
+    _startLongPress(sx, sy) {
+        this._cancelLongPress();
+        this._lpTimer = setTimeout(() => {
+            if (!this._spectatorMode && !this._inert && !this._moved
+                && !this._lpFired && !this._isRightClick && !this._isPinching) {
+                this._lpFired = true;
+                const { x, y } = this._screenToCell(sx, sy);
+                if (x >= 0 && y >= 0 && this.onCellClick) this.onCellClick(x, y, ClickType.LongLeftClick);
+            }
+            this._lpTimer = null;
+        }, GridRenderer.LONG_PRESS_MS);
+    }
+
+    _cancelLongPress() {
+        if (this._lpTimer) {
+            clearTimeout(this._lpTimer);
+            this._lpTimer = null;
+        }
+    }
+
+    // ── Touch position helpers ──
+
+    _tchPos(touch) {
+        const r = this._cachedRect || this.canvas.getBoundingClientRect();
+        this._reuseTchPos.x = touch.clientX - r.left;
+        this._reuseTchPos.y = touch.clientY - r.top;
+        return this._reuseTchPos;
+    }
+
+    // ── Zoom-at-point (mirrors Qt GridRenderer::zoomAt) ──
+
+    _zoomAt(factor, px, py) {
+        const prev = this.cellSize;
+        const newSize = Math.max(this.minZoom, Math.min(this.maxZoom, Math.round(prev * factor)));
+        if (newSize === prev) return;
+
+        const k = newSize / prev;
+        this.cellSize = newSize;
+        this.offsetX = px - (px - this.offsetX) * k;
+        this.offsetY = py - (py - this.offsetY) * k;
+        this._clampOffset();
+        this._gridDirty = true;
+        this._scheduleFrame();
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Keyboard zoom  (mirrors Qt GridRenderer::keyboardZoomIn/Out)
+    // ════════════════════════════════════════════════════════════════════════
+
+    keyboardZoomIn() {
+        const d = getDPR();
+        this._zoomAt(1.1, this.canvas.width / d / 2, this.canvas.height / d / 2);
+    }
+
+    keyboardZoomOut() {
+        const d = getDPR();
+        this._zoomAt(1 / 1.1, this.canvas.width / d / 2, this.canvas.height / d / 2);
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Shift+Arrow smooth pan  (mirrors Qt GridRenderer shift-pan)
+    // ════════════════════════════════════════════════════════════════════════
+
+    startKbdShiftPan(key) {
+        switch (key) {
+        case 'ArrowLeft':  this._shiftPanLeft  = true; break;
+        case 'ArrowRight': this._shiftPanRight = true; break;
+        case 'ArrowUp':    this._shiftPanUp    = true; break;
+        case 'ArrowDown':  this._shiftPanDown  = true; break;
+        }
+        if (!this._kbdPanTimer && this._anyShiftPanKey()) {
+            this._kbdPanLastTime = performance.now();
+            this._kbdPanTimer = setInterval(() => this._stepKbdPan(), 16);
+        }
+    }
+
+    stopKbdShiftPan(key) {
+        switch (key) {
+        case 'ArrowLeft':  this._shiftPanLeft  = false; break;
+        case 'ArrowRight': this._shiftPanRight = false; break;
+        case 'ArrowUp':    this._shiftPanUp    = false; break;
+        case 'ArrowDown':  this._shiftPanDown  = false; break;
+        }
+        if (!this._anyShiftPanKey()) this._stopKbdPanTimer();
+    }
+
+    stopAllKbdShiftPan() {
+        this._shiftPanLeft = this._shiftPanRight = this._shiftPanUp = this._shiftPanDown = false;
+        this._stopKbdPanTimer();
+    }
+
+    _anyShiftPanKey() {
+        return this._shiftPanLeft || this._shiftPanRight || this._shiftPanUp || this._shiftPanDown;
+    }
+
+    _stopKbdPanTimer() {
+        if (this._kbdPanTimer) { clearInterval(this._kbdPanTimer); this._kbdPanTimer = null; }
+    }
+
+    _stepKbdPan() {
+        if (!this.gridManager || !this._anyShiftPanKey()) { this._stopKbdPanTimer(); return; }
+        const now = performance.now();
+        const dt  = Math.min((now - this._kbdPanLastTime) / 1000, 0.05);
+        this._kbdPanLastTime = now;
+        const stride = this.cellSize + CELL_SPACING;
+        const speed  = Math.max(420, 14 * stride);  // px/s, mirrors Qt keyboardPanSpeedPxPerSec (min=420, mult=14)
+        const dx = ((this._shiftPanRight ? 1 : 0) - (this._shiftPanLeft  ? 1 : 0)) * speed * dt;
+        const dy = ((this._shiftPanDown  ? 1 : 0) - (this._shiftPanUp    ? 1 : 0)) * speed * dt;
+        // Pan direction: arrow = viewport motion direction (content moves opposite)
+        this.offsetX -= dx;
+        this.offsetY -= dy;
+        this._clampOffset();
+        this._gridDirty = true;
+        this._scheduleFrame();
+    }
+}
+

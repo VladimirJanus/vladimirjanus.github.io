@@ -1,1 +1,204 @@
-const a31_0x3a3d98=a31_0x3d3b;(function(_0x3732bd,_0xc99284){const _0x108d33=a31_0x3d3b,_0x294d8a=_0x3732bd();while(!![]){try{const _0x2bb889=parseInt(_0x108d33(0x1de))/0x1+parseInt(_0x108d33(0x1d8))/0x2+parseInt(_0x108d33(0x1cc))/0x3*(parseInt(_0x108d33(0x1da))/0x4)+parseInt(_0x108d33(0x1d6))/0x5+parseInt(_0x108d33(0x1ea))/0x6*(-parseInt(_0x108d33(0x1ed))/0x7)+parseInt(_0x108d33(0x1dd))/0x8*(-parseInt(_0x108d33(0x1d5))/0x9)+-parseInt(_0x108d33(0x1d0))/0xa;if(_0x2bb889===_0xc99284)break;else _0x294d8a['push'](_0x294d8a['shift']());}catch(_0x4f27cf){_0x294d8a['push'](_0x294d8a['shift']());}}}(a31_0x53b1,0xa4518));function a31_0x3d3b(_0x405ecd,_0x1d187c){_0x405ecd=_0x405ecd-0x1cb;const _0x53b12d=a31_0x53b1();let _0x3d3b95=_0x53b12d[_0x405ecd];return _0x3d3b95;}function a31_0x53b1(){const _0x1b232a=['Normal','length','addEventListener','soloRated','stringify','_flushInterval','274893JrOiyQ','pvpDuel','map','addDuelWon','8357650DvjkKN','minesweeper_3d','minesClicked','_flush','timeAliveMs','158391kPLDmm','1886600bVaLrO','addMineClicked','1562110nWaSyc','reveals','20AiQBiP','gamesPlayed','addReveal','232YERnAx','933164CqiuYL','Minesweeper3D','toJSON','duelsWon','duelsLost','_load','gridsCompleted','FogOfWar','flags','normal','minesweeper_online_stats','fog_of_war','6HyBYUv','infinite_minesweeper','InfiniteMinesweeper','3713570CoZvFT','community','parse','onlineTotal','_stats','number','coopSoft','solo','addDuelLost','setItem','_dirty'];a31_0x53b1=function(){return _0x1b232a;};return a31_0x53b1();}const STATS_KEY=a31_0x3a3d98(0x1e8),MODE_KEYS=[a31_0x3a3d98(0x1f4),a31_0x3a3d98(0x1fb),'coopHard',a31_0x3a3d98(0x1f3),a31_0x3a3d98(0x1cd),a31_0x3a3d98(0x1ee)],VARIANT_KEYS=[a31_0x3a3d98(0x1e7),'fog_of_war',a31_0x3a3d98(0x1d1),a31_0x3a3d98(0x1eb)];export const StatsMode=Object['freeze']({'Solo':0x0,'SoloRated':0x1,'CoOpHard':0x2,'CoOpSoft':0x3,'PVPDuel':0x4,'Community':0x5});export const StatsVariant=Object['freeze']({'Normal':0x0,'FogOfWar':0x1,'Minesweeper3D':0x2,'InfiniteMinesweeper':0x3});export function variantFromString(_0x385d17){const _0x272220=a31_0x3a3d98;if(_0x385d17===_0x272220(0x1e9))return StatsVariant[_0x272220(0x1e5)];if(_0x385d17==='minesweeper_3d')return StatsVariant[_0x272220(0x1df)];if(_0x385d17===_0x272220(0x1eb))return StatsVariant[_0x272220(0x1ec)];return StatsVariant[_0x272220(0x1f8)];}function emptyModeStats(){return{'reveals':0x0,'flags':0x0,'minesClicked':0x0,'gridsCompleted':0x0,'timeAliveMs':0x0,'gamesPlayed':0x0,'duelsWon':0x0,'duelsLost':0x0};}export class StatsManager{constructor(){const _0x1442fd=a31_0x3a3d98;this[_0x1442fd(0x1f1)]=MODE_KEYS[_0x1442fd(0x1ce)](()=>VARIANT_KEYS[_0x1442fd(0x1ce)](()=>emptyModeStats())),this[_0x1442fd(0x1f7)]=![],this[_0x1442fd(0x1e3)](),this[_0x1442fd(0x1cb)]=setInterval(()=>this[_0x1442fd(0x1d3)](),0x7530),window[_0x1442fd(0x1fa)]('beforeunload',()=>this[_0x1442fd(0x1d3)]());}[a31_0x3a3d98(0x1dc)](_0x3cff19,_0x2f347d=0x1,_0x4863bc=StatsVariant[a31_0x3a3d98(0x1f8)]){const _0x4c8b7e=a31_0x3a3d98;this[_0x4c8b7e(0x1f1)][_0x3cff19][_0x4863bc][_0x4c8b7e(0x1d9)]+=_0x2f347d,this[_0x4c8b7e(0x1f7)]=!![];}['addFlag'](_0x479faf,_0x4a1744=0x1,_0x112bd5=StatsVariant[a31_0x3a3d98(0x1f8)]){const _0x339e1d=a31_0x3a3d98;this[_0x339e1d(0x1f1)][_0x479faf][_0x112bd5][_0x339e1d(0x1e6)]+=_0x4a1744,this[_0x339e1d(0x1f7)]=!![];}[a31_0x3a3d98(0x1d7)](_0x30029a,_0x476e32=StatsVariant[a31_0x3a3d98(0x1f8)]){const _0x4632e9=a31_0x3a3d98;this['_stats'][_0x30029a][_0x476e32]['minesClicked']++,this[_0x4632e9(0x1f7)]=!![];}['addGridCompleted'](_0x482365,_0x2edea7=StatsVariant[a31_0x3a3d98(0x1f8)]){const _0x3cbadd=a31_0x3a3d98;this[_0x3cbadd(0x1f1)][_0x482365][_0x2edea7][_0x3cbadd(0x1e4)]++,this[_0x3cbadd(0x1f7)]=!![];}['addTimeAlive'](_0x5ba80a,_0x52e0c8,_0x3f776a=StatsVariant[a31_0x3a3d98(0x1f8)]){const _0x469eea=a31_0x3a3d98;this[_0x469eea(0x1f1)][_0x5ba80a][_0x3f776a]['timeAliveMs']+=_0x52e0c8,this[_0x469eea(0x1f7)]=!![];}['addGamePlayed'](_0x55c2e4,_0x293a9f=StatsVariant[a31_0x3a3d98(0x1f8)]){const _0xdadf3e=a31_0x3a3d98;this[_0xdadf3e(0x1f1)][_0x55c2e4][_0x293a9f][_0xdadf3e(0x1db)]++,this[_0xdadf3e(0x1f7)]=!![];}[a31_0x3a3d98(0x1cf)](_0x216a36,_0x5257da=StatsVariant[a31_0x3a3d98(0x1f8)]){const _0x21ebad=a31_0x3a3d98;this[_0x21ebad(0x1f1)][_0x216a36][_0x5257da]['duelsWon']++,this[_0x21ebad(0x1f7)]=!![];}[a31_0x3a3d98(0x1f5)](_0x3d52c7,_0x2a00e9=StatsVariant[a31_0x3a3d98(0x1f8)]){const _0x1a5c18=a31_0x3a3d98;this[_0x1a5c18(0x1f1)][_0x3d52c7][_0x2a00e9][_0x1a5c18(0x1e2)]++,this['_dirty']=!![];}[a31_0x3a3d98(0x1e0)](){const _0x581854=a31_0x3a3d98,_0x12b455={},_0x47ed6e=emptyModeStats(),_0x44da9f=emptyModeStats(),_0xf5f887={};for(let _0x8faa8b=0x0;_0x8faa8b<MODE_KEYS['length'];_0x8faa8b++){const _0x5c10a1=emptyModeStats(),_0x1e09ab={};for(let _0x150947=0x0;_0x150947<VARIANT_KEYS[_0x581854(0x1f9)];_0x150947++){const _0x2652f2=this[_0x581854(0x1f1)][_0x8faa8b][_0x150947];_0x5c10a1['reveals']+=_0x2652f2[_0x581854(0x1d9)],_0x5c10a1['flags']+=_0x2652f2[_0x581854(0x1e6)],_0x5c10a1[_0x581854(0x1d2)]+=_0x2652f2[_0x581854(0x1d2)],_0x5c10a1[_0x581854(0x1e4)]+=_0x2652f2[_0x581854(0x1e4)],_0x5c10a1['timeAliveMs']+=_0x2652f2[_0x581854(0x1d4)],_0x5c10a1[_0x581854(0x1db)]+=_0x2652f2['gamesPlayed'],_0x5c10a1['duelsWon']+=_0x2652f2[_0x581854(0x1e1)],_0x5c10a1[_0x581854(0x1e2)]+=_0x2652f2[_0x581854(0x1e2)],_0x1e09ab[VARIANT_KEYS[_0x150947]]={..._0x2652f2};}_0xf5f887[MODE_KEYS[_0x8faa8b]]=_0x1e09ab,_0x12b455[MODE_KEYS[_0x8faa8b]]=_0x5c10a1,_0x47ed6e[_0x581854(0x1d9)]+=_0x5c10a1[_0x581854(0x1d9)],_0x47ed6e[_0x581854(0x1e6)]+=_0x5c10a1[_0x581854(0x1e6)],_0x47ed6e[_0x581854(0x1d2)]+=_0x5c10a1[_0x581854(0x1d2)],_0x47ed6e[_0x581854(0x1e4)]+=_0x5c10a1[_0x581854(0x1e4)],_0x47ed6e[_0x581854(0x1d4)]+=_0x5c10a1[_0x581854(0x1d4)],_0x47ed6e[_0x581854(0x1db)]+=_0x5c10a1[_0x581854(0x1db)],_0x47ed6e['duelsWon']+=_0x5c10a1['duelsWon'],_0x47ed6e[_0x581854(0x1e2)]+=_0x5c10a1[_0x581854(0x1e2)],_0x8faa8b!==StatsMode['Solo']&&(_0x44da9f[_0x581854(0x1d9)]+=_0x5c10a1[_0x581854(0x1d9)],_0x44da9f['flags']+=_0x5c10a1[_0x581854(0x1e6)],_0x44da9f['minesClicked']+=_0x5c10a1[_0x581854(0x1d2)],_0x44da9f[_0x581854(0x1e4)]+=_0x5c10a1[_0x581854(0x1e4)],_0x44da9f[_0x581854(0x1d4)]+=_0x5c10a1[_0x581854(0x1d4)],_0x44da9f[_0x581854(0x1db)]+=_0x5c10a1[_0x581854(0x1db)],_0x44da9f[_0x581854(0x1e1)]+=_0x5c10a1[_0x581854(0x1e1)],_0x44da9f[_0x581854(0x1e2)]+=_0x5c10a1[_0x581854(0x1e2)]);}return _0x12b455['total']=_0x47ed6e,_0x12b455[_0x581854(0x1f0)]=_0x44da9f,_0x12b455['variants']=_0xf5f887,_0x12b455;}[a31_0x3a3d98(0x1e3)](){const _0x2ae1e6=a31_0x3a3d98;try{const _0x4247d0=localStorage['getItem'](STATS_KEY);if(!_0x4247d0)return;const _0xbb8ca=JSON[_0x2ae1e6(0x1ef)](_0x4247d0);for(let _0x39a046=0x0;_0x39a046<MODE_KEYS[_0x2ae1e6(0x1f9)];_0x39a046++){const _0x3a3504=_0xbb8ca[MODE_KEYS[_0x39a046]];if(!_0x3a3504)continue;if(typeof _0x3a3504['reveals']===_0x2ae1e6(0x1f2)){const _0x1ebbce=this[_0x2ae1e6(0x1f1)][_0x39a046][StatsVariant[_0x2ae1e6(0x1f8)]];_0x1ebbce[_0x2ae1e6(0x1d9)]=_0x3a3504[_0x2ae1e6(0x1d9)]||0x0,_0x1ebbce[_0x2ae1e6(0x1e6)]=_0x3a3504[_0x2ae1e6(0x1e6)]||0x0,_0x1ebbce['minesClicked']=_0x3a3504[_0x2ae1e6(0x1d2)]||0x0,_0x1ebbce[_0x2ae1e6(0x1e4)]=_0x3a3504[_0x2ae1e6(0x1e4)]||0x0,_0x1ebbce[_0x2ae1e6(0x1d4)]=_0x3a3504[_0x2ae1e6(0x1d4)]||0x0,_0x1ebbce['gamesPlayed']=_0x3a3504[_0x2ae1e6(0x1db)]||0x0,_0x1ebbce['duelsWon']=_0x3a3504[_0x2ae1e6(0x1e1)]||0x0,_0x1ebbce[_0x2ae1e6(0x1e2)]=_0x3a3504[_0x2ae1e6(0x1e2)]||0x0;}else for(let _0x247f49=0x0;_0x247f49<VARIANT_KEYS['length'];_0x247f49++){const _0x5b3a91=_0x3a3504[VARIANT_KEYS[_0x247f49]];if(!_0x5b3a91)continue;const _0x4ef92a=this[_0x2ae1e6(0x1f1)][_0x39a046][_0x247f49];_0x4ef92a[_0x2ae1e6(0x1d9)]=_0x5b3a91['reveals']||0x0,_0x4ef92a['flags']=_0x5b3a91[_0x2ae1e6(0x1e6)]||0x0,_0x4ef92a[_0x2ae1e6(0x1d2)]=_0x5b3a91[_0x2ae1e6(0x1d2)]||0x0,_0x4ef92a[_0x2ae1e6(0x1e4)]=_0x5b3a91[_0x2ae1e6(0x1e4)]||0x0,_0x4ef92a['timeAliveMs']=_0x5b3a91['timeAliveMs']||0x0,_0x4ef92a[_0x2ae1e6(0x1db)]=_0x5b3a91[_0x2ae1e6(0x1db)]||0x0,_0x4ef92a[_0x2ae1e6(0x1e1)]=_0x5b3a91[_0x2ae1e6(0x1e1)]||0x0,_0x4ef92a[_0x2ae1e6(0x1e2)]=_0x5b3a91[_0x2ae1e6(0x1e2)]||0x0;}}}catch(_0x3aff2c){}}['_flush'](){const _0x1ce4dd=a31_0x3a3d98;if(!this[_0x1ce4dd(0x1f7)])return;this['_dirty']=![];try{const _0x49f1d5={};for(let _0x1a9723=0x0;_0x1a9723<MODE_KEYS[_0x1ce4dd(0x1f9)];_0x1a9723++){const _0x225841={};for(let _0x2603d0=0x0;_0x2603d0<VARIANT_KEYS[_0x1ce4dd(0x1f9)];_0x2603d0++){_0x225841[VARIANT_KEYS[_0x2603d0]]={...this['_stats'][_0x1a9723][_0x2603d0]};}_0x49f1d5[MODE_KEYS[_0x1a9723]]=_0x225841;}localStorage[_0x1ce4dd(0x1f6)](STATS_KEY,JSON[_0x1ce4dd(0x1fc)](_0x49f1d5));}catch(_0x118f71){}}}
+// StatsManager.js - Local statistics tracking with localStorage persistence
+// ============================================================================
+
+import { GameVariant } from '../core/CoreEnums.js';
+
+const STATS_KEY = 'minesweeper_online_stats';
+
+const MODE_KEYS = ['solo', 'soloRated', 'coopHard', 'coopSoft', 'pvpDuel', 'community'];
+// Indices match GameVariant: Normal=0, Minesweeper3D=1, FogOfWar=2, Infinite=3
+const VARIANT_KEYS = ['normal', 'minesweeper_3d', 'fog_of_war', 'infinite_minesweeper'];
+
+export const StatsMode = Object.freeze({
+    Solo:       0,
+    SoloRated:  1,
+    CoOpHard:   2,
+    CoOpSoft:   3,
+    PVPDuel:    4,
+    Community:  5,
+});
+
+// Alias to the global GameVariant enum (kept for backwards compatibility with existing imports)
+export const StatsVariant = GameVariant;
+
+export function variantFromString(s) {
+    if (s === 'minesweeper_3d') return GameVariant.Minesweeper3D;
+    if (s === 'fog_of_war') return GameVariant.FogOfWar;
+    if (s === 'infinite_minesweeper') return GameVariant.Infinite;
+    return GameVariant.Normal;
+}
+
+function emptyModeStats() {
+    return { reveals: 0, flags: 0, minesClicked: 0, gridsCompleted: 0, timeAliveMs: 0, gamesPlayed: 0, duelsWon: 0, duelsLost: 0, gamesWon: 0 };
+}
+
+export class StatsManager {
+    constructor() {
+        this._stats = MODE_KEYS.map(() => VARIANT_KEYS.map(() => emptyModeStats()));
+        this._dirty = false;
+        this._load();
+        // Periodic flush every 30 seconds
+        this._flushInterval = setInterval(() => this._flush(), 30000);
+        // Flush on unload
+        window.addEventListener('beforeunload', () => this._flush());
+    }
+
+    // ── Fast in-memory increments ──
+
+    addReveal(mode, count = 1, variant = StatsVariant.Normal) {
+        this._stats[mode][variant].reveals += count;
+        this._dirty = true;
+    }
+
+    addFlag(mode, count = 1, variant = StatsVariant.Normal) {
+        this._stats[mode][variant].flags += count;
+        this._dirty = true;
+    }
+
+    addMineClicked(mode, variant = StatsVariant.Normal) {
+        this._stats[mode][variant].minesClicked++;
+        this._dirty = true;
+    }
+
+    addGridCompleted(mode, variant = StatsVariant.Normal) {
+        this._stats[mode][variant].gridsCompleted++;
+        this._dirty = true;
+    }
+
+    addTimeAlive(mode, ms, variant = StatsVariant.Normal) {
+        this._stats[mode][variant].timeAliveMs += ms;
+        this._dirty = true;
+    }
+
+    addGamePlayed(mode, variant = StatsVariant.Normal) {
+        this._stats[mode][variant].gamesPlayed++;
+        this._dirty = true;
+    }
+
+    addDuelWon(mode, variant = StatsVariant.Normal) {
+        this._stats[mode][variant].duelsWon++;
+        this._dirty = true;
+    }
+
+    addDuelLost(mode, variant = StatsVariant.Normal) {
+        this._stats[mode][variant].duelsLost++;
+        this._dirty = true;
+    }
+
+    addGameWon(mode, variant = StatsVariant.Normal) {
+        this._stats[mode][variant].gamesWon++;
+        this._dirty = true;
+    }
+
+    // ── Read access for UI ──
+
+    toJSON() {
+        const result = {};
+        const totals = emptyModeStats();
+        const onlineTotals = emptyModeStats();
+        const variants = {};
+        for (let i = 0; i < MODE_KEYS.length; i++) {
+            const agg = emptyModeStats();
+            const modeVariants = {};
+            for (let v = 0; v < VARIANT_KEYS.length; v++) {
+                const s = this._stats[i][v];
+                agg.reveals        += s.reveals;
+                agg.flags          += s.flags;
+                agg.minesClicked   += s.minesClicked;
+                agg.gridsCompleted += s.gridsCompleted;
+                agg.timeAliveMs    += s.timeAliveMs;
+                agg.gamesPlayed    += s.gamesPlayed;
+                agg.duelsWon       += s.duelsWon;
+                agg.duelsLost      += s.duelsLost;
+                agg.gamesWon       += s.gamesWon;
+                modeVariants[VARIANT_KEYS[v]] = { ...s };
+            }
+            variants[MODE_KEYS[i]] = modeVariants;
+            result[MODE_KEYS[i]] = agg;
+
+            totals.reveals        += agg.reveals;
+            totals.flags          += agg.flags;
+            totals.minesClicked   += agg.minesClicked;
+            totals.gridsCompleted += agg.gridsCompleted;
+            totals.timeAliveMs    += agg.timeAliveMs;
+            totals.gamesPlayed    += agg.gamesPlayed;
+            totals.duelsWon       += agg.duelsWon;
+            totals.duelsLost      += agg.duelsLost;
+            totals.gamesWon       += agg.gamesWon;
+            if (i !== StatsMode.Solo) {
+                onlineTotals.reveals        += agg.reveals;
+                onlineTotals.flags          += agg.flags;
+                onlineTotals.minesClicked   += agg.minesClicked;
+                onlineTotals.gridsCompleted += agg.gridsCompleted;
+                onlineTotals.timeAliveMs    += agg.timeAliveMs;
+                onlineTotals.gamesPlayed    += agg.gamesPlayed;
+                onlineTotals.duelsWon       += agg.duelsWon;
+                onlineTotals.duelsLost      += agg.duelsLost;
+                onlineTotals.gamesWon       += agg.gamesWon;
+            }
+        }
+        result.total = totals;
+        result.onlineTotal = onlineTotals;
+        result.variants = variants;
+        return result;
+    }
+
+    // ── Persistence ──
+
+    _load() {
+        try {
+            const stored = localStorage.getItem(STATS_KEY);
+            if (!stored) return;
+            const data = JSON.parse(stored);
+            for (let i = 0; i < MODE_KEYS.length; i++) {
+                const saved = data[MODE_KEYS[i]];
+                if (!saved) continue;
+                // Migration: old flat format has "reveals" directly
+                if (typeof saved.reveals === 'number') {
+                    const s = this._stats[i][StatsVariant.Normal];
+                    s.reveals        = saved.reveals        || 0;
+                    s.flags          = saved.flags          || 0;
+                    s.minesClicked   = saved.minesClicked   || 0;
+                    s.gridsCompleted = saved.gridsCompleted || 0;
+                    s.timeAliveMs    = saved.timeAliveMs    || 0;
+                    s.gamesPlayed    = saved.gamesPlayed    || 0;
+                    s.duelsWon       = saved.duelsWon       || 0;
+                    s.duelsLost      = saved.duelsLost      || 0;
+                    s.gamesWon       = saved.gamesWon       || 0;
+                } else {
+                    // New nested format
+                    for (let v = 0; v < VARIANT_KEYS.length; v++) {
+                        const vs = saved[VARIANT_KEYS[v]];
+                        if (!vs) continue;
+                        const s = this._stats[i][v];
+                        s.reveals        = vs.reveals        || 0;
+                        s.flags          = vs.flags          || 0;
+                        s.minesClicked   = vs.minesClicked   || 0;
+                        s.gridsCompleted = vs.gridsCompleted || 0;
+                        s.timeAliveMs    = vs.timeAliveMs    || 0;
+                        s.gamesPlayed    = vs.gamesPlayed    || 0;
+                        s.duelsWon       = vs.duelsWon       || 0;
+                        s.duelsLost      = vs.duelsLost      || 0;
+                        s.gamesWon       = vs.gamesWon       || 0;
+                    }
+                }
+            }
+        } catch (_) { /* ignore corrupt data */ }
+    }
+
+    _flush() {
+        if (!this._dirty) return;
+        this._dirty = false;
+        try {
+            const data = {};
+            for (let i = 0; i < MODE_KEYS.length; i++) {
+                const modeObj = {};
+                for (let v = 0; v < VARIANT_KEYS.length; v++) {
+                    modeObj[VARIANT_KEYS[v]] = { ...this._stats[i][v] };
+                }
+                data[MODE_KEYS[i]] = modeObj;
+            }
+            localStorage.setItem(STATS_KEY, JSON.stringify(data));
+        } catch (_) { /* storage full */ }
+    }
+}

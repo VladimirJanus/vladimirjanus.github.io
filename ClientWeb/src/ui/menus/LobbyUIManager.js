@@ -1,1 +1,660 @@
-const a24_0x3b729b=a24_0x596a;(function(_0x1468d1,_0x29feda){const _0x5c4a6f=a24_0x596a,_0xe31462=_0x1468d1();while(!![]){try{const _0x47ddf6=-parseInt(_0x5c4a6f(0x1f2))/0x1*(-parseInt(_0x5c4a6f(0x1c9))/0x2)+parseInt(_0x5c4a6f(0x1cb))/0x3+parseInt(_0x5c4a6f(0x240))/0x4*(parseInt(_0x5c4a6f(0x28b))/0x5)+parseInt(_0x5c4a6f(0x269))/0x6+parseInt(_0x5c4a6f(0x1f9))/0x7*(-parseInt(_0x5c4a6f(0x285))/0x8)+parseInt(_0x5c4a6f(0x26f))/0x9*(-parseInt(_0x5c4a6f(0x1fa))/0xa)+parseInt(_0x5c4a6f(0x1d5))/0xb*(-parseInt(_0x5c4a6f(0x206))/0xc);if(_0x47ddf6===_0x29feda)break;else _0xe31462['push'](_0xe31462['shift']());}catch(_0x5dea28){_0xe31462['push'](_0xe31462['shift']());}}}(a24_0x3455,0xe69c3));import{GameType,LobbyVisibility,NetworkRole,PlayerState}from'../../core/CoreEnums.js';function a24_0x596a(_0x305d03,_0xef7d06){_0x305d03=_0x305d03-0x1c6;const _0x345544=a24_0x3455();let _0x596a10=_0x345544[_0x305d03];return _0x596a10;}import{getPlayerColorHex}from'../../core/CoreTypes.js';function a24_0x3455(){const _0x13dae3=['\x22\x20id=\x22netReadyBtn\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','gameData','CoOpHard','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>❓</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22player-name\x22>','trim','gridHeight','remove','isReady','lobbyConfig','\x22\x20style=\x22width:auto\x22>✓\x20Approve</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-small\x20btn-danger\x20\x20reject-btn\x22\x20\x20data-id=\x22','respawnButtonEnabled','•\x20Game\x20ID:\x20','modalState','length','handleLobbyStartAction',';border:1px\x20solid\x20','<span\x20class=\x22npt-ready','<span\x20class=\x22netbar-players-label\x22>Players\x20(','\x20self','player-card','getRespawnCooldown','pid','_pubLobbyFilter','\x20×\x20','lobbyID','btnPublicNext','connection','\x22\x20id=\x22netRespawnBtn\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','PVP\x20Duel','\x20host-player','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22player-name\x22\x20style=\x22','231800BQlWXb','.approve-btn','Cooperative\x20Hardcore','data-expire','lobbyGameID','parentElement','Ready\x20Up','netRole','Alive','netPlayerRow','inGameID','createElement','state','showGameBrowserDialog','🔌\x20Connected','classList','%\x20&nbsp;\x20Mines:\x20','publicLobbyList','lobby-list-entry','_respawnTickId','Private','CoOpSoft','<span\x20style=\x22font-size:12px;font-weight:bold;color:#000;\x22>HOST</span>','showPublicLobbiesDialog','background','joinDialog','_hideModal','🌍\x20Lobby','<span\x20style=\x22display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;border-radius:3px;background:','hostName','playerName','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>','showHostDialog','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','Game\x20in\x20progress\x20—\x20click\x20\x27Join\x20Game\x20in\x20Progress\x27\x20to\x20participate','now','respawnCooldownRemaining','_showModal','\x20ready','joinPlayerName','publicLobbyTotalCount','6183666RVPUfJ','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20style=\x22font-size:16px\x22>','<span\x20class=\x22netbar-player-tags\x22>','normal','Unknown','</span>','9612FOZpGw','Page\x20','\x20👤</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22lobby-entry-detail\x22>Game\x20ID:\x20','s</div>','SoloLeaderboard','stopPropagation','hostPlayerName','getElementById','.npt-approve','Player','_setupBrowserTabs','Dead','hostGame','<span\x20class=\x22netbar-pending-label\x22>Pending\x20Players\x20(','Start\x20and\x20win\x20the\x20game\x20to\x20be\x20placed\x20on\x20the\x20leaderboard!','gameType','disabled','\x22\x20style=\x22width:auto\x22>❌</button>','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22npt-ready','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22npt-approve\x22\x20data-pid=\x22','players','value','1933784hKHVcC','kickPlayer','%\x20Mines','pendingPlayers','lobbyStartOrReady','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22lobby-entry-detail\x22>Type:\x20','40tvuBEc','pendingList','publicLobbies','hasActiveGame','.lobby-entry-cooldown.active[data-expire]','respawnCooldownMs','pendingSection','max','gameID','\x20(You)','dataset','<div\x20class=\x22list-empty\x22>No\x20public\x20lobbies\x20found</div>','🌍\x20Lobby\x20(Host)','floor','browserFilterPVP','innerHTML','_startPubCooldownTick','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22pending-actions\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-small\x20btn-success\x20approve-btn\x22\x20data-id=\x22','settings','_pubCooldownTickId','<button\x20class=\x22netbar-ready-btn','netRespawnBtn','set','_pubPage','round','grid','btnLobbyStart','<span\x20class=\x22net-player-tag\x22\x20style=\x22background:','display','\x22>Cooldown:\x20','_currentQueryType','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','bold','btnNetChat','👁️','btnPublicPrev','opacity','var(--ready-active)','0.7','refreshPublicLobbies','.reject-btn','Host','\x20&nbsp;\x20Density:\x20','div','\x22>❌</button>','lobbyStartButtonEnabled','Ready!','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','chat','#fff','showReadyIndicators','fontWeight','playerCount','browserFilters','density','\x20is-ready','#publicLobbyList\x20.lobby-entry-cooldown.active[data-expire]','588990tJBDhf','<button\x20class=\x22netbar-respawn-btn','3585309eKLApD','style','respawnButtonText','lobbyTitle','lobbyHandler','<button\x20class=\x22npt-kick\x22\x20data-kid=\x22','networkBar','netGameID','<div\x20class=\x22lobby-entry-detail\x22>','get','88198XKZWPG','_showToast','visibility','publicPageInfo','returnToGame','\x20Grid\x20•\x20','visible','lobbyStartButtonText','Rated\x20solo\x20game','serverGameActive','btnReturnToGame','#netRespawnBtn','Enter\x20a\x20player\x20name','ownPlayerID','onclick','btn\x20btn-accent','queryHandler','hostDialog','text-decoration:underline;','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>','forEach','add','joinGame','Cooperative\x20Softcore','.kick-btn','showNetworkRespawnButton','None','requestPublicLobbies','.npt-kick','2aLBIVd','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22lobby-entry-header\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22lobby-entry-host\x22>🎮\x20','browserFilterCoOpSoft','ensureConnected','mineDensity','closeChatPanel','21liWUua','3650KPjqgY','\x20enabled','active','updateNetworkBar','enabled','<button\x20class=\x22btn\x20btn-small\x20btn-danger\x20kick-btn\x22\x20data-id=\x22','textContent','btnLobbySettings','PVPDuel','filter','btnJoinInProgress',')</span>','1824xUOyFA','none','.npt-reject','browserFilterAll','querySelectorAll','toggle','publicLobbiesDialog','_startRespawnTick','lobbyHint','approveJoin','className','showJoinDialog','🌐\x20Hosting','appendChild','Waiting\x20for\x20host\x20to\x20start…','You\x20are\x20still\x20on\x20cooldown\x20for\x20this\x20game.\x20Try\x20again\x20in\x20','isOwnPlayerReady','loadOnlineGameSettings','role','_showScreen','browserTabCommunity','handleHostConfirm','Community',';font-size:12px;font-weight:','lobbyStartButtonVisible','browserFilterCoOpHard','querySelector'];a24_0x3455=function(){return _0x13dae3;};return a24_0x3455();}const PAGE_SIZE=0xa;export class LobbyUIManager{constructor(_0x2367ca){const _0x1f427f=a24_0x596a;this['ui']=_0x2367ca,this['_pubPage']=0x0,this[_0x1f427f(0x237)]=0x0,this['_currentQueryType']=0x0,this[_0x1f427f(0x253)]=0x0,this[_0x1f427f(0x29e)]=0x0;}[a24_0x3b729b(0x260)](){const _0x4d4dee=a24_0x3b729b,_0x513e9b=this['ui'];_0x513e9b[_0x4d4dee(0x23b)]['ensureConnected'](()=>{const _0x4a7a1b=_0x4d4dee;_0x513e9b['_showModal']('hostDialog'),document['getElementById'](_0x4a7a1b(0x275))['value']=_0x513e9b['settings'][_0x4a7a1b(0x1d4)](_0x4a7a1b(0x25e));});}[a24_0x3b729b(0x211)](){const _0x470245=a24_0x3b729b,_0x57f42a=this['ui'];_0x57f42a[_0x470245(0x23b)][_0x470245(0x1f6)](()=>{const _0x38a55c=_0x470245;_0x57f42a[_0x38a55c(0x265)](_0x38a55c(0x259)),document[_0x38a55c(0x276)](_0x38a55c(0x267))[_0x38a55c(0x284)]=_0x57f42a[_0x38a55c(0x29d)][_0x38a55c(0x1d4)](_0x38a55c(0x25e));});}[a24_0x3b729b(0x257)](_0x2e1577=0x0){const _0x3f148a=a24_0x3b729b;this[_0x3f148a(0x24d)](_0x2e1577===0x1?0x1:0x0);}['showGameBrowserDialog'](_0x23ac1f=0x0){const _0x11e60c=a24_0x3b729b,_0x405546=this['ui'];_0x405546[_0x11e60c(0x23b)][_0x11e60c(0x1f6)](()=>{const _0x2e0f6f=_0x11e60c;_0x405546[_0x2e0f6f(0x265)](_0x2e0f6f(0x20c)),this[_0x2e0f6f(0x2a2)]=0x0,this[_0x2e0f6f(0x2a9)]=_0x23ac1f===0x1?0x1:0x0,this['_pubLobbyFilter']=0x0,this[_0x2e0f6f(0x279)](),_0x405546[_0x2e0f6f(0x1e5)][_0x2e0f6f(0x1f0)](this['_currentQueryType'],0x0,PAGE_SIZE);});}['_setupBrowserTabs'](){const _0x55333c=a24_0x3b729b,_0x198e97=this['ui'],_0x3286d6=this['_currentQueryType']===0x1,_0x1f04a2=document[_0x55333c(0x276)]('browserTabPlayerLobbies'),_0x98d168=document[_0x55333c(0x276)](_0x55333c(0x21a)),_0xc399b5=document[_0x55333c(0x276)](_0x55333c(0x2c0));if(_0x1f04a2)_0x1f04a2[_0x55333c(0x24f)][_0x55333c(0x20b)]('active',!_0x3286d6);if(_0x98d168)_0x98d168[_0x55333c(0x24f)][_0x55333c(0x20b)](_0x55333c(0x1fc),_0x3286d6);if(_0xc399b5)_0xc399b5[_0x55333c(0x1cc)][_0x55333c(0x2a7)]=_0x3286d6?_0x55333c(0x207):'';[['browserFilterAll',0x0],[_0x55333c(0x1f5),0x1],[_0x55333c(0x21f),0x2],[_0x55333c(0x299),0x3]][_0x55333c(0x1e9)](([_0xf7e32f,_0x34ee9a])=>{const _0x39fb11=_0x55333c,_0x279b98=document['getElementById'](_0xf7e32f);if(_0x279b98)_0x279b98[_0x39fb11(0x24f)]['toggle'](_0x39fb11(0x1fc),this[_0x39fb11(0x237)]===_0x34ee9a);});if(_0x1f04a2)_0x1f04a2[_0x55333c(0x1e3)]=()=>{const _0x30776d=_0x55333c;this['_currentQueryType']=0x0,this[_0x30776d(0x2a2)]=0x0,this[_0x30776d(0x237)]=0x0,this[_0x30776d(0x279)](),_0x198e97[_0x30776d(0x1e5)][_0x30776d(0x1f0)](0x0,0x0,PAGE_SIZE);};if(_0x98d168)_0x98d168[_0x55333c(0x1e3)]=()=>{const _0x55843c=_0x55333c;this[_0x55843c(0x2a9)]=0x1,this[_0x55843c(0x2a2)]=0x0,this[_0x55843c(0x237)]=0x0,this['_setupBrowserTabs'](),_0x198e97[_0x55843c(0x1e5)][_0x55843c(0x1f0)](0x1,0x0,PAGE_SIZE);};[[_0x55333c(0x209),0x0],[_0x55333c(0x1f5),0x1],[_0x55333c(0x21f),0x2],[_0x55333c(0x299),0x3]][_0x55333c(0x1e9)](([_0x11071b,_0x3a97e7])=>{const _0x43ce95=_0x55333c,_0x22f5a3=document['getElementById'](_0x11071b);if(_0x22f5a3)_0x22f5a3[_0x43ce95(0x1e3)]=()=>{const _0x4e4c85=_0x43ce95;this['_pubLobbyFilter']=_0x3a97e7,this[_0x4e4c85(0x279)](),this['renderPublicLobbies']();};});}[a24_0x3b729b(0x21b)](){const _0x9d9e44=a24_0x3b729b,_0x56bdfd=this['ui'],_0x1d58a6=document['getElementById'](_0x9d9e44(0x275))[_0x9d9e44(0x284)][_0x9d9e44(0x225)]();if(!_0x1d58a6){_0x56bdfd[_0x9d9e44(0x1d6)](_0x9d9e44(0x1e1));return;}_0x56bdfd[_0x9d9e44(0x29d)][_0x9d9e44(0x2a1)](_0x9d9e44(0x25e),_0x1d58a6);const _0x361f7e=_0x56bdfd[_0x9d9e44(0x29d)][_0x9d9e44(0x217)](),_0x27fca7=_0x361f7e?_0x361f7e[_0x9d9e44(0x222)]['grid']['w']:_0x56bdfd['settings'][_0x9d9e44(0x1d4)]('gridWidth'),_0x559513=_0x361f7e?_0x361f7e[_0x9d9e44(0x222)]['grid']['h']:_0x56bdfd['settings'][_0x9d9e44(0x1d4)](_0x9d9e44(0x226)),_0x25bb37=_0x361f7e?_0x361f7e[_0x9d9e44(0x222)][_0x9d9e44(0x2a4)][_0x9d9e44(0x1c6)]:_0x56bdfd[_0x9d9e44(0x29d)][_0x9d9e44(0x1d4)](_0x9d9e44(0x1f7)),_0x341b18=_0x361f7e?_0x361f7e[_0x9d9e44(0x222)]['gameType']:GameType[_0x9d9e44(0x223)],_0x5d3b1f=_0x361f7e?_0x361f7e[_0x9d9e44(0x1d7)]:LobbyVisibility[_0x9d9e44(0x254)];_0x56bdfd[_0x9d9e44(0x1cf)][_0x9d9e44(0x27b)](_0x1d58a6,{'gameType':_0x341b18,'grid':{'w':_0x27fca7,'h':_0x559513,'density':_0x25bb37}},_0x5d3b1f),_0x56bdfd[_0x9d9e44(0x25a)](_0x9d9e44(0x1e6));}['handleJoinConfirm'](){const _0x147071=a24_0x3b729b,_0x1f1672=this['ui'],_0x1e9d72=document['getElementById'](_0x147071(0x267))['value'][_0x147071(0x225)](),_0x1b6934=document[_0x147071(0x276)]('joinGameID')[_0x147071(0x284)][_0x147071(0x225)]();if(!_0x1e9d72){_0x1f1672['_showToast']('Enter\x20a\x20player\x20name');return;}if(!_0x1b6934){_0x1f1672[_0x147071(0x1d6)]('Enter\x20a\x20Game\x20ID');return;}_0x1f1672[_0x147071(0x29d)][_0x147071(0x2a1)](_0x147071(0x25e),_0x1e9d72);const _0x1a4728=parseInt(_0x1b6934);if(isNaN(_0x1a4728)||_0x1a4728<=0x0){_0x1f1672[_0x147071(0x1d6)]('Invalid\x20Game\x20ID');return;}const _0x5641fe=_0x1f1672[_0x147071(0x29d)]['getRespawnCooldown'](_0x1a4728),_0x1e1406=Date['now']();if(_0x5641fe>_0x1e1406){const _0x326cbf=_0x5641fe-_0x1e1406,_0x578d05=Math[_0x147071(0x298)](_0x326cbf/0x36ee80),_0x252501=Math['floor'](_0x326cbf%0x36ee80/0xea60),_0x28d4b0=Math['floor'](_0x326cbf%0xea60/0x3e8);_0x1f1672[_0x147071(0x1d6)](_0x147071(0x215)+_0x578d05+'h\x20'+_0x252501+'m\x20'+_0x28d4b0+'s.');return;}_0x1f1672[_0x147071(0x1cf)]['joinGame'](_0x1e9d72,_0x1a4728),_0x1f1672[_0x147071(0x25a)](_0x147071(0x259));}[a24_0x3b729b(0x289)](){const _0x19aa13=a24_0x3b729b;this['ui'][_0x19aa13(0x22f)]();}['lobbyLeave'](){const _0xb675d3=a24_0x3b729b;this['ui'][_0xb675d3(0x1cf)]['leaveLobby']();}[a24_0x3b729b(0x1d9)](){const _0x530734=a24_0x3b729b,_0x1a2e4e=this['ui'][_0x530734(0x1cf)];if(_0x1a2e4e[_0x530734(0x218)]===NetworkRole[_0x530734(0x1ef)])return;if(!_0x1a2e4e['hasActiveGame'])return;this['ui'][_0x530734(0x219)]('gameView');}[a24_0x3b729b(0x1de)](){const _0x29e56=a24_0x3b729b,_0x4fb661=this['ui'][_0x29e56(0x1cf)];return _0x4fb661[_0x29e56(0x28e)]||_0x4fb661[_0x29e56(0x1de)];}['renderLobby'](){const _0x16f5b7=a24_0x3b729b,_0x314038=this['ui'],_0x53e34a=_0x314038['lobbyHandler'],_0x1ad697=_0x53e34a[_0x16f5b7(0x218)]===NetworkRole[_0x16f5b7(0x2b4)],_0x1fb99c=_0x53e34a[_0x16f5b7(0x222)]['gameType']===GameType[_0x16f5b7(0x202)],_0x1906ff=_0x53e34a[_0x16f5b7(0x222)][_0x16f5b7(0x27e)]===GameType['SoloLeaderboard'],_0x1cba3a=_0x314038[_0x16f5b7(0x22d)][_0x16f5b7(0x2bd)];document[_0x16f5b7(0x276)](_0x16f5b7(0x1ce))[_0x16f5b7(0x200)]=_0x1906ff?_0x16f5b7(0x1dd):_0x1ad697?_0x16f5b7(0x297):_0x16f5b7(0x25b);const _0x12b4aa=document['getElementById'](_0x16f5b7(0x244));_0x12b4aa[_0x16f5b7(0x200)]='Game\x20ID:\x20'+_0x53e34a[_0x16f5b7(0x239)],_0x12b4aa[_0x16f5b7(0x1cc)][_0x16f5b7(0x2a7)]=_0x1906ff?_0x16f5b7(0x207):'';const _0x397a41=_0x53e34a['gameData'][_0x16f5b7(0x2a4)];document[_0x16f5b7(0x276)](_0x16f5b7(0x229))[_0x16f5b7(0x200)]=_0x397a41['w']+'×'+_0x397a41['h']+_0x16f5b7(0x1da)+_0x397a41[_0x16f5b7(0x1c6)]+_0x16f5b7(0x287);const _0x41ac89=document['getElementById'](_0x16f5b7(0x20e));if(_0x1906ff)_0x41ac89['textContent']=_0x16f5b7(0x27d),_0x41ac89[_0x16f5b7(0x1cc)][_0x16f5b7(0x2be)]='';else{if(_0x1ad697)_0x41ac89[_0x16f5b7(0x200)]='Share\x20this\x20Game\x20ID\x20with\x20players',_0x41ac89[_0x16f5b7(0x1cc)]['fontWeight']='';else!_0x53e34a[_0x16f5b7(0x28e)]&&this[_0x16f5b7(0x1de)]()?(_0x41ac89['textContent']=_0x16f5b7(0x262),_0x41ac89[_0x16f5b7(0x1cc)][_0x16f5b7(0x2be)]=_0x16f5b7(0x2ab)):(_0x41ac89[_0x16f5b7(0x200)]=_0x16f5b7(0x214),_0x41ac89[_0x16f5b7(0x1cc)][_0x16f5b7(0x2be)]='');}document[_0x16f5b7(0x276)](_0x16f5b7(0x201))['style'][_0x16f5b7(0x2a7)]=_0x1ad697&&!_0x1906ff?'':_0x16f5b7(0x207);const _0x357534=document[_0x16f5b7(0x276)]('playerList');_0x357534[_0x16f5b7(0x29a)]='',_0x53e34a[_0x16f5b7(0x283)]['forEach']((_0x4f1c03,_0x115820)=>{const _0x4385b1=_0x16f5b7,_0x4192e9=document[_0x4385b1(0x24b)](_0x4385b1(0x2b6));_0x4192e9[_0x4385b1(0x210)]=_0x4385b1(0x234);const _0x34e8b8=getPlayerColorHex(_0x4f1c03[_0x4385b1(0x24a)],_0x53e34a[_0x4385b1(0x222)]['gameType']);_0x4192e9[_0x4385b1(0x1cc)][_0x4385b1(0x258)]=_0x34e8b8;const _0x5e0896=_0x53e34a[_0x4385b1(0x222)][_0x4385b1(0x27e)]===GameType['CoOpSoft'],_0x5b2e3b=_0x53e34a[_0x4385b1(0x222)]['gameType']===GameType['Community'],_0x3654d5=_0x5e0896||_0x1fb99c||_0x5b2e3b,_0x8fcc40=_0x3654d5?_0x4f1c03[_0x4385b1(0x24c)]===PlayerState[_0x4385b1(0x248)]?'💚':_0x4f1c03[_0x4385b1(0x24c)]===PlayerState[_0x4385b1(0x27a)]?'💀':_0x4385b1(0x2ad):'',_0x45da96=_0x4f1c03[_0x4385b1(0x24a)]===0x1?'👑':'👤',_0x384295=_0x4f1c03['inGameID']===_0x53e34a[_0x4385b1(0x1e2)]?_0x4385b1(0x294):'',_0x4c3100=_0x4f1c03[_0x4385b1(0x24a)]===0x1?_0x4385b1(0x256):'';let _0x470243='';if(_0x1cba3a){const _0x4546f5=_0x4f1c03['isReady']?_0x4385b1(0x2b0):'var(--bg-networkbar)',_0x5bff17=_0x4f1c03[_0x4385b1(0x228)]?_0x4385b1(0x2b0):'var(--ready-inactive)',_0x5b73c2=_0x4f1c03[_0x4385b1(0x228)]?'✓':'○';_0x470243=_0x4385b1(0x25c)+_0x4546f5+_0x4385b1(0x230)+_0x5bff17+_0x4385b1(0x21d)+(_0x4f1c03[_0x4385b1(0x228)]?_0x4385b1(0x2ab):_0x4385b1(0x26c))+';color:'+(_0x4f1c03[_0x4385b1(0x228)]?_0x4385b1(0x2bc):'var(--text-muted)')+'\x22>'+_0x5b73c2+_0x4385b1(0x26e);}const _0x5c64ef=_0x1ad697&&_0x4f1c03[_0x4385b1(0x24a)]!==_0x53e34a['ownPlayerID']?_0x4385b1(0x1ff)+_0x4f1c03[_0x4385b1(0x24a)]+_0x4385b1(0x280):'';_0x4192e9[_0x4385b1(0x29a)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20style=\x22font-size:20px\x22>'+_0x45da96+_0x4385b1(0x23f)+(_0x4f1c03[_0x4385b1(0x24a)]===_0x53e34a['ownPlayerID']?_0x4385b1(0x1e7):'')+'\x22>'+_0x4f1c03['playerName']+_0x384295+_0x4385b1(0x26a)+_0x8fcc40+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x470243+'\x20'+_0x4c3100+'\x20'+_0x5c64ef+_0x4385b1(0x261),_0x357534[_0x4385b1(0x213)](_0x4192e9);}),_0x357534[_0x16f5b7(0x20a)](_0x16f5b7(0x1ed))[_0x16f5b7(0x1e9)](_0x2b65e8=>{const _0x46e851=_0x16f5b7;_0x2b65e8[_0x46e851(0x1e3)]=()=>_0x53e34a[_0x46e851(0x286)](parseInt(_0x2b65e8[_0x46e851(0x295)]['id']));});const _0x1dde35=document[_0x16f5b7(0x276)](_0x16f5b7(0x291));_0x1dde35[_0x16f5b7(0x1cc)][_0x16f5b7(0x2a7)]=_0x1ad697&&_0x53e34a[_0x16f5b7(0x288)]['length']>0x0?'':_0x16f5b7(0x207);const _0x3f8a36=document['getElementById'](_0x16f5b7(0x28c));_0x3f8a36[_0x16f5b7(0x29a)]='';for(const _0x170c31 of _0x53e34a[_0x16f5b7(0x288)]){const _0x1df5e4=document[_0x16f5b7(0x24b)](_0x16f5b7(0x2b6));_0x1df5e4['className']='pending-card',_0x1df5e4['innerHTML']=_0x16f5b7(0x224)+_0x170c31[_0x16f5b7(0x25e)]+_0x16f5b7(0x29c)+_0x170c31['inGameID']+_0x16f5b7(0x22a)+_0x170c31[_0x16f5b7(0x24a)]+'\x22\x20style=\x22width:auto\x22>❌\x20Reject</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>',_0x3f8a36['appendChild'](_0x1df5e4);}_0x3f8a36['querySelectorAll'](_0x16f5b7(0x241))[_0x16f5b7(0x1e9)](_0x298f3d=>{const _0x2f436d=_0x16f5b7;_0x298f3d[_0x2f436d(0x1e3)]=()=>_0x53e34a[_0x2f436d(0x20f)](parseInt(_0x298f3d[_0x2f436d(0x295)]['id']),!![]);}),_0x3f8a36['querySelectorAll'](_0x16f5b7(0x2b3))[_0x16f5b7(0x1e9)](_0x128eb5=>{const _0x2cdfc8=_0x16f5b7;_0x128eb5[_0x2cdfc8(0x1e3)]=()=>_0x53e34a[_0x2cdfc8(0x20f)](parseInt(_0x128eb5[_0x2cdfc8(0x295)]['id']),![]);});const _0x1b6562=document[_0x16f5b7(0x276)](_0x16f5b7(0x1df)),_0x2163b8=document[_0x16f5b7(0x276)](_0x16f5b7(0x204)),_0x240ac1=document['getElementById'](_0x16f5b7(0x2a5));_0x1b6562['style'][_0x16f5b7(0x2a7)]=_0x53e34a['hasActiveGame']?'':_0x16f5b7(0x207);const _0xd7c4b2=this[_0x16f5b7(0x1de)]();_0x2163b8[_0x16f5b7(0x1cc)][_0x16f5b7(0x2a7)]=!_0x1ad697&&!_0x53e34a[_0x16f5b7(0x28e)]&&_0xd7c4b2&&!_0x1fb99c?'':_0x16f5b7(0x207),_0x240ac1[_0x16f5b7(0x1cc)]['display']=_0x314038[_0x16f5b7(0x22d)][_0x16f5b7(0x21e)]?'':'none',_0x240ac1[_0x16f5b7(0x200)]=_0x314038[_0x16f5b7(0x22d)][_0x16f5b7(0x1dc)],_0x240ac1[_0x16f5b7(0x27f)]=!_0x314038[_0x16f5b7(0x22d)]['lobbyStartButtonEnabled'],_0x240ac1[_0x16f5b7(0x1cc)][_0x16f5b7(0x2af)]=_0x314038[_0x16f5b7(0x22d)][_0x16f5b7(0x2b8)]?'1':_0x16f5b7(0x2b1),_0x240ac1[_0x16f5b7(0x210)]=_0x16f5b7(0x1e4);}[a24_0x3b729b(0x1fd)](){const _0x552d0e=a24_0x3b729b,_0x5c0bf6=this['ui'],_0x210431=_0x5c0bf6[_0x552d0e(0x1cf)],_0x452a3=document['getElementById'](_0x552d0e(0x1d1));if(!_0x5c0bf6['isInLobby']){_0x452a3['classList'][_0x552d0e(0x227)]('visible');return;}_0x452a3[_0x552d0e(0x24f)][_0x552d0e(0x1ea)](_0x552d0e(0x1db));const _0x319637=_0x210431[_0x552d0e(0x218)]===NetworkRole['Host'],_0x93b076=_0x210431[_0x552d0e(0x222)]['gameType']===GameType[_0x552d0e(0x202)],_0x73a161=_0x210431[_0x552d0e(0x222)][_0x552d0e(0x27e)]===GameType[_0x552d0e(0x255)],_0x520648=_0x210431['gameData'][_0x552d0e(0x27e)]===GameType['Community'],_0x1c4329=_0x210431['gameData'][_0x552d0e(0x27e)]===GameType[_0x552d0e(0x273)],_0x2262fd=_0x5c0bf6[_0x552d0e(0x22d)][_0x552d0e(0x2bd)],_0xdceff2=_0x73a161||_0x93b076||_0x520648,_0x5b2026=document[_0x552d0e(0x276)](_0x552d0e(0x2ac))[_0x552d0e(0x245)];_0x5b2026[_0x552d0e(0x1cc)][_0x552d0e(0x2a7)]=_0x1c4329?'none':'';if(_0x1c4329)_0x5c0bf6[_0x552d0e(0x2bb)][_0x552d0e(0x1f8)]();document[_0x552d0e(0x276)](_0x552d0e(0x247))[_0x552d0e(0x200)]=_0x319637?_0x552d0e(0x212):_0x552d0e(0x24e),document[_0x552d0e(0x276)](_0x552d0e(0x1d2))[_0x552d0e(0x200)]=_0x552d0e(0x22c)+_0x210431[_0x552d0e(0x239)];const _0x4be578=document['getElementById'](_0x552d0e(0x249));let _0x21a4be=_0x552d0e(0x232)+_0x210431['players'][_0x552d0e(0x22e)]+_0x552d0e(0x205);_0x21a4be+=_0x552d0e(0x26b),_0x210431[_0x552d0e(0x283)][_0x552d0e(0x1e9)]((_0xe29a0b,_0x20ef84)=>{const _0xcd3624=_0x552d0e,_0x3465d0=getPlayerColorHex(_0xe29a0b[_0xcd3624(0x24a)],_0x210431[_0xcd3624(0x222)][_0xcd3624(0x27e)]),_0x1f59a6=_0xe29a0b[_0xcd3624(0x24a)]===0x1?'👑':'👤',_0x10c058=_0xe29a0b[_0xcd3624(0x24a)]===_0x210431['ownPlayerID'],_0x5740c8=(_0x10c058?_0xcd3624(0x233):'')+(_0xe29a0b[_0xcd3624(0x24a)]===0x1?_0xcd3624(0x23e):''),_0x10a4f1=_0xdceff2?_0xe29a0b['state']===PlayerState[_0xcd3624(0x248)]?'💚':_0xe29a0b[_0xcd3624(0x24c)]===PlayerState[_0xcd3624(0x27a)]?'💀':_0xcd3624(0x2ad):'',_0x988f23=_0x319637&&_0xe29a0b[_0xcd3624(0x24a)]!==_0x210431['ownPlayerID']?_0xcd3624(0x1d0)+_0xe29a0b[_0xcd3624(0x24a)]+_0xcd3624(0x2b7):'',_0x15fd76=_0x2262fd?_0xcd3624(0x231)+(_0xe29a0b[_0xcd3624(0x228)]?_0xcd3624(0x266):'')+'\x22>'+(_0xe29a0b[_0xcd3624(0x228)]?'✓':'○')+'</span>':'';_0x21a4be+=_0xcd3624(0x2a6)+_0x3465d0+'\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22npt-icon\x22>'+_0x1f59a6+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22npt-name'+_0x5740c8+'\x22>'+_0xe29a0b[_0xcd3624(0x25e)]+_0xcd3624(0x1f3)+(_0x10a4f1?'<span\x20class=\x22npt-state\x22>'+_0x10a4f1+_0xcd3624(0x26e):'')+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x15fd76+'\x20'+_0x988f23+_0xcd3624(0x25f);}),_0x21a4be+=_0x552d0e(0x26e);if(_0x2262fd){const _0x47f8b2=_0x5c0bf6[_0x552d0e(0x22d)][_0x552d0e(0x216)];_0x21a4be+=_0x552d0e(0x29f)+(_0x47f8b2?_0x552d0e(0x1c7):'')+_0x552d0e(0x221)+(_0x47f8b2?_0x552d0e(0x2b9):_0x552d0e(0x246))+_0x552d0e(0x281)+(_0x47f8b2?_0x552d0e(0x266):'')+'\x22>'+(_0x47f8b2?'✓':'○')+_0x552d0e(0x1e8);}if(_0x5c0bf6[_0x552d0e(0x22d)][_0x552d0e(0x1ee)]){const _0x2c7d0f=_0x5c0bf6[_0x552d0e(0x22d)][_0x552d0e(0x22b)];_0x21a4be+=_0x552d0e(0x1ca)+(_0x2c7d0f?_0x552d0e(0x1fb):'')+_0x552d0e(0x23c)+(_0x2c7d0f?'':_0x552d0e(0x27f))+'>'+_0x5c0bf6['modalState'][_0x552d0e(0x1cd)]+'</button>';}_0x4be578[_0x552d0e(0x29a)]=_0x21a4be,_0x4be578[_0x552d0e(0x20a)](_0x552d0e(0x1f1))[_0x552d0e(0x1e9)](_0x952a27=>{const _0x1b5fc3=_0x552d0e;_0x952a27[_0x1b5fc3(0x1e3)]=_0x4d5e77=>{const _0x1f88aa=_0x1b5fc3;_0x4d5e77[_0x1f88aa(0x274)](),_0x210431[_0x1f88aa(0x286)](parseInt(_0x952a27['dataset']['kid']));};});const _0xb1f4ca=_0x4be578['querySelector']('#netReadyBtn');_0xb1f4ca&&(_0xb1f4ca[_0x552d0e(0x1e3)]=()=>{const _0xaf9eff=_0x552d0e;_0x5c0bf6[_0xaf9eff(0x22f)]();});const _0x52d5ba=_0x4be578[_0x552d0e(0x220)](_0x552d0e(0x1e0));_0x52d5ba&&(_0x52d5ba[_0x552d0e(0x1e3)]=()=>{const _0x1e212f=_0x552d0e;_0x5c0bf6[_0x1e212f(0x22d)][_0x1e212f(0x22b)]&&_0x5c0bf6['lobbyHandler']['sendRespawnRequest']();});const _0x578c0d=document['getElementById']('netPendingRow');if(_0x319637&&_0x210431[_0x552d0e(0x288)][_0x552d0e(0x22e)]>0x0){_0x578c0d[_0x552d0e(0x1cc)][_0x552d0e(0x2a7)]='';let _0x5b497d=_0x552d0e(0x27c)+_0x210431[_0x552d0e(0x288)][_0x552d0e(0x22e)]+_0x552d0e(0x205);_0x210431[_0x552d0e(0x288)]['forEach'](_0x3a93ac=>{const _0x56e0f2=_0x552d0e;_0x5b497d+='<span\x20class=\x22net-pending-tag\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>❓\x20'+_0x3a93ac[_0x56e0f2(0x25e)]+_0x56e0f2(0x282)+_0x3a93ac[_0x56e0f2(0x24a)]+'\x22>✔️</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22npt-reject\x22\x20\x20data-pid=\x22'+_0x3a93ac[_0x56e0f2(0x24a)]+'\x22>❌</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>';}),_0x578c0d[_0x552d0e(0x29a)]=_0x5b497d,_0x578c0d[_0x552d0e(0x20a)](_0x552d0e(0x277))['forEach'](_0x3f66fd=>{const _0x169eb2=_0x552d0e;_0x3f66fd[_0x169eb2(0x1e3)]=_0x507672=>{const _0x1511f2=_0x169eb2;_0x507672['stopPropagation'](),_0x210431[_0x1511f2(0x20f)](parseInt(_0x3f66fd[_0x1511f2(0x295)][_0x1511f2(0x236)]),!![]);};}),_0x578c0d['querySelectorAll'](_0x552d0e(0x208))['forEach'](_0x7d3bbd=>{const _0x37d72b=_0x552d0e;_0x7d3bbd[_0x37d72b(0x1e3)]=_0x2ef6a2=>{const _0x1a9971=_0x37d72b;_0x2ef6a2[_0x1a9971(0x274)](),_0x210431['approveJoin'](parseInt(_0x7d3bbd[_0x1a9971(0x295)][_0x1a9971(0x236)]),![]);};});}else _0x578c0d['style']['display']='none';this['_startRespawnTick']();}[a24_0x3b729b(0x20d)](){const _0x5e98cd=a24_0x3b729b;clearInterval(this['_respawnTickId']),this[_0x5e98cd(0x253)]=0x0;const _0xf27c96=this['ui'][_0x5e98cd(0x22d)];if(!_0xf27c96['showNetworkRespawnButton']||_0xf27c96[_0x5e98cd(0x264)]<=0x0)return;this['_respawnTickId']=setInterval(()=>{const _0x394d35=_0x5e98cd,_0x18bfb6=document[_0x394d35(0x276)](_0x394d35(0x2a0));if(!_0x18bfb6||_0xf27c96[_0x394d35(0x264)]<=0x0){clearInterval(this[_0x394d35(0x253)]),this[_0x394d35(0x253)]=0x0;_0x18bfb6&&(_0x18bfb6[_0x394d35(0x200)]=_0xf27c96[_0x394d35(0x1cd)],_0x18bfb6[_0x394d35(0x27f)]=!_0xf27c96[_0x394d35(0x22b)],_0x18bfb6[_0x394d35(0x24f)]['toggle'](_0x394d35(0x1fe),_0xf27c96[_0x394d35(0x22b)]));return;}_0x18bfb6[_0x394d35(0x200)]=_0xf27c96[_0x394d35(0x1cd)];},0x3e8);}['renderPublicLobbies'](){const _0x5082af=a24_0x3b729b,_0x8a1549=this['ui'],_0x58673d=document['getElementById'](_0x5082af(0x251));_0x58673d[_0x5082af(0x29a)]='';const _0xce245b=_0x8a1549[_0x5082af(0x1e5)][_0x5082af(0x28d)],_0x547499=_0x8a1549[_0x5082af(0x1e5)][_0x5082af(0x268)],_0x3daf34=[_0x5082af(0x242),_0x5082af(0x1ec),'Solo\x20Leaderboard',_0x5082af(0x23d),_0x5082af(0x21c)],_0x1ea85d={0x1:0x1,0x2:0x0,0x3:0x3},_0x1b5158=this[_0x5082af(0x237)]&&this[_0x5082af(0x2a9)]===0x0?_0xce245b[_0x5082af(0x203)](_0x58715f=>_0x58715f[_0x5082af(0x27e)]===_0x1ea85d[this[_0x5082af(0x237)]]):_0xce245b;if(_0x1b5158[_0x5082af(0x22e)]===0x0)_0x58673d['innerHTML']=_0x5082af(0x296);else for(const _0x263c0d of _0x1b5158){const _0x3f3084=document[_0x5082af(0x24b)](_0x5082af(0x2b6));_0x3f3084[_0x5082af(0x210)]=_0x5082af(0x252);let _0x1da4c0='';const _0x58c9f7=_0x8a1549[_0x5082af(0x29d)][_0x5082af(0x235)](_0x263c0d['gameID']),_0xed7e28=Date[_0x5082af(0x263)]();if(_0x58c9f7>_0xed7e28){const _0x45b56d=_0x58c9f7-_0xed7e28,_0x2946b7=Math['floor'](_0x45b56d/0x36ee80),_0xd6f30a=Math[_0x5082af(0x298)](_0x45b56d%0x36ee80/0xea60),_0x428fb5=Math[_0x5082af(0x298)](_0x45b56d%0xea60/0x3e8);_0x1da4c0='<div\x20class=\x22lobby-entry-cooldown\x20active\x22\x20data-expire=\x22'+_0x58c9f7+_0x5082af(0x2a8)+_0x2946b7+'h\x20'+_0xd6f30a+'m\x20'+_0x428fb5+_0x5082af(0x272);}else{if(_0x263c0d[_0x5082af(0x290)]>0x0){const _0x2ef200=Math['floor'](_0x263c0d[_0x5082af(0x290)]/0x36ee80),_0x3c86a5=Math[_0x5082af(0x298)](_0x263c0d[_0x5082af(0x290)]%0x36ee80/0xea60),_0x2f259a=Math[_0x5082af(0x298)](_0x263c0d[_0x5082af(0x290)]%0xea60/0x3e8);_0x1da4c0='<div\x20class=\x22lobby-entry-cooldown\x22>Death\x20Cooldown:\x20'+_0x2ef200+'h\x20'+_0x3c86a5+'m\x20'+_0x2f259a+_0x5082af(0x272);}}const _0x4c8697=_0x263c0d['grid']||{},_0x437898=_0x4c8697['w']&&_0x4c8697['h']?_0x5082af(0x1d3)+_0x4c8697['w']+_0x5082af(0x238)+_0x4c8697['h']+_0x5082af(0x2b5)+_0x4c8697[_0x5082af(0x1c6)]+_0x5082af(0x250)+Math[_0x5082af(0x2a3)](_0x4c8697['w']*_0x4c8697['h']*_0x4c8697['density']/0x64)+'</div>':'';_0x3f3084[_0x5082af(0x29a)]=_0x5082af(0x1f4)+_0x263c0d[_0x5082af(0x25d)]+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22lobby-entry-players\x22>'+_0x263c0d[_0x5082af(0x2bf)]+_0x5082af(0x271)+_0x263c0d[_0x5082af(0x293)]+_0x5082af(0x28a)+(_0x3daf34[_0x263c0d[_0x5082af(0x27e)]]||_0x5082af(0x26d))+_0x5082af(0x2ba)+_0x437898+_0x5082af(0x2aa)+_0x1da4c0+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',_0x3f3084[_0x5082af(0x1e3)]=()=>{const _0x2ed2d2=_0x5082af;if(this['_currentQueryType']!==0x1&&_0x58c9f7>Date['now']()){const _0x2eae0d=_0x58c9f7-Date[_0x2ed2d2(0x263)](),_0x3874b7=Math[_0x2ed2d2(0x298)](_0x2eae0d/0x36ee80),_0x137f9f=Math['floor'](_0x2eae0d%0x36ee80/0xea60),_0x4457a3=Math[_0x2ed2d2(0x298)](_0x2eae0d%0xea60/0x3e8);_0x8a1549[_0x2ed2d2(0x1d6)](_0x2ed2d2(0x215)+_0x3874b7+'h\x20'+_0x137f9f+'m\x20'+_0x4457a3+'s.');return;}this['joinPublicLobby'](_0x263c0d[_0x2ed2d2(0x293)]);},_0x58673d[_0x5082af(0x213)](_0x3f3084);}document[_0x5082af(0x276)](_0x5082af(0x2ae))['disabled']=this['_pubPage']===0x0,document[_0x5082af(0x276)](_0x5082af(0x23a))[_0x5082af(0x27f)]=_0x547499<=PAGE_SIZE*(this[_0x5082af(0x2a2)]+0x1),document[_0x5082af(0x276)](_0x5082af(0x1d8))['textContent']=_0x5082af(0x270)+(this[_0x5082af(0x2a2)]+0x1),this[_0x5082af(0x29b)]();}[a24_0x3b729b(0x29b)](){const _0x8a5ebb=a24_0x3b729b;clearInterval(this[_0x8a5ebb(0x29e)]),this[_0x8a5ebb(0x29e)]=0x0;const _0x1fe9a1=document[_0x8a5ebb(0x276)](_0x8a5ebb(0x251));if(!_0x1fe9a1||!_0x1fe9a1[_0x8a5ebb(0x220)](_0x8a5ebb(0x28f)))return;this[_0x8a5ebb(0x29e)]=setInterval(()=>{const _0x3eb275=_0x8a5ebb,_0x7cb9b0=Date[_0x3eb275(0x263)](),_0x195e14=document[_0x3eb275(0x20a)](_0x3eb275(0x1c8));if(_0x195e14[_0x3eb275(0x22e)]===0x0){clearInterval(this[_0x3eb275(0x29e)]),this[_0x3eb275(0x29e)]=0x0;return;}for(const _0x53d8ed of _0x195e14){const _0x152c7c=parseInt(_0x53d8ed[_0x3eb275(0x295)]['expire'])-_0x7cb9b0;if(_0x152c7c<=0x0)_0x53d8ed[_0x3eb275(0x24f)][_0x3eb275(0x227)]('active'),_0x53d8ed['removeAttribute'](_0x3eb275(0x243)),_0x53d8ed[_0x3eb275(0x200)]='';else{const _0x14ff77=Math['floor'](_0x152c7c/0x36ee80),_0x16d8e9=Math[_0x3eb275(0x298)](_0x152c7c%0x36ee80/0xea60),_0x342566=Math['floor'](_0x152c7c%0xea60/0x3e8);_0x53d8ed[_0x3eb275(0x200)]='Cooldown:\x20'+_0x14ff77+'h\x20'+_0x16d8e9+'m\x20'+_0x342566+'s';}}},0x3e8);}['joinPublicLobby'](_0x2d08f9){const _0x307466=a24_0x3b729b,_0xfae275=this['ui'],_0x2cf3d2=_0xfae275['settings']['get']('playerName')||_0x307466(0x278);if(!_0x2cf3d2){_0xfae275[_0x307466(0x1d6)]('Set\x20a\x20player\x20name\x20in\x20App\x20Settings\x20first');return;}clearInterval(this[_0x307466(0x29e)]),this[_0x307466(0x29e)]=0x0,_0xfae275[_0x307466(0x1cf)][_0x307466(0x1eb)](_0x2cf3d2,_0x2d08f9),_0xfae275[_0x307466(0x25a)](_0x307466(0x20c));}[a24_0x3b729b(0x2b2)](_0x1fd839=0x0){const _0x273c0b=a24_0x3b729b,_0x5cac4e=this['ui'];this[_0x273c0b(0x2a2)]=Math[_0x273c0b(0x292)](0x0,this['_pubPage']+_0x1fd839),_0x5cac4e[_0x273c0b(0x1e5)]['requestPublicLobbies'](this[_0x273c0b(0x2a9)],this[_0x273c0b(0x2a2)],PAGE_SIZE);}}
+// LobbyUIManager.js — WAN lobby, public lobby browser, online hosting/joining
+// ============================================================================
+
+import { GameType, LobbyVisibility, NetworkRole, PlayerState } from '../../core/CoreEnums.js';
+import { getPlayerColorHex } from '../../core/CoreTypes.js';
+
+const PAGE_SIZE = 10;
+
+export class LobbyUIManager {
+    constructor(ui) {
+        this.ui      = ui;
+        this._pubPage = 0;
+        this._showPlayerLobbies = true;
+        this._showCommunity     = true;
+        this._filterCoOpSoft    = false;
+        this._filterCoOpHard    = false;
+        this._filterPVPDuel     = false;
+        this._communityLobbies  = [];
+        this._playerLobbies     = [];
+        this._currentQueryType  = -1;  // which query type the last request was for
+        this._respawnTickId = 0;
+        this._pubCooldownTickId = 0;
+    }
+
+    // ========================================================================
+    // Dialog launchers
+    // ========================================================================
+
+    showHostDialog() {
+        const ui = this.ui;
+        ui.connection.ensureConnected(() => {
+            ui._showModal('hostDialog');
+            document.getElementById('hostPlayerName').value = ui.settings.get('playerName');
+        });
+    }
+
+    showJoinDialog() {
+        const ui = this.ui;
+        ui.connection.ensureConnected(() => {
+            ui._showModal('joinDialog');
+            document.getElementById('joinPlayerName').value = ui.settings.get('playerName');
+        });
+    }
+
+    showPublicLobbiesDialog(queryType = 0) {
+        this.showGameBrowserDialog(queryType === 1 ? 1 : 0);
+    }
+
+    showGameBrowserDialog(initialTab = 0) {
+        const ui = this.ui;
+        ui.connection.ensureConnected(() => {
+            this._pubPage = 0;
+            this._showPlayerLobbies = true;
+            this._showCommunity     = true;
+            this._filterCoOpSoft    = false;
+            this._filterCoOpHard    = false;
+            this._filterPVPDuel     = false;
+            this._communityLobbies  = [];
+            this._playerLobbies     = [];
+
+            ui._showScreen('gameBrowserScreen');
+            this._setupBrowserButtons();
+            this._doRequest();
+        });
+    }
+
+    _setupBrowserButtons() {
+        const tabPL  = document.getElementById('browserTabPlayerLobbies');
+        const tabCom = document.getElementById('browserTabCommunity');
+        const filterSection = document.getElementById('browserFilters');
+
+        if (tabPL)  tabPL.classList.toggle('active', this._showPlayerLobbies);
+        if (tabCom) tabCom.classList.toggle('active', this._showCommunity);
+        if (filterSection) filterSection.style.display = this._showPlayerLobbies ? '' : 'none';
+
+        [['browserFilterCoOpSoft', '_filterCoOpSoft'],
+         ['browserFilterCoOpHard', '_filterCoOpHard'],
+         ['browserFilterPVP',      '_filterPVPDuel']].forEach(([id, prop]) => {
+            const btn = document.getElementById(id);
+            if (btn) btn.classList.toggle('active', this[prop]);
+        });
+
+        if (tabPL) tabPL.onclick = () => {
+            this._showPlayerLobbies = !this._showPlayerLobbies;
+            if (!this._showPlayerLobbies) {
+                this._filterCoOpSoft = false;
+                this._filterCoOpHard = false;
+                this._filterPVPDuel  = false;
+            }
+            this._pubPage = 0;
+            this._setupBrowserButtons();
+            this._doRequest();
+        };
+        if (tabCom) tabCom.onclick = () => {
+            this._showCommunity = !this._showCommunity;
+            this._pubPage = 0;
+            this._setupBrowserButtons();
+            this._doRequest();
+        };
+
+        [['browserFilterCoOpSoft', '_filterCoOpSoft'],
+         ['browserFilterCoOpHard', '_filterCoOpHard'],
+         ['browserFilterPVP',      '_filterPVPDuel']].forEach(([id, prop]) => {
+            const btn = document.getElementById(id);
+            if (btn) btn.onclick = () => {
+                this[prop] = !this[prop];
+                this._setupBrowserButtons();
+                this._renderFromSnapshots();
+            };
+        });
+    }
+
+    /**
+     * Issues one or two server requests depending on selected categories.
+     * When both are selected, community fires first; its callback chains the
+     * player-lobbies request. Each response is stored in its own snapshot.
+     */
+    _doRequest() {
+        const ui = this.ui;
+        this._communityLobbies = [];
+        this._playerLobbies    = [];
+
+        if (!this._showPlayerLobbies && !this._showCommunity) {
+            this._renderFromSnapshots();
+            return;
+        }
+
+        if (this._showCommunity) {
+            // Fire community first; if player lobbies also needed, the callback will chain it
+            this._currentQueryType = 1;
+            ui.queryHandler.requestPublicLobbies(1, this._pubPage, PAGE_SIZE);
+        } else {
+            // Only player lobbies
+            this._currentQueryType = 0;
+            ui.queryHandler.requestPublicLobbies(0, this._pubPage, PAGE_SIZE);
+        }
+    }
+
+    // ========================================================================
+    // Dialog confirm handlers (called from HTML via app.handleHostConfirm etc.)
+    // ========================================================================
+
+    handleHostConfirm() {
+        const ui   = this.ui;
+        const name = document.getElementById('hostPlayerName').value.trim();
+        if (!name) { ui._showToast('Enter a player name'); return; }
+        ui.settings.set('playerName', name);
+
+        const saved = ui.settings.loadOnlineGameSettings();
+        const w    = saved ? saved.gameData.grid.w       : ui.settings.get('gridWidth');
+        const h    = saved ? saved.gameData.grid.h       : ui.settings.get('gridHeight');
+        const d    = saved ? saved.gameData.grid.density : ui.settings.get('mineDensity');
+        const gt   = saved ? saved.gameData.gameType     : GameType.CoOpHard;
+        const vis  = saved ? saved.visibility            : LobbyVisibility.Private;
+
+        ui.lobbyHandler.hostGame(name, { gameType: gt, grid: { w, h, density: d } }, vis);
+        ui._hideModal('hostDialog');
+    }
+
+    handleJoinConfirm() {
+        const ui    = this.ui;
+        const name  = document.getElementById('joinPlayerName').value.trim();
+        const idStr = document.getElementById('joinGameID').value.trim();
+        if (!name)  { ui._showToast('Enter a player name'); return; }
+        if (!idStr) { ui._showToast('Enter a Game ID');     return; }
+        ui.settings.set('playerName', name);
+
+        const gameID = parseInt(idStr);
+        if (isNaN(gameID) || gameID <= 0) { ui._showToast('Invalid Game ID'); return; }
+
+        const cooldown = ui.settings.getRespawnCooldown(gameID);
+        const now = Date.now();
+        if (cooldown > now) {
+            const remaining = cooldown - now;
+            const hours = Math.floor(remaining / 3600000);
+            const mins = Math.floor((remaining % 3600000) / 60000);
+            const secs = Math.floor((remaining % 60000) / 1000);
+            ui._showToast(`You are still on cooldown for this game. Try again in ${hours}h ${mins}m ${secs}s.`);
+            return;
+        }
+
+        ui.lobbyHandler.joinGame(name, gameID);
+        ui._hideModal('joinDialog');
+    }
+
+    // ========================================================================
+    // Lobby state actions
+    // ========================================================================
+
+    lobbyStartOrReady() {
+        this.ui.handleLobbyStartAction();
+    }
+
+    lobbyLeave() { this.ui.lobbyHandler.leaveLobby(); }
+
+    returnToGame() {
+        const lh = this.ui.lobbyHandler;
+        if (lh.role === NetworkRole.None) return;
+        if (!lh.hasActiveGame) return;
+        this.ui._showScreen('gameView');
+    }
+
+    /** True when the server has an active game round in progress. */
+    serverGameActive() {
+        const lh = this.ui.lobbyHandler;
+        return lh.hasActiveGame || lh.serverGameActive;
+    }
+
+    // ========================================================================
+    // Lobby rendering
+    // ========================================================================
+
+    renderLobby() {
+        const ui     = this.ui;
+        const lh     = ui.lobbyHandler;
+        const isHost = lh.role === NetworkRole.Host;
+        const isPVP  = lh.gameData.gameType === GameType.PVPDuel;
+        const isSolo = lh.gameData.gameType === GameType.SoloLeaderboard;
+        const isAllReady = ui.modalState.showReadyIndicators;
+
+        // Title
+        document.getElementById('lobbyTitle').textContent =
+            isSolo ? 'Rated solo game' : isHost ? '🌍 Lobby (Host)' : '🌍 Lobby';
+
+        // Game ID
+        const gidEl = document.getElementById('lobbyGameID');
+        gidEl.textContent = 'Game ID: ' + lh.lobbyID;
+        gidEl.style.display = isSolo ? 'none' : '';
+
+        // Config
+        const grid = lh.gameData.grid;
+        document.getElementById('lobbyConfig').textContent = `${grid.w}×${grid.h} Grid • ${grid.density}% Mines`;
+
+        // Hint
+        const hint = document.getElementById('lobbyHint');
+        if (isSolo) {
+            hint.textContent  = 'Start and win the game to be placed on the leaderboard!';
+            hint.style.fontWeight = '';
+        } else if (isHost) {
+            hint.textContent  = 'Share this Game ID with players';
+            hint.style.fontWeight = '';
+        } else if (!lh.hasActiveGame && this.serverGameActive()) {
+            hint.textContent  = "Game in progress — click 'Join Game in Progress' to participate";
+            hint.style.fontWeight = 'bold';
+        } else {
+            hint.textContent  = 'Waiting for host to start…';
+            hint.style.fontWeight = '';
+        }
+
+        // Header controls
+        document.getElementById('btnLobbySettings').style.display     = (isHost && !isSolo) ? '' : 'none';
+
+        // Player list
+        const plEl = document.getElementById('playerList');
+        plEl.innerHTML = '';
+        lh.players.forEach((p, idx) => {
+            const card   = document.createElement('div');
+            card.className = 'player-card';
+            const color  = getPlayerColorHex(p.inGameID, lh.gameData.gameType);
+            card.style.background = color;
+
+            const isCoOpSoft  = lh.gameData.gameType === GameType.CoOpSoft;
+            const isCommunity = lh.gameData.gameType === GameType.Community;
+            const showState   = isCoOpSoft || isPVP || isCommunity;
+            const stateEmoji  = showState
+                ? (p.state === PlayerState.Alive ? '💚' : p.state === PlayerState.Dead ? '💀' : '👁️')
+                : '';
+            const icon        = p.inGameID === 1 ? '👑' : '👤';
+            const youTag      = p.inGameID === lh.ownPlayerID ? ' (You)' : '';
+            const hostTag     = p.inGameID === 1
+                ? '<span style="font-size:12px;font-weight:bold;color:#000;">HOST</span>' : '';
+
+            let readyIndicator = '';
+            if (isAllReady) {
+                const rc  = p.isReady ? 'var(--ready-active)' : 'var(--bg-networkbar)';
+                const bc  = p.isReady ? 'var(--ready-active)' : 'var(--ready-inactive)';
+                const sym = p.isReady ? '✓' : '○';
+                readyIndicator = `<span style="display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;border-radius:3px;background:${rc};border:1px solid ${bc};font-size:12px;font-weight:${p.isReady ? 'bold' : 'normal'};color:${p.isReady ? '#fff' : 'var(--text-muted)'}">${sym}</span>`;
+            }
+
+            const kickBtn = (isHost && p.inGameID !== lh.ownPlayerID)
+                ? `<button class="btn btn-small btn-danger kick-btn" data-id="${p.inGameID}" style="width:auto">❌</button>` : '';
+
+            card.innerHTML = `
+                <span style="font-size:20px">${icon}</span>
+                <span class="player-name" style="${p.inGameID === lh.ownPlayerID ? 'text-decoration:underline;' : ''}">${p.playerName}${youTag}</span>
+                <span style="font-size:16px">${stateEmoji}</span>
+                ${readyIndicator} ${hostTag} ${kickBtn}
+            `;
+            plEl.appendChild(card);
+        });
+        plEl.querySelectorAll('.kick-btn').forEach(btn => {
+            btn.onclick = () => lh.kickPlayer(parseInt(btn.dataset.id));
+        });
+
+        // Pending players
+        const pendSec = document.getElementById('pendingSection');
+        pendSec.style.display = (isHost && lh.pendingPlayers.length > 0) ? '' : 'none';
+        const pendEl  = document.getElementById('pendingList');
+        pendEl.innerHTML = '';
+        for (const p of lh.pendingPlayers) {
+            const card = document.createElement('div');
+            card.className = 'pending-card';
+            card.innerHTML = `
+                <span>❓</span>
+                <span class="player-name">${p.playerName}</span>
+                <div class="pending-actions">
+                    <button class="btn btn-small btn-success approve-btn" data-id="${p.inGameID}" style="width:auto">✓ Approve</button>
+                    <button class="btn btn-small btn-danger  reject-btn"  data-id="${p.inGameID}" style="width:auto">❌ Reject</button>
+                </div>`;
+            pendEl.appendChild(card);
+        }
+        pendEl.querySelectorAll('.approve-btn').forEach(b => { b.onclick = () => lh.approveJoin(parseInt(b.dataset.id), true);  });
+        pendEl.querySelectorAll('.reject-btn') .forEach(b => { b.onclick = () => lh.approveJoin(parseInt(b.dataset.id), false); });
+
+        // Bottom buttons
+        const returnBtn = document.getElementById('btnReturnToGame');
+        const joinBtn   = document.getElementById('btnJoinInProgress');
+        const startBtn  = document.getElementById('btnLobbyStart');
+
+        returnBtn.style.display = lh.hasActiveGame ? '' : 'none';
+
+        const serverActive = this.serverGameActive();
+        joinBtn.style.display = (!isHost && !lh.hasActiveGame && serverActive && !isPVP) ? '' : 'none';
+
+        // Use centralized start-button state
+        startBtn.style.display = ui.modalState.lobbyStartButtonVisible ? '' : 'none';
+        startBtn.textContent   = ui.modalState.lobbyStartButtonText;
+        startBtn.disabled      = !ui.modalState.lobbyStartButtonEnabled;
+        startBtn.style.opacity = ui.modalState.lobbyStartButtonEnabled ? '1' : '0.7';
+        startBtn.className     = 'btn btn-accent';
+    }
+
+    // ========================================================================
+    // Network bar
+    // ========================================================================
+
+    updateNetworkBar() {
+        const ui   = this.ui;
+        const lh   = ui.lobbyHandler;
+        const el   = document.getElementById('networkBar');
+        if (!ui.isInLobby) { el.classList.remove('visible'); return; }
+        el.classList.add('visible');
+
+        const isHost             = lh.role === NetworkRole.Host;
+        const isPVP              = lh.gameData.gameType === GameType.PVPDuel;
+        const isCoOpSoft         = lh.gameData.gameType === GameType.CoOpSoft;
+        const isCommunity        = lh.gameData.gameType === GameType.Community;
+        const isSoloLeaderboard  = lh.gameData.gameType === GameType.SoloLeaderboard;
+        const isAllReady         = ui.modalState.showReadyIndicators;
+        const showState          = isCoOpSoft || isPVP || isCommunity;
+
+        // Mirror Qt NetworkBar: chatButton visible: !isSoloLeaderboard
+        const chatBtnWrap = document.getElementById('btnNetChat').parentElement;
+        chatBtnWrap.style.display = isSoloLeaderboard ? 'none' : '';
+        if (isSoloLeaderboard) ui.chat.closeChatPanel();
+
+        document.getElementById('netRole').textContent   = isHost ? '🌐 Hosting' : '🔌 Connected';
+        document.getElementById('netGameID').textContent = '• Game ID: ' + lh.lobbyID;
+
+        const playerRow = document.getElementById('netPlayerRow');
+        let html = `<span class="netbar-players-label">Players (${lh.players.length})</span>`;
+
+        // Player tags in a flex-growing wrapper so buttons are pushed right
+        html += `<span class="netbar-player-tags">`;
+        lh.players.forEach((p, idx) => {
+            const color      = getPlayerColorHex(p.inGameID, lh.gameData.gameType);
+            const icon       = p.inGameID === 1 ? '👑' : '👤';
+            const isSelf     = p.inGameID === lh.ownPlayerID;
+            const nameClass  = (isSelf ? ' self' : '') + (p.inGameID === 1 ? ' host-player' : '');
+            const stateEmoji = showState
+                ? (p.state === PlayerState.Alive ? '💚' : p.state === PlayerState.Dead ? '💀' : '👁️')
+                : '';
+            const kickBtn    = (isHost && p.inGameID !== lh.ownPlayerID)
+                ? `<button class="npt-kick" data-kid="${p.inGameID}">❌</button>` : '';
+            const readyInd   = isAllReady
+                ? `<span class="npt-ready${p.isReady ? ' ready' : ''}">${p.isReady ? '✓' : '○'}</span>` : '';
+
+            html += `<span class="net-player-tag" style="background:${color}">
+                <span class="npt-icon">${icon}</span>
+                <span class="npt-name${nameClass}">${p.playerName}</span>
+                ${stateEmoji ? `<span class="npt-state">${stateEmoji}</span>` : ''}
+                ${readyInd} ${kickBtn}
+            </span>`;
+        });
+        html += `</span>`;
+
+        // Ready button (PVP Duel) — right-aligned
+        if (isAllReady) {
+            const isReady = ui.modalState.isOwnPlayerReady;
+            html += `<button class="netbar-ready-btn${isReady ? ' is-ready' : ''}" id="netReadyBtn">
+                ${isReady ? 'Ready!' : 'Ready Up'}
+                <span class="npt-ready${isReady ? ' ready' : ''}">${isReady ? '✓' : '○'}</span>
+            </button>`;
+        }
+
+        // Respawn button (Community) — right-aligned
+        if (ui.modalState.showNetworkRespawnButton) {
+            const canRespawn = ui.modalState.respawnButtonEnabled;
+            html += `<button class="netbar-respawn-btn${canRespawn ? ' enabled' : ''}" id="netRespawnBtn"
+                ${canRespawn ? '' : 'disabled'}>${ui.modalState.respawnButtonText}</button>`;
+        }
+
+        playerRow.innerHTML = html;
+
+        playerRow.querySelectorAll('.npt-kick').forEach(btn => {
+            btn.onclick = (e) => { e.stopPropagation(); lh.kickPlayer(parseInt(btn.dataset.kid)); };
+        });
+        const readyBtn = playerRow.querySelector('#netReadyBtn');
+        if (readyBtn) {
+            readyBtn.onclick = () => {
+                ui.handleLobbyStartAction();
+            };
+        }
+        const respawnBtn = playerRow.querySelector('#netRespawnBtn');
+        if (respawnBtn) {
+            respawnBtn.onclick = () => {
+                if (ui.modalState.respawnButtonEnabled) {
+                    ui.lobbyHandler.sendRespawnRequest();
+                }
+            };
+        }
+
+        // Pending row
+        const pendRow = document.getElementById('netPendingRow');
+        if (isHost && lh.pendingPlayers.length > 0) {
+            pendRow.style.display = '';
+            let ph = `<span class="netbar-pending-label">Pending Players (${lh.pendingPlayers.length})</span>`;
+            lh.pendingPlayers.forEach(p => {
+                ph += `<span class="net-pending-tag">
+                    <span>❓ ${p.playerName}</span>
+                    <button class="npt-approve" data-pid="${p.inGameID}">✔️</button>
+                    <button class="npt-reject"  data-pid="${p.inGameID}">❌</button>
+                </span>`;
+            });
+            pendRow.innerHTML = ph;
+            pendRow.querySelectorAll('.npt-approve').forEach(btn => {
+                btn.onclick = (e) => { e.stopPropagation(); lh.approveJoin(parseInt(btn.dataset.pid), true);  };
+            });
+            pendRow.querySelectorAll('.npt-reject').forEach(btn => {
+                btn.onclick = (e) => { e.stopPropagation(); lh.approveJoin(parseInt(btn.dataset.pid), false); };
+            });
+        } else {
+            pendRow.style.display = 'none';
+        }
+
+        // Respawn cooldown tick — update the button text every second
+        this._startRespawnTick();
+    }
+
+    _startRespawnTick() {
+        clearInterval(this._respawnTickId);
+        this._respawnTickId = 0;
+        const ms = this.ui.modalState;
+        if (!ms.showNetworkRespawnButton || ms.respawnCooldownRemaining <= 0) return;
+        this._respawnTickId = setInterval(() => {
+            const btn = document.getElementById('netRespawnBtn');
+            if (!btn || ms.respawnCooldownRemaining <= 0) {
+                clearInterval(this._respawnTickId);
+                this._respawnTickId = 0;
+                // Final update once cooldown expires
+                if (btn) {
+                    btn.textContent = ms.respawnButtonText;
+                    btn.disabled = !ms.respawnButtonEnabled;
+                    btn.classList.toggle('enabled', ms.respawnButtonEnabled);
+                }
+                return;
+            }
+            btn.textContent = ms.respawnButtonText;
+        }, 1000);
+    }
+
+    // ========================================================================
+    // Public lobby browser
+    // ========================================================================
+
+    renderPublicLobbies() {
+        const ui = this.ui;
+
+    /**
+     * Called by onPublicLobbiesLoaded when a server response is fully assembled.
+     * Snapshots the response into the right list, chains the second request if
+     * needed, or renders the UI from the two stable snapshots.
+     */
+    renderPublicLobbies() {
+        const ui = this.ui;
+        const lobbies = [...ui.queryHandler.publicLobbies];
+
+        if (this._currentQueryType === 1) {
+            // Community response just arrived
+            this._communityLobbies = lobbies;
+
+            // If player lobbies are also wanted, chain that request now
+            if (this._showPlayerLobbies) {
+                this._currentQueryType = 0;
+                ui.queryHandler.requestPublicLobbies(0, this._pubPage, PAGE_SIZE);
+                return; // wait for player-lobbies response before rendering
+            }
+        } else {
+            // Player-lobbies response just arrived
+            this._playerLobbies = lobbies.filter(l => l.gameType !== GameType.Community);
+        }
+
+        this._renderFromSnapshots();
+    }
+
+    /** Renders the list UI purely from the two stable snapshot arrays. */
+    _renderFromSnapshots() {
+        const ui = this.ui;
+        const communitySource = this._showCommunity ? this._communityLobbies : [];
+
+        const anyFilter = this._filterCoOpSoft || this._filterCoOpHard || this._filterPVPDuel;
+        const playerSource = this._showPlayerLobbies
+            ? (anyFilter
+                ? this._playerLobbies.filter(l => {
+                    if (this._filterCoOpSoft && l.gameType === GameType.CoOpSoft) return true;
+                    if (this._filterCoOpHard && l.gameType === GameType.CoOpHard) return true;
+                    if (this._filterPVPDuel  && l.gameType === GameType.PVPDuel)  return true;
+                    return false;
+                  })
+                : this._playerLobbies)
+            : [];
+
+        const combined = [...communitySource, ...playerSource];
+        const list    = document.getElementById('publicLobbyList');
+        list.innerHTML = '';
+        const total   = ui.queryHandler.publicLobbyTotalCount;
+        const typeNames = ['Cooperative Hardcore', 'Cooperative Softcore', 'Solo Leaderboard', 'PVP Duel', 'Community'];
+
+        if (combined.length === 0) {
+            let msg;
+            if (!this._showPlayerLobbies && !this._showCommunity)
+                msg = 'Select Player Lobbies or Community to browse games.';
+            else if (this._showCommunity && !this._showPlayerLobbies)
+                msg = 'No community games available. Try refreshing!';
+            else if (anyFilter)
+                msg = 'No lobbies match this filter. Try another mode or refresh.';
+            else
+                msg = 'No player lobbies available. Create one or refresh to check again!';
+            list.innerHTML = `<div class="list-empty">${msg}</div>`;
+        } else {
+            const typeBadgeClass = [
+                'gb-type-coophard',   // 0 CoOpHard
+                'gb-type-coopsoft',   // 1 CoOpSoft
+                'gb-type-other',      // 2 SoloLeaderboard
+                'gb-type-pvpduel',    // 3 PVPDuel
+                'gb-type-community',  // 4 Community
+            ];
+            const typeAccentColor = [
+                '#D32F2F',  // 0 CoOpHard
+                '#388E3C',  // 1 CoOpSoft
+                '#3498DB',  // 2 SoloLeaderboard
+                '#7B1FA2',  // 3 PVPDuel
+                '#1976D2',  // 4 Community
+            ];
+            for (const lobby of combined) {
+                const entry = document.createElement('div');
+                entry.className = 'gb-entry';
+                entry.style.setProperty('--gb-accent', typeAccentColor[lobby.gameType] || '#3498DB');
+
+                const cooldown = ui.settings.getRespawnCooldown(lobby.gameID);
+                const now = Date.now();
+                let cooldownHtml = '';
+                if (cooldown > now) {
+                    const remaining = cooldown - now;
+                    const h = Math.floor(remaining / 3600000);
+                    const m = Math.floor((remaining % 3600000) / 60000);
+                    const s = Math.floor((remaining % 60000) / 1000);
+                    cooldownHtml = `<div class="gb-cooldown" data-expire="${cooldown}">⏳ Cooldown: ${h}h ${m}m ${s}s</div>`;
+                } else if (lobby.respawnCooldownMs > 0) {
+                    const h = Math.floor(lobby.respawnCooldownMs / 3600000);
+                    const m = Math.floor((lobby.respawnCooldownMs % 3600000) / 60000);
+                    const s = Math.floor((lobby.respawnCooldownMs % 60000) / 1000);
+                    cooldownHtml = `<div class="gb-cooldown static">⚠️ Death Cooldown: ${h}h ${m}m ${s}s</div>`;
+                }
+
+                const g = lobby.grid || {};
+                const gridSubRow = (g.w && g.h)
+                    ? `<div class="gb-sub-row">${g.w} × ${g.h} &nbsp;•&nbsp; ${g.density}% density</div>`
+                    : '';
+                const badgeClass = typeBadgeClass[lobby.gameType] || 'gb-type-other';
+
+                entry.innerHTML = `
+                    <div class="gb-entry-row">
+                        <span class="gb-type-badge ${badgeClass}">${typeNames[lobby.gameType] || 'Unknown'}</span>
+                        <span class="gb-host">🎮 ${lobby.hostName}</span>
+                        <span class="gb-players">${lobby.playerCount} 👤</span>
+                    </div>
+                    ${gridSubRow}
+                    ${cooldownHtml}
+                `;
+                entry.onclick = () => {
+                    const isPlayerLobby = lobby.gameType !== GameType.Community;
+                    if (isPlayerLobby && cooldown > Date.now()) {
+                        const remaining = cooldown - Date.now();
+                        const hours = Math.floor(remaining / 3600000);
+                        const mins = Math.floor((remaining % 3600000) / 60000);
+                        const secs = Math.floor((remaining % 60000) / 1000);
+                        ui._showToast(`You are still on cooldown for this game. Try again in ${hours}h ${mins}m ${secs}s.`);
+                        return;
+                    }
+                    this.joinPublicLobby(lobby.gameID);
+                };
+                list.appendChild(entry);
+            }
+        }
+
+        document.getElementById('btnPublicPrev').disabled    = this._pubPage === 0;
+        document.getElementById('btnPublicNext').disabled    = total <= PAGE_SIZE * (this._pubPage + 1);
+        document.getElementById('publicPageInfo').textContent = 'Page ' + (this._pubPage + 1);
+        this._startPubCooldownTick();
+    }
+
+    _startPubCooldownTick() {
+        clearInterval(this._pubCooldownTickId);
+        this._pubCooldownTickId = 0;
+        const list = document.getElementById('publicLobbyList');
+        if (!list || !list.querySelector('.gb-cooldown[data-expire]')) return;
+        this._pubCooldownTickId = setInterval(() => {
+            const now = Date.now();
+            const els = document.querySelectorAll('#publicLobbyList .gb-cooldown[data-expire]');
+            if (els.length === 0) {
+                clearInterval(this._pubCooldownTickId);
+                this._pubCooldownTickId = 0;
+                return;
+            }
+            for (const el of els) {
+                const rem = parseInt(el.dataset.expire) - now;
+                if (rem <= 0) {
+                    el.removeAttribute('data-expire');
+                    el.textContent = '';
+                    el.style.display = 'none';
+                    el.removeAttribute('data-expire');
+                    el.textContent = '';
+                } else {
+                    const h = Math.floor(rem / 3600000);
+                    const m = Math.floor((rem % 3600000) / 60000);
+                    const s = Math.floor((rem % 60000) / 1000);
+                    el.textContent = `⏳ Cooldown: ${h}h ${m}m ${s}s`;
+                }
+            }
+        }, 1000);
+    }
+
+    joinPublicLobby(gameID) {
+        const ui   = this.ui;
+        const name = ui.settings.get('playerName') || 'Player';
+        if (!name) { ui._showToast('Set a player name in App Settings first'); return; }
+        clearInterval(this._pubCooldownTickId);
+        this._pubCooldownTickId = 0;
+        ui.lobbyHandler.joinGame(name, gameID);
+        ui._showScreen('mainMenu');
+    }
+
+    refreshPublicLobbies(pageDelta = 0) {
+        this._pubPage = Math.max(0, this._pubPage + pageDelta);
+        this._communityLobbies = [];
+        this._doRequest();
+    }
+}

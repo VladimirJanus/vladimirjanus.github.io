@@ -503,29 +503,38 @@
         </div>
 
         
-        <div id="publicLobbiesDialog" class="modal-backdrop">
-            <div class="modal modal-tall">
-                <h3>🧭 Game Browser</h3>
-                <div class="browser-tabs">
-                    <button class="browser-tab active" id="browserTabPlayerLobbies">Player Lobbies</button>
-                    <button class="browser-tab" id="browserTabCommunity">Community</button>
-                    <button class="btn btn-small" id="btnPublicRefresh" style="margin-left:auto;">🔄</button>
+        <div id="gameBrowserScreen" class="screen">
+            <div class="game-browser-content">
+                <div class="game-browser-header">
+                    <div class="screen-header-row">
+                        <button id="btnGameBrowserBack" class="screen-back-btn">⬅️</button>
+                        <h2 class="solo-title">🧭 Game Browser</h2>
+                        <button id="btnPublicRefresh" class="screen-back-btn">🔄</button>
+                    </div>
                 </div>
-                <div class="browser-filters" id="browserFilters">
-                    <button class="browser-filter active" id="browserFilterAll">All</button>
-                    <button class="browser-filter" id="browserFilterCoOpSoft">Co-Op Soft</button>
-                    <button class="browser-filter" id="browserFilterCoOpHard">Co-Op Hard</button>
-                    <button class="browser-filter" id="browserFilterPVP">PVP Duel</button>
+                <div class="gb-filters-area">
+                    <div class="lb-tabs-scroll">
+                        <div class="lb-tabs" id="gbCategoryTabs">
+                            <button class="lb-tab active" id="browserTabPlayerLobbies">Player Lobbies</button>
+                            <button class="lb-tab active" id="browserTabCommunity">Community</button>
+                        </div>
+                    </div>
+                    <div class="lb-tabs-scroll" id="browserFilters">
+                        <div class="lb-tabs">
+                            <button class="lb-tab" id="browserFilterCoOpSoft">Co-Op Soft</button>
+                            <button class="lb-tab" id="browserFilterCoOpHard">Co-Op Hard</button>
+                            <button class="lb-tab" id="browserFilterPVP">PVP Duel</button>
+                        </div>
+                    </div>
                 </div>
-                <div id="publicLobbyList" class="scrollable-list">
+                <div id="publicLobbyList" class="gb-list">
                     <div class="list-empty">No public games available</div>
                 </div>
-                <div class="pagination-row" id="publicLobbyPagination">
+                <div class="pagination-row gb-pagination">
                     <button class="btn btn-small" id="btnPublicPrev" disabled>◀</button>
                     <span id="publicPageInfo">Page 1</span>
                     <button class="btn btn-small" id="btnPublicNext" disabled>▶</button>
                 </div>
-                <button class="btn" onclick="app._hideModal('publicLobbiesDialog')">Close</button>
             </div>
         </div>
 

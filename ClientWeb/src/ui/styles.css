@@ -1173,11 +1173,94 @@ input[type="checkbox"] {
 @keyframes toastOut { from{opacity:1} to{opacity:0} }
 
 /* ====================================================================
-   GAME BROWSER TABS + FILTERS
+   GAME BROWSER SCREEN
+   ==================================================================== */
+.game-browser-content {
+    display: flex; flex-direction: column;
+    height: 100%;
+}
+.game-browser-header {
+    flex-shrink: 0;
+    padding: 10px 12px 0;
+}
+.gb-filters-area {
+    flex-shrink: 0;
+    padding: 6px 12px 0;
+    display: flex; flex-direction: column; gap: 4px;
+}
+.gb-list {
+    flex: 1; overflow-y: auto; overflow-x: hidden;
+    padding: 8px 12px;
+    display: flex; flex-direction: column; gap: 6px;
+}
+.gb-pagination {
+    flex-shrink: 0;
+    padding: 8px 12px;
+}
+
+/* Game entry card */
+.gb-entry {
+    display: flex; flex-direction: column;
+    padding: 10px 12px 10px 16px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-left: 4px solid var(--gb-accent, #3498DB);
+    cursor: pointer;
+    background: var(--card-primary);
+    transition: background .1s, border-color .1s;
+    position: relative;
+}
+.gb-entry:hover { background: var(--card-active, #5a5a80); border-color: var(--accent-blue); }
+
+.gb-entry-row {
+    display: flex; align-items: center; gap: 8px;
+}
+.gb-type-badge {
+    flex-shrink: 0;
+    font-size: 10px; font-weight: bold; color: #fff;
+    padding: 3px 7px; border-radius: 4px;
+    white-space: nowrap;
+}
+.gb-type-community { background: #1976D2; }
+.gb-type-coopsoft  { background: #388E3C; }
+.gb-type-coophard  { background: #D32F2F; }
+.gb-type-pvpduel   { background: #7B1FA2; }
+.gb-type-other     { background: var(--bg-networkbar); }
+
+/* Left strip color per type is applied inline via --gb-accent */
+
+.gb-host {
+    flex: 1; font-size: 15px; font-weight: bold;
+    color: var(--text-primary);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.gb-grid {
+    flex-shrink: 0; font-size: 11px; color: var(--text-dimmed);
+    white-space: nowrap;
+}
+.gb-players {
+    flex-shrink: 0;
+    font-size: 10px; font-weight: bold; color: #fff;
+    background: #4CAF50; padding: 3px 8px; border-radius: 10px;
+    white-space: nowrap;
+}
+.gb-sub-row {
+    margin-top: 3px;
+    font-size: 11px; color: var(--text-dimmed);
+}
+.gb-cooldown {
+    font-size: 11px; color: #EF9A9A; font-weight: bold;
+    margin-top: 3px;
+}
+.gb-cooldown.static { color: var(--text-dimmed); }
+
+/* ====================================================================
+   GAME BROWSER TABS + FILTERS (legacy modal, kept for reference)
    ==================================================================== */
 .browser-tabs {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 6px;
     margin-bottom: 6px;
 }

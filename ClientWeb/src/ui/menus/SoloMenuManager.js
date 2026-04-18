@@ -1,1 +1,1133 @@
-function a25_0x2be2(){const _0x2a9064=['className','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-detail\x22>Density:\x20','fogCacheLimit','visibleCells','resolveInfiniteSaveKey','\x20expanded','fillText','#a3a3a3','var(--card-level)','%</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','height','_launchInfiniteGame','key','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-detail\x22>','soloMenu','classList','Visible\x20Cells\x20(1–','gridHeight','%;background:','mineCount','gameView','currentScore','getInfiniteSavedGameInfoForKey','_loadLevelPreviewGrid','startGameModeLevel','continuePreview','state','gmCustomVCRow','<div\x20class=\x22level-card-body\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-preview-container\x22\x20id=\x22','stopPropagation','gameModal','value','_showToast','_launch3DGame','_duelResult','timer','getLevelProgress','loadGame','none','68885yegerI','highScore','gmCustomW','length','loadGameStateForKey','<span\x20class=\x22category-arrow\x22>','createElement','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-detail\x22>','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-actions\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-icon\x20btn-play-gm-continue\x22>▶</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>','gm-continue-preview','fillStyle','startRatedGame','_resumeFromSave','gmCustomH','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-actions\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-icon\x20btn-play-gm\x22>▶</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','3EqZEUZ','loadGameModeStateForKey','_activeGameVariant','No\x20saved\x20game\x20found\x20for\x20current\x20custom\x20settings','getElementById','forEach','\x20mines)','join','levels','round','358952EPqfJY','.btn-rated-preset','level-preview-canvas','_loadGameModeLevelPreviewGrid','strokeStyle','middle','loadGameModeCustomSettings','#0000FF','\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-info\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-name\x22>Custom</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-detail\x22>','Custom\x20level','Flagged','arc','customEnabled','modalState','textBaseline','%</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','var(--card-level-done)','\x20levels</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-actions\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20style=\x22color:#fff;font-size:16px\x22>▶</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>','level-card\x20level-card-preset','2nXeqXX','%</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-detail\x22>Mines:\x20','continueCustomGame','<div\x20class=\x22level-card-body\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-preview-container\x22\x20id=\x22preview-','<div\x20class=\x22level-detail\x22>Mines:\x20','<div\x20class=\x22level-best-time\x20level-best-set\x22>Best:\x20','normal','gameModeBackBtn','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>','grid3DState','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>','category-header','center','getLevelCategory','density','get','otherGameModes','_renderGameModeLevelView','saveGameModeCustomSettings','connection','_formatDuration','max','Width\x20(','#808080','No\x20saved\x20game\x20found','\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-info\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-name\x22>','\x20×\x20','playerName','grid','<div\x20class=\x22level-card-body\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-preview-container\x22\x20id=\x22','gmCustomSettingsDialog','gridDataKey','var(--progress-complete)','stroke','saveData','visible','_expandedCategory','\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-info\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-name\x20continue-title\x22>Continue\x20Last\x20Game</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-detail\x22>','textContent','getGameModeLevelCategory','resetDeathState','_openGameModeCustomSettings','_gameModeExpandedCategory','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','preview-','div','3270076bjJeUX','fogCache','_renderGameModeCustomCard','<div\x20class=\x22level-detail\x20level-best-set\x22>High\x20score:\x20','toSaveJson','loadGameModeState3DForKey','gameModeLevelCategories','loadGameModeLastGameState','replace','minesweeper_3d','gmCustomWRow','_ensureCustomPreview','hasSavedGameForCurrentSelection','gmCustomVCLabel','_infiniteAutosaveTimer','#008000','700\x20','continueGame','oninput','continueCard','_updateMinesDisplay','saveGameState','lineTo','getGameModeSavedGameInfo','<div\x20class=\x22level-card-body\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-preview-container\x22\x20id=\x22','continueGameForLevel','loadInfiniteLastGame','var(--progress-partial)','_otherModesExpanded','lineWidth','level-card\x20continue-card','<div\x20class=\x22level-detail\x22>Score:\x20Revealed\x20safe\x20cells</div>','#000080','_3dAutosaveTimer','btnCustomContinue','Time:\x20','</div>','categories','custom','px\x20\x22Segoe\x20UI\x22,\x20sans-serif','Endless\x20grid','gmCustomVC','16YAERZj','_grid3DManager','fill','_resumeInfiniteFromSave','20319mHEFVj','font','1197196jrfTyW','_gamePlayedTracked','<div\x20class=\x22progress-bar-container\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22progress-bar-fill\x22\x20style=\x22width:','8292NEgxNv','isInfinitePresetDensity','resolveGameModeSaveKey','Mines:\x20','_showScreen','gridData','presetCategories','settings','gameVariant','gmCustomApplyBtn','#888888','var(--card-primary,\x20#1e3a2e)','mineDensity','.btn-play-gm','gmCustomL','actionHandler','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-actions\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-icon\x20btn-play-preset\x22>▶</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','hasGameModeSavedGame','startSoloPresetGame','pointer','beginPath','gmCustomHRow','getLevelBestTime','moveTo','gameManager','startTicking','<div\x20class=\x22level-best-time\x20level-best-none\x22>Best:\x20—</div>','Custom','openGameMode','<button\x20class=\x22btn\x20btn-icon\x20btn-continue-gm\x22>Continue</button>','.btn-gm-custom-play','_renderOtherGameModes','\x20levels)</span>','.btn-continue-preset','_selectedGameMode','remove','gmCustomDLabel','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','continueDensity','isInLobby','<div\x20class=\x22level-detail\x22>Visible\x20cells:\x20','1860gnTWJA','networkBar','formatTime','loadLastGameState','innerHTML','_showModal','#BBBBBB','<div\x20class=\x22level-detail\x22>Current\x20score:\x20','background','category-levels','continueLevelName','Density:\x20','No\x20saved\x20game\x20found\x20for\x20this\x20level','getLevelShortName','fog_of_war','strokeRect','isKnownLevelPreset','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','_launchLocalGame','resolveGameSaveKey','querySelector','hideGameModal','continueGameModeLevel','gameModeLevelTitle','min','_getGameModeCustomSettings','appendChild','<button\x20class=\x22btn\x20btn-icon\x20btn-rated-preset\x22>▶\x20Rated</button>','_pauseLevelName','.custom-card','ensureConnected','_pauseCategoryName','getGameModeLevelShortName','lastGameKey','scale','getSavedGameInfo','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22category-name\x22>','reset','_isContinuedGame','#FF0000','startSoloGame','<div\x20class=\x22level-detail\x20level-best-set\x22>Current\x20score:\x20','soloCustomSize','Mine\x20Density:\x20','soloCustomMines','clientHeight','continueGameModeLastGame','display','gridWidth','gridRenderer','openSoloMenu','gmCustomD','customPreview','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22category-count\x22>(','renderSoloMenu','continueSize','var(--card-level-started)','onclick','style','hasInfiniteSavedCustomGame','_hideModal','elapsedTimeMs','.btn-gm-custom-settings','210DEAziu','name','gm-preview-','closePath','_renderLevelPreviewCanvas','376938NbTGYP','content','fillRect','closeGameMode','textAlign','setCustomGame','Revealed','_flushInfiniteAutosave','category-levels\x20expanded','getInfinitePresetScoreInfo','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22category-name\x22>Other\x20game\x20modes</span>','centerGrid','\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22progress-bar-text\x22>','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-actions\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-icon\x20btn-gm-custom-play\x22>▶</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-icon\x20btn-gm-custom-settings\x22>Settings</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','_updateContinueCard','#FFAA00','hasSavedGameForLevel','gameState','cursor','loadInfiniteGameForKey','initGame','_resume3DFromSave','level-card','<button\x20class=\x22btn\x20btn-icon\x20btn-gm-custom-continue\x22>Continue</button>','levelName','#FF3333','Player','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-detail\x22>Density:\x20','.btn-play-gm-continue','infinite_minesweeper','36619VvngAQ','#000000'];a25_0x2be2=function(){return _0x2a9064;};return a25_0x2be2();}const a25_0x5e2503=a25_0x40fa;(function(_0x8ae4d4,_0x5c2ef0){const _0x25017c=a25_0x40fa,_0x4a77cc=_0x8ae4d4();while(!![]){try{const _0x168ce4=-parseInt(_0x25017c(0x1dc))/0x1*(-parseInt(_0x25017c(0x1c9))/0x2)+parseInt(_0x25017c(0x1bf))/0x3*(-parseInt(_0x25017c(0x20a))/0x4)+parseInt(_0x25017c(0x1b0))/0x5*(-parseInt(_0x25017c(0x2a5))/0x6)+-parseInt(_0x25017c(0x23a))/0x7+-parseInt(_0x25017c(0x234))/0x8*(-parseInt(_0x25017c(0x2aa))/0x9)+parseInt(_0x25017c(0x266))/0xa*(parseInt(_0x25017c(0x2c8))/0xb)+parseInt(_0x25017c(0x23d))/0xc*(parseInt(_0x25017c(0x238))/0xd);if(_0x168ce4===_0x5c2ef0)break;else _0x4a77cc['push'](_0x4a77cc['shift']());}catch(_0x4cbb00){_0x4a77cc['push'](_0x4a77cc['shift']());}}}(a25_0x2be2,0xa3de1));import{GameType,LobbyVisibility,CellState}from'../../core/CoreEnums.js';import{LEVEL_PRESETS,OTHER_GAME_MODES}from'../../core/CoreData.js';function a25_0x40fa(_0xb70d5e,_0x5aedb1){_0xb70d5e=_0xb70d5e-0x196;const _0x2be27b=a25_0x2be2();let _0x40fa71=_0x2be27b[_0xb70d5e];return _0x40fa71;}export class SoloMenuManager{constructor(_0x5aa3f9){const _0x257dfb=a25_0x40fa;this['ui']=_0x5aa3f9,this[_0x257dfb(0x200)]=-0x1,this['_otherModesExpanded']=![],this['_selectedGameMode']='',this[_0x257dfb(0x206)]=-0x1;}[a25_0x5e2503(0x298)](){const _0x54f08a=a25_0x5e2503;if(this['ui']['_3dAutosaveTimer']){clearTimeout(this['ui']['_3dAutosaveTimer']),this['ui'][_0x54f08a(0x22b)]=null;if(this['ui'][_0x54f08a(0x235)]&&!this['ui'][_0x54f08a(0x235)]['finished']&&this['ui'][_0x54f08a(0x235)][_0x54f08a(0x2bb)]===0x2){const _0x1db068=this['ui'][_0x54f08a(0x235)][_0x54f08a(0x20e)](),_0x5903c2=this['ui'][_0x54f08a(0x1ac)]['currentGameTimeMs']();this['ui'][_0x54f08a(0x244)]['saveGameModeState3D'](_0x54f08a(0x213),_0x1db068,_0x5903c2);}}this['ui']['_infiniteAutosaveTimer']&&(clearTimeout(this['ui'][_0x54f08a(0x218)]),this['ui'][_0x54f08a(0x218)]=null,this['ui'][_0x54f08a(0x2b1)]()),this['ui'][_0x54f08a(0x1c1)]&&!this[_0x54f08a(0x25f)]&&(this[_0x54f08a(0x25f)]=this['ui'][_0x54f08a(0x1c1)],this[_0x54f08a(0x206)]=0x0),this['ui']['_activeGameVariant']='',this['ui'][_0x54f08a(0x255)][_0x54f08a(0x245)]='',this['renderSoloMenu'](),this['ui'][_0x54f08a(0x241)](_0x54f08a(0x197));}[a25_0x5e2503(0x28e)](){const _0x4ac495=a25_0x5e2503,_0x3f48e8=this['ui'],_0x1e0f68=_0x3f48e8['settings'][_0x4ac495(0x1eb)]('gridWidth'),_0x25b2ad=_0x3f48e8['settings']['get'](_0x4ac495(0x19a)),_0x11d04c=_0x3f48e8[_0x4ac495(0x244)][_0x4ac495(0x1eb)](_0x4ac495(0x249));_0x3f48e8[_0x4ac495(0x244)][_0x4ac495(0x2af)](!![]),_0x3f48e8[_0x4ac495(0x244)]['clearGameSave']('custom'),this['_launchLocalGame'](_0x1e0f68,_0x25b2ad,_0x11d04c,_0x4ac495(0x258),'Custom');}[a25_0x5e2503(0x24f)](_0x588e83,_0x341e05,_0x13885b,_0x3ffb68='',_0x1b7bbe=''){const _0x60eea5=a25_0x5e2503;this['ui'][_0x60eea5(0x244)][_0x60eea5(0x2af)](![]),this[_0x60eea5(0x278)](_0x588e83,_0x341e05,_0x13885b,_0x3ffb68,_0x1b7bbe);}['_launchLocalGame'](_0x18bb5c,_0x16119d,_0x13ee72,_0x55b0fe='',_0x4092cd=''){const _0xb19c3f=a25_0x5e2503,_0x38263a=this['ui'],_0x3bac65={'w':_0x18bb5c,'h':_0x16119d,'density':_0x13ee72};_0x38263a[_0xb19c3f(0x28c)]=![],_0x38263a[_0xb19c3f(0x23b)]=![],_0x38263a[_0xb19c3f(0x24c)][_0xb19c3f(0x23b)]=![],_0x38263a['_pauseCategoryName']=_0x55b0fe||_0x38263a[_0xb19c3f(0x244)][_0xb19c3f(0x1e9)](_0x3bac65)||_0xb19c3f(0x258),_0x38263a['_pauseLevelName']=_0x4092cd||_0x38263a[_0xb19c3f(0x244)][_0xb19c3f(0x273)](_0x3bac65)||_0xb19c3f(0x258),_0x38263a[_0xb19c3f(0x264)]=![],_0x38263a['_duelResult']=null,_0x38263a['modalState'][_0xb19c3f(0x204)](),_0x38263a[_0xb19c3f(0x297)]['clearFalseFlags'](),_0x38263a[_0xb19c3f(0x255)][_0xb19c3f(0x2be)](_0x3bac65),_0x38263a[_0xb19c3f(0x1ac)][_0xb19c3f(0x28b)](),_0x38263a[_0xb19c3f(0x21e)](_0x38263a[_0xb19c3f(0x255)]['minesRemaining']),_0x38263a['_showScreen'](_0xb19c3f(0x19d)),_0x38263a['gridRenderer'][_0xb19c3f(0x2b5)](),document[_0xb19c3f(0x1c3)](_0xb19c3f(0x267))[_0xb19c3f(0x198)]['remove'](_0xb19c3f(0x1ff)),document[_0xb19c3f(0x1c3)]('btnClaimVictory')[_0xb19c3f(0x2a0)]['display']=_0xb19c3f(0x1af),_0x38263a[_0xb19c3f(0x1a7)][_0xb19c3f(0x27b)](),_0x38263a[_0xb19c3f(0x1a7)]['syncPauseButton']();}[a25_0x5e2503(0x21b)](){const _0x3dc40b=a25_0x5e2503,_0x2085a4=this['ui'];_0x2085a4[_0x3dc40b(0x28c)]=!![],_0x2085a4[_0x3dc40b(0x23b)]=!![],_0x2085a4[_0x3dc40b(0x24c)]['_gamePlayedTracked']=!![],_0x2085a4[_0x3dc40b(0x244)][_0x3dc40b(0x2af)](_0x2085a4[_0x3dc40b(0x244)][_0x3dc40b(0x287)]()===_0x3dc40b(0x230));const _0x430c26=_0x2085a4[_0x3dc40b(0x244)][_0x3dc40b(0x269)]();if(!_0x430c26){_0x2085a4['_showToast'](_0x3dc40b(0x1f4));return;}this['_resumeFromSave'](_0x430c26);}[a25_0x5e2503(0x223)](_0x408e1f,_0x3cd4ea,_0x98ddea){const _0x2e05d5=a25_0x5e2503,_0x3e7f2e=this['ui'];_0x3e7f2e[_0x2e05d5(0x28c)]=!![],_0x3e7f2e[_0x2e05d5(0x23b)]=!![],_0x3e7f2e[_0x2e05d5(0x24c)][_0x2e05d5(0x23b)]=!![],_0x3e7f2e[_0x2e05d5(0x244)][_0x2e05d5(0x2af)](![]);const _0x49e08d={'w':_0x408e1f,'h':_0x3cd4ea,'density':_0x98ddea},_0x19aa2d=_0x3e7f2e['settings'][_0x2e05d5(0x279)](_0x49e08d);_0x3e7f2e[_0x2e05d5(0x285)]=_0x3e7f2e['settings'][_0x2e05d5(0x1e9)](_0x49e08d)||_0x2e05d5(0x258),_0x3e7f2e['_pauseLevelName']=_0x3e7f2e[_0x2e05d5(0x244)][_0x2e05d5(0x273)](_0x49e08d)||'Custom';const _0x4de187=_0x3e7f2e[_0x2e05d5(0x244)][_0x2e05d5(0x1b4)](_0x19aa2d);if(!_0x4de187){_0x3e7f2e[_0x2e05d5(0x1a9)](_0x2e05d5(0x272));return;}_0x3e7f2e[_0x2e05d5(0x244)]['saveGameState'](_0x4de187[_0x2e05d5(0x1f8)],_0x4de187[_0x2e05d5(0x242)],_0x4de187[_0x2e05d5(0x2a3)],_0x4de187[_0x2e05d5(0x20b)]||[],_0x4de187[_0x2e05d5(0x2cc)]),this[_0x2e05d5(0x1bc)](_0x4de187);}[a25_0x5e2503(0x1de)](){const _0xf0d198=a25_0x5e2503,_0x32ffae=this['ui'];_0x32ffae[_0xf0d198(0x28c)]=!![],_0x32ffae[_0xf0d198(0x23b)]=!![],_0x32ffae[_0xf0d198(0x24c)][_0xf0d198(0x23b)]=!![];const _0x275d5e={'w':_0x32ffae[_0xf0d198(0x244)][_0xf0d198(0x1eb)]('gridWidth'),'h':_0x32ffae[_0xf0d198(0x244)][_0xf0d198(0x1eb)](_0xf0d198(0x19a)),'density':_0x32ffae['settings'][_0xf0d198(0x1eb)](_0xf0d198(0x249))};_0x32ffae[_0xf0d198(0x285)]=_0xf0d198(0x258),_0x32ffae[_0xf0d198(0x282)]='Custom';let _0xff73fe=null;_0x32ffae['settings'][_0xf0d198(0x216)](_0x275d5e)&&(_0x32ffae[_0xf0d198(0x244)][_0xf0d198(0x2af)](!![]),_0xff73fe=_0x32ffae['settings'][_0xf0d198(0x1b4)](_0xf0d198(0x230)));if(!_0xff73fe&&_0x32ffae['settings'][_0xf0d198(0x276)](_0x275d5e)&&_0x32ffae['settings'][_0xf0d198(0x2ba)](_0x275d5e)){_0x32ffae[_0xf0d198(0x244)][_0xf0d198(0x2af)](![]);const _0x1cfe1d=_0x32ffae[_0xf0d198(0x244)][_0xf0d198(0x1fb)](_0x275d5e);_0xff73fe=_0x32ffae[_0xf0d198(0x244)]['loadGameStateForKey'](_0x1cfe1d);}if(!_0xff73fe){_0x32ffae[_0xf0d198(0x1a9)](_0xf0d198(0x1c2));return;}_0x32ffae[_0xf0d198(0x244)][_0xf0d198(0x21f)](_0xff73fe[_0xf0d198(0x1f8)],_0xff73fe['gridData'],_0xff73fe[_0xf0d198(0x2a3)],_0xff73fe[_0xf0d198(0x20b)]||[],_0xff73fe[_0xf0d198(0x2cc)]),this['_resumeFromSave'](_0xff73fe);}[a25_0x5e2503(0x1bc)](_0x31a221){const _0x3464dc=a25_0x5e2503,_0x218bb9=this['ui'],_0xaa8be5=_0x218bb9['_activeGameVariant']&&_0x218bb9['_activeGameVariant'][_0x3464dc(0x1b3)]>0x0?_0x218bb9[_0x3464dc(0x1c1)]:_0x3464dc(0x1e2);_0xaa8be5===_0x3464dc(0x1e2)?_0x31a221['isCustom']?(_0x218bb9[_0x3464dc(0x285)]=_0x3464dc(0x258),_0x218bb9[_0x3464dc(0x282)]='Custom'):(_0x218bb9[_0x3464dc(0x285)]=_0x218bb9['settings'][_0x3464dc(0x1e9)](_0x31a221[_0x3464dc(0x242)])||'Custom',_0x218bb9[_0x3464dc(0x282)]=_0x218bb9[_0x3464dc(0x244)]['getLevelShortName'](_0x31a221[_0x3464dc(0x242)])||'Custom'):(_0x218bb9[_0x3464dc(0x285)]=_0x218bb9['settings']['getGameModeLevelCategory'](_0xaa8be5,_0x31a221[_0x3464dc(0x242)])||_0x3464dc(0x258),_0x218bb9[_0x3464dc(0x282)]=_0x218bb9[_0x3464dc(0x244)][_0x3464dc(0x286)](_0xaa8be5,_0x31a221[_0x3464dc(0x242)])||_0x3464dc(0x258)),_0x218bb9[_0x3464dc(0x264)]=![],_0x218bb9[_0x3464dc(0x1ab)]=null,_0x218bb9[_0x3464dc(0x1d6)]['resetDeathState'](),_0x218bb9[_0x3464dc(0x255)][_0x3464dc(0x2cc)]=_0x31a221['fogCacheLimit']||0x14,_0x218bb9[_0x3464dc(0x255)][_0x3464dc(0x1ae)](_0x31a221['grid'],_0x31a221[_0x3464dc(0x242)],_0x31a221[_0x3464dc(0x20b)]||[]),_0x218bb9['timer']['setFromDuration'](_0x31a221['elapsedTimeMs']||0x0),_0x218bb9[_0x3464dc(0x1ac)][_0x3464dc(0x256)](),_0x218bb9[_0x3464dc(0x21e)](_0x218bb9[_0x3464dc(0x255)]['minesRemaining']),_0x218bb9[_0x3464dc(0x241)]('gameView'),_0x218bb9['gridRenderer'][_0x3464dc(0x2b5)](),document[_0x3464dc(0x1c3)]('networkBar')[_0x3464dc(0x198)][_0x3464dc(0x260)](_0x3464dc(0x1ff)),_0x218bb9[_0x3464dc(0x1a7)][_0x3464dc(0x27b)](),_0x218bb9['gameModal']['syncPauseButton']();}[a25_0x5e2503(0x1bb)](_0x4a62a4,_0x3e8a78,_0x53b056,_0x111e2a='',_0x31afcc=''){const _0x108215=a25_0x5e2503,_0x837c26=this['ui'],_0x10fcda={'w':_0x4a62a4,'h':_0x3e8a78,'density':_0x53b056};_0x837c26[_0x108215(0x285)]=_0x111e2a||_0x837c26['settings']['getLevelCategory'](_0x10fcda)||'Custom',_0x837c26['_pauseLevelName']=_0x31afcc||_0x837c26[_0x108215(0x244)][_0x108215(0x273)](_0x10fcda)||_0x108215(0x258),_0x837c26[_0x108215(0x1ef)][_0x108215(0x284)](()=>{const _0x152cf3=_0x108215,_0x711e22=_0x837c26[_0x152cf3(0x244)][_0x152cf3(0x1eb)](_0x152cf3(0x1f7))||_0x152cf3(0x2c4);_0x837c26['lobbyHandler']['hostGame'](_0x711e22,{'gameType':GameType['SoloLeaderboard'],'grid':{'w':_0x4a62a4,'h':_0x3e8a78,'density':_0x53b056}},LobbyVisibility['Private']);});}[a25_0x5e2503(0x259)](_0x43fc27){const _0x318148=a25_0x5e2503;this[_0x318148(0x25f)]=_0x43fc27,this[_0x318148(0x206)]=0x0,this['renderSoloMenu']();}['closeGameMode'](){const _0xfda236=a25_0x5e2503;this['_selectedGameMode']='',this[_0xfda236(0x29c)]();}[a25_0x5e2503(0x1a1)](_0x385532,_0x4010a4,_0x4d0b68,_0x387340,_0x3830e7,_0x3e288b,_0x60dfea='',_0x177e2f=''){const _0x3c69da=a25_0x5e2503,_0x28886c=this['ui'],_0x4e18c4={'w':_0x4010a4,'h':_0x4d0b68,'density':_0x387340,'l':_0x3e288b||0x0};if(_0x385532===_0x3c69da(0x2c7)){const _0x1030fd=Math[_0x3c69da(0x1f1)](0xf,Math[_0x3c69da(0x27e)](0x28,Number(_0x387340)||0x14)),_0xfc1192={'density':_0x1030fd};_0x28886c[_0x3c69da(0x285)]=_0x60dfea||_0x28886c[_0x3c69da(0x244)]['getGameModeLevelCategory'](_0x385532,_0xfc1192)||'Custom',_0x28886c[_0x3c69da(0x282)]=_0x177e2f||_0x28886c['settings'][_0x3c69da(0x286)](_0x385532,_0xfc1192)||_0x3c69da(0x258),_0x28886c['_activeGameVariant']=_0x385532,_0x28886c[_0x3c69da(0x255)][_0x3c69da(0x245)]=_0x385532;const _0x37581e=_0x28886c['_pauseCategoryName']===_0x3c69da(0x258)||_0x28886c['_pauseLevelName']===_0x3c69da(0x258);_0x28886c[_0x3c69da(0x2d5)](_0x1030fd,!_0x37581e&&_0x28886c['settings'][_0x3c69da(0x23e)](_0x1030fd));return;}_0x28886c[_0x3c69da(0x285)]=_0x60dfea||_0x28886c[_0x3c69da(0x244)]['getGameModeLevelCategory'](_0x385532,_0x4e18c4)||_0x3c69da(0x258),_0x28886c['_pauseLevelName']=_0x177e2f||_0x28886c[_0x3c69da(0x244)][_0x3c69da(0x286)](_0x385532,_0x4e18c4)||'Custom';if(_0x385532===_0x3c69da(0x213)&&_0x3e288b>0x0){_0x28886c[_0x3c69da(0x1aa)](_0x4010a4,_0x4d0b68,_0x3e288b,_0x387340);return;}const _0x2aad26=_0x60dfea===_0x3c69da(0x258)||_0x177e2f==='Custom';_0x2aad26?(_0x28886c['settings'][_0x3c69da(0x2af)](!![]),_0x28886c[_0x3c69da(0x244)]['clearGameSave'](_0x3c69da(0x230))):_0x28886c['settings'][_0x3c69da(0x2af)](![]),_0x28886c[_0x3c69da(0x255)][_0x3c69da(0x2cc)]=_0x3830e7||0x14,this['_launchLocalGame'](_0x4010a4,_0x4d0b68,_0x387340,_0x28886c[_0x3c69da(0x285)],_0x28886c['_pauseLevelName']),_0x28886c[_0x3c69da(0x1c1)]=_0x385532,_0x28886c[_0x3c69da(0x255)]['gameVariant']=_0x385532;}[a25_0x5e2503(0x27c)](_0x362843,_0x4d2d53,_0x1a4ba0,_0x30cdec,_0x43fa2b,_0x26d728){const _0x400c72=a25_0x5e2503,_0xacda22=this['ui'];_0xacda22['_isContinuedGame']=!![],_0xacda22['_gamePlayedTracked']=!![],_0xacda22['actionHandler'][_0x400c72(0x23b)]=!![];const _0x3d9c15={'w':_0x4d2d53,'h':_0x1a4ba0,'density':_0x30cdec,'l':_0x26d728||0x0};if(_0x362843===_0x400c72(0x2c7)){const _0x9598e4=Math[_0x400c72(0x1f1)](0xf,Math[_0x400c72(0x27e)](0x28,Number(_0x30cdec)||0x14)),_0x1365ce={'density':_0x9598e4};_0xacda22[_0x400c72(0x285)]=_0xacda22[_0x400c72(0x244)][_0x400c72(0x203)](_0x362843,_0x1365ce)||_0x400c72(0x258),_0xacda22[_0x400c72(0x282)]=_0xacda22[_0x400c72(0x244)]['getGameModeLevelShortName'](_0x362843,_0x1365ce)||_0x400c72(0x258);const _0x549e05=_0xacda22['settings']['resolveInfiniteSaveKey'](_0x9598e4,!![]),_0x29f3f6=_0xacda22[_0x400c72(0x244)][_0x400c72(0x2bd)](_0x549e05);if(!_0x29f3f6){_0xacda22['_showToast']('No\x20saved\x20game\x20found\x20for\x20this\x20level');return;}_0xacda22[_0x400c72(0x1c1)]=_0x362843,_0xacda22['gameManager'][_0x400c72(0x245)]=_0x362843,_0xacda22[_0x400c72(0x237)](_0x29f3f6[_0x400c72(0x1fe)],_0x29f3f6[_0x400c72(0x2a3)],_0x549e05,!![]);return;}_0xacda22[_0x400c72(0x285)]=_0xacda22[_0x400c72(0x244)][_0x400c72(0x203)](_0x362843,_0x3d9c15)||'Custom',_0xacda22[_0x400c72(0x282)]=_0xacda22[_0x400c72(0x244)][_0x400c72(0x286)](_0x362843,_0x3d9c15)||_0x400c72(0x258);if(_0x362843===_0x400c72(0x213)){const _0x16bbea={'w':_0x4d2d53,'h':_0x1a4ba0,'l':_0x26d728||0x0,'density':_0x30cdec},_0x510423=_0xacda22[_0x400c72(0x244)][_0x400c72(0x23f)](_0x362843,_0x16bbea),_0x9ceb4f=_0xacda22[_0x400c72(0x244)][_0x400c72(0x20f)](_0x362843,_0x510423);if(!_0x9ceb4f){_0xacda22['_showToast']('No\x20saved\x20game\x20found\x20for\x20this\x20level');return;}_0xacda22[_0x400c72(0x1c1)]=_0x362843,_0xacda22[_0x400c72(0x255)][_0x400c72(0x245)]=_0x362843,_0xacda22[_0x400c72(0x2bf)](_0x9ceb4f['grid3DState'],_0x9ceb4f[_0x400c72(0x2a3)]);return;}const _0x20356b={'w':_0x4d2d53,'h':_0x1a4ba0,'density':_0x30cdec},_0x29c62a=_0xacda22['settings']['resolveGameModeSaveKey'](_0x362843,_0x20356b);_0xacda22[_0x400c72(0x244)]['setCustomGame'](![]);const _0x53e126=_0xacda22[_0x400c72(0x244)][_0x400c72(0x1c0)](_0x362843,_0x29c62a);if(!_0x53e126){_0xacda22['_showToast']('No\x20saved\x20game\x20found\x20for\x20this\x20level');return;}_0xacda22['_activeGameVariant']=_0x362843,_0xacda22[_0x400c72(0x255)]['gameVariant']=_0x362843,this['_resumeFromSave'](_0x53e126);}[a25_0x5e2503(0x294)](_0x49a66a){const _0x3481ce=a25_0x5e2503,_0x105ec2=this['ui'];_0x105ec2[_0x3481ce(0x28c)]=!![],_0x105ec2[_0x3481ce(0x23b)]=!![],_0x105ec2['actionHandler'][_0x3481ce(0x23b)]=!![];if(_0x49a66a==='infinite_minesweeper'){const _0x1da170=_0x105ec2[_0x3481ce(0x244)][_0x3481ce(0x224)]();if(!_0x1da170){_0x105ec2[_0x3481ce(0x1a9)](_0x3481ce(0x1f4));return;}_0x105ec2[_0x3481ce(0x1c1)]=_0x49a66a,_0x105ec2[_0x3481ce(0x255)][_0x3481ce(0x245)]=_0x49a66a;const _0x3433c4=Number(_0x1da170['saveData']?.['density'])||0x14,_0x46e60f=_0x105ec2[_0x3481ce(0x244)][_0x3481ce(0x23e)](_0x3433c4)&&_0x1da170[_0x3481ce(0x2d6)]!==_0x3481ce(0x230);_0x1da170['key']===_0x3481ce(0x230)?(_0x105ec2['_pauseCategoryName']=_0x3481ce(0x258),_0x105ec2[_0x3481ce(0x282)]=_0x3481ce(0x258)):(_0x105ec2[_0x3481ce(0x285)]=_0x105ec2[_0x3481ce(0x244)][_0x3481ce(0x203)](_0x49a66a,{'density':_0x3433c4})||_0x3481ce(0x258),_0x105ec2[_0x3481ce(0x282)]=_0x105ec2[_0x3481ce(0x244)][_0x3481ce(0x286)](_0x49a66a,{'density':_0x3433c4})||_0x3481ce(0x258));_0x105ec2[_0x3481ce(0x237)](_0x1da170[_0x3481ce(0x1fe)],_0x1da170[_0x3481ce(0x2a3)],_0x1da170['key']||'',_0x46e60f);return;}if(_0x49a66a==='minesweeper_3d'){const _0x418ad6=_0x105ec2[_0x3481ce(0x244)]['loadGameModeLastGameState3D'](_0x49a66a);if(!_0x418ad6){_0x105ec2[_0x3481ce(0x1a9)]('No\x20saved\x20game\x20found');return;}_0x105ec2[_0x3481ce(0x1c1)]=_0x49a66a,_0x105ec2[_0x3481ce(0x255)]['gameVariant']=_0x49a66a;const _0x45825d={'w':_0x418ad6[_0x3481ce(0x1e5)]['w'],'h':_0x418ad6[_0x3481ce(0x1e5)]['h'],'l':_0x418ad6[_0x3481ce(0x1e5)]['l'],'density':_0x418ad6[_0x3481ce(0x1e5)][_0x3481ce(0x1ea)]};_0x105ec2[_0x3481ce(0x285)]=_0x105ec2['settings'][_0x3481ce(0x203)](_0x49a66a,_0x45825d)||'Custom',_0x105ec2[_0x3481ce(0x282)]=_0x105ec2['settings']['getGameModeLevelShortName'](_0x49a66a,_0x45825d)||_0x3481ce(0x258),_0x105ec2[_0x3481ce(0x2bf)](_0x418ad6['grid3DState'],_0x418ad6[_0x3481ce(0x2a3)]);return;}const _0x3e33a5=_0x105ec2['settings'][_0x3481ce(0x211)](_0x49a66a);if(!_0x3e33a5){_0x105ec2['_showToast']('No\x20saved\x20game\x20found');return;}const _0x21b8ff=_0x105ec2['settings'][_0x3481ce(0x287)]();_0x105ec2[_0x3481ce(0x244)][_0x3481ce(0x2af)](_0x21b8ff===_0x3481ce(0x230)),_0x105ec2['_activeGameVariant']=_0x49a66a,_0x105ec2[_0x3481ce(0x255)]['gameVariant']=_0x49a66a,this[_0x3481ce(0x1bc)](_0x3e33a5);}[a25_0x5e2503(0x29c)](){const _0x584122=a25_0x5e2503,_0x37961e=this['ui'],_0x12404c=_0x37961e[_0x584122(0x244)]['get'](_0x584122(0x296)),_0xd7eea9=_0x37961e[_0x584122(0x244)][_0x584122(0x1eb)](_0x584122(0x19a)),_0xee3bd3=_0x37961e['settings'][_0x584122(0x1eb)]('mineDensity'),_0x17102c=Math[_0x584122(0x1c8)](_0x12404c*_0xd7eea9*_0xee3bd3/0x64);document[_0x584122(0x1c3)](_0x584122(0x290))['textContent']=_0x12404c+'\x20×\x20'+_0xd7eea9,document[_0x584122(0x1c3)]('soloCustomDensity')[_0x584122(0x202)]=_0x584122(0x271)+_0xee3bd3+'%',document[_0x584122(0x1c3)](_0x584122(0x292))['textContent']=_0x584122(0x240)+_0x17102c;const _0x5cb5f2=document[_0x584122(0x1c3)](_0x584122(0x22c));if(_0x5cb5f2){const _0xdf07ba={'w':_0x12404c,'h':_0xd7eea9,'density':_0xee3bd3},_0x1f0403=_0x37961e[_0x584122(0x244)][_0x584122(0x216)](_0xdf07ba)||_0x37961e[_0x584122(0x244)][_0x584122(0x276)](_0xdf07ba)&&_0x37961e[_0x584122(0x244)][_0x584122(0x2ba)](_0xdf07ba);_0x5cb5f2[_0x584122(0x2a0)][_0x584122(0x295)]=_0x1f0403?'':_0x584122(0x1af);}this[_0x584122(0x215)](_0x584122(0x29a),_0x12404c,_0xd7eea9,_0xee3bd3),this[_0x584122(0x2b8)]();const _0x4e5352=document[_0x584122(0x1c3)](_0x584122(0x243));_0x4e5352['innerHTML']='',LEVEL_PRESETS[_0x584122(0x1c4)]((_0x16d3e2,_0x338115)=>{const _0x1507da=_0x584122,_0x4848cb=this[_0x1507da(0x200)]===_0x338115,_0x2224f5=document[_0x1507da(0x1b6)](_0x1507da(0x209));_0x2224f5['className']=_0x1507da(0x1e7)+(_0x4848cb?'\x20expanded':''),_0x2224f5[_0x1507da(0x26a)]=_0x1507da(0x1b5)+(_0x4848cb?'▼':'▶')+_0x1507da(0x28a)+_0x16d3e2[_0x1507da(0x2a6)]+_0x1507da(0x29b)+_0x16d3e2['levels'][_0x1507da(0x1b3)]+'\x20levels)</span>',_0x2224f5[_0x1507da(0x29f)]=()=>{const _0x2d39a3=_0x1507da;this[_0x2d39a3(0x200)]=_0x4848cb?-0x1:_0x338115,this['renderSoloMenu']();},_0x4e5352[_0x1507da(0x280)](_0x2224f5);const _0x15d07c=document[_0x1507da(0x1b6)](_0x1507da(0x209));_0x15d07c[_0x1507da(0x2ca)]='category-levels'+(_0x4848cb?_0x1507da(0x2cf):''),_0x16d3e2['levels'][_0x1507da(0x1c4)](_0x5aef6a=>{const _0x2e0fc6=_0x1507da,_0x53cb84=document['createElement']('div'),_0x2643d1=Math['round'](_0x5aef6a['w']*_0x5aef6a['h']*_0x5aef6a[_0x2e0fc6(0x1ea)]/0x64),_0x35d612=_0x37961e[_0x2e0fc6(0x244)][_0x2e0fc6(0x1ad)](_0x5aef6a),_0x5f2207=_0x37961e[_0x2e0fc6(0x244)][_0x2e0fc6(0x253)](_0x5aef6a),_0x2b24ad=_0x37961e[_0x2e0fc6(0x244)][_0x2e0fc6(0x2ba)](_0x5aef6a),_0x498e39=_0x35d612>=0x64?_0x2e0fc6(0x1d9):_0x35d612>0x0?'var(--card-level-started)':_0x2e0fc6(0x2d2);_0x53cb84[_0x2e0fc6(0x2ca)]=_0x2e0fc6(0x1db),_0x53cb84[_0x2e0fc6(0x2a0)][_0x2e0fc6(0x26e)]=_0x498e39;const _0x12c96d=_0x5f2207!==null&&_0x5f2207>=0x0?_0x2e0fc6(0x1e1)+_0x37961e[_0x2e0fc6(0x1f0)](_0x5f2207)+_0x2e0fc6(0x22e):_0x2e0fc6(0x257);let _0x3719f6='';if(_0x35d612>0x0){const _0x5a635c=_0x35d612>=0x64?_0x2e0fc6(0x1fc):_0x2e0fc6(0x225);_0x3719f6=_0x2e0fc6(0x23c)+_0x35d612+_0x2e0fc6(0x19b)+_0x5a635c+_0x2e0fc6(0x2b6)+_0x35d612+'%</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>';}const _0x44b330=_0x2b24ad?'<button\x20class=\x22btn\x20btn-icon\x20btn-continue-preset\x22>Continue</button>':'';_0x53cb84[_0x2e0fc6(0x26a)]=_0x2e0fc6(0x1df)+_0x338115+'-'+_0x5aef6a[_0x2e0fc6(0x2a6)][_0x2e0fc6(0x212)](/\s/g,'')+_0x2e0fc6(0x1f5)+_0x5aef6a['name']+'</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-detail\x22>'+_0x5aef6a['w']+_0x2e0fc6(0x1f6)+_0x5aef6a['h']+_0x2e0fc6(0x2c5)+_0x5aef6a[_0x2e0fc6(0x1ea)]+_0x2e0fc6(0x1dd)+_0x2643d1+'</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x12c96d+_0x2e0fc6(0x277)+_0x3719f6+_0x2e0fc6(0x24d)+(_0x5aef6a['rated']?_0x2e0fc6(0x281):'')+_0x2e0fc6(0x277)+_0x44b330+_0x2e0fc6(0x1e6),_0x53cb84[_0x2e0fc6(0x27a)]('.btn-play-preset')[_0x2e0fc6(0x29f)]=_0x1ea77e=>{const _0x190ce5=_0x2e0fc6;_0x1ea77e[_0x190ce5(0x1a6)](),this[_0x190ce5(0x24f)](_0x5aef6a['w'],_0x5aef6a['h'],_0x5aef6a['density'],_0x16d3e2['name'],_0x5aef6a[_0x190ce5(0x2a6)]);};const _0x1a435c=_0x53cb84['querySelector'](_0x2e0fc6(0x25e));_0x1a435c&&(_0x1a435c['onclick']=_0x48ad3b=>{const _0x2b96af=_0x2e0fc6;_0x48ad3b['stopPropagation'](),this['continueGameForLevel'](_0x5aef6a['w'],_0x5aef6a['h'],_0x5aef6a[_0x2b96af(0x1ea)]);});const _0x4211d9=_0x53cb84['querySelector'](_0x2e0fc6(0x1ca));_0x4211d9&&(_0x4211d9['onclick']=_0x4a917d=>{const _0x535fde=_0x2e0fc6;_0x4a917d['stopPropagation'](),this['startRatedGame'](_0x5aef6a['w'],_0x5aef6a['h'],_0x5aef6a[_0x535fde(0x1ea)],_0x16d3e2[_0x535fde(0x2a6)],_0x5aef6a[_0x535fde(0x2a6)]);}),_0x15d07c[_0x2e0fc6(0x280)](_0x53cb84);}),_0x4e5352[_0x1507da(0x280)](_0x15d07c),_0x4848cb&&_0x16d3e2[_0x1507da(0x1c7)][_0x1507da(0x1c4)](_0x393472=>{const _0x25d230=_0x1507da,_0x3b4494=_0x25d230(0x208)+_0x338115+'-'+_0x393472[_0x25d230(0x2a6)][_0x25d230(0x212)](/\s/g,''),_0xe514d9=document[_0x25d230(0x1c3)](_0x3b4494);if(_0xe514d9){const _0x11e92a=_0x37961e['settings'][_0x25d230(0x2ba)](_0x393472),_0x236074=_0x11e92a?this['_loadLevelPreviewGrid'](_0x393472):null;this[_0x25d230(0x2a9)](_0xe514d9,_0x393472['w'],_0x393472['h'],_0x236074);}});}),this['_renderOtherGameModes'](),this[_0x584122(0x1ed)]();}[a25_0x5e2503(0x25c)](){const _0x4c5bba=a25_0x5e2503,_0x517de4=document['getElementById'](_0x4c5bba(0x1ec));_0x517de4[_0x4c5bba(0x26a)]='';if(this['_selectedGameMode']||OTHER_GAME_MODES[_0x4c5bba(0x1b3)]===0x0){_0x517de4[_0x4c5bba(0x2a0)][_0x4c5bba(0x295)]=_0x4c5bba(0x1af);return;}_0x517de4[_0x4c5bba(0x2a0)]['display']='';const _0x4fd786=this[_0x4c5bba(0x226)],_0x4aee9c=document[_0x4c5bba(0x1b6)](_0x4c5bba(0x209));_0x4aee9c[_0x4c5bba(0x2ca)]='category-header'+(_0x4fd786?_0x4c5bba(0x2cf):''),_0x4aee9c['innerHTML']=_0x4c5bba(0x1b5)+(_0x4fd786?'▼':'▶')+_0x4c5bba(0x2b4),_0x4aee9c[_0x4c5bba(0x29f)]=()=>{const _0xf85140=_0x4c5bba;this[_0xf85140(0x226)]=!this[_0xf85140(0x226)],this[_0xf85140(0x25c)]();},_0x517de4[_0x4c5bba(0x280)](_0x4aee9c);if(!_0x4fd786)return;const _0x148b17=document[_0x4c5bba(0x1b6)]('div');_0x148b17[_0x4c5bba(0x2ca)]=_0x4c5bba(0x2b2),OTHER_GAME_MODES[_0x4c5bba(0x1c4)](_0x9473d1=>{const _0x4b902c=_0x4c5bba;let _0xe7725e=0x0;for(const _0x23ccc8 of _0x9473d1[_0x4b902c(0x22f)])_0xe7725e+=_0x23ccc8[_0x4b902c(0x1c7)]['length'];const _0xe0fc0a=document[_0x4b902c(0x1b6)](_0x4b902c(0x209));_0xe0fc0a[_0x4b902c(0x2ca)]='level-card\x20game-mode-card',_0xe0fc0a[_0x4b902c(0x2a0)][_0x4b902c(0x2bc)]=_0x4b902c(0x250),_0xe0fc0a[_0x4b902c(0x26a)]='<div\x20class=\x22level-card-body\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-info\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-name\x22>'+_0x9473d1[_0x4b902c(0x2a6)]+_0x4b902c(0x1b7)+_0xe7725e+_0x4b902c(0x1da),_0xe0fc0a[_0x4b902c(0x29f)]=()=>this[_0x4b902c(0x259)](_0x9473d1['id']),_0x148b17[_0x4b902c(0x280)](_0xe0fc0a);}),_0x517de4[_0x4c5bba(0x280)](_0x148b17);}[a25_0x5e2503(0x1ed)](){const _0x273134=a25_0x5e2503,_0x34474a=document[_0x273134(0x1c3)]('gameModeLevelView');if(!this['_selectedGameMode']){_0x34474a[_0x273134(0x2a0)][_0x273134(0x295)]='none',document[_0x273134(0x27a)]('.custom-card')[_0x273134(0x2a0)][_0x273134(0x295)]='',document[_0x273134(0x1c3)](_0x273134(0x243))['style'][_0x273134(0x295)]='',this[_0x273134(0x2b8)]();return;}document[_0x273134(0x1c3)](_0x273134(0x21d))[_0x273134(0x2a0)][_0x273134(0x295)]=_0x273134(0x1af),document['querySelector'](_0x273134(0x283))[_0x273134(0x2a0)]['display']='none',document[_0x273134(0x1c3)](_0x273134(0x243))[_0x273134(0x2a0)][_0x273134(0x295)]=_0x273134(0x1af),_0x34474a[_0x273134(0x2a0)]['display']='';const _0x10617d=this['ui'],_0xd028e3=OTHER_GAME_MODES['find'](_0x4b1eba=>_0x4b1eba['id']===this[_0x273134(0x25f)]);if(!_0xd028e3)return;document[_0x273134(0x1c3)](_0x273134(0x27d))[_0x273134(0x202)]=_0xd028e3[_0x273134(0x2a6)],document[_0x273134(0x1c3)](_0x273134(0x1e3))['onclick']=()=>this[_0x273134(0x2ad)]();const _0x2aea61=document[_0x273134(0x1c3)](_0x273134(0x210));_0x2aea61['innerHTML']='';const _0x236d68=_0x10617d[_0x273134(0x244)][_0x273134(0x221)](this[_0x273134(0x25f)]);if(_0x236d68['exists']){const _0x31483f=document[_0x273134(0x1b6)]('div');_0x31483f[_0x273134(0x2ca)]=_0x273134(0x228),_0x31483f[_0x273134(0x2a0)][_0x273134(0x2bc)]=_0x273134(0x250);const _0x33fe2b=this[_0x273134(0x25f)]==='infinite_minesweeper',_0x5d3c81=this[_0x273134(0x25f)]===_0x273134(0x213),_0x1ab73d=_0x33fe2b?_0x273134(0x232):_0x236d68['l']&&_0x236d68['l']>0x0?_0x236d68['w']+'\x20×\x20'+_0x236d68['h']+_0x273134(0x1f6)+_0x236d68['l']:_0x236d68['w']+'\x20×\x20'+_0x236d68['h'],_0xf33eb3=_0x33fe2b?_0x273134(0x271)+_0x236d68['density']+'%':_0x273134(0x271)+_0x236d68[_0x273134(0x1ea)]+'%\x20('+_0x236d68[_0x273134(0x19c)]+_0x273134(0x1c5),_0x3571f0=_0x33fe2b?_0x273134(0x28f)+(_0x236d68['currentScore']||0x0)+_0x273134(0x22e):'',_0xfaeefa=_0x273134(0x1b9);_0x31483f['innerHTML']=_0x273134(0x1a5)+_0xfaeefa+_0x273134(0x201)+(_0x236d68[_0x273134(0x2c2)]||'Custom\x20level')+'</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-detail\x22>'+_0x1ab73d+'</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-detail\x22>'+_0xf33eb3+_0x273134(0x262)+_0x3571f0+_0x273134(0x1b8),_0x31483f[_0x273134(0x29f)]=()=>this['continueGameModeLastGame'](this['_selectedGameMode']),_0x31483f[_0x273134(0x27a)](_0x273134(0x2c6))[_0x273134(0x29f)]=_0x2627e0=>{_0x2627e0['stopPropagation'](),this['continueGameModeLastGame'](this['_selectedGameMode']);},_0x2aea61[_0x273134(0x280)](_0x31483f),requestAnimationFrame(()=>{const _0x4a3ae=_0x273134,_0x5201b7=document[_0x4a3ae(0x1c3)](_0xfaeefa);if(!_0x5201b7)return;if(!_0x33fe2b&&!_0x5d3c81){const _0x2d5c8f=_0x10617d[_0x4a3ae(0x244)][_0x4a3ae(0x211)](this['_selectedGameMode']),_0x26accf=_0x2d5c8f?_0x2d5c8f[_0x4a3ae(0x1f8)]:null;this[_0x4a3ae(0x2a9)](_0x5201b7,_0x236d68['w'],_0x236d68['h'],_0x26accf);}else{const _0x458ff0=_0x33fe2b?0xf:_0x236d68['w'],_0x3158dc=_0x33fe2b?0xf:_0x236d68['h'];this[_0x4a3ae(0x2a9)](_0x5201b7,_0x458ff0,_0x3158dc);}});}_0xd028e3[_0x273134(0x1d5)]&&this[_0x273134(0x20c)](_0x2aea61,_0xd028e3),_0xd028e3['categories'][_0x273134(0x1c4)]((_0x2771c6,_0x2d5354)=>{const _0x201dd3=_0x273134,_0x43667c=this[_0x201dd3(0x206)]===_0x2d5354,_0x24bb4f=document[_0x201dd3(0x1b6)](_0x201dd3(0x209));_0x24bb4f[_0x201dd3(0x2ca)]=_0x201dd3(0x1e7)+(_0x43667c?_0x201dd3(0x2cf):''),_0x24bb4f[_0x201dd3(0x26a)]=_0x201dd3(0x1b5)+(_0x43667c?'▼':'▶')+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22category-name\x22>'+_0x2771c6[_0x201dd3(0x2a6)]+_0x201dd3(0x29b)+_0x2771c6[_0x201dd3(0x1c7)][_0x201dd3(0x1b3)]+_0x201dd3(0x25d),_0x24bb4f[_0x201dd3(0x29f)]=()=>{const _0x117a9c=_0x201dd3;this[_0x117a9c(0x206)]=_0x43667c?-0x1:_0x2d5354,this[_0x117a9c(0x1ed)]();},_0x2aea61['appendChild'](_0x24bb4f);const _0xbdccda=document[_0x201dd3(0x1b6)]('div');_0xbdccda[_0x201dd3(0x2ca)]=_0x201dd3(0x26f)+(_0x43667c?_0x201dd3(0x2cf):''),_0x2771c6[_0x201dd3(0x1c7)][_0x201dd3(0x1c4)](_0x1e72b9=>{const _0x28bf6f=_0x201dd3,_0x55ea0a=document[_0x28bf6f(0x1b6)](_0x28bf6f(0x209)),_0x38f6cc=this[_0x28bf6f(0x25f)]==='infinite_minesweeper',_0x5a766c=this[_0x28bf6f(0x25f)]===_0x28bf6f(0x213)&&_0x1e72b9['l']>0x0,_0x5a27e7=_0x5a766c?Math[_0x28bf6f(0x1c8)](0x2*(_0x1e72b9['w']*_0x1e72b9['h']+_0x1e72b9['w']*_0x1e72b9['l']+_0x1e72b9['h']*_0x1e72b9['l'])*_0x1e72b9['density']/0x64):Math[_0x28bf6f(0x1c8)]((_0x1e72b9['w']||0x0)*(_0x1e72b9['h']||0x0)*_0x1e72b9[_0x28bf6f(0x1ea)]/0x64),_0x226367=_0x38f6cc?0x0:_0x10617d[_0x28bf6f(0x244)]['getGameModeProgress'](this[_0x28bf6f(0x25f)],_0x1e72b9),_0x5f0320=_0x38f6cc?null:_0x10617d[_0x28bf6f(0x244)]['getGameModeBestTime'](this[_0x28bf6f(0x25f)],_0x1e72b9),_0x3a8d26=_0x38f6cc?_0x10617d[_0x28bf6f(0x244)][_0x28bf6f(0x2ce)](_0x1e72b9[_0x28bf6f(0x1ea)],!![]):'',_0x4841f5=_0x38f6cc?_0x10617d['settings'][_0x28bf6f(0x19f)](_0x3a8d26):null,_0x2471c2=_0x38f6cc?!!(_0x4841f5&&_0x4841f5['exists']):_0x10617d[_0x28bf6f(0x244)]['hasGameModeSavedGame'](this[_0x28bf6f(0x25f)],_0x1e72b9),_0x2b2d4a=_0x38f6cc?_0x2471c2?_0x28bf6f(0x29e):'var(--card-level)':_0x226367>=0x64?_0x28bf6f(0x1d9):_0x226367>0x0?_0x28bf6f(0x29e):_0x28bf6f(0x2d2);_0x55ea0a[_0x28bf6f(0x2ca)]=_0x28bf6f(0x1db),_0x55ea0a[_0x28bf6f(0x2a0)]['background']=_0x2b2d4a;const _0x3f9940=_0x5f0320!==null&&_0x5f0320>=0x0?'<div\x20class=\x22level-best-time\x20level-best-set\x22>Best:\x20'+_0x10617d['_formatDuration'](_0x5f0320)+_0x28bf6f(0x22e):_0x28bf6f(0x257),_0x3514be=_0x38f6cc?_0x10617d['settings'][_0x28bf6f(0x2b3)](_0x1e72b9[_0x28bf6f(0x1ea)]):null,_0x13ca48=_0x38f6cc?['<div\x20class=\x22level-detail\x22>Last\x20score:\x20'+(_0x3514be&&_0x3514be['lastScore']||0x0)+_0x28bf6f(0x22e),_0x28bf6f(0x20d)+(_0x3514be&&_0x3514be[_0x28bf6f(0x1b1)]||0x0)+_0x28bf6f(0x22e),_0x2471c2?_0x28bf6f(0x26d)+(_0x4841f5&&_0x4841f5[_0x28bf6f(0x19e)]||0x0)+_0x28bf6f(0x22e):''][_0x28bf6f(0x1c6)](''):'';let _0x4d80eb='';if(!_0x38f6cc&&_0x226367>0x0){const _0x22e707=_0x226367>=0x64?_0x28bf6f(0x1fc):_0x28bf6f(0x225);_0x4d80eb='<div\x20class=\x22progress-bar-container\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22progress-bar-fill\x22\x20style=\x22width:'+_0x226367+_0x28bf6f(0x19b)+_0x22e707+'\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22progress-bar-text\x22>'+_0x226367+'%</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>';}const _0x54d7f2=_0x2471c2?_0x28bf6f(0x25a):'',_0x40825d=_0x28bf6f(0x2a7)+_0x2d5354+'-'+_0x1e72b9[_0x28bf6f(0x2a6)][_0x28bf6f(0x212)](/\s/g,''),_0x6640fd=_0x38f6cc?_0x28bf6f(0x232):_0x5a766c?_0x1e72b9['w']+_0x28bf6f(0x1f6)+_0x1e72b9['h']+_0x28bf6f(0x1f6)+_0x1e72b9['l']:_0x1e72b9['w']+'\x20×\x20'+_0x1e72b9['h'],_0x35f8d5=_0x1e72b9[_0x28bf6f(0x2cd)]&&!_0x5a766c?_0x28bf6f(0x265)+(_0x1e72b9[_0x28bf6f(0x2cd)]||0x14)+_0x28bf6f(0x22e):'',_0x106e8a=_0x38f6cc?'':_0x28bf6f(0x1e0)+_0x5a27e7+_0x28bf6f(0x22e),_0x18f84d=_0x38f6cc?'':_0x3f9940;_0x55ea0a[_0x28bf6f(0x26a)]=_0x28bf6f(0x1f9)+_0x40825d+_0x28bf6f(0x1f5)+_0x1e72b9[_0x28bf6f(0x2a6)]+_0x28bf6f(0x196)+_0x6640fd+'</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22level-detail\x22>Density:\x20'+_0x1e72b9[_0x28bf6f(0x1ea)]+_0x28bf6f(0x1d8)+_0x106e8a+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x35f8d5+_0x28bf6f(0x277)+_0x18f84d+_0x28bf6f(0x277)+_0x13ca48+_0x28bf6f(0x277)+_0x4d80eb+_0x28bf6f(0x1be)+_0x54d7f2+_0x28bf6f(0x1e6),_0x55ea0a[_0x28bf6f(0x27a)](_0x28bf6f(0x24a))[_0x28bf6f(0x29f)]=_0x30dfe3=>{const _0xd2fcb9=_0x28bf6f;_0x30dfe3[_0xd2fcb9(0x1a6)](),this['startGameModeLevel'](this['_selectedGameMode'],_0x1e72b9['w'],_0x1e72b9['h'],_0x1e72b9['density'],_0x1e72b9[_0xd2fcb9(0x2cd)],_0x1e72b9['l'],_0x2771c6[_0xd2fcb9(0x2a6)],_0x1e72b9[_0xd2fcb9(0x2a6)]);};const _0x37411d=_0x55ea0a[_0x28bf6f(0x27a)]('.btn-continue-gm');_0x37411d&&(_0x37411d['onclick']=_0x54b7e2=>{const _0xa9dd46=_0x28bf6f;_0x54b7e2['stopPropagation'](),this[_0xa9dd46(0x27c)](this['_selectedGameMode'],_0x1e72b9['w'],_0x1e72b9['h'],_0x1e72b9[_0xa9dd46(0x1ea)],_0x1e72b9[_0xa9dd46(0x2cd)],_0x1e72b9['l']);}),_0xbdccda['appendChild'](_0x55ea0a);}),_0x2aea61[_0x201dd3(0x280)](_0xbdccda),_0x43667c&&_0x2771c6[_0x201dd3(0x1c7)][_0x201dd3(0x1c4)](_0x34f30e=>{const _0x2cb07f=_0x201dd3,_0x3a32bc=_0x2cb07f(0x2a7)+_0x2d5354+'-'+_0x34f30e[_0x2cb07f(0x2a6)][_0x2cb07f(0x212)](/\s/g,''),_0x43d63e=document['getElementById'](_0x3a32bc);if(_0x43d63e){const _0xaafb0a=this['_selectedGameMode']===_0x2cb07f(0x2c7)?0xf:_0x34f30e['w'],_0x2ed82c=this[_0x2cb07f(0x25f)]===_0x2cb07f(0x2c7)?0xf:_0x34f30e['h'],_0x1efc7f=this[_0x2cb07f(0x25f)]===_0x2cb07f(0x213),_0x5cd6b4=this[_0x2cb07f(0x25f)]===_0x2cb07f(0x2c7);let _0x409dc3=null;if(!_0x1efc7f&&!_0x5cd6b4){const _0x137e16=_0x10617d['settings'][_0x2cb07f(0x24e)](this[_0x2cb07f(0x25f)],_0x34f30e);_0x409dc3=_0x137e16?this['_loadGameModeLevelPreviewGrid'](this['_selectedGameMode'],_0x34f30e):null;}this[_0x2cb07f(0x2a9)](_0x43d63e,_0xaafb0a,_0x2ed82c,_0x409dc3);}});});}[a25_0x5e2503(0x27f)](_0x29f693){const _0x6decbf=a25_0x5e2503,_0x24437b=this['ui'][_0x6decbf(0x244)][_0x6decbf(0x1cf)](_0x29f693);if(_0x24437b&&(_0x24437b['w']||_0x29f693===_0x6decbf(0x2c7)))return _0x24437b;if(_0x29f693===_0x6decbf(0x2c7))return{'w':0xf,'h':0xf,'l':0x5,'d':0x14,'visibleCells':0xa};if(_0x29f693===_0x6decbf(0x213))return{'w':0x5,'h':0x5,'l':0x5,'d':0x14,'visibleCells':0xa};return{'w':0xa,'h':0xa,'l':0x5,'d':0x14,'visibleCells':0xa};}[a25_0x5e2503(0x20c)](_0x2cae07,_0x40ecd9){const _0x346b4c=a25_0x5e2503,_0x2d3dc8=this['ui'],_0x11e53f=_0x40ecd9['id'],_0x31f6b7=this[_0x346b4c(0x27f)](_0x11e53f),_0x3ed20c=_0x11e53f===_0x346b4c(0x213),_0x2b8098=_0x11e53f==='fog_of_war',_0x397800=_0x11e53f==='infinite_minesweeper',_0x2390a6=_0x397800&&_0x2d3dc8[_0x346b4c(0x244)][_0x346b4c(0x2a1)](),_0x16eaa9=_0x3ed20c?Math[_0x346b4c(0x1c8)](0x2*(_0x31f6b7['w']*_0x31f6b7['h']+_0x31f6b7['w']*_0x31f6b7['l']+_0x31f6b7['h']*_0x31f6b7['l'])*_0x31f6b7['d']/0x64):Math[_0x346b4c(0x1c8)](_0x31f6b7['w']*_0x31f6b7['h']*_0x31f6b7['d']/0x64),_0x521067=_0x397800?_0x346b4c(0x232):_0x3ed20c?_0x31f6b7['w']+'\x20×\x20'+_0x31f6b7['h']+'\x20×\x20'+_0x31f6b7['l']:_0x31f6b7['w']+'\x20×\x20'+_0x31f6b7['h'],_0x309bed=_0x2b8098?_0x346b4c(0x265)+_0x31f6b7[_0x346b4c(0x2cd)]+'</div>':'',_0x3f5fc5=_0x397800?_0x346b4c(0x229):_0x346b4c(0x1e0)+_0x16eaa9+'</div>',_0x5e624f=document['createElement'](_0x346b4c(0x209));_0x5e624f[_0x346b4c(0x2ca)]=_0x346b4c(0x2c0),_0x5e624f['style']['background']=_0x346b4c(0x248);const _0x135992='gm-custom-preview';_0x5e624f[_0x346b4c(0x26a)]=_0x346b4c(0x222)+_0x135992+_0x346b4c(0x1d1)+_0x521067+_0x346b4c(0x2cb)+_0x31f6b7['d']+_0x346b4c(0x2d3)+_0x3f5fc5+_0x346b4c(0x207)+_0x309bed+_0x346b4c(0x2b7)+(_0x2390a6?_0x346b4c(0x2c1):'')+_0x346b4c(0x1e4),_0x5e624f[_0x346b4c(0x27a)](_0x346b4c(0x25b))[_0x346b4c(0x29f)]=_0x5638e6=>{const _0x436d83=_0x346b4c;_0x5638e6[_0x436d83(0x1a6)](),this['startGameModeLevel'](_0x11e53f,_0x31f6b7['w'],_0x31f6b7['h'],_0x31f6b7['d'],_0x31f6b7[_0x436d83(0x2cd)],_0x31f6b7['l']||0x0,_0x436d83(0x258),_0x436d83(0x258));},_0x5e624f[_0x346b4c(0x27a)](_0x346b4c(0x2a4))[_0x346b4c(0x29f)]=_0x1bc4e5=>{const _0xc4ba69=_0x346b4c;_0x1bc4e5[_0xc4ba69(0x1a6)](),this['_openGameModeCustomSettings'](_0x11e53f);};const _0x54254f=_0x5e624f['querySelector']('.btn-gm-custom-continue');_0x54254f&&(_0x54254f[_0x346b4c(0x29f)]=_0x3a5d1d=>{const _0x239e1a=_0x346b4c;_0x3a5d1d[_0x239e1a(0x1a6)]();const _0x5f4cd3=_0x2d3dc8['settings'][_0x239e1a(0x2bd)](_0x239e1a(0x230));if(!_0x5f4cd3){_0x2d3dc8['_showToast']('No\x20saved\x20custom\x20game\x20found');return;}_0x2d3dc8[_0x239e1a(0x1c1)]=_0x11e53f,_0x2d3dc8[_0x239e1a(0x255)]['gameVariant']=_0x11e53f,_0x2d3dc8[_0x239e1a(0x285)]=_0x239e1a(0x258),_0x2d3dc8[_0x239e1a(0x282)]=_0x239e1a(0x258),_0x2d3dc8['_resumeInfiniteFromSave'](_0x5f4cd3[_0x239e1a(0x1fe)],_0x5f4cd3['elapsedTimeMs'],'custom',![]);}),_0x2cae07['appendChild'](_0x5e624f),requestAnimationFrame(()=>{const _0x5acf0c=_0x346b4c,_0xdf29a6=document[_0x5acf0c(0x1c3)](_0x135992);if(!_0xdf29a6)return;const _0x37adc2=_0x397800?0xf:_0x31f6b7['w'],_0x3784b9=_0x397800?0xf:_0x31f6b7['h'];let _0x28d4fe=null;if(!_0x3ed20c&&!_0x397800){const _0x59e87b={'w':_0x31f6b7['w'],'h':_0x31f6b7['h'],'density':_0x31f6b7['d']};_0x2d3dc8[_0x5acf0c(0x244)]['hasGameModeSavedGame'](_0x11e53f,_0x59e87b)&&(_0x28d4fe=this[_0x5acf0c(0x1cc)](_0x11e53f,_0x59e87b));}this[_0x5acf0c(0x2a9)](_0xdf29a6,_0x37adc2,_0x3784b9,_0x28d4fe);});}[a25_0x5e2503(0x205)](_0x5b5679){const _0x272dea=a25_0x5e2503,_0x262037=this[_0x272dea(0x27f)](_0x5b5679),_0x4e4ea4=_0x5b5679===_0x272dea(0x213),_0x30ba27=_0x5b5679===_0x272dea(0x274),_0x30811f=_0x5b5679===_0x272dea(0x2c7),_0x3e4e3f=_0x4e4ea4?0x2:0x5,_0x514545=_0x4e4ea4?0x20:0x80;document[_0x272dea(0x1c3)]('gmCustomWLabel')['textContent']=_0x272dea(0x1f2)+_0x3e4e3f+'–'+_0x514545+')',document[_0x272dea(0x1c3)]('gmCustomHLabel')[_0x272dea(0x202)]='Height\x20('+_0x3e4e3f+'–'+_0x514545+')',document[_0x272dea(0x1c3)](_0x272dea(0x1b2))[_0x272dea(0x27e)]=_0x3e4e3f,document[_0x272dea(0x1c3)](_0x272dea(0x1bd))[_0x272dea(0x27e)]=_0x3e4e3f,document['getElementById'](_0x272dea(0x1b2))[_0x272dea(0x1f1)]=_0x514545,document['getElementById'](_0x272dea(0x1bd))[_0x272dea(0x1f1)]=_0x514545,document['getElementById'](_0x272dea(0x24b))[_0x272dea(0x1f1)]=_0x514545,document[_0x272dea(0x1c3)](_0x272dea(0x1b2))[_0x272dea(0x1a8)]=_0x262037['w'],document[_0x272dea(0x1c3)](_0x272dea(0x1bd))[_0x272dea(0x1a8)]=_0x262037['h'],document[_0x272dea(0x1c3)](_0x272dea(0x24b))['value']=_0x262037['l']||0x5,document[_0x272dea(0x1c3)](_0x272dea(0x299))['value']=_0x262037['d'],document[_0x272dea(0x1c3)](_0x272dea(0x299))[_0x272dea(0x27e)]=_0x30811f?0xf:0x5,document[_0x272dea(0x1c3)](_0x272dea(0x261))[_0x272dea(0x202)]='Mine\x20Density:\x20'+_0x262037['d']+'%',document[_0x272dea(0x1c3)](_0x272dea(0x214))['style']['display']=_0x30811f?_0x272dea(0x1af):'',document[_0x272dea(0x1c3)](_0x272dea(0x252))[_0x272dea(0x2a0)][_0x272dea(0x295)]=_0x30811f?_0x272dea(0x1af):'',document[_0x272dea(0x1c3)]('gmCustomLRow')['style'][_0x272dea(0x295)]=_0x4e4ea4?'':_0x272dea(0x1af),document[_0x272dea(0x1c3)](_0x272dea(0x1a4))[_0x272dea(0x2a0)][_0x272dea(0x295)]=_0x30ba27?'':_0x272dea(0x1af);_0x30ba27&&(document[_0x272dea(0x1c3)]('gmCustomVC')[_0x272dea(0x1a8)]=_0x262037[_0x272dea(0x2cd)]||0xa,document[_0x272dea(0x1c3)](_0x272dea(0x233))[_0x272dea(0x1f1)]=_0x262037['w']*_0x262037['h'],document[_0x272dea(0x1c3)](_0x272dea(0x217))['textContent']=_0x272dea(0x199)+_0x262037['w']*_0x262037['h']+')');const _0x35f358=document[_0x272dea(0x1c3)](_0x272dea(0x299));_0x35f358[_0x272dea(0x21c)]=()=>{const _0x227443=_0x272dea;document[_0x227443(0x1c3)]('gmCustomDLabel')[_0x227443(0x202)]=_0x227443(0x291)+_0x35f358[_0x227443(0x1a8)]+'%';if(_0x30ba27){const _0x4159a2=parseInt(document[_0x227443(0x1c3)](_0x227443(0x1b2))[_0x227443(0x1a8)])*parseInt(document[_0x227443(0x1c3)](_0x227443(0x1bd))[_0x227443(0x1a8)]);document[_0x227443(0x1c3)](_0x227443(0x233))[_0x227443(0x1f1)]=_0x4159a2,document[_0x227443(0x1c3)]('gmCustomVCLabel')[_0x227443(0x202)]=_0x227443(0x199)+_0x4159a2+')';}};if(_0x30ba27){const _0x147c15=document[_0x272dea(0x1c3)](_0x272dea(0x1b2)),_0x581f55=document[_0x272dea(0x1c3)]('gmCustomH'),_0x396804=()=>{const _0xfb6f7e=_0x272dea,_0x170188=parseInt(_0x147c15[_0xfb6f7e(0x1a8)])*parseInt(_0x581f55[_0xfb6f7e(0x1a8)]);document[_0xfb6f7e(0x1c3)](_0xfb6f7e(0x233))[_0xfb6f7e(0x1f1)]=_0x170188,document[_0xfb6f7e(0x1c3)](_0xfb6f7e(0x217))[_0xfb6f7e(0x202)]=_0xfb6f7e(0x199)+_0x170188+')';};_0x147c15[_0x272dea(0x21c)]=_0x396804,_0x581f55['oninput']=_0x396804;}document[_0x272dea(0x1c3)](_0x272dea(0x246))[_0x272dea(0x29f)]=()=>{const _0x511e45=_0x272dea,_0x31005b=_0x4e4ea4?0x2:0x5,_0x4f3670=_0x4e4ea4?0x20:0x80,_0x13df55=Math[_0x511e45(0x1f1)](_0x31005b,Math[_0x511e45(0x27e)](_0x4f3670,parseInt(document[_0x511e45(0x1c3)](_0x511e45(0x1b2))[_0x511e45(0x1a8)])||_0x31005b)),_0x138337=Math[_0x511e45(0x1f1)](_0x31005b,Math[_0x511e45(0x27e)](_0x4f3670,parseInt(document[_0x511e45(0x1c3)]('gmCustomH')[_0x511e45(0x1a8)])||_0x31005b)),_0x1a8f46=Math[_0x511e45(0x1f1)](0x2,Math[_0x511e45(0x27e)](_0x4f3670,parseInt(document[_0x511e45(0x1c3)](_0x511e45(0x24b))[_0x511e45(0x1a8)])||0x3)),_0x57a5b8=Math['max'](_0x30811f?0xf:0x5,Math[_0x511e45(0x27e)](0x28,parseInt(document[_0x511e45(0x1c3)]('gmCustomD')[_0x511e45(0x1a8)])||0x14)),_0x2ac764=Math[_0x511e45(0x1f1)](0x1,Math['min'](_0x13df55*_0x138337,parseInt(document['getElementById'](_0x511e45(0x233))[_0x511e45(0x1a8)])||0xf)),_0x415eed=_0x30811f?{'w':0xf,'h':0xf,'l':0x5,'d':_0x57a5b8,'visibleCells':0xa}:{'w':_0x13df55,'h':_0x138337,'l':_0x1a8f46,'d':_0x57a5b8,'visibleCells':_0x2ac764};this['ui'][_0x511e45(0x244)][_0x511e45(0x1ee)](_0x5b5679,_0x415eed),this['ui'][_0x511e45(0x2a2)]('gmCustomSettingsDialog'),this[_0x511e45(0x1ed)]();},this['ui'][_0x272dea(0x26b)](_0x272dea(0x1fa));}['_ensureLevelPreview'](_0xd22d31,_0x302cd2,_0xf4a69b){const _0xd8bdcc=document['getElementById'](_0xd22d31);if(!_0xd8bdcc)return;this['_renderLevelPreviewCanvas'](_0xd8bdcc,_0x302cd2,_0xf4a69b);}['_ensureCustomPreview'](_0x4784ca,_0x250a04,_0x3a791f,_0x376f7a){const _0x4990ff=a25_0x5e2503,_0x2f99cd=document['getElementById'](_0x4784ca);if(!_0x2f99cd)return;const _0x347ded={'w':_0x250a04,'h':_0x3a791f,'density':_0x376f7a};let _0x524a0f=null;if(this['ui']['settings'][_0x4990ff(0x216)](_0x347ded)){const _0x1d3017=this['ui']['settings'][_0x4990ff(0x1b4)](_0x4990ff(0x230));if(_0x1d3017)_0x524a0f=_0x1d3017[_0x4990ff(0x1f8)];}!_0x524a0f&&this['ui'][_0x4990ff(0x244)][_0x4990ff(0x276)](_0x347ded)&&(_0x524a0f=this[_0x4990ff(0x1a0)](_0x347ded)),this[_0x4990ff(0x2a9)](_0x2f99cd,_0x250a04,_0x3a791f,_0x524a0f);}[a25_0x5e2503(0x2b8)](){const _0x19b974=a25_0x5e2503,_0x425959=this['ui'],_0x2aa1f1=_0x425959['settings'][_0x19b974(0x289)](),_0x55d1dc=document[_0x19b974(0x1c3)](_0x19b974(0x21d));if(!_0x2aa1f1['exists']){_0x55d1dc[_0x19b974(0x2a0)]['display']=_0x19b974(0x1af);return;}_0x55d1dc[_0x19b974(0x2a0)][_0x19b974(0x295)]='';const _0xf8fea8=document[_0x19b974(0x1c3)](_0x19b974(0x270));_0xf8fea8[_0x19b974(0x202)]=_0x2aa1f1[_0x19b974(0x2c2)]||_0x19b974(0x1d2),document[_0x19b974(0x1c3)](_0x19b974(0x29d))[_0x19b974(0x202)]=_0x2aa1f1['w']+'\x20×\x20'+_0x2aa1f1['h'],document[_0x19b974(0x1c3)](_0x19b974(0x263))[_0x19b974(0x202)]=_0x19b974(0x271)+_0x2aa1f1[_0x19b974(0x1ea)]+'%\x20('+_0x2aa1f1['mineCount']+'\x20mines)',document['getElementById']('continueTime')[_0x19b974(0x202)]=_0x19b974(0x22d)+_0x425959['timer'][_0x19b974(0x268)](_0x2aa1f1['elapsedTimeMs']||0x0);const _0xe3c380=_0x425959['settings'][_0x19b974(0x269)](),_0x5e50ef=document[_0x19b974(0x1c3)](_0x19b974(0x1a2));_0x5e50ef&&this[_0x19b974(0x2a9)](_0x5e50ef,_0x2aa1f1['w'],_0x2aa1f1['h'],_0xe3c380?_0xe3c380[_0x19b974(0x1f8)]:null);}[a25_0x5e2503(0x2a9)](_0x393619,_0x29c8e1,_0xc440c3,_0x4fe5ca){const _0x2acef4=a25_0x5e2503;_0x393619[_0x2acef4(0x26a)]='';const _0xd254a8=Math['min'](_0x393619['clientWidth']||0x96,_0x393619[_0x2acef4(0x293)]||0x96),_0x479354=window['devicePixelRatio']||0x1,_0x95386c=document[_0x2acef4(0x1b6)]('canvas');_0x95386c[_0x2acef4(0x2ca)]=_0x2acef4(0x1cb),_0x95386c['width']=Math['round'](_0xd254a8*_0x479354),_0x95386c[_0x2acef4(0x2d4)]=Math[_0x2acef4(0x1c8)](_0xd254a8*_0x479354),_0x95386c[_0x2acef4(0x2a0)]['width']=_0xd254a8+'px',_0x95386c['style'][_0x2acef4(0x2d4)]=_0xd254a8+'px',_0x393619[_0x2acef4(0x280)](_0x95386c);const _0x868c0=_0x95386c['getContext']('2d');_0x868c0[_0x2acef4(0x288)](_0x479354,_0x479354),_0x868c0[_0x2acef4(0x1ba)]='#333333',_0x868c0[_0x2acef4(0x2ac)](0x0,0x0,_0xd254a8,_0xd254a8);if(_0x29c8e1===0x0||_0xc440c3===0x0)return;let _0x5e033d=null;if(_0x4fe5ca){_0x5e033d=[];for(let _0x3e27c4=0x0;_0x3e27c4<_0xc440c3;_0x3e27c4++){_0x5e033d[_0x3e27c4]=[];for(let _0x336953=0x0;_0x336953<_0x29c8e1;_0x336953++){let _0xf6d14b=0x0;const _0x382ae6=_0x3e27c4>0x0?_0x3e27c4-0x1:0x0,_0x415ffe=_0x3e27c4<_0xc440c3-0x1?_0x3e27c4+0x1:_0xc440c3-0x1,_0x443f91=_0x336953>0x0?_0x336953-0x1:0x0,_0x4cf484=_0x336953<_0x29c8e1-0x1?_0x336953+0x1:_0x29c8e1-0x1;for(let _0x36a50a=_0x382ae6;_0x36a50a<=_0x415ffe;_0x36a50a++){for(let _0x1fea14=_0x443f91;_0x1fea14<=_0x4cf484;_0x1fea14++){if(_0x4fe5ca[_0x36a50a]&&_0x4fe5ca[_0x36a50a][_0x1fea14]&&_0x4fe5ca[_0x36a50a][_0x1fea14]['content']===0x2)_0xf6d14b++;}}_0x5e033d[_0x3e27c4][_0x336953]=_0xf6d14b;}}}const _0x6cc8cd=[_0x2acef4(0x1d0),_0x2acef4(0x219),_0x2acef4(0x28d),_0x2acef4(0x22a),'#800000','#008080',_0x2acef4(0x2c9),_0x2acef4(0x1f3)],_0x3870e4=_0x29c8e1<=0x32&&_0xc440c3<=0x32,_0x4d8c83=_0x3870e4?0.5:0x0,_0x16862f=Math[_0x2acef4(0x27e)]((_0xd254a8-(_0x29c8e1-0x1)*_0x4d8c83)/_0x29c8e1,(_0xd254a8-(_0xc440c3-0x1)*_0x4d8c83)/_0xc440c3),_0x2519e7=_0x29c8e1*(_0x16862f+_0x4d8c83)-_0x4d8c83,_0x5e09ad=_0xc440c3*(_0x16862f+_0x4d8c83)-_0x4d8c83,_0x128001=(_0xd254a8-_0x2519e7)/0x2,_0x292b20=(_0xd254a8-_0x5e09ad)/0x2,_0x54149a=_0x4fe5ca&&_0x16862f>=0x6;if(_0x54149a){const _0x4267fc=Math[_0x2acef4(0x1f1)](0x4,Math['floor'](_0x16862f*0.7));_0x868c0[_0x2acef4(0x239)]=_0x2acef4(0x21a)+_0x4267fc+_0x2acef4(0x231),_0x868c0[_0x2acef4(0x2ae)]=_0x2acef4(0x1e8),_0x868c0[_0x2acef4(0x1d7)]=_0x2acef4(0x1ce);}for(let _0x204e59=0x0;_0x204e59<_0xc440c3;_0x204e59++){for(let _0x42cc29=0x0;_0x42cc29<_0x29c8e1;_0x42cc29++){const _0x1bd21b=_0x128001+_0x42cc29*(_0x16862f+_0x4d8c83),_0x5c12b0=_0x292b20+_0x204e59*(_0x16862f+_0x4d8c83);if(_0x4fe5ca&&_0x4fe5ca[_0x204e59]&&_0x4fe5ca[_0x204e59][_0x42cc29]){const _0x58de8f=_0x4fe5ca[_0x204e59][_0x42cc29];if(_0x58de8f[_0x2acef4(0x1a3)]===CellState[_0x2acef4(0x2b0)]){_0x868c0['fillStyle']=_0x2acef4(0x26c),_0x868c0[_0x2acef4(0x2ac)](_0x1bd21b,_0x5c12b0,_0x16862f,_0x16862f);if(_0x54149a&&_0x5e033d&&_0x58de8f[_0x2acef4(0x2ab)]!==0x2){const _0x4d9ef8=_0x5e033d[_0x204e59][_0x42cc29];_0x4d9ef8>0x0&&_0x4d9ef8<=0x8&&(_0x868c0[_0x2acef4(0x1ba)]=_0x6cc8cd[_0x4d9ef8-0x1],_0x868c0[_0x2acef4(0x2d0)](String(_0x4d9ef8),_0x1bd21b+_0x16862f/0x2,_0x5c12b0+_0x16862f*0.54));}if(_0x58de8f[_0x2acef4(0x2ab)]===0x2&&_0x16862f>=0x6){_0x868c0['fillStyle']=_0x2acef4(0x2c9);const _0x5b554e=_0x16862f*0.25;_0x868c0[_0x2acef4(0x251)](),_0x868c0[_0x2acef4(0x1d4)](_0x1bd21b+_0x16862f/0x2,_0x5c12b0+_0x16862f/0x2,_0x5b554e,0x0,Math['PI']*0x2),_0x868c0[_0x2acef4(0x236)]();}}else{if(_0x58de8f[_0x2acef4(0x1a3)]===CellState[_0x2acef4(0x1d3)]){_0x868c0['fillStyle']=_0x2acef4(0x247),_0x868c0[_0x2acef4(0x2ac)](_0x1bd21b,_0x5c12b0,_0x16862f,_0x16862f);if(_0x16862f>=0x6){const _0x12d6c9=_0x1bd21b+_0x16862f*0.45;_0x868c0[_0x2acef4(0x1cd)]='#333333',_0x868c0[_0x2acef4(0x227)]=Math['max'](0x1,_0x16862f*0.08),_0x868c0[_0x2acef4(0x251)](),_0x868c0[_0x2acef4(0x254)](_0x12d6c9,_0x5c12b0+_0x16862f*0.2),_0x868c0['lineTo'](_0x12d6c9,_0x5c12b0+_0x16862f*0.8),_0x868c0[_0x2acef4(0x1fd)](),_0x868c0['fillStyle']=_0x2acef4(0x2c3),_0x868c0[_0x2acef4(0x251)](),_0x868c0[_0x2acef4(0x254)](_0x12d6c9,_0x5c12b0+_0x16862f*0.2),_0x868c0[_0x2acef4(0x220)](_0x12d6c9+_0x16862f*0.35,_0x5c12b0+_0x16862f*0.35),_0x868c0[_0x2acef4(0x220)](_0x12d6c9,_0x5c12b0+_0x16862f*0.5),_0x868c0[_0x2acef4(0x2a8)](),_0x868c0[_0x2acef4(0x236)]();}else _0x868c0['fillStyle']=_0x2acef4(0x2b9),_0x868c0[_0x2acef4(0x2ac)](_0x1bd21b,_0x5c12b0,_0x16862f,_0x16862f);}else _0x868c0[_0x2acef4(0x1ba)]=_0x2acef4(0x247),_0x868c0[_0x2acef4(0x2ac)](_0x1bd21b,_0x5c12b0,_0x16862f,_0x16862f);}}else _0x868c0[_0x2acef4(0x1ba)]=_0x2acef4(0x247),_0x868c0[_0x2acef4(0x2ac)](_0x1bd21b,_0x5c12b0,_0x16862f,_0x16862f);_0x3870e4&&(_0x868c0[_0x2acef4(0x1cd)]=_0x2acef4(0x2d1),_0x868c0['lineWidth']=0.5,_0x868c0[_0x2acef4(0x275)](_0x1bd21b+0.25,_0x5c12b0+0.25,_0x16862f-0.5,_0x16862f-0.5));}}}[a25_0x5e2503(0x1a0)](_0x2c825f){const _0x34c882=a25_0x5e2503,_0x1a6676=this['ui'][_0x34c882(0x244)][_0x34c882(0x1fb)](_0x2c825f),_0x20ab29=this['ui'][_0x34c882(0x244)][_0x34c882(0x1b4)](_0x1a6676);return _0x20ab29?_0x20ab29[_0x34c882(0x1f8)]:null;}[a25_0x5e2503(0x1cc)](_0x156744,_0x5da1f5){const _0x57d0be=a25_0x5e2503,_0x1bd0dd=this['ui'][_0x57d0be(0x244)][_0x57d0be(0x23f)](_0x156744,_0x5da1f5),_0x25d4bd=this['ui'][_0x57d0be(0x244)][_0x57d0be(0x1c0)](_0x156744,_0x1bd0dd);return _0x25d4bd?_0x25d4bd[_0x57d0be(0x1f8)]:null;}}
+// SoloMenuManager.js — Solo menu rendering and local game flow
+// ============================================================================
+
+import { GameType, LobbyVisibility, CellState } from '../../core/CoreEnums.js';
+import { LEVEL_PRESETS, OTHER_GAME_MODES } from '../../core/CoreData.js';
+
+export class SoloMenuManager {
+    constructor(ui) {
+        this.ui = ui;
+        this._expandedCategory = -1;
+        this._otherModesExpanded = false;
+        this._selectedGameMode = '';
+        this._gameModeExpandedCategory = -1;
+    }
+
+    // ========================================================================
+    // Navigation
+    // ========================================================================
+
+    openSoloMenu() {
+        // Flush any pending 3D autosave before leaving
+        if (this.ui._3dAutosaveTimer) {
+            clearTimeout(this.ui._3dAutosaveTimer);
+            this.ui._3dAutosaveTimer = null;
+            if (this.ui._grid3DManager && !this.ui._grid3DManager.finished
+                && this.ui._grid3DManager.gameState === 2 /* GameState.Playing */) {
+                const saveData = this.ui._grid3DManager.toSaveJson();
+                const elapsed = this.ui.timer.currentGameTimeMs();
+                this.ui.settings.saveGameModeState3D('minesweeper_3d', saveData, elapsed);
+            }
+        }
+
+        // Flush any pending infinite autosave before leaving
+        if (this.ui._infiniteAutosaveTimer) {
+            clearTimeout(this.ui._infiniteAutosaveTimer);
+            this.ui._infiniteAutosaveTimer = null;
+            this.ui._flushInfiniteAutosave();
+        }
+
+        // Restore game mode sub-view if returning from a game mode game
+        if (this.ui._activeGameVariant && !this._selectedGameMode) {
+            this._selectedGameMode = this.ui._activeGameVariant;
+            this._gameModeExpandedCategory = 0;
+        }
+        this.ui._activeGameVariant = '';
+        this.ui.gridManager.gameVariant = '';
+        this.renderSoloMenu();
+        this.ui._showScreen('soloMenu');
+    }
+
+    // ========================================================================
+    // Game start helpers
+    // ========================================================================
+
+    /** Start a custom solo game using the current grid settings. */
+    startSoloGame() {
+        const ui = this.ui;
+        const w = ui.settings.get('gridWidth');
+        const h = ui.settings.get('gridHeight');
+        const d = ui.settings.get('mineDensity');
+        // Custom games always save to 'custom'; clear any old custom save.
+        ui.settings.setCustomGame(true);
+        ui.settings.clearGameSave('custom');
+        this._launchLocalGame(w, h, d, 'Custom', 'Custom');
+    }
+
+    /** Start a preset solo game with explicit dimensions. */
+    startSoloPresetGame(w, h, density, categoryName = '', levelName = '') {
+        this.ui.settings.setCustomGame(false);
+        this._launchLocalGame(w, h, density, categoryName, levelName);
+    }
+
+    _launchLocalGame(w, h, density, categoryName = '', levelName = '') {
+        const ui = this.ui;
+        const gridData = { w, h, density };
+        ui._isContinuedGame = false;
+        ui._gamePlayedTracked = false;
+        ui.actionHandler._gamePlayedTracked = false;
+        ui._pauseCategoryName = categoryName || ui.settings.getLevelCategory(gridData) || 'Custom';
+        ui._pauseLevelName = levelName || ui.settings.getLevelShortName(gridData) || 'Custom';
+        ui.isInLobby = false;
+        ui._duelResult = null;
+        ui.modalState.resetDeathState();
+        ui.gridRenderer.clearFalseFlags();
+        ui.gridManager.initGame(gridData);
+        ui.timer.reset();
+        ui._updateMinesDisplay(ui.gridManager.minesRemaining);
+        ui._showScreen('gameView');
+        ui.gridRenderer.centerGrid();
+        document.getElementById('networkBar').classList.remove('visible');
+        document.getElementById('btnClaimVictory').style.display = 'none';
+        ui.gameModal.hideGameModal();
+        ui.gameModal.syncPauseButton();
+    }
+
+    /** Continue a previously saved solo game (last game). */
+    continueGame() {
+        const ui   = this.ui;
+        ui._isContinuedGame = true;
+        ui._gamePlayedTracked = true;
+        ui.actionHandler._gamePlayedTracked = true;
+        // Restore the custom flag so auto-saves go to the right slot.
+        ui.settings.setCustomGame(ui.settings.lastGameKey() === 'custom');
+        const save = ui.settings.loadLastGameState();
+        if (!save) { ui._showToast('No saved game found'); return; }
+
+        this._resumeFromSave(save);
+    }
+
+    /** Continue a specific level's saved game. */
+    continueGameForLevel(w, h, density) {
+        const ui  = this.ui;
+        ui._isContinuedGame = true;
+        ui._gamePlayedTracked = true;
+        ui.actionHandler._gamePlayedTracked = true;
+        // Preset level continue: saves go back to the preset key.
+        ui.settings.setCustomGame(false);
+        const gd  = { w, h, density };
+        const key = ui.settings.resolveGameSaveKey(gd);
+        ui._pauseCategoryName = ui.settings.getLevelCategory(gd) || 'Custom';
+        ui._pauseLevelName = ui.settings.getLevelShortName(gd) || 'Custom';
+        const save = ui.settings.loadGameStateForKey(key);
+        if (!save) { ui._showToast('No saved game found for this level'); return; }
+
+        // Update lastGameKey to this game
+        ui.settings.saveGameState(save.grid, save.gridData, save.elapsedTimeMs, save.fogCache || [], save.fogCacheLimit);
+        this._resumeFromSave(save);
+    }
+
+    /** Continue the saved custom game. */
+    continueCustomGame() {
+        const ui  = this.ui;
+        ui._isContinuedGame = true;
+        ui._gamePlayedTracked = true;
+        ui.actionHandler._gamePlayedTracked = true;
+        const gd = {
+            w: ui.settings.get('gridWidth'),
+            h: ui.settings.get('gridHeight'),
+            density: ui.settings.get('mineDensity'),
+        };
+        ui._pauseCategoryName = 'Custom';
+        ui._pauseLevelName = 'Custom';
+
+        // Try 'custom' slot first
+        let save = null;
+        if (ui.settings.hasSavedGameForCurrentSelection(gd)) {
+            ui.settings.setCustomGame(true);
+            save = ui.settings.loadGameStateForKey('custom');
+        }
+        // If no custom save, try the matching preset slot (custom dims match a known preset)
+        if (!save && ui.settings.isKnownLevelPreset(gd) && ui.settings.hasSavedGameForLevel(gd)) {
+            ui.settings.setCustomGame(false);
+            const key = ui.settings.gridDataKey(gd);
+            save = ui.settings.loadGameStateForKey(key);
+        }
+        if (!save) {
+            ui._showToast('No saved game found for current custom settings');
+            return;
+        }
+
+        // Update lastGameKey to this game
+        ui.settings.saveGameState(save.grid, save.gridData, save.elapsedTimeMs, save.fogCache || [], save.fogCacheLimit);
+        this._resumeFromSave(save);
+    }
+
+    _resumeFromSave(save) {
+        const ui = this.ui;
+        const variant = (ui._activeGameVariant && ui._activeGameVariant.length > 0)
+            ? ui._activeGameVariant
+            : 'normal';
+        if (variant === 'normal') {
+            if (save.isCustom) {
+                ui._pauseCategoryName = 'Custom';
+                ui._pauseLevelName = 'Custom';
+            } else {
+                ui._pauseCategoryName = ui.settings.getLevelCategory(save.gridData) || 'Custom';
+                ui._pauseLevelName = ui.settings.getLevelShortName(save.gridData) || 'Custom';
+            }
+        } else {
+            if (save.isCustom) {
+                ui._pauseCategoryName = 'Custom';
+                ui._pauseLevelName = 'Custom';
+            } else {
+                ui._pauseCategoryName = ui.settings.getGameModeLevelCategory(variant, save.gridData) || 'Custom';
+                ui._pauseLevelName = ui.settings.getGameModeLevelShortName(variant, save.gridData) || 'Custom';
+            }
+        }
+        ui.isInLobby = false;
+        ui._duelResult = null;
+        ui.modalState.resetDeathState();
+        ui.gridManager.fogCacheLimit = save.fogCacheLimit || 20;
+        ui.gridManager.loadGame(save.grid, save.gridData, save.fogCache || []);
+        ui.timer.setFromDuration(save.elapsedTimeMs || 0);
+        ui.timer.startTicking();
+        ui._updateMinesDisplay(ui.gridManager.minesRemaining);
+        ui._showScreen('gameView');
+        ui.gridRenderer.centerGrid();
+        document.getElementById('networkBar').classList.remove('visible');
+        ui.gameModal.hideGameModal();
+        ui.gameModal.syncPauseButton();
+    }
+
+    /** Start a server-rated (SoloLeaderboard) game. */
+    startRatedGame(w, h, density, categoryName = '', levelName = '') {
+        const ui = this.ui;
+        const gridData = { w, h, density };
+        ui._pauseCategoryName = categoryName || ui.settings.getLevelCategory(gridData) || 'Custom';
+        ui._pauseLevelName = levelName || ui.settings.getLevelShortName(gridData) || 'Custom';
+        ui.connection.ensureConnected(() => {
+            const name = ui.settings.get('playerName') || 'Player';
+            ui.lobbyHandler.hostGame(name, {
+                gameType: GameType.SoloLeaderboard,
+                grid: { w, h, density },
+            }, LobbyVisibility.Private);
+        });
+    }
+
+    // ========================================================================
+    // Game mode methods
+    // ========================================================================
+
+    openGameMode(gameModeId) {
+        this._selectedGameMode = gameModeId;
+        this._gameModeExpandedCategory = 0;
+        this.renderSoloMenu();
+    }
+
+    closeGameMode() {
+        this._selectedGameMode = '';
+        this.renderSoloMenu();
+    }
+
+    startGameModeLevel(gameModeId, w, h, density, visibleCells, l, categoryName = '', levelName = '') {
+        const ui = this.ui;
+        const gridData = { w, h, density, l: l || 0 };
+
+        if (gameModeId === 'infinite_minesweeper') {
+            const d = Math.max(15, Math.min(40, Number(density) || 20));
+            const levelData = { density: d };
+            ui._pauseCategoryName = categoryName || ui.settings.getGameModeLevelCategory(gameModeId, levelData) || 'Custom';
+            ui._pauseLevelName = levelName || ui.settings.getGameModeLevelShortName(gameModeId, levelData) || 'Custom';
+            ui._activeGameVariant = gameModeId;
+            ui.gridManager.gameVariant = gameModeId;
+            const isExplicitCustom = ui._pauseCategoryName === 'Custom' || ui._pauseLevelName === 'Custom';
+            ui._launchInfiniteGame(d, !isExplicitCustom && ui.settings.isInfinitePresetDensity(d));
+            return;
+        }
+
+        ui._pauseCategoryName = categoryName || ui.settings.getGameModeLevelCategory(gameModeId, gridData) || 'Custom';
+        ui._pauseLevelName = levelName || ui.settings.getGameModeLevelShortName(gameModeId, gridData) || 'Custom';
+
+        if (gameModeId === 'minesweeper_3d' && l > 0) {
+            ui._launch3DGame(w, h, l, density);
+            return;
+        }
+        // Set custom flag before launching so auto-saves use the right slot.
+        const isCustomLevel = categoryName === 'Custom' || levelName === 'Custom';
+        if (isCustomLevel) {
+            ui.settings.setCustomGame(true);
+            ui.settings.clearGameSave('custom');
+        } else {
+            ui.settings.setCustomGame(false);
+        }
+        ui.gridManager.fogCacheLimit = visibleCells || 20;
+        this._launchLocalGame(w, h, density, ui._pauseCategoryName, ui._pauseLevelName);
+        // Track that this was a game mode game (for save/progress)
+        ui._activeGameVariant = gameModeId;
+        ui.gridManager.gameVariant = gameModeId;
+    }
+
+    continueGameModeLevel(gameModeId, w, h, density, visibleCells, l) {
+        const ui = this.ui;
+        ui._isContinuedGame = true;
+        ui._gamePlayedTracked = true;
+        ui.actionHandler._gamePlayedTracked = true;
+        const gridData = { w, h, density, l: l || 0 };
+
+        if (gameModeId === 'infinite_minesweeper') {
+            const d = Math.max(15, Math.min(40, Number(density) || 20));
+            const levelData = { density: d };
+            ui._pauseCategoryName = ui.settings.getGameModeLevelCategory(gameModeId, levelData) || 'Custom';
+            ui._pauseLevelName = ui.settings.getGameModeLevelShortName(gameModeId, levelData) || 'Custom';
+            const key = ui.settings.resolveInfiniteSaveKey(d, true);
+            const result = ui.settings.loadInfiniteGameForKey(key);
+            if (!result) { ui._showToast('No saved game found for this level'); return; }
+
+            ui._activeGameVariant = gameModeId;
+            ui.gridManager.gameVariant = gameModeId;
+            ui._resumeInfiniteFromSave(result.saveData, result.elapsedTimeMs, key, true);
+            return;
+        }
+
+        ui._pauseCategoryName = ui.settings.getGameModeLevelCategory(gameModeId, gridData) || 'Custom';
+        ui._pauseLevelName = ui.settings.getGameModeLevelShortName(gameModeId, gridData) || 'Custom';
+
+        if (gameModeId === 'minesweeper_3d') {
+            const gd = { w, h, l: l || 0, density };
+            const key = ui.settings.resolveGameModeSaveKey(gameModeId, gd);
+            const result = ui.settings.loadGameModeState3DForKey(gameModeId, key);
+            if (!result) { ui._showToast('No saved game found for this level'); return; }
+            ui._activeGameVariant = gameModeId;
+            ui.gridManager.gameVariant = gameModeId;
+            ui._resume3DFromSave(result.grid3DState, result.elapsedTimeMs);
+            return;
+        }
+        const gd = { w, h, density };
+        const key = ui.settings.resolveGameModeSaveKey(gameModeId, gd);
+        // Preset game mode continue: saves go back to the preset key.
+        ui.settings.setCustomGame(false);
+        const save = ui.settings.loadGameModeStateForKey(gameModeId, key);
+        if (!save) { ui._showToast('No saved game found for this level'); return; }
+        ui._activeGameVariant = gameModeId;
+        ui.gridManager.gameVariant = gameModeId;
+        this._resumeFromSave(save);
+    }
+
+    continueGameModeLastGame(gameModeId) {
+        const ui = this.ui;
+        ui._isContinuedGame = true;
+        ui._gamePlayedTracked = true;
+        ui.actionHandler._gamePlayedTracked = true;
+        if (gameModeId === 'infinite_minesweeper') {
+            const result = ui.settings.loadInfiniteLastGame();
+            if (!result) { ui._showToast('No saved game found'); return; }
+
+            ui._activeGameVariant = gameModeId;
+            ui.gridManager.gameVariant = gameModeId;
+            const density = Number(result.saveData?.density) || 20;
+            const isPreset = ui.settings.isInfinitePresetDensity(density) && result.key !== 'custom';
+            if (result.key === 'custom') {
+                ui._pauseCategoryName = 'Custom';
+                ui._pauseLevelName = 'Custom';
+            } else {
+                ui._pauseCategoryName = ui.settings.getGameModeLevelCategory(gameModeId, { density }) || 'Custom';
+                ui._pauseLevelName = ui.settings.getGameModeLevelShortName(gameModeId, { density }) || 'Custom';
+            }
+            ui._resumeInfiniteFromSave(result.saveData, result.elapsedTimeMs, result.key || '', isPreset);
+            return;
+        }
+
+        if (gameModeId === 'minesweeper_3d') {
+            const result = ui.settings.loadGameModeLastGameState3D(gameModeId);
+            if (!result) { ui._showToast('No saved game found'); return; }
+            ui._activeGameVariant = gameModeId;
+            ui.gridManager.gameVariant = gameModeId;
+            if (result.key === 'custom') {
+                ui._pauseCategoryName = 'Custom';
+                ui._pauseLevelName = 'Custom';
+            } else {
+                const gridData = {
+                    w: result.grid3DState.w,
+                    h: result.grid3DState.h,
+                    l: result.grid3DState.l,
+                    density: result.grid3DState.density,
+                };
+                ui._pauseCategoryName = ui.settings.getGameModeLevelCategory(gameModeId, gridData) || 'Custom';
+                ui._pauseLevelName = ui.settings.getGameModeLevelShortName(gameModeId, gridData) || 'Custom';
+            }
+            ui._resume3DFromSave(result.grid3DState, result.elapsedTimeMs);
+            return;
+        }
+        const save = ui.settings.loadGameModeLastGameState(gameModeId);
+        if (!save) { ui._showToast('No saved game found'); return; }
+        // Restore custom flag from saved last-key so auto-saves go to the right slot.
+        const lastKey = save.key || '';
+        ui.settings.setCustomGame(lastKey === 'custom');
+        ui._activeGameVariant = gameModeId;
+        ui.gridManager.gameVariant = gameModeId;
+        this._resumeFromSave(save);
+    }
+
+    // ========================================================================
+    // Solo menu rendering
+    // ========================================================================
+
+    renderSoloMenu() {
+        const ui = this.ui;
+        const w  = ui.settings.get('gridWidth');
+        const h  = ui.settings.get('gridHeight');
+        const d  = ui.settings.get('mineDensity');
+        const mines = Math.round(w * h * d / 100);
+
+        document.getElementById('soloCustomSize').textContent    = `${w} × ${h}`;
+        document.getElementById('soloCustomDensity').textContent = `Density: ${d}%`;
+        document.getElementById('soloCustomMines').textContent   = `Mines: ${mines}`;
+
+        // Custom continue button — show if a save exists in the custom slot,
+        // OR if the custom settings match a known preset that has a save.
+        const customContinueBtn = document.getElementById('btnCustomContinue');
+        if (customContinueBtn) {
+            const customGd = { w, h, density: d };
+            const hasCustomSave = ui.settings.hasSavedGameForCurrentSelection(customGd)
+                || (ui.settings.isKnownLevelPreset(customGd) && ui.settings.hasSavedGameForLevel(customGd));
+            customContinueBtn.style.display = hasCustomSave ? '' : 'none';
+        }
+
+        this._ensureCustomPreview('customPreview', w, h, d);
+        this._updateContinueCard();
+
+        const container = document.getElementById('presetCategories');
+        container.innerHTML = '';
+
+        LEVEL_PRESETS.forEach((cat, catIdx) => {
+            const expanded = this._expandedCategory === catIdx;
+
+            const hdr = document.createElement('div');
+            hdr.className = 'category-header' + (expanded ? ' expanded' : '');
+            hdr.innerHTML = `<span class="category-arrow">${expanded ? '▼' : '▶'}</span>
+                <span class="category-name">${cat.name}</span>
+                <span class="category-count">(${cat.levels.length} levels)</span>`;
+            hdr.onclick = () => {
+                this._expandedCategory = expanded ? -1 : catIdx;
+                this.renderSoloMenu();
+            };
+            container.appendChild(hdr);
+
+            const wrap = document.createElement('div');
+            wrap.className = 'category-levels' + (expanded ? ' expanded' : '');
+            cat.levels.forEach(lv => {
+                const card      = document.createElement('div');
+                const mineCount = Math.round(lv.w * lv.h * lv.density / 100);
+                const progress  = ui.settings.getLevelProgress(lv);
+                const bestTime  = ui.settings.getLevelBestTime(lv);
+                const hasSave   = ui.settings.hasSavedGameForLevel(lv);
+                const bgColor   = progress >= 100 ? 'var(--card-level-done)'
+                                : progress  >    0 ? 'var(--card-level-started)' : 'var(--card-level)';
+
+                card.className = 'level-card level-card-preset';
+                card.style.background = bgColor;
+
+                const bestTimeHtml = (bestTime !== null && bestTime >= 0)
+                    ? `<div class="level-best-time level-best-set">Best: ${ui._formatDuration(bestTime)}</div>`
+                    : `<div class="level-best-time level-best-none">Best: —</div>`;
+
+                let progressHtml = '';
+                if (progress > 0) {
+                    const barColor = progress >= 100 ? 'var(--progress-complete)' : 'var(--progress-partial)';
+                    progressHtml = `<div class="progress-bar-container">
+                        <div class="progress-bar-fill" style="width:${progress}%;background:${barColor}"></div>
+                        <div class="progress-bar-text">${progress}%</div>
+                    </div>`;
+                }
+
+                const continueHtml = hasSave ? '<button class="btn btn-icon btn-continue-preset">Continue</button>' : '';
+
+                card.innerHTML = `<div class="level-card-body">
+                    <div class="level-preview-container" id="preview-${catIdx}-${lv.name.replace(/\s/g, '')}"></div>
+                    <div class="level-info">
+                        <div class="level-name">${lv.name}</div>
+                        <div class="level-detail">${lv.w} × ${lv.h}</div>
+                        <div class="level-detail">Density: ${lv.density}%</div>
+                        <div class="level-detail">Mines: ${mineCount}</div>
+                        ${bestTimeHtml}
+                        ${progressHtml}
+                    </div>
+                    <div class="level-actions">
+                        <button class="btn btn-icon btn-play-preset">▶</button>
+                        ${lv.rated ? '<button class="btn btn-icon btn-rated-preset">▶ Rated</button>' : ''}
+                        ${continueHtml}
+                    </div>
+                </div>`;
+
+                card.querySelector('.btn-play-preset').onclick = (e) => {
+                    e.stopPropagation();
+                    this.startSoloPresetGame(lv.w, lv.h, lv.density, cat.name, lv.name);
+                };
+                const continueBtn = card.querySelector('.btn-continue-preset');
+                if (continueBtn) {
+                    continueBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        this.continueGameForLevel(lv.w, lv.h, lv.density);
+                    };
+                }
+                const ratedBtn = card.querySelector('.btn-rated-preset');
+                if (ratedBtn) {
+                    ratedBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        this.startRatedGame(lv.w, lv.h, lv.density, cat.name, lv.name);
+                    };
+                }
+                wrap.appendChild(card);
+            });
+            container.appendChild(wrap);
+
+            if (expanded) {
+                cat.levels.forEach(lv => {
+                    const id = `preview-${catIdx}-${lv.name.replace(/\s/g, '')}`;
+                    const el = document.getElementById(id);
+                    if (el) {
+                        const hasSave = ui.settings.hasSavedGameForLevel(lv);
+                        const grid = hasSave ? this._loadLevelPreviewGrid(lv) : null;
+                        this._renderLevelPreviewCanvas(el, lv.w, lv.h, grid);
+                    }
+                });
+            }
+        });
+
+        // Other game modes section
+        this._renderOtherGameModes();
+        this._renderGameModeLevelView();
+    }
+
+    _renderOtherGameModes() {
+        const container = document.getElementById('otherGameModes');
+        container.innerHTML = '';
+
+        if (this._selectedGameMode || OTHER_GAME_MODES.length === 0) {
+            container.style.display = 'none';
+            return;
+        }
+        container.style.display = '';
+
+        const expanded = this._otherModesExpanded;
+
+        const hdr = document.createElement('div');
+        hdr.className = 'category-header' + (expanded ? ' expanded' : '');
+        hdr.innerHTML = `<span class="category-arrow">${expanded ? '▼' : '▶'}</span>
+            <span class="category-name">Other game modes</span>`;
+        hdr.onclick = () => {
+            this._otherModesExpanded = !this._otherModesExpanded;
+            this._renderOtherGameModes();
+        };
+        container.appendChild(hdr);
+
+        if (!expanded) return;
+
+        const wrap = document.createElement('div');
+        wrap.className = 'category-levels expanded';
+
+        OTHER_GAME_MODES.forEach(mode => {
+            let levelCount = 0;
+            for (const cat of mode.categories) levelCount += cat.levels.length;
+
+            const card = document.createElement('div');
+            card.className = 'level-card game-mode-card';
+            card.style.cursor = 'pointer';
+            card.innerHTML = `<div class="level-card-body">
+                <div class="level-info">
+                    <div class="level-name">${mode.name}</div>
+                    <div class="level-detail">${levelCount} levels</div>
+                </div>
+                <div class="level-actions">
+                    <span style="color:#fff;font-size:16px">▶</span>
+                </div>
+            </div>`;
+            card.onclick = () => this.openGameMode(mode.id);
+            wrap.appendChild(card);
+        });
+
+        container.appendChild(wrap);
+    }
+
+    _renderGameModeLevelView() {
+        const view = document.getElementById('gameModeLevelView');
+
+        if (!this._selectedGameMode) {
+            view.style.display = 'none';
+            // Restore main solo menu elements
+            document.querySelector('.custom-card').style.display = '';
+            document.getElementById('presetCategories').style.display = '';
+            this._updateContinueCard(); // let it decide its own visibility
+            return;
+        }
+
+        // Hide main solo menu elements
+        document.getElementById('continueCard').style.display = 'none';
+        document.querySelector('.custom-card').style.display = 'none';
+        document.getElementById('presetCategories').style.display = 'none';
+        view.style.display = '';
+
+        const ui = this.ui;
+        const mode = OTHER_GAME_MODES.find(m => m.id === this._selectedGameMode);
+        if (!mode) return;
+
+        document.getElementById('gameModeLevelTitle').textContent = mode.name;
+        document.getElementById('gameModeBackBtn').onclick = () => this.closeGameMode();
+
+        const container = document.getElementById('gameModeLevelCategories');
+        container.innerHTML = '';
+
+        // Continue last game card for this mode
+        const savedInfo = ui.settings.getGameModeSavedGameInfo(this._selectedGameMode);
+        if (savedInfo.exists) {
+            const card = document.createElement('div');
+            card.className = 'level-card continue-card';
+            card.style.cursor = 'pointer';
+            const isInfiniteMode = this._selectedGameMode === 'infinite_minesweeper';
+            const is3DMode = this._selectedGameMode === 'minesweeper_3d';
+            const dimText = isInfiniteMode
+                ? 'Endless grid'
+                : ((savedInfo.l && savedInfo.l > 0) ? `${savedInfo.w} × ${savedInfo.h} × ${savedInfo.l}` : `${savedInfo.w} × ${savedInfo.h}`);
+            const densityText = isInfiniteMode
+                ? `Density: ${savedInfo.density}%`
+                : `Density: ${savedInfo.density}% (${savedInfo.mineCount} mines)`;
+            const scoreLine = isInfiniteMode
+                ? `<div class="level-detail level-best-set">Current score: ${savedInfo.currentScore || 0}</div>`
+                : '';
+            const previewId = 'gm-continue-preview';
+            card.innerHTML = `<div class="level-card-body">
+                <div class="level-preview-container" id="${previewId}"></div>
+                <div class="level-info">
+                    <div class="level-name continue-title">Continue Last Game</div>
+                    <div class="level-detail">${savedInfo.levelName || 'Custom level'}</div>
+                    <div class="level-detail">${dimText}</div>
+                    <div class="level-detail">${densityText}</div>
+                    ${scoreLine}
+                </div>
+                <div class="level-actions">
+                    <button class="btn btn-icon btn-play-gm-continue">▶</button>
+                </div>
+            </div>`;
+            card.onclick = () => this.continueGameModeLastGame(this._selectedGameMode);
+            card.querySelector('.btn-play-gm-continue').onclick = (e) => {
+                e.stopPropagation();
+                this.continueGameModeLastGame(this._selectedGameMode);
+            };
+            container.appendChild(card);
+
+            // Render continue preview with saved game data
+            requestAnimationFrame(() => {
+                const el = document.getElementById(previewId);
+                if (!el) return;
+                if (!isInfiniteMode && !is3DMode) {
+                    const save = ui.settings.loadGameModeLastGameState(this._selectedGameMode);
+                    const previewGrid = save ? save.grid : null;
+                    this._renderLevelPreviewCanvas(el, savedInfo.w, savedInfo.h, previewGrid);
+                } else {
+                    const previewW = isInfiniteMode ? 15 : savedInfo.w;
+                    const previewH = isInfiniteMode ? 15 : savedInfo.h;
+                    this._renderLevelPreviewCanvas(el, previewW, previewH);
+                }
+            });
+        }
+
+        // Custom level card (if mode supports it)
+        if (mode.customEnabled) {
+            this._renderGameModeCustomCard(container, mode);
+        }
+
+        mode.categories.forEach((cat, catIdx) => {
+            const expanded = this._gameModeExpandedCategory === catIdx;
+
+            const hdr = document.createElement('div');
+            hdr.className = 'category-header' + (expanded ? ' expanded' : '');
+            hdr.innerHTML = `<span class="category-arrow">${expanded ? '▼' : '▶'}</span>
+                <span class="category-name">${cat.name}</span>
+                <span class="category-count">(${cat.levels.length} levels)</span>`;
+            hdr.onclick = () => {
+                this._gameModeExpandedCategory = expanded ? -1 : catIdx;
+                this._renderGameModeLevelView();
+            };
+            container.appendChild(hdr);
+
+            const wrap = document.createElement('div');
+            wrap.className = 'category-levels' + (expanded ? ' expanded' : '');
+
+            cat.levels.forEach(lv => {
+                const card = document.createElement('div');
+                const isInfinite = this._selectedGameMode === 'infinite_minesweeper';
+                const is3D = this._selectedGameMode === 'minesweeper_3d' && lv.l > 0;
+                const mineCount = is3D
+                    ? Math.round(2 * (lv.w * lv.h + lv.w * lv.l + lv.h * lv.l) * lv.density / 100)
+                    : Math.round((lv.w || 0) * (lv.h || 0) * lv.density / 100);
+                const progress = isInfinite ? 0 : ui.settings.getGameModeProgress(this._selectedGameMode, lv);
+                const bestTime = isInfinite ? null : ui.settings.getGameModeBestTime(this._selectedGameMode, lv);
+
+                const infiniteSaveKey = isInfinite ? ui.settings.resolveInfiniteSaveKey(lv.density, true) : '';
+                const infiniteSaveInfo = isInfinite ? ui.settings.getInfiniteSavedGameInfoForKey(infiniteSaveKey) : null;
+                const hasSave = isInfinite ? !!(infiniteSaveInfo && infiniteSaveInfo.exists) : ui.settings.hasGameModeSavedGame(this._selectedGameMode, lv);
+
+                const bgColor = isInfinite
+                    ? (hasSave ? 'var(--card-level-started)' : 'var(--card-level)')
+                    : (progress >= 100 ? 'var(--card-level-done)'
+                        : progress > 0 ? 'var(--card-level-started)' : 'var(--card-level)');
+
+                card.className = 'level-card level-card-preset';
+                card.style.background = bgColor;
+
+                const bestTimeHtml = (bestTime !== null && bestTime >= 0)
+                    ? `<div class="level-best-time level-best-set">Best: ${ui._formatDuration(bestTime)}</div>`
+                    : `<div class="level-best-time level-best-none">Best: —</div>`;
+
+                const infiniteScore = isInfinite ? ui.settings.getInfinitePresetScoreInfo(lv.density) : null;
+                const infiniteStatsHtml = isInfinite
+                    ? [
+                        `<div class="level-detail">Last score: ${(infiniteScore && infiniteScore.lastScore) || 0}</div>`,
+                        `<div class="level-detail level-best-set">High score: ${(infiniteScore && infiniteScore.highScore) || 0}</div>`,
+                        hasSave ? `<div class="level-detail">Current score: ${(infiniteSaveInfo && infiniteSaveInfo.currentScore) || 0}</div>` : '',
+                    ].join('')
+                    : '';
+
+                let progressHtml = '';
+                if (!isInfinite && progress > 0) {
+                    const barColor = progress >= 100 ? 'var(--progress-complete)' : 'var(--progress-partial)';
+                    progressHtml = `<div class="progress-bar-container">
+                        <div class="progress-bar-fill" style="width:${progress}%;background:${barColor}"></div>
+                        <div class="progress-bar-text">${progress}%</div>
+                    </div>`;
+                }
+
+                const continueHtml = hasSave ? '<button class="btn btn-icon btn-continue-gm">Continue</button>' : '';
+                const previewId = `gm-preview-${catIdx}-${lv.name.replace(/\s/g, '')}`;
+                const dimText = isInfinite ? 'Endless grid' : (is3D ? `${lv.w} × ${lv.h} × ${lv.l}` : `${lv.w} × ${lv.h}`);
+                const visibleLine = (lv.visibleCells && !is3D) ? `<div class="level-detail">Visible cells: ${lv.visibleCells || 20}</div>` : '';
+                const minesLine = isInfinite ? '' : `<div class="level-detail">Mines: ${mineCount}</div>`;
+                const bestLine = isInfinite ? '' : bestTimeHtml;
+
+                card.innerHTML = `<div class="level-card-body">
+                    <div class="level-preview-container" id="${previewId}"></div>
+                    <div class="level-info">
+                        <div class="level-name">${lv.name}</div>
+                        <div class="level-detail">${dimText}</div>
+                        <div class="level-detail">Density: ${lv.density}%</div>
+                        ${minesLine}
+                        ${visibleLine}
+                        ${bestLine}
+                        ${infiniteStatsHtml}
+                        ${progressHtml}
+                    </div>
+                    <div class="level-actions">
+                        <button class="btn btn-icon btn-play-gm">▶</button>
+                        ${continueHtml}
+                    </div>
+                </div>`;
+
+                card.querySelector('.btn-play-gm').onclick = (e) => {
+                    e.stopPropagation();
+                    this.startGameModeLevel(this._selectedGameMode, lv.w, lv.h, lv.density, lv.visibleCells, lv.l, cat.name, lv.name);
+                };
+                const continueBtn = card.querySelector('.btn-continue-gm');
+                if (continueBtn) {
+                    continueBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        this.continueGameModeLevel(this._selectedGameMode, lv.w, lv.h, lv.density, lv.visibleCells, lv.l);
+                    };
+                }
+                wrap.appendChild(card);
+            });
+            container.appendChild(wrap);
+
+            if (expanded) {
+                cat.levels.forEach(lv => {
+                    const id = `gm-preview-${catIdx}-${lv.name.replace(/\s/g, '')}`;
+                    const el = document.getElementById(id);
+                    if (el) {
+                        const previewW = this._selectedGameMode === 'infinite_minesweeper' ? 15 : lv.w;
+                        const previewH = this._selectedGameMode === 'infinite_minesweeper' ? 15 : lv.h;
+                        const is3D = this._selectedGameMode === 'minesweeper_3d';
+                        const isInfinite = this._selectedGameMode === 'infinite_minesweeper';
+                        let grid = null;
+                        if (!is3D && !isInfinite) {
+                            const hasSave = ui.settings.hasGameModeSavedGame(this._selectedGameMode, lv);
+                            grid = hasSave ? this._loadGameModeLevelPreviewGrid(this._selectedGameMode, lv) : null;
+                        }
+                        this._renderLevelPreviewCanvas(el, previewW, previewH, grid);
+                    }
+                });
+            }
+        });
+    }
+
+    _getGameModeCustomSettings(gameModeId) {
+        const saved = this.ui.settings.loadGameModeCustomSettings(gameModeId);
+        if (saved && (saved.w || gameModeId === 'infinite_minesweeper')) return saved;
+        // Defaults
+        if (gameModeId === 'infinite_minesweeper')
+            return { w: 15, h: 15, l: 5, d: 20, visibleCells: 10 };
+        if (gameModeId === 'minesweeper_3d')
+            return { w: 5, h: 5, l: 5, d: 20, visibleCells: 10 };
+        return { w: 10, h: 10, l: 5, d: 20, visibleCells: 10 };
+    }
+
+    _renderGameModeCustomCard(container, mode) {
+        const ui = this.ui;
+        const gameModeId = mode.id;
+        const s = this._getGameModeCustomSettings(gameModeId);
+        const is3D = gameModeId === 'minesweeper_3d';
+        const isFoW = gameModeId === 'fog_of_war';
+        const isInfinite = gameModeId === 'infinite_minesweeper';
+        const hasInfiniteCustomSave = isInfinite && ui.settings.hasInfiniteSavedCustomGame();
+
+        const mineCount = is3D
+            ? Math.round(2 * (s.w * s.h + s.w * s.l + s.h * s.l) * s.d / 100)
+            : Math.round(s.w * s.h * s.d / 100);
+        const dimText = isInfinite ? 'Endless grid' : (is3D ? `${s.w} × ${s.h} × ${s.l}` : `${s.w} × ${s.h}`);
+        const visibleLine = isFoW ? `<div class="level-detail">Visible cells: ${s.visibleCells}</div>` : '';
+        const minesLine = isInfinite
+            ? '<div class="level-detail">Score: Revealed safe cells</div>'
+            : `<div class="level-detail">Mines: ${mineCount}</div>`;
+
+        const card = document.createElement('div');
+        card.className = 'level-card';
+        card.style.background = 'var(--card-primary, #1e3a2e)';
+
+        const previewId = 'gm-custom-preview';
+        card.innerHTML = `<div class="level-card-body">
+            <div class="level-preview-container" id="${previewId}"></div>
+            <div class="level-info">
+                <div class="level-name">Custom</div>
+                <div class="level-detail">${dimText}</div>
+                <div class="level-detail">Density: ${s.d}%</div>
+                ${minesLine}
+                ${visibleLine}
+            </div>
+            <div class="level-actions">
+                <button class="btn btn-icon btn-gm-custom-play">▶</button>
+                <button class="btn btn-icon btn-gm-custom-settings">Settings</button>
+                ${hasInfiniteCustomSave ? '<button class="btn btn-icon btn-gm-custom-continue">Continue</button>' : ''}
+            </div>
+        </div>`;
+
+        card.querySelector('.btn-gm-custom-play').onclick = (e) => {
+            e.stopPropagation();
+            this.startGameModeLevel(gameModeId, s.w, s.h, s.d, s.visibleCells, s.l || 0, 'Custom', 'Custom');
+        };
+        card.querySelector('.btn-gm-custom-settings').onclick = (e) => {
+            e.stopPropagation();
+            this._openGameModeCustomSettings(gameModeId);
+        };
+        const continueBtn = card.querySelector('.btn-gm-custom-continue');
+        if (continueBtn) {
+            continueBtn.onclick = (e) => {
+                e.stopPropagation();
+                const result = ui.settings.loadInfiniteGameForKey('custom');
+                if (!result) { ui._showToast('No saved custom game found'); return; }
+                ui._activeGameVariant = gameModeId;
+                ui.gridManager.gameVariant = gameModeId;
+                ui._pauseCategoryName = 'Custom';
+                ui._pauseLevelName = 'Custom';
+                ui._resumeInfiniteFromSave(result.saveData, result.elapsedTimeMs, 'custom', false);
+            };
+        }
+
+        container.appendChild(card);
+
+        requestAnimationFrame(() => {
+            const el = document.getElementById(previewId);
+            if (!el) return;
+            const previewW = isInfinite ? 15 : s.w;
+            const previewH = isInfinite ? 15 : s.h;
+            // Try to load saved grid for the custom game mode preview
+            let grid = null;
+            if (!is3D && !isInfinite) {
+                const gd = { w: s.w, h: s.h, density: s.d };
+                if (ui.settings.hasGameModeSavedGame(gameModeId, gd)) {
+                    grid = this._loadGameModeLevelPreviewGrid(gameModeId, gd);
+                }
+            }
+            this._renderLevelPreviewCanvas(el, previewW, previewH, grid);
+        });
+    }
+
+    _openGameModeCustomSettings(gameModeId) {
+        const s = this._getGameModeCustomSettings(gameModeId);
+        const is3D = gameModeId === 'minesweeper_3d';
+        const isFoW = gameModeId === 'fog_of_war';
+        const isInfinite = gameModeId === 'infinite_minesweeper';
+
+        const minWH = is3D ? 2 : 5;
+        const maxWHL = is3D ? 32 : 128;
+        document.getElementById('gmCustomWLabel').textContent = `Width (${minWH}–${maxWHL})`;
+        document.getElementById('gmCustomHLabel').textContent = `Height (${minWH}–${maxWHL})`;
+        document.getElementById('gmCustomW').min = minWH;
+        document.getElementById('gmCustomH').min = minWH;
+        document.getElementById('gmCustomW').max = maxWHL;
+        document.getElementById('gmCustomH').max = maxWHL;
+        document.getElementById('gmCustomL').max = maxWHL;
+        document.getElementById('gmCustomW').value = s.w;
+        document.getElementById('gmCustomH').value = s.h;
+        document.getElementById('gmCustomL').value = s.l || 5;
+        document.getElementById('gmCustomD').value = s.d;
+        document.getElementById('gmCustomD').min = isInfinite ? 15 : 5;
+        document.getElementById('gmCustomDLabel').textContent = `Mine Density: ${s.d}%`;
+
+        document.getElementById('gmCustomWRow').style.display = isInfinite ? 'none' : '';
+        document.getElementById('gmCustomHRow').style.display = isInfinite ? 'none' : '';
+        document.getElementById('gmCustomLRow').style.display = is3D ? '' : 'none';
+        document.getElementById('gmCustomVCRow').style.display = isFoW ? '' : 'none';
+        if (isFoW) {
+            document.getElementById('gmCustomVC').value = s.visibleCells || 10;
+            document.getElementById('gmCustomVC').max = s.w * s.h;
+            document.getElementById('gmCustomVCLabel').textContent = `Visible Cells (1–${s.w * s.h})`;
+        }
+
+        // Wire density label update
+        const slider = document.getElementById('gmCustomD');
+        slider.oninput = () => {
+            document.getElementById('gmCustomDLabel').textContent = `Mine Density: ${slider.value}%`;
+            if (isFoW) {
+                const maxVC = parseInt(document.getElementById('gmCustomW').value) * parseInt(document.getElementById('gmCustomH').value);
+                document.getElementById('gmCustomVC').max = maxVC;
+                document.getElementById('gmCustomVCLabel').textContent = `Visible Cells (1–${maxVC})`;
+            }
+        };
+
+        // Wire W/H change to update VC max for FoW
+        if (isFoW) {
+            const wInput = document.getElementById('gmCustomW');
+            const hInput = document.getElementById('gmCustomH');
+            const updateVCMax = () => {
+                const maxVC = parseInt(wInput.value) * parseInt(hInput.value);
+                document.getElementById('gmCustomVC').max = maxVC;
+                document.getElementById('gmCustomVCLabel').textContent = `Visible Cells (1–${maxVC})`;
+            };
+            wInput.oninput = updateVCMax;
+            hInput.oninput = updateVCMax;
+        }
+
+        // Wire apply
+        document.getElementById('gmCustomApplyBtn').onclick = () => {
+            const minWH2 = is3D ? 2 : 5;
+            const maxWHL2 = is3D ? 32 : 128;
+            const w = Math.max(minWH2, Math.min(maxWHL2, parseInt(document.getElementById('gmCustomW').value) || minWH2));
+            const h = Math.max(minWH2, Math.min(maxWHL2, parseInt(document.getElementById('gmCustomH').value) || minWH2));
+            const l = Math.max(2, Math.min(maxWHL2, parseInt(document.getElementById('gmCustomL').value) || 3));
+            const d = Math.max(isInfinite ? 15 : 5, Math.min(40, parseInt(document.getElementById('gmCustomD').value) || 20));
+            const vc = Math.max(1, Math.min(w * h, parseInt(document.getElementById('gmCustomVC').value) || 15));
+
+            const settings = isInfinite
+                ? { w: 15, h: 15, l: 5, d, visibleCells: 10 }
+                : { w, h, l, d, visibleCells: vc };
+            this.ui.settings.saveGameModeCustomSettings(gameModeId, settings);
+            this.ui._hideModal('gmCustomSettingsDialog');
+            this._renderGameModeLevelView();
+        };
+
+        this.ui._showModal('gmCustomSettingsDialog');
+    }
+
+    _ensureLevelPreview(containerId, gridW, gridH) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        this._renderLevelPreviewCanvas(container, gridW, gridH);
+    }
+
+    /**
+     * Render the custom card preview, loading saved grid data from whichever
+     * slot has it: the 'custom' slot first, then the preset slot if the
+     * custom settings happen to match a known preset.
+     */
+    _ensureCustomPreview(containerId, gridW, gridH, density) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const gd = { w: gridW, h: gridH, density };
+        let grid = null;
+        // Try the custom slot first
+        if (this.ui.settings.hasSavedGameForCurrentSelection(gd)) {
+            const save = this.ui.settings.loadGameStateForKey('custom');
+            if (save) grid = save.grid;
+        }
+        // If no custom save, try the preset slot (custom settings might match a preset)
+        if (!grid && this.ui.settings.isKnownLevelPreset(gd)) {
+            grid = this._loadLevelPreviewGrid(gd);
+        }
+        this._renderLevelPreviewCanvas(container, gridW, gridH, grid);
+    }
+
+    _updateContinueCard() {
+        const ui   = this.ui;
+        const info = ui.settings.getSavedGameInfo();
+        const card = document.getElementById('continueCard');
+        if (!info.exists) { card.style.display = 'none'; return; }
+        card.style.display = '';
+
+        const nameEl = document.getElementById('continueLevelName');
+        nameEl.textContent = info.levelName || 'Custom level';
+        document.getElementById('continueSize').textContent    = `${info.w} × ${info.h}`;
+        document.getElementById('continueDensity').textContent = `Density: ${info.density}% (${info.mineCount} mines)`;
+        document.getElementById('continueTime').textContent    = `Time: ${ui.timer.formatTime(info.elapsedTimeMs || 0)}`;
+
+        const savedGame       = ui.settings.loadLastGameState();
+        const previewContainer = document.getElementById('continuePreview');
+        if (previewContainer) {
+            this._renderLevelPreviewCanvas(previewContainer, info.w, info.h, savedGame ? savedGame.grid : null);
+        }
+    }
+
+    /**
+     * Draw a small thumbnail of a grid level.
+     * @param {HTMLElement} container
+     * @param {number} gridW
+     * @param {number} gridH
+     * @param {Array<Array<{content,state}>>} [grid] - optional actual cell states
+     */
+    _renderLevelPreviewCanvas(container, gridW, gridH, grid) {
+        container.innerHTML = '';
+        const size   = Math.min(container.clientWidth || 150, container.clientHeight || 150);
+        const dpr    = window.devicePixelRatio || 1;
+        const canvas = document.createElement('canvas');
+        canvas.className = 'level-preview-canvas';
+        canvas.width  = Math.round(size * dpr);
+        canvas.height = Math.round(size * dpr);
+        canvas.style.width  = size + 'px';
+        canvas.style.height = size + 'px';
+        container.appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        ctx.scale(dpr, dpr);
+        ctx.fillStyle = '#333333';
+        ctx.fillRect(0, 0, size, size);
+        if (gridW === 0 || gridH === 0) return;
+
+        // Compute adjacent mine counts if we have a real grid
+        let adjGrid = null;
+        if (grid) {
+            adjGrid = [];
+            for (let r = 0; r < gridH; r++) {
+                adjGrid[r] = [];
+                for (let c = 0; c < gridW; c++) {
+                    let count = 0;
+                    const yLo = r > 0 ? r - 1 : 0;
+                    const yHi = r < gridH - 1 ? r + 1 : gridH - 1;
+                    const xLo = c > 0 ? c - 1 : 0;
+                    const xHi = c < gridW - 1 ? c + 1 : gridW - 1;
+                    for (let ny = yLo; ny <= yHi; ny++) {
+                        for (let nx = xLo; nx <= xHi; nx++) {
+                            if (grid[ny] && grid[ny][nx] && grid[ny][nx].content === 2) count++;
+                        }
+                    }
+                    adjGrid[r][c] = count;
+                }
+            }
+        }
+
+        const NUMBER_COLORS = ['#0000FF', '#008000', '#FF0000', '#000080', '#800000', '#008080', '#000000', '#808080'];
+        const bordersVisible = gridW <= 50 && gridH <= 50;
+        const gap = bordersVisible ? 0.5 : 0;
+        const cellSize = Math.min((size - (gridW - 1) * gap) / gridW,
+                                  (size - (gridH - 1) * gap) / gridH);
+        const totalW = gridW * (cellSize + gap) - gap;
+        const totalH = gridH * (cellSize + gap) - gap;
+        const offX   = (size - totalW) / 2;
+        const offY   = (size - totalH) / 2;
+
+        // Set up font once if cells are large enough to show numbers
+        const showNumbers = grid && cellSize >= 6;
+        if (showNumbers) {
+            const fs = Math.max(4, Math.floor(cellSize * 0.7));
+            ctx.font = `700 ${fs}px "Segoe UI", sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+        }
+
+        for (let row = 0; row < gridH; row++) {
+            for (let col = 0; col < gridW; col++) {
+                const x = offX + col * (cellSize + gap);
+                const y = offY + row * (cellSize + gap);
+
+                if (grid && grid[row] && grid[row][col]) {
+                    const cell = grid[row][col];
+                    if (cell.state === CellState.Revealed) {
+                        ctx.fillStyle = '#BBBBBB';
+                        ctx.fillRect(x, y, cellSize, cellSize);
+                        // Draw number
+                        if (showNumbers && adjGrid && cell.content !== 2) {
+                            const adj = adjGrid[row][col];
+                            if (adj > 0 && adj <= 8) {
+                                ctx.fillStyle = NUMBER_COLORS[adj - 1];
+                                ctx.fillText(String(adj), x + cellSize / 2, y + cellSize * 0.54);
+                            }
+                        }
+                        // Draw mine (shouldn't normally appear in preview, but handle it)
+                        if (cell.content === 2 && cellSize >= 6) {
+                            ctx.fillStyle = '#000000';
+                            const r = cellSize * 0.25;
+                            ctx.beginPath();
+                            ctx.arc(x + cellSize / 2, y + cellSize / 2, r, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    } else if (cell.state === CellState.Flagged) {
+                        ctx.fillStyle = '#888888';
+                        ctx.fillRect(x, y, cellSize, cellSize);
+                        // Draw flag marker
+                        if (cellSize >= 6) {
+                            // Flag pole
+                            const poleX = x + cellSize * 0.45;
+                            ctx.strokeStyle = '#333333';
+                            ctx.lineWidth = Math.max(1, cellSize * 0.08);
+                            ctx.beginPath();
+                            ctx.moveTo(poleX, y + cellSize * 0.2);
+                            ctx.lineTo(poleX, y + cellSize * 0.8);
+                            ctx.stroke();
+                            // Flag triangle
+                            ctx.fillStyle = '#FF3333';
+                            ctx.beginPath();
+                            ctx.moveTo(poleX, y + cellSize * 0.2);
+                            ctx.lineTo(poleX + cellSize * 0.35, y + cellSize * 0.35);
+                            ctx.lineTo(poleX, y + cellSize * 0.5);
+                            ctx.closePath();
+                            ctx.fill();
+                        } else {
+                            // Too small for flag detail, just color it
+                            ctx.fillStyle = '#FFAA00';
+                            ctx.fillRect(x, y, cellSize, cellSize);
+                        }
+                    } else {
+                        ctx.fillStyle = '#888888';
+                        ctx.fillRect(x, y, cellSize, cellSize);
+                    }
+                } else {
+                    ctx.fillStyle = '#888888';
+                    ctx.fillRect(x, y, cellSize, cellSize);
+                }
+
+                if (bordersVisible) {
+                    ctx.strokeStyle = '#a3a3a3';
+                    ctx.lineWidth   = 0.5;
+                    ctx.strokeRect(x + 0.25, y + 0.25, cellSize - 0.5, cellSize - 0.5);
+                }
+            }
+        }
+    }
+
+    /**
+     * Load saved grid data for a normal level.
+     * @returns {Array<Array<{content,state}>>|null}
+     */
+    _loadLevelPreviewGrid(gridData) {
+        const key = this.ui.settings.gridDataKey(gridData);
+        const save = this.ui.settings.loadGameStateForKey(key);
+        return save ? save.grid : null;
+    }
+
+    /**
+     * Load saved grid data for a game mode level.
+     * @returns {Array<Array<{content,state}>>|null}
+     */
+    _loadGameModeLevelPreviewGrid(gameModeId, gridData) {
+        const key = this.ui.settings.resolveGameModeSaveKey(gameModeId, gridData);
+        const save = this.ui.settings.loadGameModeStateForKey(gameModeId, key);
+        return save ? save.grid : null;
+    }
+}

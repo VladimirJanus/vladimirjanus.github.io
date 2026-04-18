@@ -1,1 +1,1010 @@
-const a28_0x3b475c=a28_0x4e16;(function(_0x102561,_0x1cfbbb){const _0x2e3fa3=a28_0x4e16,_0x5e3487=_0x102561();while(!![]){try{const _0x509ef4=parseInt(_0x2e3fa3(0x179))/0x1*(parseInt(_0x2e3fa3(0x178))/0x2)+parseInt(_0x2e3fa3(0x16f))/0x3+parseInt(_0x2e3fa3(0x1b4))/0x4+-parseInt(_0x2e3fa3(0x1f6))/0x5+-parseInt(_0x2e3fa3(0x1a2))/0x6+parseInt(_0x2e3fa3(0x1a5))/0x7*(-parseInt(_0x2e3fa3(0x19f))/0x8)+parseInt(_0x2e3fa3(0x1f5))/0x9*(-parseInt(_0x2e3fa3(0x1b3))/0xa);if(_0x509ef4===_0x1cfbbb)break;else _0x5e3487['push'](_0x5e3487['shift']());}catch(_0x16a7c0){_0x5e3487['push'](_0x5e3487['shift']());}}}(a28_0x253b,0x283b2));import{CellContent,CellState,ClickType}from'../../core/CoreEnums.js';const INFINITE_SVG_ASSETS={'n1':a28_0x3b475c(0x1a9),'n2':'src/assets/grid/2.svg','n3':a28_0x3b475c(0x1ae),'n4':a28_0x3b475c(0x1d1),'n5':a28_0x3b475c(0x133),'n6':a28_0x3b475c(0x13a),'n7':a28_0x3b475c(0x208),'n8':a28_0x3b475c(0x1d3),'flag':a28_0x3b475c(0x1a3),'mine':'src/assets/grid/mine.svg'},_infiniteSprites=new Map();let _infiniteSpritesLoaded=![];function a28_0x4e16(_0x45ad19,_0x43a601){_0x45ad19=_0x45ad19-0x122;const _0x253b51=a28_0x253b();let _0x4e166b=_0x253b51[_0x45ad19];return _0x4e166b;}function _ensureInfiniteSprites(_0x5cb799){const _0xa56fcb=a28_0x3b475c;if(_infiniteSpritesLoaded)return;_infiniteSpritesLoaded=!![];for(const [_0x48c550,_0x12a3d7]of Object['entries'](INFINITE_SVG_ASSETS)){const _0x27b069=new Image();_0x27b069[_0xa56fcb(0x14a)]='async',_0x27b069[_0xa56fcb(0x1ba)]=()=>{if(_0x5cb799)_0x5cb799();},_0x27b069['src']=_0x12a3d7,_infiniteSprites[_0xa56fcb(0x1bf)](_0x48c550,_0x27b069);}}const BG_COLOR='#333333',HIDDEN_COLOR='#888888',REVEALED_COLOR=a28_0x3b475c(0x183),BORDER_COLOR=a28_0x3b475c(0x180),NUMBER_COLORS=[a28_0x3b475c(0x160),a28_0x3b475c(0x18c),a28_0x3b475c(0x1c3),a28_0x3b475c(0x1ef),'#800000','#008080',a28_0x3b475c(0x135),a28_0x3b475c(0x1b8)],CLICK_THRESHOLD=0xa,LONG_PRESS_MS=0x1a4;function clamp(_0x3cc269,_0x44ec2c,_0xa574b2){const _0x8f0c56=a28_0x3b475c;return Math['max'](_0x44ec2c,Math[_0x8f0c56(0x1b5)](_0xa574b2,_0x3cc269));}function a28_0x253b(){const _0x5b7ccd=['_panStartTime','_dirty','_paintFalseFlags','#3498db','_rafId','originArrowAngle','onCellClick','_pinchStartCenterY','clientX','parentElement','flag','_viewHeight','_touchPos','548187gYdIzG','_scheduleFrame','_kbdSelX','floor','stopKbdShiftPan','ArrowLeft','bold\x20','touchcancel','_kbdSelY','4nWoozG','140121BvEdRm','inert','_keepSelectionVisible','rgba(0,\x200,\x200,\x200.35)','deltaY','drawImage','_panDurationMs','#333333','keyboardRevealSelected','stopRenderLoop','#bbbbbb','_lastMouseX','#f39c12','addEventListener','_pinchStartScale','_stopPanAnimation','content','canvas','_screenToCell','#008000','_digitalTexturesEnabled','cellSize','_pinchStartDist','type','Revealed','showOriginArrow','style','setTransform','_draw','_frame','strokeRect','fillText','_anyShiftPanKey','strokeStyle','fillStyle','centerY','stopAllKbdShiftPan','_drawFalseFlag','151024gImLRf','_drawSvgGlyph','minScale','579618ttWwYx','src/assets/grid/flag.svg','get','77nxAqqi','offsetY','getContext','textAlign','src/assets/grid/1.svg','naturalWidth','lastArrowAngle','_shiftPanUp','_startLongPress','src/assets/grid/3.svg','centerX','abs','_kbdPanLastTime','_stepKbdPan','490qnwrTh','1182480zmLlFs','min','_panAnimating','beginPath','#808080','mouseup','onload','gridManager','px\x20serif','stroke','show','set','_dragSY','_shiftPanRight','ceil','#ff0000','_digitalNumbersEnabled','_isRightClick','mine','devicePixelRatio','round','lineWidth','_lastMouseY','now','center','_moved','fill','middle','ensureKbdSelection','src/assets/grid/4.svg','spacing','src/assets/grid/8.svg','setGridManager','Mine','setDigitalTexturesEnabled','left','_pinchStartViewY','touchstart','_lpFired','width','_startPanAnimation','ctx','setInert','requestRedraw','last','mousedown','clientY','rotate','RightClick','_panTargetX','_running','_drawArrows','_pinchStartCenterX','_isPinching','#ffffff','Safe','arc','_hitTestArrow','_cachedRect','#000080','_pinchStartViewX','_viewWidth','offsetX','display','LongLeftClick','51885vzIdLu','35295WpViYn','cos','atan2','hasLastReveal','_mouseIsDown','maxScale','_arrowPoint','_shiftPanLeft','ArrowRight','_kbdPanTimer','top','height','lastRevealY','rgba(255,\x20230,\x20120,\x200.90)','resetView','startKbdShiftPan','_touchEvent','translate','src/assets/grid/7.svg','lastRevealX','lineTo','_cancelLongPress','fillRect','cellAt','rgba(255,\x20255,\x20255,\x200.25)','_stride','panToOrigin','hideKbdSelection','_panStartX','px\x20Segoe\x20UI','hypot','_lpTimer','resize','_drawFlag','_panTargetY','_dragSX','src/assets/grid/5.svg','sin','#000000','state','_shiftPanDown','_drawArrowBadge','_bindEvents','src/assets/grid/6.svg','scale','_mouseDown','LeftClick','ArrowUp','save','_dragging','_hasKbdSel','onArrowDataChanged','_mouseMove','Flagged','showLastArrow','button','_drawMine','moveKbdSelection','bold\x2010px\x20Segoe\x20UI','decoding','touchmove','preventDefault','_panStartY','moveTo','_stopKbdPanTimer','getBoundingClientRect','ArrowDown','_zoomAt','startRenderLoop','clearFalseFlags','panToCell','_stepPanAnimation','wheel','origin','length','revealFalseFlags','font','_updateArrowState','setDigitalNumbersEnabled','max','textBaseline','#0000ff','_drawKbdCursor'];a28_0x253b=function(){return _0x5b7ccd;};return a28_0x253b();}function easeInOutQuad(_0x503f74){if(_0x503f74<0.5)return 0x2*_0x503f74*_0x503f74;return 0x1-0x2*(0x1-_0x503f74)*(0x1-_0x503f74);}export class InfiniteGridRenderer{constructor(_0xfbea1){const _0x2de81d=a28_0x3b475c;this[_0x2de81d(0x18a)]=_0xfbea1,this[_0x2de81d(0x1dd)]=_0xfbea1[_0x2de81d(0x1a7)]('2d',{'alpha':![]}),this['gridManager']=null,this[_0x2de81d(0x18e)]=0x1c,this[_0x2de81d(0x1a1)]=0.2,this['maxScale']=0x4,this[_0x2de81d(0x13b)]=0x1,this[_0x2de81d(0x1d2)]=0x1,this['centerX']=0.5,this['centerY']=0.5,this['inert']=!![],this[_0x2de81d(0x145)]=![],this['lastArrowAngle']=0x0,this['showOriginArrow']=![],this[_0x2de81d(0x167)]=0x0,this['onCellClick']=null,this[_0x2de81d(0x142)]=null,this['_running']=![],this[_0x2de81d(0x166)]=0x0,this[_0x2de81d(0x163)]=!![],this[_0x2de81d(0x1fa)]=![],this[_0x2de81d(0x140)]=![],this[_0x2de81d(0x132)]=0x0,this[_0x2de81d(0x1c0)]=0x0,this[_0x2de81d(0x184)]=0x0,this[_0x2de81d(0x1ca)]=0x0,this[_0x2de81d(0x1cd)]=![],this[_0x2de81d(0x1c5)]=![],this['_lpTimer']=null,this['_lpFired']=![],this[_0x2de81d(0x1e9)]=![],this['_pinchStartDist']=0x1,this[_0x2de81d(0x187)]=0x1,this[_0x2de81d(0x1e8)]=0x0,this[_0x2de81d(0x169)]=0x0,this[_0x2de81d(0x1f0)]=0x0,this[_0x2de81d(0x1d8)]=0x0,this['_cachedRect']=null,this[_0x2de81d(0x1b6)]=![],this[_0x2de81d(0x12b)]=0x0,this[_0x2de81d(0x14d)]=0x0,this['_panTargetX']=0x0,this[_0x2de81d(0x131)]=0x0,this[_0x2de81d(0x162)]=0x0,this[_0x2de81d(0x17f)]=0xd2,this[_0x2de81d(0x141)]=![],this[_0x2de81d(0x171)]=0x0,this[_0x2de81d(0x177)]=0x0,this[_0x2de81d(0x1fd)]=![],this['_shiftPanRight']=![],this[_0x2de81d(0x1ac)]=![],this[_0x2de81d(0x137)]=![],this[_0x2de81d(0x1ff)]=null,this[_0x2de81d(0x1b1)]=0x0,this['_digitalNumbersEnabled']=![],this[_0x2de81d(0x18d)]=![],this[_0x2de81d(0x164)]=![],_ensureInfiniteSprites(()=>this[_0x2de81d(0x1df)]()),this[_0x2de81d(0x139)](),this[_0x2de81d(0x12f)]();}[a28_0x3b475c(0x1d4)](_0x594625){const _0x450391=a28_0x3b475c,_0x25dcf0=!_0x594625||!this['gridManager']||_0x594625!==this[_0x450391(0x1bb)];_0x25dcf0&&(this[_0x450391(0x141)]=![],this['_kbdSelX']=0x0,this['_kbdSelY']=0x0,this[_0x450391(0x164)]=![]),this[_0x450391(0x1bb)]=_0x594625,this['_updateArrowState'](),this[_0x450391(0x1df)]();}[a28_0x3b475c(0x1de)](_0x4fd1f8){const _0x38a9dd=a28_0x3b475c;if(!_0x4fd1f8)this[_0x38a9dd(0x164)]=![];this[_0x38a9dd(0x17a)]=!!_0x4fd1f8;}[a28_0x3b475c(0x15a)](){const _0x22f261=a28_0x3b475c;this['_paintFalseFlags']=!![],this[_0x22f261(0x1df)]();}[a28_0x3b475c(0x154)](){this['_paintFalseFlags']=![],this['requestRedraw']();}[a28_0x3b475c(0x1be)](){const _0x21a170=a28_0x3b475c;this[_0x21a170(0x18a)][_0x21a170(0x193)][_0x21a170(0x1f3)]='',this[_0x21a170(0x12f)](),this['startRenderLoop']();}['hide'](){const _0x1b71f1=a28_0x3b475c;this['stopRenderLoop'](),this[_0x1b71f1(0x18a)][_0x1b71f1(0x193)][_0x1b71f1(0x1f3)]='none',this[_0x1b71f1(0x141)]=![],this[_0x1b71f1(0x19d)]();}[a28_0x3b475c(0x153)](){const _0x367567=a28_0x3b475c;this['_running']=!![],this[_0x367567(0x1df)]();}[a28_0x3b475c(0x182)](){const _0x2f8300=a28_0x3b475c;this['_running']=![],this[_0x2f8300(0x166)]&&(cancelAnimationFrame(this[_0x2f8300(0x166)]),this[_0x2f8300(0x166)]=0x0);}[a28_0x3b475c(0x1df)](){const _0x519018=a28_0x3b475c;this['_dirty']=!![],this[_0x519018(0x170)]();}[a28_0x3b475c(0x12f)](){const _0x44584e=a28_0x3b475c,_0x4b8ffa=this[_0x44584e(0x18a)][_0x44584e(0x16b)];if(!_0x4b8ffa)return;const _0x1971ff=_0x4b8ffa['getBoundingClientRect'](),_0x146af2=window[_0x44584e(0x1c7)]||0x1;this[_0x44584e(0x18a)]['width']=Math[_0x44584e(0x1c8)](_0x1971ff[_0x44584e(0x1db)]*_0x146af2),this[_0x44584e(0x18a)][_0x44584e(0x201)]=Math[_0x44584e(0x1c8)](_0x1971ff[_0x44584e(0x201)]*_0x146af2),this['canvas'][_0x44584e(0x193)]['width']=_0x1971ff[_0x44584e(0x1db)]+'px',this['canvas'][_0x44584e(0x193)][_0x44584e(0x201)]=_0x1971ff[_0x44584e(0x201)]+'px',this['_updateArrowState'](),this['requestRedraw']();}[a28_0x3b475c(0x204)](){const _0x4fed97=a28_0x3b475c;if(this[_0x4fed97(0x1f1)]()<=0x0||this[_0x4fed97(0x16d)]()<=0x0)return;this[_0x4fed97(0x188)](),this[_0x4fed97(0x1af)]=0.5,this[_0x4fed97(0x19c)]=0.5;const _0x5786d7=Math[_0x4fed97(0x1b5)](this[_0x4fed97(0x1f1)](),this[_0x4fed97(0x16d)]())/(this[_0x4fed97(0x18e)]*0xf);this[_0x4fed97(0x13b)]=clamp(_0x5786d7,this['minScale'],this['maxScale']),this[_0x4fed97(0x15c)](),this['requestRedraw']();}[a28_0x3b475c(0x155)](_0x4a2fcf,_0x4637f2){const _0x37b17a=a28_0x3b475c;this[_0x37b17a(0x1dc)](Number(_0x4a2fcf)+0.5,Number(_0x4637f2)+0.5);}['panToOrigin'](){const _0x27ee3b=a28_0x3b475c;this[_0x27ee3b(0x155)](0x0,0x0);}['panToLastReveal'](){const _0x21618c=a28_0x3b475c;if(!this[_0x21618c(0x1bb)]||!this[_0x21618c(0x1bb)][_0x21618c(0x1f9)])return;this[_0x21618c(0x155)](this[_0x21618c(0x1bb)][_0x21618c(0x122)],this[_0x21618c(0x1bb)][_0x21618c(0x202)]);}[a28_0x3b475c(0x1f1)](){const _0x42e8d0=a28_0x3b475c,_0x31c721=window[_0x42e8d0(0x1c7)]||0x1;return this[_0x42e8d0(0x18a)][_0x42e8d0(0x1db)]/_0x31c721;}[a28_0x3b475c(0x16d)](){const _0x3aa050=a28_0x3b475c,_0x56fe0d=window[_0x3aa050(0x1c7)]||0x1;return this['canvas']['height']/_0x56fe0d;}['_stride'](){const _0x37bbcc=a28_0x3b475c;return this[_0x37bbcc(0x18e)]*this['scale']+this[_0x37bbcc(0x1d2)];}[a28_0x3b475c(0x170)](){const _0x552b7=a28_0x3b475c;if(!this[_0x552b7(0x1e6)]||this[_0x552b7(0x166)])return;this[_0x552b7(0x166)]=requestAnimationFrame(_0x42882a=>{const _0x114e8f=_0x552b7;this[_0x114e8f(0x166)]=0x0;if(!this[_0x114e8f(0x1e6)])return;this[_0x114e8f(0x196)](_0x42882a);});}[a28_0x3b475c(0x196)](_0x887ea3){const _0x58c676=a28_0x3b475c;this[_0x58c676(0x1b6)]&&(this[_0x58c676(0x156)](_0x887ea3),this['_dirty']=!![]),this[_0x58c676(0x163)]&&(this[_0x58c676(0x195)](),this[_0x58c676(0x163)]=![]),this['_running']&&(this['_dirty']||this['_panAnimating'])&&this[_0x58c676(0x170)]();}[a28_0x3b475c(0x195)](){const _0x3ffcae=a28_0x3b475c;if(!this[_0x3ffcae(0x1dd)])return;const _0x41a893=window[_0x3ffcae(0x1c7)]||0x1,_0x32bdba=this[_0x3ffcae(0x1f1)](),_0x1fde45=this[_0x3ffcae(0x16d)]();this['ctx'][_0x3ffcae(0x194)](_0x41a893,0x0,0x0,_0x41a893,0x0,0x0),this[_0x3ffcae(0x1dd)][_0x3ffcae(0x19b)]=BG_COLOR,this[_0x3ffcae(0x1dd)][_0x3ffcae(0x125)](0x0,0x0,_0x32bdba,_0x1fde45);if(this['gridManager']){const _0x4c4768=this[_0x3ffcae(0x128)]();if(_0x4c4768>0x0){const _0x4c0529=_0x32bdba*0.5/_0x4c4768,_0x446ffa=_0x1fde45*0.5/_0x4c4768,_0x8070e9=Math[_0x3ffcae(0x172)](this[_0x3ffcae(0x1af)]-_0x4c0529)-0x1,_0x32f2ba=Math[_0x3ffcae(0x1c2)](this[_0x3ffcae(0x1af)]+_0x4c0529)+0x1,_0x4f71e9=Math[_0x3ffcae(0x172)](this[_0x3ffcae(0x19c)]-_0x446ffa)-0x1,_0x177307=Math[_0x3ffcae(0x1c2)](this[_0x3ffcae(0x19c)]+_0x446ffa)+0x1,_0x435d2d=this[_0x3ffcae(0x18e)]*this['scale'];this[_0x3ffcae(0x1dd)]['textAlign']=_0x3ffcae(0x1cc),this[_0x3ffcae(0x1dd)]['textBaseline']=_0x3ffcae(0x1cf);for(let _0x230f6d=_0x4f71e9;_0x230f6d<=_0x177307;_0x230f6d++){for(let _0x1bd7bf=_0x8070e9;_0x1bd7bf<=_0x32f2ba;_0x1bd7bf++){const _0x540ef6=_0x32bdba*0.5+(_0x1bd7bf-this[_0x3ffcae(0x1af)])*_0x4c4768,_0x1ffc16=_0x1fde45*0.5+(_0x230f6d-this['centerY'])*_0x4c4768;if(_0x540ef6+_0x435d2d<0x0||_0x1ffc16+_0x435d2d<0x0||_0x540ef6>_0x32bdba||_0x1ffc16>_0x1fde45)continue;const _0x186ad8=this[_0x3ffcae(0x1bb)][_0x3ffcae(0x126)](_0x1bd7bf,_0x230f6d),_0x54ced5=_0x186ad8[_0x3ffcae(0x136)]===CellState[_0x3ffcae(0x191)];this['ctx'][_0x3ffcae(0x19b)]=_0x54ced5?REVEALED_COLOR:HIDDEN_COLOR,this['ctx'][_0x3ffcae(0x125)](_0x540ef6,_0x1ffc16,_0x435d2d,_0x435d2d),this[_0x3ffcae(0x1dd)]['strokeStyle']=BORDER_COLOR,this['ctx'][_0x3ffcae(0x1c9)]=0x1,this['ctx'][_0x3ffcae(0x197)](_0x540ef6+0.5,_0x1ffc16+0.5,_0x435d2d-0x1,_0x435d2d-0x1);if(_0x186ad8[_0x3ffcae(0x136)]===CellState[_0x3ffcae(0x144)]){this[_0x3ffcae(0x164)]&&_0x186ad8['content']!==CellContent[_0x3ffcae(0x1d5)]?this[_0x3ffcae(0x19e)](_0x540ef6,_0x1ffc16,_0x435d2d):this[_0x3ffcae(0x130)](_0x540ef6,_0x1ffc16,_0x435d2d);continue;}if(_0x54ced5&&_0x186ad8[_0x3ffcae(0x189)]===CellContent[_0x3ffcae(0x1d5)]){this[_0x3ffcae(0x147)](_0x540ef6,_0x1ffc16,_0x435d2d);continue;}if(_0x54ced5&&_0x186ad8['content']===CellContent[_0x3ffcae(0x1eb)]){const _0x5c706d=this[_0x3ffcae(0x1bb)]['adjacentMines'](_0x1bd7bf,_0x230f6d);_0x5c706d>0x0&&(this[_0x3ffcae(0x1c4)]?this[_0x3ffcae(0x1a0)]('n'+_0x5c706d,_0x540ef6,_0x1ffc16,_0x435d2d):(this['ctx'][_0x3ffcae(0x19b)]=NUMBER_COLORS[Math[_0x3ffcae(0x1b5)](_0x5c706d,0x8)-0x1]||_0x3ffcae(0x135),this[_0x3ffcae(0x1dd)]['font']=_0x3ffcae(0x175)+Math[_0x3ffcae(0x172)](_0x435d2d*0.64)+_0x3ffcae(0x12c),this[_0x3ffcae(0x1dd)][_0x3ffcae(0x198)](String(_0x5c706d),_0x540ef6+_0x435d2d*0.5,_0x1ffc16+_0x435d2d*0.54)));}}}}}this['_drawArrows'](_0x32bdba,_0x1fde45),this[_0x3ffcae(0x161)](_0x32bdba,_0x1fde45);}[a28_0x3b475c(0x1a0)](_0x32e6ff,_0x244823,_0x53f1c8,_0x15b4d9){const _0xa596f8=a28_0x3b475c,_0x6280aa=_infiniteSprites[_0xa596f8(0x1a4)](_0x32e6ff);if(_0x6280aa&&_0x6280aa['complete']&&_0x6280aa[_0xa596f8(0x1aa)]>0x0){const _0x488a2f=_0x15b4d9*0.1;return this[_0xa596f8(0x1dd)][_0xa596f8(0x17e)](_0x6280aa,_0x244823+_0x488a2f,_0x53f1c8+_0x488a2f,_0x15b4d9-_0x488a2f*0x2,_0x15b4d9-_0x488a2f*0x2),!![];}return![];}[a28_0x3b475c(0x15d)](_0x290a8c){const _0x3fd1eb=a28_0x3b475c,_0x1aed0a=!!_0x290a8c;if(this[_0x3fd1eb(0x1c4)]===_0x1aed0a)return;this['_digitalNumbersEnabled']=_0x1aed0a,this[_0x3fd1eb(0x1df)]();}[a28_0x3b475c(0x1d6)](_0x41cee4){const _0x362a15=a28_0x3b475c,_0x3dde25=!!_0x41cee4;if(this[_0x362a15(0x18d)]===_0x3dde25)return;this[_0x362a15(0x18d)]=_0x3dde25,this[_0x362a15(0x1df)]();}[a28_0x3b475c(0x130)](_0x510e40,_0x428aae,_0x283b03){const _0x34a99c=a28_0x3b475c;if(this[_0x34a99c(0x18d)]&&this[_0x34a99c(0x1a0)](_0x34a99c(0x16c),_0x510e40,_0x428aae,_0x283b03))return;this[_0x34a99c(0x1dd)]['font']=Math[_0x34a99c(0x172)](_0x283b03*0.68)+_0x34a99c(0x1bc),this[_0x34a99c(0x1dd)][_0x34a99c(0x1a8)]=_0x34a99c(0x1cc),this[_0x34a99c(0x1dd)]['textBaseline']=_0x34a99c(0x1cf),this['ctx'][_0x34a99c(0x19b)]='#000000',this[_0x34a99c(0x1dd)][_0x34a99c(0x198)]('🚩',_0x510e40+_0x283b03*0.5,_0x428aae+_0x283b03*0.54);}['_drawFalseFlag'](_0x26e0a2,_0x51749c,_0x9c1c92){const _0x3bf6f0=a28_0x3b475c;this['ctx'][_0x3bf6f0(0x15b)]=Math[_0x3bf6f0(0x172)](_0x9c1c92*0.68)+_0x3bf6f0(0x1bc),this[_0x3bf6f0(0x1dd)]['textAlign']='center',this[_0x3bf6f0(0x1dd)][_0x3bf6f0(0x15f)]=_0x3bf6f0(0x1cf),this['ctx'][_0x3bf6f0(0x19b)]=_0x3bf6f0(0x135),this[_0x3bf6f0(0x1dd)][_0x3bf6f0(0x198)]('❌',_0x26e0a2+_0x9c1c92*0.5,_0x51749c+_0x9c1c92*0.54);}[a28_0x3b475c(0x147)](_0x2f8490,_0x545cf1,_0x2cee1d){const _0x31a4c6=a28_0x3b475c;if(this[_0x31a4c6(0x18d)]&&this['_drawSvgGlyph'](_0x31a4c6(0x1c6),_0x2f8490,_0x545cf1,_0x2cee1d))return;this['ctx']['font']=Math[_0x31a4c6(0x172)](_0x2cee1d*0.68)+_0x31a4c6(0x1bc),this[_0x31a4c6(0x1dd)]['textAlign']=_0x31a4c6(0x1cc),this[_0x31a4c6(0x1dd)][_0x31a4c6(0x15f)]='middle',this[_0x31a4c6(0x1dd)][_0x31a4c6(0x19b)]=_0x31a4c6(0x135),this[_0x31a4c6(0x1dd)][_0x31a4c6(0x198)]('💣',_0x2f8490+_0x2cee1d*0.5,_0x545cf1+_0x2cee1d*0.54);}[a28_0x3b475c(0x1e7)](_0xb5c85b,_0x2b7e3e){const _0xcb90ff=a28_0x3b475c;if(this['showLastArrow']){const _0xa1efc4=this[_0xcb90ff(0x1fc)](this[_0xcb90ff(0x1ab)],_0xb5c85b,_0x2b7e3e);this[_0xcb90ff(0x138)](_0xa1efc4['x'],_0xa1efc4['y'],this[_0xcb90ff(0x1ab)],_0xcb90ff(0x185),'L');}if(this[_0xcb90ff(0x192)]){const _0x36e6bc=this[_0xcb90ff(0x1fc)](this[_0xcb90ff(0x167)],_0xb5c85b,_0x2b7e3e);this[_0xcb90ff(0x138)](_0x36e6bc['x'],_0x36e6bc['y'],this[_0xcb90ff(0x167)],_0xcb90ff(0x165),'O');}}[a28_0x3b475c(0x138)](_0x49aa64,_0x1ee7bc,_0x4a0a29,_0x59ec36,_0x1f6f71){const _0x44c20b=a28_0x3b475c,_0x3799b9=0x16;this[_0x44c20b(0x1dd)][_0x44c20b(0x13f)](),this['ctx'][_0x44c20b(0x19b)]=_0x44c20b(0x17c),this[_0x44c20b(0x1dd)][_0x44c20b(0x1b7)](),this[_0x44c20b(0x1dd)][_0x44c20b(0x1ec)](_0x49aa64,_0x1ee7bc,_0x3799b9+0x2,0x0,Math['PI']*0x2),this['ctx'][_0x44c20b(0x1ce)](),this[_0x44c20b(0x1dd)][_0x44c20b(0x19b)]=_0x59ec36,this[_0x44c20b(0x1dd)][_0x44c20b(0x1b7)](),this[_0x44c20b(0x1dd)][_0x44c20b(0x1ec)](_0x49aa64,_0x1ee7bc,_0x3799b9,0x0,Math['PI']*0x2),this[_0x44c20b(0x1dd)]['fill'](),this[_0x44c20b(0x1dd)][_0x44c20b(0x19a)]=_0x44c20b(0x127),this[_0x44c20b(0x1dd)][_0x44c20b(0x1c9)]=0x1,this[_0x44c20b(0x1dd)][_0x44c20b(0x1bd)](),this[_0x44c20b(0x1dd)][_0x44c20b(0x207)](_0x49aa64,_0x1ee7bc),this[_0x44c20b(0x1dd)][_0x44c20b(0x1e3)](_0x4a0a29*Math['PI']/0xb4),this[_0x44c20b(0x1dd)][_0x44c20b(0x19b)]=_0x44c20b(0x1ea),this['ctx'][_0x44c20b(0x1b7)](),this[_0x44c20b(0x1dd)][_0x44c20b(0x14e)](0x9,0x0),this[_0x44c20b(0x1dd)][_0x44c20b(0x123)](-0x6,0x6),this[_0x44c20b(0x1dd)]['lineTo'](-0x6,-0x6),this[_0x44c20b(0x1dd)]['closePath'](),this[_0x44c20b(0x1dd)][_0x44c20b(0x1ce)](),this[_0x44c20b(0x1dd)]['restore'](),this[_0x44c20b(0x1dd)][_0x44c20b(0x19b)]=_0x44c20b(0x1ea),this[_0x44c20b(0x1dd)][_0x44c20b(0x15b)]=_0x44c20b(0x149),this[_0x44c20b(0x1dd)][_0x44c20b(0x1a8)]=_0x44c20b(0x1cc),this['ctx'][_0x44c20b(0x15f)]=_0x44c20b(0x1cf),this[_0x44c20b(0x1dd)][_0x44c20b(0x198)](_0x1f6f71,_0x49aa64,_0x1ee7bc+0xf);}['_drawKbdCursor'](_0x3b47f1,_0xc19169){const _0x288a90=a28_0x3b475c;if(!this[_0x288a90(0x141)])return;const _0xfeba75=this[_0x288a90(0x128)]();if(_0xfeba75<=0x0)return;const _0xfc6799=this['cellSize']*this[_0x288a90(0x13b)],_0x403d11=_0x3b47f1*0.5+(this['_kbdSelX']-this[_0x288a90(0x1af)])*_0xfeba75,_0x3fc185=_0xc19169*0.5+(this[_0x288a90(0x177)]-this['centerY'])*_0xfeba75,_0x52b2b8=Math[_0x288a90(0x15e)](0x2,0x1);this[_0x288a90(0x1dd)][_0x288a90(0x19a)]=_0x288a90(0x203),this[_0x288a90(0x1dd)]['lineWidth']=_0x52b2b8,this['ctx'][_0x288a90(0x197)](_0x403d11+_0x52b2b8*0.5,_0x3fc185+_0x52b2b8*0.5,_0xfc6799-_0x52b2b8,_0xfc6799-_0x52b2b8);}[a28_0x3b475c(0x1fc)](_0x450298,_0x4c3400,_0x4574e7){const _0x2c6bf9=a28_0x3b475c,_0x386fee=Math[_0x2c6bf9(0x15e)](0x1c,Math[_0x2c6bf9(0x1b5)](_0x4c3400,_0x4574e7)*0.5-0x22),_0x427962=_0x450298*Math['PI']/0xb4;return{'x':_0x4c3400*0.5+Math[_0x2c6bf9(0x1f7)](_0x427962)*_0x386fee,'y':_0x4574e7*0.5+Math[_0x2c6bf9(0x134)](_0x427962)*_0x386fee};}['_hitTestArrow'](_0x6e0902,_0x5dba75){const _0x5ecb89=a28_0x3b475c,_0x4631c4=this[_0x5ecb89(0x1f1)](),_0x5cac43=this['_viewHeight'](),_0x32fce4=0x18;if(this['showLastArrow']){const _0x197d98=this[_0x5ecb89(0x1fc)](this[_0x5ecb89(0x1ab)],_0x4631c4,_0x5cac43),_0xabfe14=_0x6e0902-_0x197d98['x'],_0x5c361e=_0x5dba75-_0x197d98['y'];if(_0xabfe14*_0xabfe14+_0x5c361e*_0x5c361e<=_0x32fce4*_0x32fce4)return _0x5ecb89(0x1e0);}if(this[_0x5ecb89(0x192)]){const _0x3388cb=this[_0x5ecb89(0x1fc)](this['originArrowAngle'],_0x4631c4,_0x5cac43),_0x555a67=_0x6e0902-_0x3388cb['x'],_0x4fb101=_0x5dba75-_0x3388cb['y'];if(_0x555a67*_0x555a67+_0x4fb101*_0x4fb101<=_0x32fce4*_0x32fce4)return'origin';}return'';}['_updateArrowState'](){const _0x3736e6=a28_0x3b475c;let _0x587832=![],_0x3843a2=0x0,_0x160c2e=![],_0x286faa=0x0;const _0x29865f=this[_0x3736e6(0x128)]();if(this[_0x3736e6(0x1bb)]&&this[_0x3736e6(0x1f1)]()>0x0&&this[_0x3736e6(0x16d)]()>0x0&&_0x29865f>0x0){const _0x1876da=this[_0x3736e6(0x1f1)]()*0.5/_0x29865f,_0x3970a6=this[_0x3736e6(0x16d)]()*0.5/_0x29865f,_0x3c37de=this[_0x3736e6(0x1af)]-_0x1876da,_0x1be375=this[_0x3736e6(0x1af)]+_0x1876da,_0x917b51=this[_0x3736e6(0x19c)]-_0x3970a6,_0x25ad84=this[_0x3736e6(0x19c)]+_0x3970a6,_0x34223a=(_0x25b083,_0x214953)=>_0x25b083>=_0x3c37de&&_0x25b083<=_0x1be375&&_0x214953>=_0x917b51&&_0x214953<=_0x25ad84;_0x587832=!_0x34223a(0x0,0x0);_0x587832&&(_0x3843a2=Math[_0x3736e6(0x1f8)](-this[_0x3736e6(0x19c)],-this[_0x3736e6(0x1af)])*0xb4/Math['PI']);if(this[_0x3736e6(0x1bb)]['hasLastReveal']){const _0xf584b=this[_0x3736e6(0x1bb)][_0x3736e6(0x122)],_0x512cae=this[_0x3736e6(0x1bb)][_0x3736e6(0x202)];_0x160c2e=!_0x34223a(_0xf584b,_0x512cae);if(_0x160c2e){const _0x450d95=_0xf584b-this[_0x3736e6(0x1af)],_0x4a3991=_0x512cae-this[_0x3736e6(0x19c)];_0x286faa=Math['atan2'](_0x4a3991,_0x450d95)*0xb4/Math['PI'];}}}const _0x4cd8a7=this[_0x3736e6(0x192)]!==_0x587832||Math['abs'](this['originArrowAngle']-_0x3843a2)>0.0001||this[_0x3736e6(0x145)]!==_0x160c2e||Math[_0x3736e6(0x1b0)](this[_0x3736e6(0x1ab)]-_0x286faa)>0.0001;if(!_0x4cd8a7)return;this[_0x3736e6(0x192)]=_0x587832,this['originArrowAngle']=_0x3843a2,this[_0x3736e6(0x145)]=_0x160c2e,this[_0x3736e6(0x1ab)]=_0x286faa,this[_0x3736e6(0x142)]&&this[_0x3736e6(0x142)]({'showOriginArrow':this[_0x3736e6(0x192)],'originArrowAngle':this[_0x3736e6(0x167)],'showLastArrow':this[_0x3736e6(0x145)],'lastArrowAngle':this[_0x3736e6(0x1ab)]});}['_screenToCell'](_0x2351b5,_0x542196){const _0x589c74=a28_0x3b475c,_0x92583=this[_0x589c74(0x128)]();if(_0x92583<=0x0)return{'x':0x0,'y':0x0};const _0x1af69b=this[_0x589c74(0x1af)]+(_0x2351b5-this[_0x589c74(0x1f1)]()*0.5)/_0x92583,_0x13d62f=this[_0x589c74(0x19c)]+(_0x542196-this[_0x589c74(0x16d)]()*0.5)/_0x92583;return{'x':Math['floor'](_0x1af69b),'y':Math[_0x589c74(0x172)](_0x13d62f)};}[a28_0x3b475c(0x152)](_0x1044ab,_0x448467,_0x3fb997){const _0x254155=a28_0x3b475c;this[_0x254155(0x188)]();const _0x5bf8eb=this['_stride']();if(_0x5bf8eb<=0x0)return;const _0x124a56=this[_0x254155(0x1af)]+(_0x448467-this[_0x254155(0x1f1)]()*0.5)/_0x5bf8eb,_0x4973d5=this[_0x254155(0x19c)]+(_0x3fb997-this[_0x254155(0x16d)]()*0.5)/_0x5bf8eb;this['scale']=clamp(this[_0x254155(0x13b)]*_0x1044ab,this[_0x254155(0x1a1)],this[_0x254155(0x1fb)]);const _0x541da0=this[_0x254155(0x128)]();if(_0x541da0<=0x0)return;this[_0x254155(0x1af)]=_0x124a56-(_0x448467-this['_viewWidth']()*0.5)/_0x541da0,this['centerY']=_0x4973d5-(_0x3fb997-this[_0x254155(0x16d)]()*0.5)/_0x541da0,this['_updateArrowState'](),this['requestRedraw']();}['_startPanAnimation'](_0x33fa94,_0x76485d){const _0x10deea=a28_0x3b475c,_0x33a2de=_0x33fa94-this[_0x10deea(0x1af)],_0x2d17de=_0x76485d-this['centerY'];if(Math[_0x10deea(0x1b0)](_0x33a2de)<0.001&&Math[_0x10deea(0x1b0)](_0x2d17de)<0.001){this[_0x10deea(0x1af)]=_0x33fa94,this[_0x10deea(0x19c)]=_0x76485d,this[_0x10deea(0x15c)](),this[_0x10deea(0x1df)]();return;}this['_panStartX']=this[_0x10deea(0x1af)],this[_0x10deea(0x14d)]=this[_0x10deea(0x19c)],this[_0x10deea(0x1e5)]=_0x33fa94,this['_panTargetY']=_0x76485d,this[_0x10deea(0x162)]=performance['now'](),this[_0x10deea(0x1b6)]=!![],this['requestRedraw']();}['_stepPanAnimation'](_0x28cdc0){const _0x4fdfee=a28_0x3b475c;if(!this[_0x4fdfee(0x1b6)])return;const _0x14a8dc=clamp((_0x28cdc0-this[_0x4fdfee(0x162)])/this[_0x4fdfee(0x17f)],0x0,0x1),_0x115f73=easeInOutQuad(_0x14a8dc);this[_0x4fdfee(0x1af)]=this['_panStartX']+(this[_0x4fdfee(0x1e5)]-this[_0x4fdfee(0x12b)])*_0x115f73,this[_0x4fdfee(0x19c)]=this[_0x4fdfee(0x14d)]+(this[_0x4fdfee(0x131)]-this['_panStartY'])*_0x115f73,this[_0x4fdfee(0x15c)](),_0x14a8dc>=0x1&&(this[_0x4fdfee(0x1b6)]=![]);}[a28_0x3b475c(0x188)](){const _0x578f2f=a28_0x3b475c;this[_0x578f2f(0x1b6)]=![];}['ensureKbdSelection'](){const _0xb158d8=a28_0x3b475c;if(!this[_0xb158d8(0x1bb)])return![];if(this[_0xb158d8(0x141)])return!![];return this[_0xb158d8(0x141)]=!![],this['requestRedraw'](),!![];}[a28_0x3b475c(0x148)](_0x238841,_0x333493){const _0xe1fd4e=a28_0x3b475c;if(!this[_0xe1fd4e(0x1d0)]())return;this[_0xe1fd4e(0x188)](),this['_kbdSelX']+=_0x238841,this[_0xe1fd4e(0x177)]+=_0x333493,this[_0xe1fd4e(0x17b)](),this[_0xe1fd4e(0x1df)]();}[a28_0x3b475c(0x12a)](){const _0x13eba5=a28_0x3b475c;if(!this[_0x13eba5(0x141)])return;this[_0x13eba5(0x141)]=![],this[_0x13eba5(0x1df)]();}[a28_0x3b475c(0x181)](){const _0x3027ff=a28_0x3b475c;if(!this['gridManager']||this[_0x3027ff(0x17a)])return;if(!this['ensureKbdSelection']())return;if(this[_0x3027ff(0x168)])this[_0x3027ff(0x168)](this['_kbdSelX'],this['_kbdSelY'],ClickType[_0x3027ff(0x13d)]);}['keyboardFlagSelected'](){const _0x1e7375=a28_0x3b475c;if(!this[_0x1e7375(0x1bb)]||this['inert'])return;if(!this[_0x1e7375(0x1d0)]())return;if(this[_0x1e7375(0x168)])this['onCellClick'](this[_0x1e7375(0x171)],this[_0x1e7375(0x177)],ClickType[_0x1e7375(0x1e4)]);}['keyboardZoomIn'](){const _0x432847=a28_0x3b475c;if(!this[_0x432847(0x1bb)]||this['inert'])return;this[_0x432847(0x152)](1.15,this[_0x432847(0x1f1)]()*0.5,this[_0x432847(0x16d)]()*0.5);}['keyboardZoomOut'](){const _0x108561=a28_0x3b475c;if(!this['gridManager']||this['inert'])return;this['_zoomAt'](0x1/1.15,this[_0x108561(0x1f1)]()*0.5,this[_0x108561(0x16d)]()*0.5);}[a28_0x3b475c(0x205)](_0x29a7e8){const _0x360227=a28_0x3b475c;switch(_0x29a7e8){case _0x360227(0x174):this[_0x360227(0x1fd)]=!![];break;case _0x360227(0x1fe):this[_0x360227(0x1c1)]=!![];break;case'ArrowUp':this[_0x360227(0x1ac)]=!![];break;case _0x360227(0x151):this[_0x360227(0x137)]=!![];break;}!this[_0x360227(0x1ff)]&&this[_0x360227(0x199)]()&&(this[_0x360227(0x1b1)]=performance[_0x360227(0x1cb)](),this[_0x360227(0x1ff)]=setInterval(()=>this['_stepKbdPan'](),0x10));}[a28_0x3b475c(0x173)](_0x31d470){const _0x268274=a28_0x3b475c;switch(_0x31d470){case _0x268274(0x174):this[_0x268274(0x1fd)]=![];break;case _0x268274(0x1fe):this['_shiftPanRight']=![];break;case _0x268274(0x13e):this[_0x268274(0x1ac)]=![];break;case _0x268274(0x151):this['_shiftPanDown']=![];break;}if(!this['_anyShiftPanKey']())this[_0x268274(0x14f)]();}[a28_0x3b475c(0x19d)](){const _0x12001=a28_0x3b475c;this['_shiftPanLeft']=this['_shiftPanRight']=this[_0x12001(0x1ac)]=this['_shiftPanDown']=![],this[_0x12001(0x14f)]();}[a28_0x3b475c(0x199)](){const _0x4805cc=a28_0x3b475c;return this[_0x4805cc(0x1fd)]||this[_0x4805cc(0x1c1)]||this['_shiftPanUp']||this[_0x4805cc(0x137)];}['_stopKbdPanTimer'](){const _0x44002c=a28_0x3b475c;this[_0x44002c(0x1ff)]&&(clearInterval(this[_0x44002c(0x1ff)]),this[_0x44002c(0x1ff)]=null);}[a28_0x3b475c(0x1b2)](){const _0x168f90=a28_0x3b475c;if(this[_0x168f90(0x17a)]||!this['_anyShiftPanKey']()){this['_stopKbdPanTimer']();return;}const _0x26080f=performance[_0x168f90(0x1cb)](),_0x416940=Math[_0x168f90(0x1b5)]((_0x26080f-this['_kbdPanLastTime'])/0x3e8,0.05);this['_kbdPanLastTime']=_0x26080f;const _0x553252=this[_0x168f90(0x128)]();if(_0x553252<=0x0)return;const _0xb7a0cf=Math[_0x168f90(0x15e)](0x1a4,0xe*_0x553252),_0xe18e60=_0xb7a0cf/_0x553252;this[_0x168f90(0x1af)]+=((this[_0x168f90(0x1c1)]?0x1:0x0)-(this[_0x168f90(0x1fd)]?0x1:0x0))*_0xe18e60*_0x416940,this[_0x168f90(0x19c)]+=((this['_shiftPanDown']?0x1:0x0)-(this[_0x168f90(0x1ac)]?0x1:0x0))*_0xe18e60*_0x416940,this[_0x168f90(0x15c)](),this['requestRedraw']();}[a28_0x3b475c(0x17b)](){const _0x515855=a28_0x3b475c,_0x393c7a=this[_0x515855(0x128)]();if(_0x393c7a<=0x0||this[_0x515855(0x1f1)]()<=0x0||this['_viewHeight']()<=0x0)return;const _0x1652e5=this[_0x515855(0x18e)]*this[_0x515855(0x13b)],_0x2bef85=this['_viewWidth'](),_0x5bf62c=this[_0x515855(0x16d)](),_0x9480d3=_0x2bef85*0.5+(this[_0x515855(0x171)]-this[_0x515855(0x1af)])*_0x393c7a,_0x23d97c=_0x5bf62c*0.5+(this['_kbdSelY']-this[_0x515855(0x19c)])*_0x393c7a;if(_0x9480d3<0x0)this[_0x515855(0x1af)]+=_0x9480d3/_0x393c7a;else{if(_0x9480d3+_0x1652e5>_0x2bef85)this[_0x515855(0x1af)]+=(_0x9480d3+_0x1652e5-_0x2bef85)/_0x393c7a;}if(_0x23d97c<0x0)this[_0x515855(0x19c)]+=_0x23d97c/_0x393c7a;else{if(_0x23d97c+_0x1652e5>_0x5bf62c)this[_0x515855(0x19c)]+=(_0x23d97c+_0x1652e5-_0x5bf62c)/_0x393c7a;}this[_0x515855(0x15c)]();}[a28_0x3b475c(0x139)](){const _0x3febcc=a28_0x3b475c,_0x93d183=this['canvas'];_0x93d183[_0x3febcc(0x186)]('contextmenu',_0x2f9069=>_0x2f9069[_0x3febcc(0x14c)]()),_0x93d183['addEventListener'](_0x3febcc(0x1e1),_0x4bb930=>this[_0x3febcc(0x13c)](_0x4bb930)),_0x93d183[_0x3febcc(0x186)]('mousemove',_0x2747e0=>this['_mouseMove'](_0x2747e0)),_0x93d183['addEventListener'](_0x3febcc(0x1b9),_0x282b61=>this['_mouseUp'](_0x282b61)),_0x93d183['addEventListener'](_0x3febcc(0x157),_0x598da6=>{const _0x272c72=_0x3febcc;_0x598da6[_0x272c72(0x14c)]();if(this[_0x272c72(0x17a)])return;const _0x51b2ef=_0x598da6[_0x272c72(0x17d)]<0x0?1.15:0x1/1.15;this[_0x272c72(0x152)](_0x51b2ef,_0x598da6[_0x272c72(0x1f2)],_0x598da6[_0x272c72(0x1a6)]);},{'passive':![]}),_0x93d183[_0x3febcc(0x186)](_0x3febcc(0x1d9),_0x1da212=>this[_0x3febcc(0x206)](_0x1da212),{'passive':![]}),_0x93d183[_0x3febcc(0x186)](_0x3febcc(0x14b),_0x9d63af=>this[_0x3febcc(0x206)](_0x9d63af),{'passive':![]}),_0x93d183[_0x3febcc(0x186)]('touchend',_0x59df13=>this[_0x3febcc(0x206)](_0x59df13),{'passive':![]}),_0x93d183[_0x3febcc(0x186)](_0x3febcc(0x176),_0x496b8e=>this['_touchEvent'](_0x496b8e),{'passive':![]});}[a28_0x3b475c(0x13c)](_0x2942b0){const _0x5cee6d=a28_0x3b475c;if(this[_0x5cee6d(0x17a)])return;this['_stopPanAnimation']();this['_hasKbdSel']&&(this[_0x5cee6d(0x141)]=![],this['_dirty']=!![]);this[_0x5cee6d(0x1fa)]=!![],this[_0x5cee6d(0x132)]=_0x2942b0[_0x5cee6d(0x1f2)],this[_0x5cee6d(0x1c0)]=_0x2942b0[_0x5cee6d(0x1a6)],this[_0x5cee6d(0x184)]=_0x2942b0[_0x5cee6d(0x1f2)],this[_0x5cee6d(0x1ca)]=_0x2942b0[_0x5cee6d(0x1a6)],this['_moved']=![],this[_0x5cee6d(0x1da)]=![],this['_dragging']=![],this[_0x5cee6d(0x1c5)]=_0x2942b0[_0x5cee6d(0x146)]===0x2;if(this[_0x5cee6d(0x1c5)]){const _0x1fdc80=this[_0x5cee6d(0x1ed)](_0x2942b0[_0x5cee6d(0x1f2)],_0x2942b0[_0x5cee6d(0x1a6)]);if(_0x1fdc80){if(_0x1fdc80===_0x5cee6d(0x158))this[_0x5cee6d(0x129)]();if(_0x1fdc80==='last')this['panToLastReveal']();return;}const _0x1cd5a8=this[_0x5cee6d(0x18b)](_0x2942b0['offsetX'],_0x2942b0[_0x5cee6d(0x1a6)]);if(this[_0x5cee6d(0x168)])this[_0x5cee6d(0x168)](_0x1cd5a8['x'],_0x1cd5a8['y'],ClickType[_0x5cee6d(0x1e4)]);}else this[_0x5cee6d(0x1ad)](_0x2942b0[_0x5cee6d(0x1f2)],_0x2942b0['offsetY']);}[a28_0x3b475c(0x143)](_0x3ca8c3){const _0x441b4c=a28_0x3b475c;if(!this[_0x441b4c(0x1fa)]||this['inert']||this['_isRightClick'])return;const _0x4e1347=_0x3ca8c3[_0x441b4c(0x1f2)]-this[_0x441b4c(0x132)],_0x3e553e=_0x3ca8c3[_0x441b4c(0x1a6)]-this[_0x441b4c(0x1c0)];if(!this[_0x441b4c(0x1cd)]){const _0x58bde7=Math['hypot'](_0x4e1347,_0x3e553e);_0x58bde7>CLICK_THRESHOLD&&(this[_0x441b4c(0x1cd)]=!![],this[_0x441b4c(0x140)]=!![],this[_0x441b4c(0x124)]());}if(this['_dragging']){const _0x169539=this[_0x441b4c(0x128)]();if(_0x169539>0x0){const _0x6b5d1b=_0x3ca8c3[_0x441b4c(0x1f2)]-this[_0x441b4c(0x184)],_0x5dbc01=_0x3ca8c3[_0x441b4c(0x1a6)]-this[_0x441b4c(0x1ca)];this[_0x441b4c(0x1af)]-=_0x6b5d1b/_0x169539,this['centerY']-=_0x5dbc01/_0x169539,this[_0x441b4c(0x15c)](),this['requestRedraw']();}}this['_lastMouseX']=_0x3ca8c3[_0x441b4c(0x1f2)],this[_0x441b4c(0x1ca)]=_0x3ca8c3[_0x441b4c(0x1a6)];}['_mouseUp'](_0x14dd5c){const _0x286c00=a28_0x3b475c;if(this['inert'])return;this[_0x286c00(0x1fa)]=![],this[_0x286c00(0x124)]();if(!this[_0x286c00(0x1c5)]&&!this[_0x286c00(0x1cd)]&&!this[_0x286c00(0x1da)]){const _0x414ab0=this[_0x286c00(0x1ed)](_0x14dd5c[_0x286c00(0x1f2)],_0x14dd5c[_0x286c00(0x1a6)]);if(_0x414ab0===_0x286c00(0x158))this[_0x286c00(0x129)]();else{if(_0x414ab0===_0x286c00(0x1e0))this['panToLastReveal']();else{const _0x4ec6d3=this['_screenToCell'](_0x14dd5c['offsetX'],_0x14dd5c[_0x286c00(0x1a6)]);if(this[_0x286c00(0x168)])this['onCellClick'](_0x4ec6d3['x'],_0x4ec6d3['y'],ClickType[_0x286c00(0x13d)]);}}}this[_0x286c00(0x140)]=![],this[_0x286c00(0x1c5)]=![],this[_0x286c00(0x1da)]=![];}[a28_0x3b475c(0x206)](_0x41d06b){const _0x26118a=a28_0x3b475c;_0x41d06b[_0x26118a(0x14c)]();if(this[_0x26118a(0x17a)])return;const _0xc103d2=_0x41d06b['touches'],_0x5e1138=_0x41d06b[_0x26118a(0x190)];_0x5e1138===_0x26118a(0x1d9)&&(this[_0x26118a(0x1ee)]=this[_0x26118a(0x18a)][_0x26118a(0x150)]());if(_0xc103d2[_0x26118a(0x159)]===0x2){this[_0x26118a(0x124)](),this[_0x26118a(0x1cd)]=!![];const _0x467708=this['_touchPos'](_0xc103d2[0x0]),_0x35cf16=this[_0x26118a(0x16e)](_0xc103d2[0x1]),_0xad2e99=(_0x467708['x']+_0x35cf16['x'])*0.5,_0x15cce9=(_0x467708['y']+_0x35cf16['y'])*0.5,_0x3abf1f=Math['hypot'](_0x35cf16['x']-_0x467708['x'],_0x35cf16['y']-_0x467708['y']);if(!this[_0x26118a(0x1e9)]){this['_stopPanAnimation'](),this[_0x26118a(0x1e9)]=!![],this[_0x26118a(0x18f)]=Math[_0x26118a(0x15e)](0x1,_0x3abf1f),this[_0x26118a(0x187)]=this[_0x26118a(0x13b)],this[_0x26118a(0x1e8)]=_0xad2e99,this[_0x26118a(0x169)]=_0x15cce9,this['_pinchStartViewX']=this['centerX'],this[_0x26118a(0x1d8)]=this[_0x26118a(0x19c)];return;}const _0x12deb0=clamp(this[_0x26118a(0x187)]*(_0x3abf1f/this[_0x26118a(0x18f)]),this[_0x26118a(0x1a1)],this[_0x26118a(0x1fb)]),_0x51d3e9=this[_0x26118a(0x18e)]*this['_pinchStartScale']+this[_0x26118a(0x1d2)],_0xcfea35=this[_0x26118a(0x1f0)]+(this[_0x26118a(0x1e8)]-this[_0x26118a(0x1f1)]()*0.5)/_0x51d3e9,_0x1c6e0d=this[_0x26118a(0x1d8)]+(this['_pinchStartCenterY']-this[_0x26118a(0x16d)]()*0.5)/_0x51d3e9;this[_0x26118a(0x13b)]=_0x12deb0;const _0x1eb5dd=this[_0x26118a(0x128)]();this['centerX']=_0xcfea35-(_0xad2e99-this[_0x26118a(0x1f1)]()*0.5)/_0x1eb5dd,this[_0x26118a(0x19c)]=_0x1c6e0d-(_0x15cce9-this[_0x26118a(0x16d)]()*0.5)/_0x1eb5dd,this[_0x26118a(0x15c)](),this[_0x26118a(0x1df)]();return;}if(_0xc103d2[_0x26118a(0x159)]===0x1){const _0x2fc224=this['_touchPos'](_0xc103d2[0x0]);if(this[_0x26118a(0x1e9)]){this[_0x26118a(0x1e9)]=![],this[_0x26118a(0x132)]=_0x2fc224['x'],this[_0x26118a(0x1c0)]=_0x2fc224['y'],this[_0x26118a(0x184)]=_0x2fc224['x'],this[_0x26118a(0x1ca)]=_0x2fc224['y'],this['_moved']=!![];return;}if(_0x5e1138===_0x26118a(0x1d9)){this['_stopPanAnimation'](),this[_0x26118a(0x132)]=_0x2fc224['x'],this[_0x26118a(0x1c0)]=_0x2fc224['y'],this['_lastMouseX']=_0x2fc224['x'],this[_0x26118a(0x1ca)]=_0x2fc224['y'],this[_0x26118a(0x1cd)]=![],this[_0x26118a(0x140)]=![],this[_0x26118a(0x1da)]=![],this[_0x26118a(0x1ad)](_0x2fc224['x'],_0x2fc224['y']);return;}if(_0x5e1138===_0x26118a(0x14b)){const _0x22c9a2=_0x2fc224['x']-this['_dragSX'],_0x47cb61=_0x2fc224['y']-this[_0x26118a(0x1c0)],_0xcd6997=Math[_0x26118a(0x12d)](_0x22c9a2,_0x47cb61);!this[_0x26118a(0x1cd)]&&_0xcd6997>CLICK_THRESHOLD&&(this['_moved']=!![],this[_0x26118a(0x140)]=!![],this['_cancelLongPress']());if(this['_dragging']){const _0x42a6fa=this[_0x26118a(0x128)]();if(_0x42a6fa>0x0){const _0x42c792=_0x2fc224['x']-this[_0x26118a(0x184)],_0x421176=_0x2fc224['y']-this[_0x26118a(0x1ca)];this[_0x26118a(0x1af)]-=_0x42c792/_0x42a6fa,this[_0x26118a(0x19c)]-=_0x421176/_0x42a6fa,this[_0x26118a(0x15c)](),this[_0x26118a(0x1df)]();}}this[_0x26118a(0x184)]=_0x2fc224['x'],this[_0x26118a(0x1ca)]=_0x2fc224['y'];}return;}if(_0xc103d2[_0x26118a(0x159)]===0x0){this[_0x26118a(0x124)]();if(!this[_0x26118a(0x1e9)]&&!this['_moved']&&!this[_0x26118a(0x1da)]){const _0x20fd27=this[_0x26118a(0x1ed)](this[_0x26118a(0x132)],this[_0x26118a(0x1c0)]);if(_0x20fd27===_0x26118a(0x158))this[_0x26118a(0x129)]();else{if(_0x20fd27===_0x26118a(0x1e0))this['panToLastReveal']();else{const _0x4a4302=this[_0x26118a(0x18b)](this[_0x26118a(0x132)],this[_0x26118a(0x1c0)]);if(this[_0x26118a(0x168)])this['onCellClick'](_0x4a4302['x'],_0x4a4302['y'],ClickType['LeftClick']);}}}this[_0x26118a(0x1e9)]=![],this[_0x26118a(0x140)]=![],this[_0x26118a(0x1cd)]=![],this[_0x26118a(0x1da)]=![],this[_0x26118a(0x1ee)]=null;}}[a28_0x3b475c(0x16e)](_0xdd4723){const _0x215629=a28_0x3b475c,_0x302d90=this[_0x215629(0x1ee)]||this['canvas'][_0x215629(0x150)]();return{'x':_0xdd4723[_0x215629(0x16a)]-_0x302d90[_0x215629(0x1d7)],'y':_0xdd4723[_0x215629(0x1e2)]-_0x302d90[_0x215629(0x200)]};}[a28_0x3b475c(0x1ad)](_0x4b3c30,_0xbde03b){const _0xbfac8a=a28_0x3b475c;this[_0xbfac8a(0x124)](),this[_0xbfac8a(0x12e)]=setTimeout(()=>{const _0x3275f4=_0xbfac8a;this[_0x3275f4(0x12e)]=null;if(this[_0x3275f4(0x17a)]||this[_0x3275f4(0x1cd)]||this[_0x3275f4(0x1da)]||this[_0x3275f4(0x1e9)])return;this[_0x3275f4(0x1da)]=!![];const _0x51ade8=this[_0x3275f4(0x18b)](_0x4b3c30,_0xbde03b);if(this[_0x3275f4(0x168)])this['onCellClick'](_0x51ade8['x'],_0x51ade8['y'],ClickType[_0x3275f4(0x1f4)]);},LONG_PRESS_MS);}[a28_0x3b475c(0x124)](){const _0x1c480c=a28_0x3b475c;this[_0x1c480c(0x12e)]&&(clearTimeout(this['_lpTimer']),this[_0x1c480c(0x12e)]=null);}}
+// InfiniteGridRenderer.js - Canvas renderer for infinite minesweeper
+// ============================================================================
+
+import { CellContent, CellState, ClickType } from '../../core/CoreEnums.js';
+
+// Shared SVG assets for digital numbers/textures (same set as GridRenderer.js)
+const INFINITE_SVG_ASSETS = {
+    n1: 'src/assets/grid/1.svg',  n2: 'src/assets/grid/2.svg',
+    n3: 'src/assets/grid/3.svg',  n4: 'src/assets/grid/4.svg',
+    n5: 'src/assets/grid/5.svg',  n6: 'src/assets/grid/6.svg',
+    n7: 'src/assets/grid/7.svg',  n8: 'src/assets/grid/8.svg',
+    flag: 'src/assets/grid/flag.svg',
+    mine: 'src/assets/grid/mine.svg',
+};
+const _infiniteSprites = new Map();
+let   _infiniteSpritesLoaded = false;
+
+function _ensureInfiniteSprites(onUpdate) {
+    if (_infiniteSpritesLoaded) return;
+    _infiniteSpritesLoaded = true;
+    for (const [key, src] of Object.entries(INFINITE_SVG_ASSETS)) {
+        const img = new Image();
+        img.decoding = 'async';
+        img.onload = () => { if (onUpdate) onUpdate(); };
+        img.src = src;
+        _infiniteSprites.set(key, img);
+    }
+}
+
+const BG_COLOR = '#333333';
+const HIDDEN_COLOR = '#888888';
+const REVEALED_COLOR = '#bbbbbb';
+const BORDER_COLOR = '#333333';
+
+const NUMBER_COLORS = [
+    '#0000ff', '#008000', '#ff0000', '#000080',
+    '#800000', '#008080', '#000000', '#808080',
+];
+
+const CLICK_THRESHOLD = 10;
+const LONG_PRESS_MS = 420;
+
+function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+}
+
+function easeInOutQuad(t) {
+    if (t < 0.5) return 2 * t * t;
+    return 1 - 2 * (1 - t) * (1 - t);
+}
+
+export class InfiniteGridRenderer {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d', { alpha: false });
+        this.gridManager = null;
+
+        this.cellSize = 28;
+        this.minScale = 0.2;
+        this.maxScale = 4.0;
+        this.scale = 1.0;
+        this.spacing = 1;
+
+        this.centerX = 0.5;
+        this.centerY = 0.5;
+
+        this.inert = true;
+
+        this.showLastArrow = false;
+        this.lastArrowAngle = 0;
+        this.showOriginArrow = false;
+        this.originArrowAngle = 0;
+
+        this.onCellClick = null;
+        this.onArrowDataChanged = null;
+
+        this._running = false;
+        this._rafId = 0;
+        this._dirty = true;
+
+        this._mouseIsDown = false;
+        this._dragging = false;
+        this._dragSX = 0;
+        this._dragSY = 0;
+        this._lastMouseX = 0;
+        this._lastMouseY = 0;
+        this._moved = false;
+        this._isRightClick = false;
+        this._lpTimer = null;
+        this._lpFired = false;
+
+        this._isPinching = false;
+        this._pinchStartDist = 1;
+        this._pinchStartScale = 1;
+        this._pinchStartCenterX = 0;
+        this._pinchStartCenterY = 0;
+        this._pinchStartViewX = 0;
+        this._pinchStartViewY = 0;
+
+        this._cachedRect = null;
+
+        this._panAnimating = false;
+        this._panStartX = 0;
+        this._panStartY = 0;
+        this._panTargetX = 0;
+        this._panTargetY = 0;
+        this._panStartTime = 0;
+        this._panDurationMs = 210;
+
+        // Keyboard selection state (mirrors Qt InfiniteGridRenderer)
+        this._hasKbdSel = false;
+        this._kbdSelX = 0;
+        this._kbdSelY = 0;
+
+        // Shift+Arrow smooth pan state
+        this._shiftPanLeft  = false;
+        this._shiftPanRight = false;
+        this._shiftPanUp    = false;
+        this._shiftPanDown  = false;
+        this._kbdPanTimer    = null;
+        this._kbdPanLastTime = 0;
+
+        // Digital settings
+        this._digitalNumbersEnabled  = false;
+        this._digitalTexturesEnabled = false;
+
+        this._paintFalseFlags = false;
+
+        _ensureInfiniteSprites(() => this.requestRedraw());
+
+        this._bindEvents();
+        this.resize();
+    }
+
+    setGridManager(gridManager) {
+        const isFreshGame = !gridManager || !this.gridManager ||
+            gridManager !== this.gridManager;
+        if (isFreshGame) {
+            this._hasKbdSel = false;
+            this._kbdSelX = 0;
+            this._kbdSelY = 0;
+            this._paintFalseFlags = false;
+        }
+        this.gridManager = gridManager;
+        this._updateArrowState();
+        this.requestRedraw();
+    }
+
+    setInert(inert) {
+        if (!inert) this._paintFalseFlags = false;
+        this.inert = !!inert;
+    }
+
+    revealFalseFlags() {
+        this._paintFalseFlags = true;
+        this.requestRedraw();
+    }
+
+    clearFalseFlags() {
+        this._paintFalseFlags = false;
+        this.requestRedraw();
+    }
+
+    show() {
+        this.canvas.style.display = '';
+        this.resize();
+        this.startRenderLoop();
+    }
+
+    hide() {
+        this.stopRenderLoop();
+        this.canvas.style.display = 'none';
+        this._hasKbdSel = false;
+        this.stopAllKbdShiftPan();
+    }
+
+    startRenderLoop() {
+        this._running = true;
+        this.requestRedraw();
+    }
+
+    stopRenderLoop() {
+        this._running = false;
+        if (this._rafId) {
+            cancelAnimationFrame(this._rafId);
+            this._rafId = 0;
+        }
+    }
+
+    requestRedraw() {
+        this._dirty = true;
+        this._scheduleFrame();
+    }
+
+    resize() {
+        const parent = this.canvas.parentElement;
+        if (!parent) return;
+
+        const rect = parent.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+
+        this.canvas.width = Math.round(rect.width * dpr);
+        this.canvas.height = Math.round(rect.height * dpr);
+        this.canvas.style.width = `${rect.width}px`;
+        this.canvas.style.height = `${rect.height}px`;
+
+        this._updateArrowState();
+        this.requestRedraw();
+    }
+
+    resetView() {
+        if (this._viewWidth() <= 0 || this._viewHeight() <= 0) return;
+
+        this._stopPanAnimation();
+        this.centerX = 0.5;
+        this.centerY = 0.5;
+
+        const fitScale = Math.min(this._viewWidth(), this._viewHeight()) / (this.cellSize * 15);
+        this.scale = clamp(fitScale, this.minScale, this.maxScale);
+
+        this._updateArrowState();
+        this.requestRedraw();
+    }
+
+    panToCell(x, y) {
+        this._startPanAnimation(Number(x) + 0.5, Number(y) + 0.5);
+    }
+
+    panToOrigin() {
+        this.panToCell(0, 0);
+    }
+
+    panToLastReveal() {
+        if (!this.gridManager || !this.gridManager.hasLastReveal) return;
+        this.panToCell(this.gridManager.lastRevealX, this.gridManager.lastRevealY);
+    }
+
+    _viewWidth() {
+        const dpr = window.devicePixelRatio || 1;
+        return this.canvas.width / dpr;
+    }
+
+    _viewHeight() {
+        const dpr = window.devicePixelRatio || 1;
+        return this.canvas.height / dpr;
+    }
+
+    _stride() {
+        return this.cellSize * this.scale + this.spacing;
+    }
+
+    _scheduleFrame() {
+        if (!this._running || this._rafId) return;
+        this._rafId = requestAnimationFrame((now) => {
+            this._rafId = 0;
+            if (!this._running) return;
+            this._frame(now);
+        });
+    }
+
+    _frame(now) {
+        if (this._panAnimating) {
+            this._stepPanAnimation(now);
+            this._dirty = true;
+        }
+
+        if (this._dirty) {
+            this._draw();
+            this._dirty = false;
+        }
+
+        if (this._running && (this._dirty || this._panAnimating)) {
+            this._scheduleFrame();
+        }
+    }
+
+    _draw() {
+        if (!this.ctx) return;
+
+        const dpr = window.devicePixelRatio || 1;
+        const vw = this._viewWidth();
+        const vh = this._viewHeight();
+
+        this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        this.ctx.fillStyle = BG_COLOR;
+        this.ctx.fillRect(0, 0, vw, vh);
+
+        if (this.gridManager) {
+            const stride = this._stride();
+            if (stride > 0) {
+                const halfCellsX = vw * 0.5 / stride;
+                const halfCellsY = vh * 0.5 / stride;
+
+                const startX = Math.floor(this.centerX - halfCellsX) - 1;
+                const endX = Math.ceil(this.centerX + halfCellsX) + 1;
+                const startY = Math.floor(this.centerY - halfCellsY) - 1;
+                const endY = Math.ceil(this.centerY + halfCellsY) + 1;
+
+                const drawSize = this.cellSize * this.scale;
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+
+                for (let y = startY; y <= endY; y++) {
+                    for (let x = startX; x <= endX; x++) {
+                        const sx = vw * 0.5 + (x - this.centerX) * stride;
+                        const sy = vh * 0.5 + (y - this.centerY) * stride;
+
+                        if (sx + drawSize < 0 || sy + drawSize < 0 || sx > vw || sy > vh) {
+                            continue;
+                        }
+
+                        const cell = this.gridManager.cellAt(x, y);
+                        const isRevealed = cell.state === CellState.Revealed;
+
+                        this.ctx.fillStyle = isRevealed ? REVEALED_COLOR : HIDDEN_COLOR;
+                        this.ctx.fillRect(sx, sy, drawSize, drawSize);
+
+                        this.ctx.strokeStyle = BORDER_COLOR;
+                        this.ctx.lineWidth = 1;
+                        this.ctx.strokeRect(sx + 0.5, sy + 0.5, drawSize - 1, drawSize - 1);
+
+                        if (cell.state === CellState.Flagged) {
+                            if (this._paintFalseFlags && cell.content !== CellContent.Mine) {
+                                this._drawFalseFlag(sx, sy, drawSize);
+                            } else {
+                                this._drawFlag(sx, sy, drawSize);
+                            }
+                            continue;
+                        }
+
+                        if (isRevealed && cell.content === CellContent.Mine) {
+                            this._drawMine(sx, sy, drawSize);
+                            continue;
+                        }
+
+                        if (isRevealed && cell.content === CellContent.Safe) {
+                            const adj = this.gridManager.adjacentMines(x, y);
+                            if (adj > 0) {
+                                if (this._digitalNumbersEnabled) {
+                                    this._drawSvgGlyph(`n${adj}`, sx, sy, drawSize);
+                                } else {
+                                    this.ctx.fillStyle = NUMBER_COLORS[Math.min(adj, 8) - 1] || '#000000';
+                                    this.ctx.font = `bold ${Math.floor(drawSize * 0.64)}px Segoe UI`;
+                                    this.ctx.fillText(String(adj), sx + drawSize * 0.5, sy + drawSize * 0.54);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        this._drawArrows(vw, vh);
+        this._drawKbdCursor(vw, vh);
+    }
+
+    _drawSvgGlyph(key, x, y, size) {
+        const img = _infiniteSprites.get(key);
+        if (img && img.complete && img.naturalWidth > 0) {
+            const pad = size * 0.1;
+            this.ctx.drawImage(img, x + pad, y + pad, size - pad * 2, size - pad * 2);
+            return true;
+        }
+        return false;
+    }
+
+    setDigitalNumbersEnabled(enabled) {
+        const normalized = !!enabled;
+        if (this._digitalNumbersEnabled === normalized) return;
+        this._digitalNumbersEnabled = normalized;
+        this.requestRedraw();
+    }
+
+    setDigitalTexturesEnabled(enabled) {
+        const normalized = !!enabled;
+        if (this._digitalTexturesEnabled === normalized) return;
+        this._digitalTexturesEnabled = normalized;
+        this.requestRedraw();
+    }
+
+    _drawFlag(x, y, size) {
+        if (this._digitalTexturesEnabled && this._drawSvgGlyph('flag', x, y, size)) return;
+        this.ctx.font = `${Math.floor(size * 0.68)}px serif`;
+        this.ctx.textAlign = 'center';
+        this.ctx.textBaseline = 'middle';
+        this.ctx.fillStyle = '#000000';
+        this.ctx.fillText('🚩', x + size * 0.5, y + size * 0.54);
+    }
+
+    _drawFalseFlag(x, y, size) {
+        this.ctx.font = `${Math.floor(size * 0.68)}px serif`;
+        this.ctx.textAlign = 'center';
+        this.ctx.textBaseline = 'middle';
+        this.ctx.fillStyle = '#000000';
+        this.ctx.fillText('❌', x + size * 0.5, y + size * 0.54);
+    }
+
+    _drawMine(x, y, size) {
+        if (this._digitalTexturesEnabled && this._drawSvgGlyph('mine', x, y, size)) return;
+        this.ctx.font = `${Math.floor(size * 0.68)}px serif`;
+        this.ctx.textAlign = 'center';
+        this.ctx.textBaseline = 'middle';
+        this.ctx.fillStyle = '#000000';
+        this.ctx.fillText('💣', x + size * 0.5, y + size * 0.54);
+    }
+
+    _drawArrows(vw, vh) {
+        if (this.showLastArrow) {
+            const p = this._arrowPoint(this.lastArrowAngle, vw, vh);
+            this._drawArrowBadge(p.x, p.y, this.lastArrowAngle, '#f39c12', 'L');
+        }
+        if (this.showOriginArrow) {
+            const p = this._arrowPoint(this.originArrowAngle, vw, vh);
+            this._drawArrowBadge(p.x, p.y, this.originArrowAngle, '#3498db', 'O');
+        }
+    }
+
+    _drawArrowBadge(x, y, angleDeg, color, label) {
+        const r = 22;
+        this.ctx.save();
+
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+        this.ctx.beginPath();
+        this.ctx.arc(x, y, r + 2, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        this.ctx.fillStyle = color;
+        this.ctx.beginPath();
+        this.ctx.arc(x, y, r, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+        this.ctx.lineWidth = 1;
+        this.ctx.stroke();
+
+        this.ctx.translate(x, y);
+        this.ctx.rotate((angleDeg * Math.PI) / 180);
+        this.ctx.fillStyle = '#ffffff';
+        this.ctx.beginPath();
+        this.ctx.moveTo(9, 0);
+        this.ctx.lineTo(-6, 6);
+        this.ctx.lineTo(-6, -6);
+        this.ctx.closePath();
+        this.ctx.fill();
+
+        this.ctx.restore();
+
+        this.ctx.fillStyle = '#ffffff';
+        this.ctx.font = 'bold 10px Segoe UI';
+        this.ctx.textAlign = 'center';
+        this.ctx.textBaseline = 'middle';
+        this.ctx.fillText(label, x, y + 15);
+    }
+
+    _drawKbdCursor(vw, vh) {
+        if (!this._hasKbdSel) return;
+        const worldStride = this._stride();
+        if (worldStride <= 0) return;
+        const drawSize = this.cellSize * this.scale;
+        const sx = vw * 0.5 + (this._kbdSelX - this.centerX) * worldStride;
+        const sy = vh * 0.5 + (this._kbdSelY - this.centerY) * worldStride;
+        const bw = Math.max(2, 1);
+        this.ctx.strokeStyle = 'rgba(255, 230, 120, 0.90)';
+        this.ctx.lineWidth = bw;
+        this.ctx.strokeRect(sx + bw * 0.5, sy + bw * 0.5, drawSize - bw, drawSize - bw);
+    }
+
+    _arrowPoint(angleDeg, vw, vh) {
+        const edgeRadius = Math.max(28, Math.min(vw, vh) * 0.5 - 34);
+        const rad = (angleDeg * Math.PI) / 180;
+        return {
+            x: vw * 0.5 + Math.cos(rad) * edgeRadius,
+            y: vh * 0.5 + Math.sin(rad) * edgeRadius,
+        };
+    }
+
+    _hitTestArrow(px, py) {
+        const vw = this._viewWidth();
+        const vh = this._viewHeight();
+        const hitRadius = 24;
+
+        if (this.showLastArrow) {
+            const p = this._arrowPoint(this.lastArrowAngle, vw, vh);
+            const dx = px - p.x;
+            const dy = py - p.y;
+            if (dx * dx + dy * dy <= hitRadius * hitRadius) return 'last';
+        }
+
+        if (this.showOriginArrow) {
+            const p = this._arrowPoint(this.originArrowAngle, vw, vh);
+            const dx = px - p.x;
+            const dy = py - p.y;
+            if (dx * dx + dy * dy <= hitRadius * hitRadius) return 'origin';
+        }
+
+        return '';
+    }
+
+    _updateArrowState() {
+        let showOriginArrow = false;
+        let originArrowAngle = 0;
+        let showLastArrow = false;
+        let lastArrowAngle = 0;
+
+        const worldStride = this._stride();
+        if (this.gridManager && this._viewWidth() > 0 && this._viewHeight() > 0 && worldStride > 0) {
+            const halfW = (this._viewWidth() * 0.5) / worldStride;
+            const halfH = (this._viewHeight() * 0.5) / worldStride;
+            const minX = this.centerX - halfW;
+            const maxX = this.centerX + halfW;
+            const minY = this.centerY - halfH;
+            const maxY = this.centerY + halfH;
+
+            const isVisible = (x, y) => x >= minX && x <= maxX && y >= minY && y <= maxY;
+
+            showOriginArrow = !isVisible(0, 0);
+            if (showOriginArrow) {
+                originArrowAngle = (Math.atan2(-this.centerY, -this.centerX) * 180) / Math.PI;
+            }
+
+            if (this.gridManager.hasLastReveal) {
+                const lx = this.gridManager.lastRevealX;
+                const ly = this.gridManager.lastRevealY;
+                showLastArrow = !isVisible(lx, ly);
+                if (showLastArrow) {
+                    const dx = lx - this.centerX;
+                    const dy = ly - this.centerY;
+                    lastArrowAngle = (Math.atan2(dy, dx) * 180) / Math.PI;
+                }
+            }
+        }
+
+        const changed = this.showOriginArrow !== showOriginArrow
+            || Math.abs(this.originArrowAngle - originArrowAngle) > 0.0001
+            || this.showLastArrow !== showLastArrow
+            || Math.abs(this.lastArrowAngle - lastArrowAngle) > 0.0001;
+
+        if (!changed) return;
+
+        this.showOriginArrow = showOriginArrow;
+        this.originArrowAngle = originArrowAngle;
+        this.showLastArrow = showLastArrow;
+        this.lastArrowAngle = lastArrowAngle;
+
+        if (this.onArrowDataChanged) {
+            this.onArrowDataChanged({
+                showOriginArrow: this.showOriginArrow,
+                originArrowAngle: this.originArrowAngle,
+                showLastArrow: this.showLastArrow,
+                lastArrowAngle: this.lastArrowAngle,
+            });
+        }
+    }
+
+    _screenToCell(sx, sy) {
+        const worldStride = this._stride();
+        if (worldStride <= 0) return { x: 0, y: 0 };
+        const wx = this.centerX + (sx - this._viewWidth() * 0.5) / worldStride;
+        const wy = this.centerY + (sy - this._viewHeight() * 0.5) / worldStride;
+        return { x: Math.floor(wx), y: Math.floor(wy) };
+    }
+
+    _zoomAt(factor, sx, sy) {
+        this._stopPanAnimation();
+
+        const oldStride = this._stride();
+        if (oldStride <= 0) return;
+
+        const worldX = this.centerX + (sx - this._viewWidth() * 0.5) / oldStride;
+        const worldY = this.centerY + (sy - this._viewHeight() * 0.5) / oldStride;
+
+        this.scale = clamp(this.scale * factor, this.minScale, this.maxScale);
+
+        const newStride = this._stride();
+        if (newStride <= 0) return;
+
+        this.centerX = worldX - (sx - this._viewWidth() * 0.5) / newStride;
+        this.centerY = worldY - (sy - this._viewHeight() * 0.5) / newStride;
+
+        this._updateArrowState();
+        this.requestRedraw();
+    }
+
+    _startPanAnimation(targetX, targetY) {
+        const dx = targetX - this.centerX;
+        const dy = targetY - this.centerY;
+        if (Math.abs(dx) < 0.001 && Math.abs(dy) < 0.001) {
+            this.centerX = targetX;
+            this.centerY = targetY;
+            this._updateArrowState();
+            this.requestRedraw();
+            return;
+        }
+
+        this._panStartX = this.centerX;
+        this._panStartY = this.centerY;
+        this._panTargetX = targetX;
+        this._panTargetY = targetY;
+        this._panStartTime = performance.now();
+        this._panAnimating = true;
+        this.requestRedraw();
+    }
+
+    _stepPanAnimation(now) {
+        if (!this._panAnimating) return;
+
+        const t = clamp((now - this._panStartTime) / this._panDurationMs, 0, 1);
+        const eased = easeInOutQuad(t);
+
+        this.centerX = this._panStartX + (this._panTargetX - this._panStartX) * eased;
+        this.centerY = this._panStartY + (this._panTargetY - this._panStartY) * eased;
+        this._updateArrowState();
+
+        if (t >= 1) {
+            this._panAnimating = false;
+        }
+    }
+
+    _stopPanAnimation() {
+        this._panAnimating = false;
+    }
+
+    // ========================================================================
+    // Keyboard selection (mirrors Qt InfiniteGridRenderer)
+    // ========================================================================
+
+    ensureKbdSelection() {
+        if (!this.gridManager) return false;
+        if (this._hasKbdSel) return true;
+        // Keep pre-seeded (0,0) so first key action is deterministic
+        this._hasKbdSel = true;
+        this.requestRedraw();
+        return true;
+    }
+
+    moveKbdSelection(dx, dy) {
+        if (!this.ensureKbdSelection()) return;
+        this._stopPanAnimation();
+        this._kbdSelX += dx;
+        this._kbdSelY += dy;
+        this._keepSelectionVisible();
+        this.requestRedraw();
+    }
+
+    hideKbdSelection() {
+        if (!this._hasKbdSel) return;
+        this._hasKbdSel = false;
+        this.requestRedraw();
+    }
+
+    keyboardRevealSelected() {
+        if (!this.gridManager || this.inert) return;
+        if (!this.ensureKbdSelection()) return;
+        if (this.onCellClick) this.onCellClick(this._kbdSelX, this._kbdSelY, ClickType.LeftClick);
+    }
+
+    keyboardFlagSelected() {
+        if (!this.gridManager || this.inert) return;
+        if (!this.ensureKbdSelection()) return;
+        if (this.onCellClick) this.onCellClick(this._kbdSelX, this._kbdSelY, ClickType.RightClick);
+    }
+
+    keyboardZoomIn() {
+        if (!this.gridManager || this.inert) return;
+        this._zoomAt(1.15, this._viewWidth() * 0.5, this._viewHeight() * 0.5);
+    }
+
+    keyboardZoomOut() {
+        if (!this.gridManager || this.inert) return;
+        this._zoomAt(1 / 1.15, this._viewWidth() * 0.5, this._viewHeight() * 0.5);
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // Shift+Arrow smooth pan  (mirrors Qt InfiniteGridRenderer / GridRenderer shift-pan)
+    // ═══════════════════════════════════════════════════════════════════════\n
+    startKbdShiftPan(key) {
+        switch (key) {
+        case 'ArrowLeft':  this._shiftPanLeft  = true; break;
+        case 'ArrowRight': this._shiftPanRight = true; break;
+        case 'ArrowUp':    this._shiftPanUp    = true; break;
+        case 'ArrowDown':  this._shiftPanDown  = true; break;
+        }
+        if (!this._kbdPanTimer && this._anyShiftPanKey()) {
+            this._kbdPanLastTime = performance.now();
+            this._kbdPanTimer = setInterval(() => this._stepKbdPan(), 16);
+        }
+    }
+
+    stopKbdShiftPan(key) {
+        switch (key) {
+        case 'ArrowLeft':  this._shiftPanLeft  = false; break;
+        case 'ArrowRight': this._shiftPanRight = false; break;
+        case 'ArrowUp':    this._shiftPanUp    = false; break;
+        case 'ArrowDown':  this._shiftPanDown  = false; break;
+        }
+        if (!this._anyShiftPanKey()) this._stopKbdPanTimer();
+    }
+
+    stopAllKbdShiftPan() {
+        this._shiftPanLeft = this._shiftPanRight = this._shiftPanUp = this._shiftPanDown = false;
+        this._stopKbdPanTimer();
+    }
+
+    _anyShiftPanKey() {
+        return this._shiftPanLeft || this._shiftPanRight || this._shiftPanUp || this._shiftPanDown;
+    }
+
+    _stopKbdPanTimer() {
+        if (this._kbdPanTimer) { clearInterval(this._kbdPanTimer); this._kbdPanTimer = null; }
+    }
+
+    _stepKbdPan() {
+        if (this.inert || !this._anyShiftPanKey()) { this._stopKbdPanTimer(); return; }
+        const now = performance.now();
+        const dt  = Math.min((now - this._kbdPanLastTime) / 1000, 0.05);
+        this._kbdPanLastTime = now;
+        const stride = this._stride();
+        if (stride <= 0) return;
+        const speedPx  = Math.max(420, 14 * stride);  // px/s, mirrors Qt keyboardPanSpeedPxPerSec (min=420, mult=14)
+        const speedCell = speedPx / stride;            // world cells/s
+        // Arrow = viewport motion direction → centerX is the camera center;
+        // moving viewport right means center moves right → centerX increases.
+        this.centerX += ((this._shiftPanRight ? 1 : 0) - (this._shiftPanLeft  ? 1 : 0)) * speedCell * dt;
+        this.centerY += ((this._shiftPanDown  ? 1 : 0) - (this._shiftPanUp    ? 1 : 0)) * speedCell * dt;
+        this._updateArrowState();
+        this.requestRedraw();
+    }
+
+    _keepSelectionVisible() {
+        const worldStride = this._stride();
+        if (worldStride <= 0 || this._viewWidth() <= 0 || this._viewHeight() <= 0) return;
+        const drawSize = this.cellSize * this.scale;
+        const vw = this._viewWidth(), vh = this._viewHeight();
+        const cellLeft = vw * 0.5 + (this._kbdSelX - this.centerX) * worldStride;
+        const cellTop  = vh * 0.5 + (this._kbdSelY - this.centerY) * worldStride;
+        if (cellLeft < 0)                      this.centerX += cellLeft / worldStride;
+        else if (cellLeft + drawSize > vw)     this.centerX += (cellLeft + drawSize - vw) / worldStride;
+        if (cellTop < 0)                       this.centerY += cellTop / worldStride;
+        else if (cellTop + drawSize > vh)      this.centerY += (cellTop + drawSize - vh) / worldStride;
+        this._updateArrowState();
+    }
+
+    _bindEvents() {
+        const c = this.canvas;
+
+        c.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        c.addEventListener('mousedown', (e) => this._mouseDown(e));
+        c.addEventListener('mousemove', (e) => this._mouseMove(e));
+        c.addEventListener('mouseup', (e) => this._mouseUp(e));
+
+        c.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            if (this.inert) return;
+            const factor = e.deltaY < 0 ? 1.15 : (1 / 1.15);
+            this._zoomAt(factor, e.offsetX, e.offsetY);
+        }, { passive: false });
+
+        c.addEventListener('touchstart', (e) => this._touchEvent(e), { passive: false });
+        c.addEventListener('touchmove', (e) => this._touchEvent(e), { passive: false });
+        c.addEventListener('touchend', (e) => this._touchEvent(e), { passive: false });
+        c.addEventListener('touchcancel', (e) => this._touchEvent(e), { passive: false });
+    }
+
+    _mouseDown(e) {
+        if (this.inert) return;
+
+        this._stopPanAnimation();
+
+        // Clear keyboard selection on mouse interaction
+        if (this._hasKbdSel) {
+            this._hasKbdSel = false;
+            this._dirty = true;
+        }
+
+        this._mouseIsDown = true;
+        this._dragSX = e.offsetX;
+        this._dragSY = e.offsetY;
+        this._lastMouseX = e.offsetX;
+        this._lastMouseY = e.offsetY;
+        this._moved = false;
+        this._lpFired = false;
+        this._dragging = false;
+        this._isRightClick = e.button === 2;
+
+        if (this._isRightClick) {
+            const arrowHit = this._hitTestArrow(e.offsetX, e.offsetY);
+            if (arrowHit) {
+                if (arrowHit === 'origin') this.panToOrigin();
+                if (arrowHit === 'last') this.panToLastReveal();
+                return;
+            }
+            const cell = this._screenToCell(e.offsetX, e.offsetY);
+            if (this.onCellClick) this.onCellClick(cell.x, cell.y, ClickType.RightClick);
+        } else {
+            this._startLongPress(e.offsetX, e.offsetY);
+        }
+    }
+
+    _mouseMove(e) {
+        if (!this._mouseIsDown || this.inert || this._isRightClick) return;
+
+        const dx = e.offsetX - this._dragSX;
+        const dy = e.offsetY - this._dragSY;
+
+        if (!this._moved) {
+            const dist = Math.hypot(dx, dy);
+            if (dist > CLICK_THRESHOLD) {
+                this._moved = true;
+                this._dragging = true;
+                this._cancelLongPress();
+            }
+        }
+
+        if (this._dragging) {
+            const worldStride = this._stride();
+            if (worldStride > 0) {
+                const mdx = e.offsetX - this._lastMouseX;
+                const mdy = e.offsetY - this._lastMouseY;
+                this.centerX -= mdx / worldStride;
+                this.centerY -= mdy / worldStride;
+                this._updateArrowState();
+                this.requestRedraw();
+            }
+        }
+
+        this._lastMouseX = e.offsetX;
+        this._lastMouseY = e.offsetY;
+    }
+
+    _mouseUp(e) {
+        if (this.inert) return;
+
+        this._mouseIsDown = false;
+        this._cancelLongPress();
+
+        if (!this._isRightClick && !this._moved && !this._lpFired) {
+            const arrowHit = this._hitTestArrow(e.offsetX, e.offsetY);
+            if (arrowHit === 'origin') {
+                this.panToOrigin();
+            } else if (arrowHit === 'last') {
+                this.panToLastReveal();
+            } else {
+                const cell = this._screenToCell(e.offsetX, e.offsetY);
+                if (this.onCellClick) this.onCellClick(cell.x, cell.y, ClickType.LeftClick);
+            }
+        }
+
+        this._dragging = false;
+        this._isRightClick = false;
+        this._lpFired = false;
+    }
+
+    _touchEvent(e) {
+        e.preventDefault();
+        if (this.inert) return;
+
+        const touches = e.touches;
+        const type = e.type;
+
+        if (type === 'touchstart') {
+            this._cachedRect = this.canvas.getBoundingClientRect();
+        }
+
+        if (touches.length === 2) {
+            this._cancelLongPress();
+            this._moved = true;
+
+            const p1 = this._touchPos(touches[0]);
+            const p2 = this._touchPos(touches[1]);
+            const cx = (p1.x + p2.x) * 0.5;
+            const cy = (p1.y + p2.y) * 0.5;
+            const dist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+
+            if (!this._isPinching) {
+                this._stopPanAnimation();
+                this._isPinching = true;
+                this._pinchStartDist = Math.max(1, dist);
+                this._pinchStartScale = this.scale;
+                this._pinchStartCenterX = cx;
+                this._pinchStartCenterY = cy;
+                this._pinchStartViewX = this.centerX;
+                this._pinchStartViewY = this.centerY;
+                return;
+            }
+
+            const newScale = clamp(
+                this._pinchStartScale * (dist / this._pinchStartDist),
+                this.minScale,
+                this.maxScale
+            );
+
+            const stride0 = this.cellSize * this._pinchStartScale + this.spacing;
+            const gx = this._pinchStartViewX + (this._pinchStartCenterX - this._viewWidth() * 0.5) / stride0;
+            const gy = this._pinchStartViewY + (this._pinchStartCenterY - this._viewHeight() * 0.5) / stride0;
+
+            this.scale = newScale;
+            const strideN = this._stride();
+            this.centerX = gx - (cx - this._viewWidth() * 0.5) / strideN;
+            this.centerY = gy - (cy - this._viewHeight() * 0.5) / strideN;
+
+            this._updateArrowState();
+            this.requestRedraw();
+            return;
+        }
+
+        if (touches.length === 1) {
+            const p = this._touchPos(touches[0]);
+
+            if (this._isPinching) {
+                this._isPinching = false;
+                this._dragSX = p.x;
+                this._dragSY = p.y;
+                this._lastMouseX = p.x;
+                this._lastMouseY = p.y;
+                this._moved = true;
+                return;
+            }
+
+            if (type === 'touchstart') {
+                this._stopPanAnimation();
+                this._dragSX = p.x;
+                this._dragSY = p.y;
+                this._lastMouseX = p.x;
+                this._lastMouseY = p.y;
+                this._moved = false;
+                this._dragging = false;
+                this._lpFired = false;
+                this._startLongPress(p.x, p.y);
+                return;
+            }
+
+            if (type === 'touchmove') {
+                const dx = p.x - this._dragSX;
+                const dy = p.y - this._dragSY;
+                const dist = Math.hypot(dx, dy);
+                if (!this._moved && dist > CLICK_THRESHOLD) {
+                    this._moved = true;
+                    this._dragging = true;
+                    this._cancelLongPress();
+                }
+
+                if (this._dragging) {
+                    const worldStride = this._stride();
+                    if (worldStride > 0) {
+                        const mdx = p.x - this._lastMouseX;
+                        const mdy = p.y - this._lastMouseY;
+                        this.centerX -= mdx / worldStride;
+                        this.centerY -= mdy / worldStride;
+                        this._updateArrowState();
+                        this.requestRedraw();
+                    }
+                }
+
+                this._lastMouseX = p.x;
+                this._lastMouseY = p.y;
+            }
+
+            return;
+        }
+
+        if (touches.length === 0) {
+            this._cancelLongPress();
+
+            if (!this._isPinching && !this._moved && !this._lpFired) {
+                const arrowHit = this._hitTestArrow(this._dragSX, this._dragSY);
+                if (arrowHit === 'origin') {
+                    this.panToOrigin();
+                } else if (arrowHit === 'last') {
+                    this.panToLastReveal();
+                } else {
+                    const cell = this._screenToCell(this._dragSX, this._dragSY);
+                    if (this.onCellClick) this.onCellClick(cell.x, cell.y, ClickType.LeftClick);
+                }
+            }
+
+            this._isPinching = false;
+            this._dragging = false;
+            this._moved = false;
+            this._lpFired = false;
+            this._cachedRect = null;
+        }
+    }
+
+    _touchPos(touch) {
+        const rect = this._cachedRect || this.canvas.getBoundingClientRect();
+        return {
+            x: touch.clientX - rect.left,
+            y: touch.clientY - rect.top,
+        };
+    }
+
+    _startLongPress(sx, sy) {
+        this._cancelLongPress();
+        this._lpTimer = setTimeout(() => {
+            this._lpTimer = null;
+            if (this.inert || this._moved || this._lpFired || this._isPinching) return;
+            this._lpFired = true;
+            const cell = this._screenToCell(sx, sy);
+            if (this.onCellClick) this.onCellClick(cell.x, cell.y, ClickType.LongLeftClick);
+        }, LONG_PRESS_MS);
+    }
+
+    _cancelLongPress() {
+        if (this._lpTimer) {
+            clearTimeout(this._lpTimer);
+            this._lpTimer = null;
+        }
+    }
+}

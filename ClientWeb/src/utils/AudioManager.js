@@ -1,1 +1,72 @@
-const a29_0x3b749a=a29_0x4b2d;function a29_0x36be(){const _0x4e9b50=['volume','auto','6922476rKOJhZ','pause','init','setFlagVolume','111735wfXFri','playFlag','../assets/sounds/explosion.wav','_flagAudio','../assets/sounds/reveal.wav','_createAudio','enabled','381451GOHIhe','flagVolume','1310cIDqJN','879EeZzeL','playExplosion','136egobOx','setEnabled','2487935iLDTaq','_explosionAudio','setRevealVolume','11568CDcTbl','catch','currentTime','playReveal','revealVolume','1490470erhvne','../assets/sounds/flag.wav','href','_play','preload','472514aCxIhM','_revealAudio'];a29_0x36be=function(){return _0x4e9b50;};return a29_0x36be();}(function(_0x29f23d,_0x464c9f){const _0x3580e0=a29_0x4b2d,_0x1fc8d9=_0x29f23d();while(!![]){try{const _0x31c809=-parseInt(_0x3580e0(0xb5))/0x1+parseInt(_0x3580e0(0xc4))/0x2+parseInt(_0x3580e0(0xb8))/0x3*(-parseInt(_0x3580e0(0xbf))/0x4)+-parseInt(_0x3580e0(0xbc))/0x5+parseInt(_0x3580e0(0xcd))/0x6+parseInt(_0x3580e0(0xc9))/0x7*(-parseInt(_0x3580e0(0xba))/0x8)+parseInt(_0x3580e0(0xd1))/0x9*(parseInt(_0x3580e0(0xb7))/0xa);if(_0x31c809===_0x464c9f)break;else _0x1fc8d9['push'](_0x1fc8d9['shift']());}catch(_0x3db935){_0x1fc8d9['push'](_0x1fc8d9['shift']());}}}(a29_0x36be,0x9f09a));function a29_0x4b2d(_0x2bb769,_0x57da87){_0x2bb769=_0x2bb769-0xb3;const _0x36bef9=a29_0x36be();let _0x4b2d2f=_0x36bef9[_0x2bb769];return _0x4b2d2f;}export class AudioManager{constructor(){const _0x58f776=a29_0x4b2d;this['revealVolume']=0.1,this['flagVolume']=0.1,this[_0x58f776(0xb4)]=!![],this[_0x58f776(0xca)]=null,this[_0x58f776(0xd4)]=null,this[_0x58f776(0xbd)]=null;}[a29_0x3b749a(0xcf)](){const _0xb2823e=a29_0x3b749a;this[_0xb2823e(0xca)]=this[_0xb2823e(0xb3)](_0xb2823e(0xd5),this[_0xb2823e(0xc3)]),this[_0xb2823e(0xd4)]=this[_0xb2823e(0xb3)](_0xb2823e(0xc5),this[_0xb2823e(0xb6)]),this[_0xb2823e(0xbd)]=this[_0xb2823e(0xb3)](_0xb2823e(0xd3),this[_0xb2823e(0xc3)]);}[a29_0x3b749a(0xb3)](_0x1f0900,_0x13d7dd){const _0x3d9280=a29_0x3b749a,_0x1ffe6d=new URL(_0x1f0900,import.meta.url)[_0x3d9280(0xc6)],_0x51904f=new Audio(_0x1ffe6d);return _0x51904f[_0x3d9280(0xc8)]=_0x3d9280(0xcc),_0x51904f[_0x3d9280(0xcb)]=_0x13d7dd,_0x51904f;}[a29_0x3b749a(0xc7)](_0x30ac75){const _0x364868=a29_0x3b749a;if(!_0x30ac75||!this[_0x364868(0xb4)])return;try{_0x30ac75[_0x364868(0xce)](),_0x30ac75[_0x364868(0xc1)]=0x0;const _0x3feecb=_0x30ac75['play']();_0x3feecb&&typeof _0x3feecb[_0x364868(0xc0)]==='function'&&_0x3feecb[_0x364868(0xc0)](()=>{});}catch(_0x34d9a6){}}[a29_0x3b749a(0xc2)](){const _0x4d1335=a29_0x3b749a;this[_0x4d1335(0xc7)](this[_0x4d1335(0xca)]);}[a29_0x3b749a(0xd2)](){const _0x3e1e52=a29_0x3b749a;this[_0x3e1e52(0xc7)](this[_0x3e1e52(0xd4)]);}[a29_0x3b749a(0xb9)](){const _0x1a9bb4=a29_0x3b749a;this[_0x1a9bb4(0xc7)](this['_explosionAudio']);}[a29_0x3b749a(0xbe)](_0x451352){const _0x5b5b8f=a29_0x3b749a;this[_0x5b5b8f(0xc3)]=_0x451352;if(this[_0x5b5b8f(0xca)])this[_0x5b5b8f(0xca)][_0x5b5b8f(0xcb)]=_0x451352;if(this[_0x5b5b8f(0xbd)])this[_0x5b5b8f(0xbd)]['volume']=_0x451352;}[a29_0x3b749a(0xd0)](_0x100de6){const _0x425134=a29_0x3b749a;this[_0x425134(0xb6)]=_0x100de6;if(this[_0x425134(0xd4)])this[_0x425134(0xd4)][_0x425134(0xcb)]=_0x100de6;}[a29_0x3b749a(0xbb)](_0x3c8488){const _0x56aefb=a29_0x3b749a;this[_0x56aefb(0xb4)]=_0x3c8488;}}
+// AudioManager.js - Sound effects for reveal, flag, and explosion actions
+// ============================================================================
+
+export class AudioManager {
+    constructor() {
+        this.revealVolume = 0.1;
+        this.flagVolume = 0.1;
+        this.enabled = true;
+
+        // Keep one audio element per SFX and restart it on each play call,
+        // matching the Qt client behavior (stop + play from start).
+        this._revealAudio = null;
+        this._flagAudio = null;
+        this._explosionAudio = null;
+    }
+
+    init() {
+        this._revealAudio = this._createAudio('../assets/sounds/reveal.wav', this.revealVolume);
+        this._flagAudio = this._createAudio('../assets/sounds/flag.wav', this.flagVolume);
+        // Keep explosion volume tied to reveal volume, same as Qt AudioManager.
+        this._explosionAudio = this._createAudio('../assets/sounds/explosion.wav', this.revealVolume);
+    }
+
+    _createAudio(relativePath, volume) {
+        const src = new URL(relativePath, import.meta.url).href;
+        const audio = new Audio(src);
+        audio.preload = 'auto';
+        audio.volume = volume;
+        return audio;
+    }
+
+    _play(audio) {
+        if (!audio || !this.enabled) return;
+        try {
+            audio.pause();
+            audio.currentTime = 0;
+            const playPromise = audio.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => {
+                    // Ignore autoplay/user-gesture restrictions silently.
+                });
+            }
+        } catch (e) {
+            // Ignore audio playback failures.
+        }
+    }
+
+    playReveal() {
+        this._play(this._revealAudio);
+    }
+
+    playFlag() {
+        this._play(this._flagAudio);
+    }
+
+    playExplosion() {
+        this._play(this._explosionAudio);
+    }
+
+    setRevealVolume(v) {
+        this.revealVolume = v;
+        if (this._revealAudio) this._revealAudio.volume = v;
+        if (this._explosionAudio) this._explosionAudio.volume = v;
+    }
+
+    setFlagVolume(v) {
+        this.flagVolume = v;
+        if (this._flagAudio) this._flagAudio.volume = v;
+    }
+
+    setEnabled(e) { this.enabled = e; }
+}

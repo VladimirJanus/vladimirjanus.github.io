@@ -1,1 +1,1290 @@
-const a30_0x37e501=a30_0x2a34;(function(_0xbced56,_0x260ae2){const _0x477521=a30_0x2a34,_0x5c370f=_0xbced56();while(!![]){try{const _0x4d5ad4=-parseInt(_0x477521(0x1de))/0x1*(parseInt(_0x477521(0x216))/0x2)+-parseInt(_0x477521(0x200))/0x3*(-parseInt(_0x477521(0x1fd))/0x4)+-parseInt(_0x477521(0x23a))/0x5+-parseInt(_0x477521(0x258))/0x6+-parseInt(_0x477521(0x288))/0x7+-parseInt(_0x477521(0x26f))/0x8*(-parseInt(_0x477521(0x20f))/0x9)+-parseInt(_0x477521(0x211))/0xa*(-parseInt(_0x477521(0x241))/0xb);if(_0x4d5ad4===_0x260ae2)break;else _0x5c370f['push'](_0x5c370f['shift']());}catch(_0x396ba3){_0x5c370f['push'](_0x5c370f['shift']());}}}(a30_0x1d29,0xdbbc9));import{LEVEL_PRESETS,OTHER_GAME_MODES}from'../core/CoreData.js';const SETTINGS_STORAGE_KEY=a30_0x37e501(0x1ef),SESSION_KEY_STORAGE_KEY=a30_0x37e501(0x1d9),COOLDOWNS_STORAGE_KEY=a30_0x37e501(0x240),DEFAULT_SETTINGS=Object[a30_0x37e501(0x1e2)]({'player/nickname':a30_0x37e501(0x217),'audio/flagVolume':0.1,'audio/revealVolume':0.1,'visual/showActionDecals':!![],'visual/digitalNumbers':![],'visual/digitalTextures':![],'visual/chatNotifications':!![],'clickBehaviour/leftClick':0x2,'clickBehaviour/rightClick':0x1,'clickBehaviour/longLeftClick':0x1,'solo/gridWidth':0x14,'solo/gridHeight':0x14,'solo/mineDensity':0x14,'online/gridWidth':0x14,'online/gridHeight':0x14,'online/mineDensity':0x14,'online/gameType':0x0,'online/lobbyVisibility':0x0,'lobby/autoApprovePending':![],'cachedServerIp':'','cachedServerPort':0x1f90}),SETTINGS_KEY_ALIASES=Object[a30_0x37e501(0x1e2)]({'playerName':a30_0x37e501(0x1dd),'flagVolume':a30_0x37e501(0x276),'revealVolume':a30_0x37e501(0x284),'showDecals':a30_0x37e501(0x270),'digitalNumbers':a30_0x37e501(0x260),'digitalTextures':a30_0x37e501(0x297),'chatNotifications':'visual/chatNotifications','clickBehaviourLeft':a30_0x37e501(0x27c),'clickBehaviourRight':a30_0x37e501(0x250),'clickBehaviourLong':a30_0x37e501(0x26e),'gridWidth':'solo/gridWidth','gridHeight':'solo/gridHeight','mineDensity':a30_0x37e501(0x1f5),'gameType':a30_0x37e501(0x20b),'lobbyVisibility':'online/lobbyVisibility','autoApprovePending':a30_0x37e501(0x248)});function gameSaveStorageKeyForVariant(_0x14b35a){const _0x2a72f2=a30_0x37e501;if(!_0x14b35a||_0x14b35a===_0x2a72f2(0x220))return _0x2a72f2(0x1f6);if(_0x14b35a===_0x2a72f2(0x201))return _0x2a72f2(0x253);return'gamesave_'+_0x14b35a+_0x2a72f2(0x203);}function progressStorageKeyForVariant(_0x19649f){const _0x5ee750=a30_0x37e501;if(!_0x19649f||_0x19649f===_0x5ee750(0x220))return _0x5ee750(0x25a);if(_0x19649f===_0x5ee750(0x201))return'progress_minesweeper3d.dat';return _0x5ee750(0x22d)+_0x19649f+_0x5ee750(0x203);}const INFINITE_PRESET_DENSITIES=Object[a30_0x37e501(0x1e2)]([0x12,0x14,0x28]),INFINITE_CHUNK_SIZE=0x20,INFINITE_CHUNK_CELLS=INFINITE_CHUNK_SIZE*INFINITE_CHUNK_SIZE;function a30_0x1d29(){const _0x261089=['freeze','saveInfinitePresetScore','progress','getGameModeBestTime','round','_normalizeInfiniteChunkCells','clearInfiniteGameSave','is3D','push','_loadCooldowns','replace','clearLastGamePointer','_loadSettings','settings.json','removeItem','_saveProgressData','_entryToInfiniteSaveData','version','custom','solo/mineDensity','gamesave.dat','isCustom','gameModeCustom/','resetAllSettings','object','state','online/gridHeight','21388uELxmz','includes','_resolveSettingKey','846jPRABT','minesweeper_3d','getLevelShortName','.dat','presetScores','getGameModeProgress','chunks','fromCharCode','clearSavedGame','find','_isEntryResumable','online/gameType','name','clearInfiniteLastGamePointer','elapsedTimeMs','72qNuTNQ','_buildSaveEntry','130CsuklM','fog_of_war','hasSavedGameForCurrentSelection','loadGameModeStateForKey','isKnownGameModePreset','6WYyvZO','Player','gameState','getSessionKey','cells','_saveGameSaves','_loadGameSaves','loadGameModeCustomSettings','saveInfiniteGameForKey','loadGameModeLastGameState','normal','slice','map','hasInfiniteSavedCustomGame','_buildInfiniteSaveInfo','setCustomGame','hasGameModeSavedGame','online/lobbyVisibility','saveGameModeState3D','getLevelName','hasSavedGameForLevel','levels','clearGameModeSave','progress_','getInfinitePresetScoreInfo','charCodeAt','resolveGameModeSaveKey','entries','chunkY','fogCacheLimit','isKnownLevelPreset','cachedServerIp','getGameModeLevelName','cachedServerPort','setSessionKey','resolveInfiniteSaveKey','7022820SGowVG','online/gridWidth','getItem','saveOnlineGameSettings','getLevelCategory','score','cooldowns.dat','1240261mOhBIg','clearGameSave','hasInfiniteSavedGameForDensity','_loadInfiniteStore','_loadSaveEntry','_lastGameKey','saveGameModeState','lobby/autoApprovePending','_saveCooldowns','length','getAll','_saveGameModeSaves','_loadProgressData','infinite_minesweeper','_gameSaves','clickBehaviour/rightClick','_findGameModeLevel','setItem','gamesave_minesweeper3d.dat','hasLastReveal','_getGameModeSavesKey','loadInfiniteLastGame','_ensureResumableOrDrop','3212856YdTHLV','density','progress_normal.dat','_getGameModeProgressKey','set','isInfinitePresetDensity','port','now','visual/digitalNumbers','parse','_buildInfiniteEntry','stringify','_parseServerAddress','startsWith','getLevelProgress','getSavedGameInfo','keys','bestTimes','lastScore','trim','gameType','_saveInfiniteStore','clickBehaviour/longLeftClick','800784EzKHnk','visual/showActionDecals','serverAddress','string','sort','hasGameModeSavedGame3D','_isCustomGame','audio/flagVolume','visibleCells','loadInfiniteGameForKey','_respawnCooldowns','loadLastGameState','getGameModeLevelCategory','clickBehaviour/leftClick','gridDataKey','Custom\x20level','_is3DEntryResumable','max','isFinite','isArray','lastGameKey','audio/revealVolume','hasMine','_saveSettings','faces','3392298bvoJMS','_buildSaveInfo','getGameModeLevelShortName','lastIndexOf','resolveGameSaveKey','_loadGameModeSaves','chunkX','loadGameState','Infinite\x20Minesweeper','categories','fogCache','getLevelBestTime','online/mineDensity','min','resolveActiveSaveKey','visual/digitalTextures','lastRevealY','_loadGameModeProgressData','network/sessionKey','highScore','settings','saves','player/nickname','149902OkkKXm','substring','lastRevealX','grid'];a30_0x1d29=function(){return _0x261089;};return a30_0x1d29();}function encodeByteArrayToBase64(_0xcd02c0){const _0x4cb2eb=a30_0x37e501;let _0x3f34d2='';for(let _0x79f155=0x0;_0x79f155<_0xcd02c0[_0x4cb2eb(0x24a)];_0x79f155++){_0x3f34d2+=String[_0x4cb2eb(0x207)](_0xcd02c0[_0x79f155]&0xff);}return btoa(_0x3f34d2);}function decodeBase64ToByteArray(_0x422cb7){const _0x4c99b8=a30_0x37e501;try{const _0x51bf84=atob(_0x422cb7),_0x397361=new Uint8Array(_0x51bf84[_0x4c99b8(0x24a)]);for(let _0x50d741=0x0;_0x50d741<_0x51bf84['length'];_0x50d741++){_0x397361[_0x50d741]=_0x51bf84[_0x4c99b8(0x22f)](_0x50d741)&0xff;}return _0x397361;}catch{return null;}}function a30_0x2a34(_0x22951a,_0x156035){_0x22951a=_0x22951a-0x1d8;const _0x1d2956=a30_0x1d29();let _0x2a3440=_0x1d2956[_0x22951a];return _0x2a3440;}export class SettingsManager{constructor(){const _0x43b556=a30_0x37e501;this[_0x43b556(0x1db)]={...DEFAULT_SETTINGS},this[_0x43b556(0x279)]={},this[_0x43b556(0x275)]=![],this['_loadSettings'](),this[_0x43b556(0x1eb)](),this[_0x43b556(0x21c)](),this['_cleanupOrphanedSaves']();}['get'](_0x379c40){const _0x168377=a30_0x37e501;if(_0x379c40===_0x168377(0x271))return this[_0x168377(0x1db)][_0x168377(0x235)]+':'+this[_0x168377(0x1db)][_0x168377(0x237)];return this[_0x168377(0x1db)][this[_0x168377(0x1ff)](_0x379c40)];}[a30_0x37e501(0x25c)](_0x22ee52,_0x24f8d7){const _0x1c53cb=a30_0x37e501;if(_0x22ee52===_0x1c53cb(0x271)&&typeof _0x24f8d7==='string'){const _0x4efc03=this[_0x1c53cb(0x264)](_0x24f8d7);_0x4efc03&&(this[_0x1c53cb(0x1db)]['cachedServerIp']=_0x4efc03['ip'],this[_0x1c53cb(0x1db)][_0x1c53cb(0x237)]=_0x4efc03[_0x1c53cb(0x25e)],this[_0x1c53cb(0x286)]());return;}this[_0x1c53cb(0x1db)][this[_0x1c53cb(0x1ff)](_0x22ee52)]=_0x24f8d7,this[_0x1c53cb(0x286)]();}[a30_0x37e501(0x24b)](){const _0x1f5fd0=a30_0x37e501;return{...this[_0x1f5fd0(0x1db)]};}['_resolveSettingKey'](_0x402892){return SETTINGS_KEY_ALIASES[_0x402892]||_0x402892;}[a30_0x37e501(0x264)](_0x500775){const _0x6cdd46=a30_0x37e501,_0x2d343d=String(_0x500775||'')['trim']();if(!_0x2d343d)return null;const _0x1d2269=_0x2d343d[_0x6cdd46(0x1ec)](/^wss?:\/\//i,''),_0x5da99b=_0x1d2269[_0x6cdd46(0x28b)](':');if(_0x5da99b<=0x0||_0x5da99b===_0x1d2269['length']-0x1)return null;const _0x3d30e4=_0x1d2269[_0x6cdd46(0x221)](0x0,_0x5da99b)[_0x6cdd46(0x26b)](),_0x1b1060=parseInt(_0x1d2269['slice'](_0x5da99b+0x1),0xa);if(!_0x3d30e4||!Number[_0x6cdd46(0x281)](_0x1b1060)||_0x1b1060<=0x0||_0x1b1060>0xffff)return null;return{'ip':_0x3d30e4,'port':_0x1b1060};}[a30_0x37e501(0x1ee)](){const _0x2dad39=a30_0x37e501;try{const _0x4d6d8d=localStorage[_0x2dad39(0x23c)](SETTINGS_STORAGE_KEY);if(_0x4d6d8d){const _0x4e1e63=JSON[_0x2dad39(0x261)](_0x4d6d8d);this[_0x2dad39(0x1db)]={...DEFAULT_SETTINGS,..._0x4e1e63};}}catch(_0xa12ce){}}[a30_0x37e501(0x286)](){const _0x4ea06c=a30_0x37e501;try{localStorage['setItem'](SETTINGS_STORAGE_KEY,JSON[_0x4ea06c(0x263)](this[_0x4ea06c(0x1db)]));}catch(_0x51708d){}}[a30_0x37e501(0x219)](){const _0x112081=a30_0x37e501,_0xc1df7e=localStorage[_0x112081(0x23c)](SESSION_KEY_STORAGE_KEY);if(!_0xc1df7e)return null;try{const _0x195cdd=atob(_0xc1df7e),_0x40b5b9=new Uint8Array(0x10);for(let _0x5b6069=0x0;_0x5b6069<0x10&&_0x5b6069<_0x195cdd[_0x112081(0x24a)];_0x5b6069++){_0x40b5b9[_0x5b6069]=_0x195cdd[_0x112081(0x22f)](_0x5b6069);}return _0x40b5b9;}catch(_0x64f01b){return null;}}[a30_0x37e501(0x238)](_0x223cc6){const _0xdea651=a30_0x37e501;if(!_0x223cc6)localStorage[_0xdea651(0x1f0)](SESSION_KEY_STORAGE_KEY);else{let _0x42dd22='';for(let _0x4c127d=0x0;_0x4c127d<0x10;_0x4c127d++)_0x42dd22+=String[_0xdea651(0x207)](_0x223cc6[_0x4c127d]);localStorage[_0xdea651(0x252)](SESSION_KEY_STORAGE_KEY,btoa(_0x42dd22));}}['saveRespawnCooldown'](_0xfddfa7,_0x42045f){const _0x1e8efe=a30_0x37e501;this[_0x1e8efe(0x279)][String(_0xfddfa7)]=_0x42045f,this[_0x1e8efe(0x249)]();}['getRespawnCooldown'](_0x4c09d6){const _0x3e8416=a30_0x37e501;return this[_0x3e8416(0x279)][String(_0x4c09d6)]||0x0;}['cleanupExpiredCooldowns'](){const _0x5b554c=a30_0x37e501,_0x21297b=Date[_0x5b554c(0x25f)]();let _0x26fc2c=![];for(const _0x2fc82f in this[_0x5b554c(0x279)]){_0x21297b>=this[_0x5b554c(0x279)][_0x2fc82f]&&(delete this[_0x5b554c(0x279)][_0x2fc82f],_0x26fc2c=!![]);}if(_0x26fc2c)this[_0x5b554c(0x249)]();}['_loadCooldowns'](){const _0x2dbd19=a30_0x37e501;try{const _0x3e5081=localStorage[_0x2dbd19(0x23c)](COOLDOWNS_STORAGE_KEY);if(!_0x3e5081){this[_0x2dbd19(0x279)]={};return;}const _0x372b1a=JSON[_0x2dbd19(0x261)](_0x3e5081);this[_0x2dbd19(0x279)]=_0x372b1a&&typeof _0x372b1a===_0x2dbd19(0x1fa)?_0x372b1a:{};}catch{this[_0x2dbd19(0x279)]={};}}[a30_0x37e501(0x249)](){const _0x10a430=a30_0x37e501;try{localStorage[_0x10a430(0x252)](COOLDOWNS_STORAGE_KEY,JSON[_0x10a430(0x263)](this[_0x10a430(0x279)]));}catch{}}['_findGameModeLevel'](_0x428253,_0x59be3c){const _0x228343=a30_0x37e501,_0x41aae8=OTHER_GAME_MODES['find'](_0x327ddc=>_0x327ddc['id']===_0x428253);if(!_0x41aae8)return null;for(const _0x4e1d7f of _0x41aae8[_0x228343(0x291)]){for(const _0x544f75 of _0x4e1d7f['levels']){if(_0x428253===_0x228343(0x24e)){if(Number(_0x544f75['density'])===Number(_0x59be3c[_0x228343(0x259)]))return _0x544f75;continue;}if(_0x544f75['w']===_0x59be3c['w']&&_0x544f75['h']===_0x59be3c['h']&&_0x544f75[_0x228343(0x259)]===_0x59be3c['density']&&(_0x544f75['l']||0x0)===(_0x59be3c['l']||0x0))return _0x544f75;}}return null;}[a30_0x37e501(0x27d)](_0x1c103e,_0x5e89c3=null){const _0x58d4b9=a30_0x37e501;if(_0x5e89c3==='infinite_minesweeper')return'd'+_0x1c103e[_0x58d4b9(0x259)];if(_0x5e89c3===_0x58d4b9(0x212)){const _0x1f434b=this[_0x58d4b9(0x251)](_0x5e89c3,_0x1c103e);if(_0x1f434b&&Number[_0x58d4b9(0x281)](_0x1f434b[_0x58d4b9(0x277)]))return _0x1c103e['w']+'x'+_0x1c103e['h']+'x'+_0x1c103e[_0x58d4b9(0x259)]+'x'+_0x1f434b['visibleCells'];}else{if(_0x5e89c3===_0x58d4b9(0x201)){const _0xfe7bd7=this[_0x58d4b9(0x251)](_0x5e89c3,_0x1c103e);if(_0xfe7bd7&&Number[_0x58d4b9(0x281)](_0xfe7bd7['l']))return _0x1c103e['w']+'x'+_0x1c103e['h']+'x'+_0x1c103e[_0x58d4b9(0x259)]+'x'+_0xfe7bd7['l'];}}return _0x1c103e['w']+'x'+_0x1c103e['h']+'x'+_0x1c103e[_0x58d4b9(0x259)];}['isKnownLevelPreset'](_0x5a4efe){const _0x833df4=a30_0x37e501;for(const _0x52cb60 of LEVEL_PRESETS){for(const _0x1d2a69 of _0x52cb60[_0x833df4(0x22b)]){if(_0x1d2a69['w']===_0x5a4efe['w']&&_0x1d2a69['h']===_0x5a4efe['h']&&_0x1d2a69[_0x833df4(0x259)]===_0x5a4efe[_0x833df4(0x259)])return!![];}}return![];}[a30_0x37e501(0x215)](_0x47d91a,_0x1a99e5){const _0x493684=a30_0x37e501;return!!this[_0x493684(0x251)](_0x47d91a,_0x1a99e5);}['getGameModeLevelCategory'](_0x54223e,_0x8f175b){const _0x154e12=a30_0x37e501,_0x5d80e1=OTHER_GAME_MODES[_0x154e12(0x209)](_0x2794a9=>_0x2794a9['id']===_0x54223e);if(!_0x5d80e1)return null;for(const _0x587fe3 of _0x5d80e1[_0x154e12(0x291)]){for(const _0x3a0437 of _0x587fe3['levels']){if(_0x54223e==='infinite_minesweeper'){if(Number(_0x3a0437[_0x154e12(0x259)])===Number(_0x8f175b[_0x154e12(0x259)]))return _0x587fe3[_0x154e12(0x20c)];continue;}if(_0x3a0437['w']===_0x8f175b['w']&&_0x3a0437['h']===_0x8f175b['h']&&_0x3a0437[_0x154e12(0x259)]===_0x8f175b[_0x154e12(0x259)]&&(_0x3a0437['l']||0x0)===(_0x8f175b['l']||0x0))return _0x587fe3[_0x154e12(0x20c)];}}return null;}[a30_0x37e501(0x28a)](_0x54f38,_0x1e567c){const _0xe56d6a=a30_0x37e501,_0x40d9ef=OTHER_GAME_MODES['find'](_0x3a28e2=>_0x3a28e2['id']===_0x54f38);if(!_0x40d9ef)return null;for(const _0x1cbd94 of _0x40d9ef[_0xe56d6a(0x291)]){for(const _0x35f7b3 of _0x1cbd94[_0xe56d6a(0x22b)]){if(_0x54f38===_0xe56d6a(0x24e)){if(Number(_0x35f7b3[_0xe56d6a(0x259)])===Number(_0x1e567c['density']))return _0x35f7b3[_0xe56d6a(0x20c)];continue;}if(_0x35f7b3['w']===_0x1e567c['w']&&_0x35f7b3['h']===_0x1e567c['h']&&_0x35f7b3[_0xe56d6a(0x259)]===_0x1e567c['density']&&(_0x35f7b3['l']||0x0)===(_0x1e567c['l']||0x0))return _0x35f7b3[_0xe56d6a(0x20c)];}}return null;}[a30_0x37e501(0x236)](_0x10696a,_0x22df0f){const _0x593cdb=a30_0x37e501,_0x1262f8=this[_0x593cdb(0x27b)](_0x10696a,_0x22df0f),_0xa413fd=this[_0x593cdb(0x28a)](_0x10696a,_0x22df0f);if(!_0x1262f8||!_0xa413fd)return null;return _0x1262f8+':\x20'+_0xa413fd;}[a30_0x37e501(0x23e)](_0xe3bad5){const _0x2d7409=a30_0x37e501;for(const _0x3c389a of LEVEL_PRESETS){for(const _0x13fb64 of _0x3c389a['levels']){if(_0x13fb64['w']===_0xe3bad5['w']&&_0x13fb64['h']===_0xe3bad5['h']&&_0x13fb64[_0x2d7409(0x259)]===_0xe3bad5['density'])return _0x3c389a[_0x2d7409(0x20c)];}}return null;}[a30_0x37e501(0x202)](_0x36ede1){const _0x172429=a30_0x37e501;for(const _0x360147 of LEVEL_PRESETS){for(const _0x448ff8 of _0x360147[_0x172429(0x22b)]){if(_0x448ff8['w']===_0x36ede1['w']&&_0x448ff8['h']===_0x36ede1['h']&&_0x448ff8[_0x172429(0x259)]===_0x36ede1[_0x172429(0x259)])return _0x448ff8[_0x172429(0x20c)];}}return null;}[a30_0x37e501(0x229)](_0x543bc6){const _0x13f630=a30_0x37e501,_0xc8ad0b=this[_0x13f630(0x23e)](_0x543bc6),_0x239c04=this[_0x13f630(0x202)](_0x543bc6);if(!_0xc8ad0b||!_0x239c04)return null;return _0xc8ad0b+':\x20'+_0x239c04;}[a30_0x37e501(0x28c)](_0x378237){const _0x59ec4c=a30_0x37e501;return this[_0x59ec4c(0x234)](_0x378237)?this[_0x59ec4c(0x27d)](_0x378237):_0x59ec4c(0x1f4);}[a30_0x37e501(0x296)](_0x4cf570){const _0x16eb52=a30_0x37e501;return this[_0x16eb52(0x275)]?'custom':this[_0x16eb52(0x28c)](_0x4cf570);}[a30_0x37e501(0x225)](_0x3b3cf5){this['_isCustomGame']=!!_0x3b3cf5;}[a30_0x37e501(0x21c)](){const _0x5cf102=a30_0x37e501;try{const _0x5486e7=localStorage['getItem'](gameSaveStorageKeyForVariant('normal'));if(!_0x5486e7){this[_0x5cf102(0x24f)]={},this[_0x5cf102(0x246)]='';return;}const _0x5ec0a4=JSON['parse'](_0x5486e7);if(!_0x5ec0a4||_0x5ec0a4[_0x5cf102(0x1f3)]!==0x2){this['_gameSaves']={},this['_lastGameKey']='';return;}this[_0x5cf102(0x24f)]=_0x5ec0a4[_0x5cf102(0x1dc)]||{},this[_0x5cf102(0x246)]=_0x5ec0a4[_0x5cf102(0x283)]||'';}catch{this[_0x5cf102(0x24f)]={},this[_0x5cf102(0x246)]='';}}[a30_0x37e501(0x21b)](){const _0x2e9e8f=a30_0x37e501;try{localStorage[_0x2e9e8f(0x252)](gameSaveStorageKeyForVariant(_0x2e9e8f(0x220)),JSON[_0x2e9e8f(0x263)]({'version':0x2,'lastGameKey':this[_0x2e9e8f(0x246)],'saves':this[_0x2e9e8f(0x24f)]}));}catch{}}['_cleanupOrphanedSaves'](){const _0x57e255=a30_0x37e501;let _0x87b03a=![];for(const _0x40d23f of Object[_0x57e255(0x268)](this['_gameSaves'])){if(_0x40d23f==='custom')continue;const _0x3668a7=_0x40d23f['split']('x');if(_0x3668a7[_0x57e255(0x24a)]!==0x3){delete this['_gameSaves'][_0x40d23f],_0x87b03a=!![];continue;}const _0x19d1fb={'w':parseInt(_0x3668a7[0x0]),'h':parseInt(_0x3668a7[0x1]),'density':parseInt(_0x3668a7[0x2])};!this[_0x57e255(0x234)](_0x19d1fb)&&(delete this[_0x57e255(0x24f)][_0x40d23f],_0x87b03a=!![]);}if(_0x87b03a){if(this[_0x57e255(0x246)]&&!this[_0x57e255(0x24f)][this[_0x57e255(0x246)]])this[_0x57e255(0x246)]='';this[_0x57e255(0x21b)]();}}['_buildSaveEntry'](_0x7269f3,_0x135d02,_0x54302c,_0x17afbe=[],_0x51247d=0x14){const _0x3d17b3=a30_0x37e501,_0x511dba=[];for(let _0x248e6c=0x0;_0x248e6c<_0x135d02['h'];_0x248e6c++){for(let _0xe50dfd=0x0;_0xe50dfd<_0x135d02['w'];_0xe50dfd++){const _0x2190f6=_0x7269f3[_0x248e6c][_0xe50dfd];_0x511dba[_0x3d17b3(0x1ea)]({'hasMine':_0x2190f6['content']===0x2,'state':_0x2190f6[_0x3d17b3(0x1fb)]});}}const _0x1afdf3={'w':_0x135d02['w'],'h':_0x135d02['h'],'density':_0x135d02[_0x3d17b3(0x259)],'elapsedTimeMs':_0x54302c,'cells':_0x511dba};return this[_0x3d17b3(0x275)]&&(_0x1afdf3[_0x3d17b3(0x1f7)]=!![]),_0x17afbe&&_0x17afbe[_0x3d17b3(0x24a)]>0x0&&(_0x1afdf3[_0x3d17b3(0x292)]=_0x17afbe['map'](_0x2de6af=>({'x':_0x2de6af['x'],'y':_0x2de6af['y']}))),_0x51247d!==0x14&&(_0x1afdf3[_0x3d17b3(0x233)]=_0x51247d),_0x1afdf3;}[a30_0x37e501(0x245)](_0x58c69c){const _0x4ee788=a30_0x37e501;if(!_0x58c69c||!_0x58c69c['w']||!_0x58c69c['h'])return null;const _0x117b80=_0x58c69c['w'],_0xcf19a1=_0x58c69c['h'];if(!_0x58c69c[_0x4ee788(0x21a)]||_0x58c69c['cells'][_0x4ee788(0x24a)]!==_0x117b80*_0xcf19a1)return null;const _0x460962=[];let _0x4309d9=0x0;for(let _0x1d4ba5=0x0;_0x1d4ba5<_0xcf19a1;_0x1d4ba5++){_0x460962[_0x1d4ba5]=[];for(let _0x1e6c08=0x0;_0x1e6c08<_0x117b80;_0x1e6c08++){const _0x55c1d5=_0x58c69c[_0x4ee788(0x21a)][_0x4309d9++];_0x460962[_0x1d4ba5][_0x1e6c08]={'content':_0x55c1d5[_0x4ee788(0x285)]?0x2:0x1,'state':_0x55c1d5[_0x4ee788(0x1fb)]};}}return{'grid':_0x460962,'gridData':{'w':_0x117b80,'h':_0xcf19a1,'density':_0x58c69c[_0x4ee788(0x259)]},'elapsedTimeMs':_0x58c69c[_0x4ee788(0x20e)]||0x0,'fogCache':(_0x58c69c['fogCache']||[])[_0x4ee788(0x222)](_0x17a766=>({'x':_0x17a766['x'],'y':_0x17a766['y']})),'fogCacheLimit':_0x58c69c[_0x4ee788(0x233)]||0x14,'isCustom':_0x58c69c[_0x4ee788(0x1f7)]||![]};}[a30_0x37e501(0x20a)](_0x1685cb){const _0x22717c=a30_0x37e501;if(!_0x1685cb||!_0x1685cb['cells']||!_0x1685cb['w']||!_0x1685cb['h'])return![];let _0x4a2ca8=![],_0x14b7e3=![];for(const _0x4ce1a0 of _0x1685cb[_0x22717c(0x21a)]){const _0x1e62b9=!!_0x4ce1a0[_0x22717c(0x285)],_0x16704d=_0x4ce1a0[_0x22717c(0x1fb)],_0x41865e=_0x16704d===0x1,_0x4a7780=_0x16704d===0x0;if(!_0x1e62b9&&_0x4a7780)_0x4a2ca8=!![];if(_0x1e62b9&&_0x41865e){_0x14b7e3=!![];break;}}return _0x4a2ca8&&!_0x14b7e3;}[a30_0x37e501(0x257)](_0x2be6e4){const _0x877ecb=a30_0x37e501,_0x5b94f1=this[_0x877ecb(0x24f)][_0x2be6e4];if(!_0x5b94f1)return![];if(this[_0x877ecb(0x20a)](_0x5b94f1))return!![];delete this[_0x877ecb(0x24f)][_0x2be6e4];if(this[_0x877ecb(0x246)]===_0x2be6e4)this[_0x877ecb(0x246)]='';return this[_0x877ecb(0x21b)](),![];}['_buildSaveInfo'](_0x45ecfb){const _0xf93750=a30_0x37e501;if(!_0x45ecfb||!_0x45ecfb['w']||!_0x45ecfb['h'])return{'exists':![]};let _0x29c88d=0x0;for(const _0x1d4232 of _0x45ecfb[_0xf93750(0x21a)]){if(_0x1d4232['hasMine'])_0x29c88d++;}const _0xb791d7={'w':_0x45ecfb['w'],'h':_0x45ecfb['h'],'density':_0x45ecfb[_0xf93750(0x259)]},_0x15745b=_0x45ecfb[_0xf93750(0x1f7)]?'Custom':this[_0xf93750(0x229)](_0xb791d7);return{'exists':!![],'w':_0x45ecfb['w'],'h':_0x45ecfb['h'],'density':_0x45ecfb[_0xf93750(0x259)],'mineCount':_0x29c88d,'elapsedTimeMs':_0x45ecfb[_0xf93750(0x20e)]||0x0,'levelName':_0x15745b};}['saveGameState'](_0x3af7c1,_0x420d2e,_0x314a3c,_0x3c4e02=[],_0x1bc2ff=0x14){const _0x4a9403=a30_0x37e501;if(!_0x3af7c1||_0x3af7c1[_0x4a9403(0x24a)]===0x0)return;const _0x1581e1=this[_0x4a9403(0x296)](_0x420d2e);this[_0x4a9403(0x24f)][_0x1581e1]=this[_0x4a9403(0x210)](_0x3af7c1,_0x420d2e,_0x314a3c,_0x3c4e02,_0x1bc2ff),this['_lastGameKey']=_0x1581e1,this[_0x4a9403(0x21b)]();}[a30_0x37e501(0x28f)](){const _0x32b6e2=a30_0x37e501;return this[_0x32b6e2(0x27a)]();}['loadLastGameState'](){const _0x61abbb=a30_0x37e501;if(!this['_lastGameKey']||!this[_0x61abbb(0x24f)][this['_lastGameKey']])return null;if(!this[_0x61abbb(0x257)](this[_0x61abbb(0x246)]))return null;return this[_0x61abbb(0x245)](this[_0x61abbb(0x24f)][this['_lastGameKey']]);}['loadGameStateForKey'](_0x751a7e){const _0x1ea017=a30_0x37e501;if(!this['_gameSaves'][_0x751a7e])return null;if(!this['_ensureResumableOrDrop'](_0x751a7e))return null;return this[_0x1ea017(0x245)](this[_0x1ea017(0x24f)][_0x751a7e]);}[a30_0x37e501(0x267)](){const _0x300e3b=a30_0x37e501;if(!this[_0x300e3b(0x246)]||!this[_0x300e3b(0x24f)][this[_0x300e3b(0x246)]])return{'exists':![]};if(!this['_ensureResumableOrDrop'](this[_0x300e3b(0x246)]))return{'exists':![]};return this['_buildSaveInfo'](this['_gameSaves'][this['_lastGameKey']]);}['getSavedGameInfoForKey'](_0x19fff5){const _0x1ece15=a30_0x37e501;if(!this[_0x1ece15(0x24f)][_0x19fff5])return{'exists':![]};if(!this[_0x1ece15(0x257)](_0x19fff5))return{'exists':![]};return this[_0x1ece15(0x289)](this[_0x1ece15(0x24f)][_0x19fff5]);}[a30_0x37e501(0x22a)](_0x131810){const _0x1fafea=a30_0x37e501,_0x2e0213=this['gridDataKey'](_0x131810);if(!this[_0x1fafea(0x24f)][_0x2e0213])return![];return this[_0x1fafea(0x257)](_0x2e0213);}[a30_0x37e501(0x213)](_0x47ac4d){const _0x5b1c07=a30_0x37e501,_0xfb9d49=this[_0x5b1c07(0x24f)][_0x5b1c07(0x1f4)];if(!_0xfb9d49)return![];if(!this[_0x5b1c07(0x257)](_0x5b1c07(0x1f4)))return![];return _0xfb9d49['w']===_0x47ac4d['w']&&_0xfb9d49['h']===_0x47ac4d['h']&&_0xfb9d49[_0x5b1c07(0x259)]===_0x47ac4d['density'];}['hasSavedCustomGame'](){const _0x44549=a30_0x37e501;return!!this[_0x44549(0x24f)]['custom'];}[a30_0x37e501(0x283)](){const _0x53424f=a30_0x37e501;return this[_0x53424f(0x246)];}[a30_0x37e501(0x242)](_0x1b8d1f){const _0x34a46a=a30_0x37e501;if(!this[_0x34a46a(0x24f)][_0x1b8d1f])return;delete this[_0x34a46a(0x24f)][_0x1b8d1f];if(this['_lastGameKey']===_0x1b8d1f)this[_0x34a46a(0x246)]='';this[_0x34a46a(0x21b)]();}[a30_0x37e501(0x1ed)](){const _0x374d1d=a30_0x37e501;this[_0x374d1d(0x246)]='',this[_0x374d1d(0x21b)]();}[a30_0x37e501(0x208)](){const _0x4eec0e=a30_0x37e501;this[_0x4eec0e(0x246)]&&this[_0x4eec0e(0x242)](this['_lastGameKey']);}[a30_0x37e501(0x24d)](_0x4d9b13='normal'){const _0x1cfd63=a30_0x37e501;try{const _0xe0f3e3=localStorage[_0x1cfd63(0x23c)](progressStorageKeyForVariant(_0x4d9b13));if(!_0xe0f3e3)return{'progress':{},'bestTimes':{}};const _0x2306e2=JSON[_0x1cfd63(0x261)](_0xe0f3e3);return{'progress':_0x2306e2[_0x1cfd63(0x1e4)]||{},'bestTimes':_0x2306e2['bestTimes']||{}};}catch{return{'progress':{},'bestTimes':{}};}}[a30_0x37e501(0x1f1)](_0x1ddec0,_0x303e6b=a30_0x37e501(0x220)){const _0x1fadbb=a30_0x37e501;try{localStorage['setItem'](progressStorageKeyForVariant(_0x303e6b),JSON[_0x1fadbb(0x263)](_0x1ddec0));}catch{}}['saveLevelProgress'](_0x1a2db8,_0x49030d,_0x28d956=-0x1){const _0x30cd76=a30_0x37e501;if(!this['isKnownLevelPreset'](_0x1a2db8))return;_0x49030d=Math[_0x30cd76(0x280)](0x0,Math[_0x30cd76(0x295)](0x64,_0x49030d));const _0x54af5d=this[_0x30cd76(0x27d)](_0x1a2db8),_0xb301c=this[_0x30cd76(0x24d)]('normal');let _0x40d9ec=![];const _0x4333ae=_0xb301c[_0x30cd76(0x1e4)][_0x54af5d]||0x0;_0x49030d>_0x4333ae&&(_0xb301c[_0x30cd76(0x1e4)][_0x54af5d]=_0x49030d,_0x40d9ec=!![]);if(_0x49030d===0x64&&_0x28d956>=0x0){const _0x20d12c=_0xb301c[_0x30cd76(0x269)][_0x54af5d];(_0x20d12c===undefined||_0x28d956<_0x20d12c)&&(_0xb301c[_0x30cd76(0x269)][_0x54af5d]=_0x28d956,_0x40d9ec=!![]);}_0x40d9ec&&this[_0x30cd76(0x1f1)](_0xb301c,_0x30cd76(0x220));}[a30_0x37e501(0x266)](_0x166149){const _0x32846e=a30_0x37e501,_0x329761=this[_0x32846e(0x24d)](_0x32846e(0x220));return _0x329761[_0x32846e(0x1e4)][this[_0x32846e(0x27d)](_0x166149)]||0x0;}[a30_0x37e501(0x293)](_0xa3acd7){const _0x429bc7=a30_0x37e501,_0x5b545b=this[_0x429bc7(0x24d)](_0x429bc7(0x220));return _0x5b545b['bestTimes'][this['gridDataKey'](_0xa3acd7)]??null;}[a30_0x37e501(0x23d)](_0x57b57d,_0x7a1de1){const _0x10edf8=a30_0x37e501;this[_0x10edf8(0x1db)][_0x10edf8(0x23b)]=_0x57b57d['grid']['w'],this[_0x10edf8(0x1db)][_0x10edf8(0x1fc)]=_0x57b57d[_0x10edf8(0x1e1)]['h'],this['settings']['online/mineDensity']=_0x57b57d[_0x10edf8(0x1e1)][_0x10edf8(0x259)],this[_0x10edf8(0x1db)][_0x10edf8(0x20b)]=_0x57b57d[_0x10edf8(0x26c)],this[_0x10edf8(0x1db)][_0x10edf8(0x227)]=_0x7a1de1,this[_0x10edf8(0x286)]();}['loadOnlineGameSettings'](){const _0x150954=a30_0x37e501;return{'gameData':{'gameType':this[_0x150954(0x1db)][_0x150954(0x20b)]??0x0,'grid':{'w':this[_0x150954(0x1db)][_0x150954(0x23b)]??0x14,'h':this[_0x150954(0x1db)][_0x150954(0x1fc)]??0x14,'density':this['settings'][_0x150954(0x294)]??0x14}},'visibility':this[_0x150954(0x1db)][_0x150954(0x227)]??0x0};}['clearAllProgress'](){const _0x5dd34b=a30_0x37e501;localStorage[_0x5dd34b(0x1f0)](progressStorageKeyForVariant(_0x5dd34b(0x220)));for(const _0x48664e of OTHER_GAME_MODES){localStorage[_0x5dd34b(0x1f0)](progressStorageKeyForVariant(_0x48664e['id']));}}[a30_0x37e501(0x1f9)](){const _0x4a97db=a30_0x37e501;localStorage[_0x4a97db(0x1f0)](SETTINGS_STORAGE_KEY),this[_0x4a97db(0x1db)]={...DEFAULT_SETTINGS};}['isInfinitePresetDensity'](_0x497038){const _0x115b83=a30_0x37e501;return INFINITE_PRESET_DENSITIES[_0x115b83(0x1fe)](Number(_0x497038));}['resolveInfiniteSaveKey'](_0x204505,_0x469477){const _0x219f89=a30_0x37e501,_0x11fdf3=Math[_0x219f89(0x280)](0xf,Math['min'](0x28,Number(_0x204505)||0x14));if(_0x469477&&this['isInfinitePresetDensity'](_0x11fdf3))return'd'+_0x11fdf3;return _0x219f89(0x1f4);}['_loadInfiniteStore'](){const _0x3620ff=a30_0x37e501,_0x41e4f7=gameSaveStorageKeyForVariant(_0x3620ff(0x24e)),_0xd6b208={'version':0x3,'lastGameKey':'','entries':{},'presetScores':{}};try{const _0x43144b=localStorage[_0x3620ff(0x23c)](_0x41e4f7);if(!_0x43144b)return _0xd6b208;const _0x349484=JSON['parse'](_0x43144b);if(!_0x349484||typeof _0x349484!==_0x3620ff(0x1fa))return _0xd6b208;if(_0x349484[_0x3620ff(0x1f3)]===0x2)return{'version':0x3,'lastGameKey':typeof _0x349484['lastGameKey']===_0x3620ff(0x272)?_0x349484['lastGameKey']:'','entries':_0x349484[_0x3620ff(0x1dc)]&&typeof _0x349484['saves']===_0x3620ff(0x1fa)?_0x349484['saves']:{},'presetScores':{}};if(_0x349484[_0x3620ff(0x1f3)]!==0x3)return _0xd6b208;return{'version':0x3,'lastGameKey':typeof _0x349484['lastGameKey']==='string'?_0x349484['lastGameKey']:'','entries':_0x349484['entries']&&typeof _0x349484[_0x3620ff(0x231)]===_0x3620ff(0x1fa)?_0x349484['entries']:{},'presetScores':_0x349484[_0x3620ff(0x204)]&&typeof _0x349484[_0x3620ff(0x204)]==='object'?_0x349484['presetScores']:{}};}catch{return _0xd6b208;}}[a30_0x37e501(0x26d)](_0x20b387){const _0x48d3e0=a30_0x37e501;try{localStorage[_0x48d3e0(0x252)](gameSaveStorageKeyForVariant(_0x48d3e0(0x24e)),JSON[_0x48d3e0(0x263)]({'version':0x3,'lastGameKey':_0x20b387[_0x48d3e0(0x283)]||'','entries':_0x20b387[_0x48d3e0(0x231)]||{},'presetScores':_0x20b387[_0x48d3e0(0x204)]||{}}));}catch{}}[a30_0x37e501(0x1e7)](_0x4a01b7){const _0x66139b=a30_0x37e501;let _0x3322af=null;if(_0x4a01b7 instanceof Uint8Array)_0x3322af=_0x4a01b7;else{if(Array[_0x66139b(0x282)](_0x4a01b7)){_0x3322af=new Uint8Array(_0x4a01b7['length']);for(let _0xd3274f=0x0;_0xd3274f<_0x4a01b7[_0x66139b(0x24a)];_0xd3274f++)_0x3322af[_0xd3274f]=Number(_0x4a01b7[_0xd3274f])&0xff;}else typeof _0x4a01b7===_0x66139b(0x272)&&(_0x3322af=decodeBase64ToByteArray(_0x4a01b7));}if(!_0x3322af)return null;if(_0x3322af[_0x66139b(0x24a)]===INFINITE_CHUNK_CELLS)return _0x3322af;const _0x326840=new Uint8Array(INFINITE_CHUNK_CELLS);return _0x326840[_0x66139b(0x25c)](_0x3322af['subarray'](0x0,Math[_0x66139b(0x295)](_0x3322af['length'],_0x326840[_0x66139b(0x24a)]))),_0x326840;}[a30_0x37e501(0x262)](_0x38b145,_0x44587a){const _0x58ed6c=a30_0x37e501,_0x531775=Math['max'](0xf,Math['min'](0x28,Number(_0x38b145?.[_0x58ed6c(0x259)])||0x14)),_0x5c6779=Math[_0x58ed6c(0x280)](0x0,Number(_0x38b145?.[_0x58ed6c(0x23f)])||0x0),_0x134db7=Number(_0x38b145?.[_0x58ed6c(0x218)])||0x0,_0x360830=!!_0x38b145?.[_0x58ed6c(0x254)],_0x2fcc2e=Number(_0x38b145?.[_0x58ed6c(0x1e0)])||0x0,_0xe12d1e=Number(_0x38b145?.[_0x58ed6c(0x298)])||0x0,_0x49cdd1=[],_0x4dc3f3=Array[_0x58ed6c(0x282)](_0x38b145?.[_0x58ed6c(0x206)])?_0x38b145['chunks']:[];for(const _0x5bc823 of _0x4dc3f3){const _0x1fde4a=Number(_0x5bc823?.['chunkX'])||0x0,_0x5c79c5=Number(_0x5bc823?.[_0x58ed6c(0x232)])||0x0,_0x257b0e=this[_0x58ed6c(0x1e7)](_0x5bc823?.[_0x58ed6c(0x21a)]);if(!_0x257b0e)continue;_0x49cdd1[_0x58ed6c(0x1ea)]({'chunkX':_0x1fde4a,'chunkY':_0x5c79c5,'cells':encodeByteArrayToBase64(_0x257b0e)});}return _0x49cdd1[_0x58ed6c(0x273)]((_0x49915e,_0x4ebaa1)=>_0x49915e[_0x58ed6c(0x232)]===_0x4ebaa1[_0x58ed6c(0x232)]?_0x49915e[_0x58ed6c(0x28e)]-_0x4ebaa1['chunkX']:_0x49915e['chunkY']-_0x4ebaa1['chunkY']),{'density':_0x531775,'elapsedTimeMs':Math['max'](0x0,Number(_0x44587a)||0x0),'score':_0x5c6779,'gameState':_0x134db7,'hasLastReveal':_0x360830,'lastRevealX':_0x2fcc2e,'lastRevealY':_0xe12d1e,'chunks':_0x49cdd1};}[a30_0x37e501(0x1f2)](_0x1ddbdf){const _0x2b7bd3=a30_0x37e501;if(!_0x1ddbdf||typeof _0x1ddbdf!==_0x2b7bd3(0x1fa))return null;const _0x182fb4=[],_0x933111=Array['isArray'](_0x1ddbdf[_0x2b7bd3(0x206)])?_0x1ddbdf['chunks']:[];for(const _0x48941a of _0x933111){const _0x4e2077=this[_0x2b7bd3(0x1e7)](_0x48941a?.['cells']);if(!_0x4e2077||_0x4e2077[_0x2b7bd3(0x24a)]!==INFINITE_CHUNK_CELLS)return null;_0x182fb4[_0x2b7bd3(0x1ea)]({'chunkX':Number(_0x48941a?.[_0x2b7bd3(0x28e)])||0x0,'chunkY':Number(_0x48941a?.['chunkY'])||0x0,'cells':_0x4e2077});}return{'density':Math[_0x2b7bd3(0x280)](0xf,Math[_0x2b7bd3(0x295)](0x28,Number(_0x1ddbdf[_0x2b7bd3(0x259)])||0x14)),'score':Math[_0x2b7bd3(0x280)](0x0,Number(_0x1ddbdf['score'])||0x0),'gameState':Number(_0x1ddbdf[_0x2b7bd3(0x218)])||0x0,'hasLastReveal':!!_0x1ddbdf['hasLastReveal'],'lastRevealX':Number(_0x1ddbdf['lastRevealX'])||0x0,'lastRevealY':Number(_0x1ddbdf[_0x2b7bd3(0x298)])||0x0,'chunks':_0x182fb4};}['_buildInfiniteSaveInfo'](_0x1b66d4,_0x1ae032,_0x593d36){const _0x303749=a30_0x37e501,_0x284818={'exists':!![],'density':Math[_0x303749(0x280)](0xf,Math[_0x303749(0x295)](0x28,Number(_0x1ae032?.[_0x303749(0x259)])||0x14)),'elapsedTimeMs':Math['max'](0x0,Number(_0x1ae032?.[_0x303749(0x20e)])||0x0),'currentScore':Math[_0x303749(0x280)](0x0,Number(_0x1ae032?.['score'])||0x0),'score':Math[_0x303749(0x280)](0x0,Number(_0x1ae032?.['score'])||0x0),'width':0x0,'height':0x0,'mineCount':0x0,'isInfinite':!![],'saveKey':_0x1b66d4,'categoryName':_0x303749(0x290),'levelName':_0x1b66d4===_0x303749(0x1f4)?'Custom':Math[_0x303749(0x280)](0xf,Math['min'](0x28,Number(_0x1ae032?.[_0x303749(0x259)])||0x14))+'%','lastScore':0x0,'highScore':0x0};if(_0x1b66d4!==_0x303749(0x1f4)&&this[_0x303749(0x25d)](_0x284818[_0x303749(0x259)])){const _0x4dfd84=_0x593d36[String(_0x284818[_0x303749(0x259)])]||{'lastScore':0x0,'highScore':0x0};_0x284818[_0x303749(0x26a)]=Math[_0x303749(0x280)](0x0,Number(_0x4dfd84['lastScore'])||0x0),_0x284818['highScore']=Math[_0x303749(0x280)](0x0,Number(_0x4dfd84['highScore'])||0x0);}return _0x284818;}[a30_0x37e501(0x21e)](_0x4032bd,_0x135386,_0x54f9ef){const _0x5a1d0c=a30_0x37e501;if(!_0x4032bd||!_0x135386)return;const _0x550450=this[_0x5a1d0c(0x244)]();_0x550450[_0x5a1d0c(0x231)][_0x4032bd]=this['_buildInfiniteEntry'](_0x135386,_0x54f9ef),_0x550450['lastGameKey']=_0x4032bd,this[_0x5a1d0c(0x26d)](_0x550450);}[a30_0x37e501(0x278)](_0x1f21e5){const _0x4d87a5=a30_0x37e501,_0x33d45f=this[_0x4d87a5(0x244)](),_0xfea709=_0x33d45f[_0x4d87a5(0x231)][_0x1f21e5];if(!_0xfea709)return null;const _0x296a9d=this[_0x4d87a5(0x1f2)](_0xfea709);if(!_0x296a9d){delete _0x33d45f['entries'][_0x1f21e5];if(_0x33d45f[_0x4d87a5(0x283)]===_0x1f21e5)_0x33d45f[_0x4d87a5(0x283)]='';return this['_saveInfiniteStore'](_0x33d45f),null;}return{'saveData':_0x296a9d,'elapsedTimeMs':Math[_0x4d87a5(0x280)](0x0,Number(_0xfea709['elapsedTimeMs'])||0x0),'key':_0x1f21e5};}[a30_0x37e501(0x256)](){const _0x285960=a30_0x37e501,_0xd18cff=this[_0x285960(0x244)]();if(!_0xd18cff[_0x285960(0x283)])return null;return this[_0x285960(0x278)](_0xd18cff[_0x285960(0x283)]);}[a30_0x37e501(0x1e8)](_0x422c15){const _0x3f7a79=a30_0x37e501,_0x4d549f=this['_loadInfiniteStore']();if(!_0x4d549f[_0x3f7a79(0x231)][_0x422c15])return;delete _0x4d549f[_0x3f7a79(0x231)][_0x422c15];if(_0x4d549f[_0x3f7a79(0x283)]===_0x422c15)_0x4d549f[_0x3f7a79(0x283)]='';this[_0x3f7a79(0x26d)](_0x4d549f);}[a30_0x37e501(0x20d)](){const _0x11a94d=a30_0x37e501,_0x1c1fe6=this[_0x11a94d(0x244)]();if(!_0x1c1fe6[_0x11a94d(0x283)])return;_0x1c1fe6[_0x11a94d(0x283)]='',this[_0x11a94d(0x26d)](_0x1c1fe6);}[a30_0x37e501(0x223)](){const _0x4b5edb=a30_0x37e501,_0x95998f=this[_0x4b5edb(0x244)]();return!!_0x95998f[_0x4b5edb(0x231)]['custom'];}[a30_0x37e501(0x243)](_0x2c2544){const _0x575757=a30_0x37e501,_0x1c9aad=this[_0x575757(0x239)](_0x2c2544,!![]),_0x2d87ee=this[_0x575757(0x244)]();return!!_0x2d87ee[_0x575757(0x231)][_0x1c9aad];}['getInfiniteSavedGameInfo'](){const _0x14a40f=a30_0x37e501,_0x1c1589=this[_0x14a40f(0x244)](),_0x3c7581=_0x1c1589[_0x14a40f(0x283)];if(!_0x3c7581||!_0x1c1589[_0x14a40f(0x231)][_0x3c7581])return{'exists':![],'density':0x0,'elapsedTimeMs':0x0,'currentScore':0x0,'lastScore':0x0,'highScore':0x0};return this['_buildInfiniteSaveInfo'](_0x3c7581,_0x1c1589[_0x14a40f(0x231)][_0x3c7581],_0x1c1589[_0x14a40f(0x204)]||{});}['getInfiniteSavedGameInfoForKey'](_0x103135){const _0x1fa94c=a30_0x37e501,_0x1ff948=this[_0x1fa94c(0x244)](),_0x3a7b73=_0x1ff948[_0x1fa94c(0x231)][_0x103135];if(!_0x3a7b73)return{'exists':![]};return this[_0x1fa94c(0x224)](_0x103135,_0x3a7b73,_0x1ff948[_0x1fa94c(0x204)]||{});}[a30_0x37e501(0x1e3)](_0x3cf0c1,_0x237f80){const _0x147d87=a30_0x37e501,_0x3c3142=Math[_0x147d87(0x280)](0xf,Math['min'](0x28,Number(_0x3cf0c1)||0x14));if(!this['isInfinitePresetDensity'](_0x3c3142))return;const _0x86d665=this[_0x147d87(0x244)](),_0xcd532d=String(_0x3c3142),_0x55ecf9=_0x86d665[_0x147d87(0x204)][_0xcd532d]||{'lastScore':0x0,'highScore':0x0},_0x4cd896=Math[_0x147d87(0x280)](0x0,Number(_0x237f80)||0x0),_0x1b0a2e=Math[_0x147d87(0x280)](Math[_0x147d87(0x280)](0x0,Number(_0x55ecf9['highScore'])||0x0),_0x4cd896);_0x86d665[_0x147d87(0x204)][_0xcd532d]={'lastScore':_0x4cd896,'highScore':_0x1b0a2e},this[_0x147d87(0x26d)](_0x86d665);}[a30_0x37e501(0x22e)](_0x56f46d){const _0x521bab=a30_0x37e501,_0x5253c2=Math['max'](0xf,Math[_0x521bab(0x295)](0x28,Number(_0x56f46d)||0x14)),_0x458701=this['_loadInfiniteStore'](),_0xdd29cb=_0x458701[_0x521bab(0x204)][String(_0x5253c2)]||{'lastScore':0x0,'highScore':0x0};return{'lastScore':Math[_0x521bab(0x280)](0x0,Number(_0xdd29cb[_0x521bab(0x26a)])||0x0),'highScore':Math[_0x521bab(0x280)](0x0,Number(_0xdd29cb[_0x521bab(0x1da)])||0x0)};}[a30_0x37e501(0x255)](_0xb408c9){return gameSaveStorageKeyForVariant(_0xb408c9);}[a30_0x37e501(0x25b)](_0x21ddb2){return progressStorageKeyForVariant(_0x21ddb2);}[a30_0x37e501(0x28d)](_0x58cfe3){const _0x336aa1=a30_0x37e501;if(_0x58cfe3===_0x336aa1(0x24e)){const _0xf36c12=this['_loadInfiniteStore']();return{'saves':_0xf36c12[_0x336aa1(0x231)],'lastGameKey':_0xf36c12[_0x336aa1(0x283)]};}try{const _0x2e34e2=localStorage[_0x336aa1(0x23c)](this['_getGameModeSavesKey'](_0x58cfe3));if(!_0x2e34e2)return{'saves':{},'lastGameKey':''};const _0x37882c=JSON[_0x336aa1(0x261)](_0x2e34e2);if(!_0x37882c||_0x37882c[_0x336aa1(0x1f3)]!==0x2)return{'saves':{},'lastGameKey':''};return{'saves':_0x37882c[_0x336aa1(0x1dc)]||{},'lastGameKey':_0x37882c['lastGameKey']||''};}catch{return{'saves':{},'lastGameKey':''};}}['_saveGameModeSaves'](_0x42d2db,_0x5e4247,_0x2320b7){const _0x5461a0=a30_0x37e501;if(_0x42d2db===_0x5461a0(0x24e)){const _0x212e76=this['_loadInfiniteStore']();_0x212e76[_0x5461a0(0x231)]=_0x5e4247||{},_0x212e76[_0x5461a0(0x283)]=_0x2320b7||'',this['_saveInfiniteStore'](_0x212e76);return;}try{localStorage[_0x5461a0(0x252)](this[_0x5461a0(0x255)](_0x42d2db),JSON[_0x5461a0(0x263)]({'version':0x2,'lastGameKey':_0x2320b7,'saves':_0x5e4247}));}catch{}}[a30_0x37e501(0x230)](_0x2999e5,_0x3dc492){const _0x13f32c=a30_0x37e501;if(_0x2999e5==='infinite_minesweeper'){const _0x1ba848=Number(_0x3dc492?.[_0x13f32c(0x259)])||0x14;return this['resolveInfiniteSaveKey'](_0x1ba848,this[_0x13f32c(0x215)](_0x2999e5,{'density':_0x1ba848}));}return this['isKnownGameModePreset'](_0x2999e5,_0x3dc492)?this[_0x13f32c(0x27d)](_0x3dc492,_0x2999e5):_0x13f32c(0x1f4);}[a30_0x37e501(0x247)](_0x3219b7,_0x54a94d,_0x28bf34,_0x2ebcc5,_0x2da812=[],_0x49cdfd=0x14){const _0xf493cc=a30_0x37e501;if(_0x3219b7==='infinite_minesweeper'){const _0x230b17=Number(_0x28bf34?.['density'])||Number(_0x54a94d?.[_0xf493cc(0x259)])||0x14,_0x399c50=this['isInfinitePresetDensity'](_0x230b17)&&this[_0xf493cc(0x215)](_0x3219b7,{'density':_0x230b17}),_0x4c3df6=this[_0xf493cc(0x239)](_0x230b17,_0x399c50);this[_0xf493cc(0x21e)](_0x4c3df6,_0x54a94d,_0x2ebcc5);return;}if(!_0x54a94d||_0x54a94d[_0xf493cc(0x24a)]===0x0)return;const _0x200b00=this[_0xf493cc(0x230)](_0x3219b7,_0x28bf34),{saves:_0x2c91f0}=this[_0xf493cc(0x28d)](_0x3219b7);_0x2c91f0[_0x200b00]=this[_0xf493cc(0x210)](_0x54a94d,_0x28bf34,_0x2ebcc5,_0x2da812,_0x49cdfd),this[_0xf493cc(0x24c)](_0x3219b7,_0x2c91f0,_0x200b00);}[a30_0x37e501(0x214)](_0x433746,_0x6ab99c){const _0x3d6dc3=a30_0x37e501;if(_0x433746===_0x3d6dc3(0x24e))return this[_0x3d6dc3(0x278)](_0x6ab99c);const {saves:_0x41cc1a}=this[_0x3d6dc3(0x28d)](_0x433746);if(!_0x41cc1a[_0x6ab99c])return null;if(!this[_0x3d6dc3(0x20a)](_0x41cc1a[_0x6ab99c]))return delete _0x41cc1a[_0x6ab99c],this['_saveGameModeSaves'](_0x433746,_0x41cc1a,''),null;return this['_loadSaveEntry'](_0x41cc1a[_0x6ab99c]);}[a30_0x37e501(0x226)](_0x35d840,_0x39f672){const _0x4e4c22=a30_0x37e501;if(_0x35d840===_0x4e4c22(0x24e))return this[_0x4e4c22(0x243)](Number(_0x39f672?.[_0x4e4c22(0x259)])||0x14);const _0x10d12d=this[_0x4e4c22(0x27d)](_0x39f672,_0x35d840),{saves:_0x5a2ae5}=this[_0x4e4c22(0x28d)](_0x35d840);if(!_0x5a2ae5[_0x10d12d])return![];const _0x215a58=_0x5a2ae5[_0x10d12d];if(_0x215a58[_0x4e4c22(0x1e9)]&&_0x215a58['faces'])return this[_0x4e4c22(0x27f)](_0x215a58);return this[_0x4e4c22(0x20a)](_0x215a58);}['getGameModeSavedGameInfo'](_0x1efa98){const _0x4e9043=a30_0x37e501;if(_0x1efa98===_0x4e9043(0x24e))return this['getInfiniteSavedGameInfo']();const {saves:_0x579a7b,lastGameKey:_0x5d169a}=this[_0x4e9043(0x28d)](_0x1efa98);if(!_0x5d169a||!_0x579a7b[_0x5d169a])return{'exists':![]};const _0x420df3=_0x579a7b[_0x5d169a];if(!_0x420df3||!_0x420df3['w']||!_0x420df3['h'])return{'exists':![]};if(_0x420df3[_0x4e9043(0x1e9)]&&_0x420df3[_0x4e9043(0x287)]){if(!this[_0x4e9043(0x27f)](_0x420df3))return{'exists':![]};const _0x426047={'w':_0x420df3['w'],'h':_0x420df3['h'],'l':_0x420df3['l'],'density':_0x420df3[_0x4e9043(0x259)]},_0x302d49=0x2*(_0x420df3['w']*_0x420df3['h']+_0x420df3['w']*_0x420df3['l']+_0x420df3['h']*_0x420df3['l']),_0x26b42e=Math[_0x4e9043(0x295)](Math[_0x4e9043(0x1e6)](_0x302d49*_0x420df3[_0x4e9043(0x259)]/0x64),_0x302d49-0x9);return{'exists':!![],'w':_0x420df3['w'],'h':_0x420df3['h'],'density':_0x420df3[_0x4e9043(0x259)],'mineCount':_0x26b42e,'elapsedTimeMs':_0x420df3[_0x4e9043(0x20e)]||0x0,'levelName':this[_0x4e9043(0x236)](_0x1efa98,_0x426047)||'Custom\x20level'};}if(!this[_0x4e9043(0x20a)](_0x420df3))return{'exists':![]};let _0xa1ee01=0x0;for(const _0x422dfa of _0x420df3[_0x4e9043(0x21a)]){if(_0x422dfa[_0x4e9043(0x285)])_0xa1ee01++;}const _0x14f581={'w':_0x420df3['w'],'h':_0x420df3['h'],'density':_0x420df3[_0x4e9043(0x259)]};return{'exists':!![],'w':_0x420df3['w'],'h':_0x420df3['h'],'density':_0x420df3[_0x4e9043(0x259)],'mineCount':_0xa1ee01,'elapsedTimeMs':_0x420df3[_0x4e9043(0x20e)]||0x0,'levelName':this['getGameModeLevelName'](_0x1efa98,_0x14f581)||_0x4e9043(0x27e)};}[a30_0x37e501(0x21f)](_0x2d24e3){const _0x1a7269=a30_0x37e501;if(_0x2d24e3==='infinite_minesweeper')return this[_0x1a7269(0x256)]();const {saves:_0x585081,lastGameKey:_0x364bcd}=this['_loadGameModeSaves'](_0x2d24e3);if(!_0x364bcd||!_0x585081[_0x364bcd])return null;if(!this['_isEntryResumable'](_0x585081[_0x364bcd]))return null;return this['_loadSaveEntry'](_0x585081[_0x364bcd]);}[a30_0x37e501(0x22c)](_0x128c17,_0x11f24b){const _0x483f70=a30_0x37e501;if(_0x128c17===_0x483f70(0x24e)){this['clearInfiniteGameSave'](_0x11f24b);return;}const {saves:_0x36fb42,lastGameKey:_0xb0073}=this[_0x483f70(0x28d)](_0x128c17);if(!_0x36fb42[_0x11f24b])return;delete _0x36fb42[_0x11f24b];const _0x1237df=_0xb0073===_0x11f24b?'':_0xb0073;this['_saveGameModeSaves'](_0x128c17,_0x36fb42,_0x1237df);}[a30_0x37e501(0x228)](_0x2d9823,_0x1d9317,_0x51c2d0){const _0x28b4df=a30_0x37e501,_0x4d6a16={'w':_0x1d9317['w'],'h':_0x1d9317['h'],'l':_0x1d9317['l'],'density':_0x1d9317[_0x28b4df(0x259)]},_0x3f1112=this['resolveGameModeSaveKey'](_0x2d9823,_0x4d6a16),{saves:_0x448bff}=this[_0x28b4df(0x28d)](_0x2d9823);_0x448bff[_0x3f1112]={..._0x1d9317,'elapsedTimeMs':_0x51c2d0,'is3D':!![]},this[_0x28b4df(0x24c)](_0x2d9823,_0x448bff,_0x3f1112);}['loadGameModeState3DForKey'](_0x1de481,_0x4d4dbd){const _0x30dfb3=a30_0x37e501,{saves:_0x3f5b5f}=this[_0x30dfb3(0x28d)](_0x1de481),_0x4dff7a=_0x3f5b5f[_0x4d4dbd];if(!_0x4dff7a||!_0x4dff7a[_0x30dfb3(0x287)]||!_0x4dff7a['is3D'])return null;if(!this[_0x30dfb3(0x27f)](_0x4dff7a))return delete _0x3f5b5f[_0x4d4dbd],this[_0x30dfb3(0x24c)](_0x1de481,_0x3f5b5f,''),null;return{'grid3DState':_0x4dff7a,'elapsedTimeMs':_0x4dff7a['elapsedTimeMs']||0x0};}['loadGameModeLastGameState3D'](_0x36b799){const _0x4730e2=a30_0x37e501,{saves:_0xb9485e,lastGameKey:_0xc951e4}=this[_0x4730e2(0x28d)](_0x36b799);if(!_0xc951e4||!_0xb9485e[_0xc951e4])return null;const _0x27624f=_0xb9485e[_0xc951e4];if(!_0x27624f||!_0x27624f['faces']||!_0x27624f[_0x4730e2(0x1e9)])return null;if(!this[_0x4730e2(0x27f)](_0x27624f))return null;return{'grid3DState':_0x27624f,'elapsedTimeMs':_0x27624f[_0x4730e2(0x20e)]||0x0};}[a30_0x37e501(0x274)](_0x4a524a,_0x491a8f){const _0x448d7a=a30_0x37e501,_0x567de2=this[_0x448d7a(0x27d)](_0x491a8f,_0x4a524a),{saves:_0x352458}=this[_0x448d7a(0x28d)](_0x4a524a),_0x52b883=_0x352458[_0x567de2];if(!_0x52b883||!_0x52b883['faces']||!_0x52b883[_0x448d7a(0x1e9)])return![];return this[_0x448d7a(0x27f)](_0x52b883);}[a30_0x37e501(0x27f)](_0x5927f4){const _0x412de9=a30_0x37e501;if(!_0x5927f4||!_0x5927f4[_0x412de9(0x287)])return![];let _0x409a8b=![],_0x246de9=![];for(const _0x5f21e6 of _0x5927f4['faces']){for(const _0x2cc9ed of _0x5f21e6){const _0x4d8a09=_0x2cc9ed['c']===0x2,_0x36e4b9=_0x2cc9ed['s']===0x1,_0xe54b03=_0x2cc9ed['s']===0x0;if(!_0x4d8a09&&_0xe54b03)_0x409a8b=!![];if(_0x4d8a09&&_0x36e4b9){_0x246de9=!![];break;}}if(_0x246de9)break;}return _0x409a8b&&!_0x246de9;}['saveGameModeProgress'](_0x3dc85f,_0x3da3e1,_0x13858b,_0x49fe5d=-0x1){const _0x86fa09=a30_0x37e501;if(_0x3dc85f===_0x86fa09(0x24e))return;if(!this[_0x86fa09(0x215)](_0x3dc85f,_0x3da3e1))return;_0x13858b=Math['max'](0x0,Math[_0x86fa09(0x295)](0x64,_0x13858b));const _0x2184a2=this['gridDataKey'](_0x3da3e1,_0x3dc85f),_0x3f922b=this[_0x86fa09(0x1d8)](_0x3dc85f);let _0xbe3632=![];const _0x21858d=_0x3f922b[_0x86fa09(0x1e4)][_0x2184a2]||0x0;_0x13858b>_0x21858d&&(_0x3f922b[_0x86fa09(0x1e4)][_0x2184a2]=_0x13858b,_0xbe3632=!![]);if(_0x13858b===0x64&&_0x49fe5d>=0x0){const _0x461d58=_0x3f922b[_0x86fa09(0x269)][_0x2184a2];(_0x461d58===undefined||_0x49fe5d<_0x461d58)&&(_0x3f922b[_0x86fa09(0x269)][_0x2184a2]=_0x49fe5d,_0xbe3632=!![]);}_0xbe3632&&this['_saveGameModeProgressData'](_0x3dc85f,_0x3f922b);}[a30_0x37e501(0x205)](_0x1a7d64,_0x4f3970){const _0x4b75e2=a30_0x37e501;if(_0x1a7d64===_0x4b75e2(0x24e))return 0x0;const _0x20d39f=this['_loadGameModeProgressData'](_0x1a7d64);return _0x20d39f['progress'][this[_0x4b75e2(0x27d)](_0x4f3970,_0x1a7d64)]||0x0;}[a30_0x37e501(0x1e5)](_0x30d01f,_0x502af0){const _0x48e298=a30_0x37e501;if(_0x30d01f===_0x48e298(0x24e))return null;const _0x48eb6c=this[_0x48e298(0x1d8)](_0x30d01f);return _0x48eb6c[_0x48e298(0x269)][this[_0x48e298(0x27d)](_0x502af0,_0x30d01f)]??null;}[a30_0x37e501(0x1d8)](_0x1dd6fc){const _0x3cb218=a30_0x37e501;return this[_0x3cb218(0x24d)](_0x1dd6fc);}['_saveGameModeProgressData'](_0x296504,_0x3066df){const _0x58ceca=a30_0x37e501;this[_0x58ceca(0x1f1)](_0x3066df,_0x296504);}['saveGameModeCustomSettings'](_0x45d0fb,_0x2fe323){const _0x4ce115=a30_0x37e501,_0xb92fae=_0x4ce115(0x1f8)+_0x45d0fb+'/';for(const _0x53b6ba of Object[_0x4ce115(0x268)](this[_0x4ce115(0x1db)])){_0x53b6ba['startsWith'](_0xb92fae)&&delete this[_0x4ce115(0x1db)][_0x53b6ba];}for(const [_0x4aaf49,_0x2efe4c]of Object[_0x4ce115(0x231)](_0x2fe323||{})){this[_0x4ce115(0x1db)][_0xb92fae+_0x4aaf49]=_0x2efe4c;}this[_0x4ce115(0x286)]();}[a30_0x37e501(0x21d)](_0x54a2cd){const _0x3ff94a=a30_0x37e501,_0xdc01e='gameModeCustom/'+_0x54a2cd+'/',_0x1c57e8={};for(const [_0x583449,_0x2487d8]of Object['entries'](this[_0x3ff94a(0x1db)])){_0x583449[_0x3ff94a(0x265)](_0xdc01e)&&(_0x1c57e8[_0x583449[_0x3ff94a(0x1df)](_0xdc01e[_0x3ff94a(0x24a)])]=_0x2487d8);}return Object[_0x3ff94a(0x268)](_0x1c57e8)[_0x3ff94a(0x24a)]?_0x1c57e8:null;}}
+// SettingsManager.js - Persistent settings via localStorage
+// ============================================================================
+
+import { LEVEL_PRESETS, OTHER_GAME_MODES } from '../core/CoreData.js';
+
+const SETTINGS_STORAGE_KEY = 'settings.json';
+const SESSION_KEY_STORAGE_KEY = 'network/sessionKey';
+const COOLDOWNS_STORAGE_KEY = 'cooldowns.dat';
+
+const DEFAULT_SETTINGS = Object.freeze({
+    'player/nickname': 'Player',
+    'audio/flagVolume': 0.1,
+    'audio/revealVolume': 0.1,
+    'visual/showActionDecals': true,
+    'visual/digitalNumbers': false,
+    'visual/digitalTextures': false,
+    'visual/chatNotifications': true,
+    'clickBehaviour/leftClick': 2,
+    'clickBehaviour/rightClick': 1,
+    'clickBehaviour/longLeftClick': 1,
+    'solo/gridWidth': 20,
+    'solo/gridHeight': 20,
+    'solo/mineDensity': 20,
+    'online/gridWidth': 20,
+    'online/gridHeight': 20,
+    'online/mineDensity': 20,
+    'online/gameType': 0,
+    'online/lobbyVisibility': 0,
+    'lobby/autoApprovePending': false,
+    'cachedServerIp': '',
+    'cachedServerPort': 8080,
+});
+
+const SETTINGS_KEY_ALIASES = Object.freeze({
+    playerName: 'player/nickname',
+    flagVolume: 'audio/flagVolume',
+    revealVolume: 'audio/revealVolume',
+    showDecals: 'visual/showActionDecals',
+    digitalNumbers: 'visual/digitalNumbers',
+    digitalTextures: 'visual/digitalTextures',
+    chatNotifications: 'visual/chatNotifications',
+    clickBehaviourLeft: 'clickBehaviour/leftClick',
+    clickBehaviourRight: 'clickBehaviour/rightClick',
+    clickBehaviourLong: 'clickBehaviour/longLeftClick',
+    gridWidth: 'solo/gridWidth',
+    gridHeight: 'solo/gridHeight',
+    mineDensity: 'solo/mineDensity',
+    gameType: 'online/gameType',
+    lobbyVisibility: 'online/lobbyVisibility',
+    autoApprovePending: 'lobby/autoApprovePending',
+});
+
+function gameSaveStorageKeyForVariant(variant) {
+    if (!variant || variant === 'normal') return 'gamesave.dat';
+    if (variant === 'minesweeper_3d') return 'gamesave_minesweeper3d.dat';
+    return `gamesave_${variant}.dat`;
+}
+
+function progressStorageKeyForVariant(variant) {
+    if (!variant || variant === 'normal') return 'progress_normal.dat';
+    if (variant === 'minesweeper_3d') return 'progress_minesweeper3d.dat';
+    return `progress_${variant}.dat`;
+}
+
+const INFINITE_PRESET_DENSITIES = Object.freeze([18, 20, 40]);
+const INFINITE_CHUNK_SIZE = 32;
+const INFINITE_CHUNK_CELLS = INFINITE_CHUNK_SIZE * INFINITE_CHUNK_SIZE;
+
+function encodeByteArrayToBase64(bytes) {
+    let binary = '';
+    for (let i = 0; i < bytes.length; i++) {
+        binary += String.fromCharCode(bytes[i] & 0xFF);
+    }
+    return btoa(binary);
+}
+
+function decodeBase64ToByteArray(base64) {
+    try {
+        const binary = atob(base64);
+        const arr = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+            arr[i] = binary.charCodeAt(i) & 0xFF;
+        }
+        return arr;
+    } catch {
+        return null;
+    }
+}
+
+export class SettingsManager {
+    constructor() {
+        this.settings = { ...DEFAULT_SETTINGS };
+        this._respawnCooldowns = {};
+        this._isCustomGame = false;
+        this._loadSettings();
+        this._loadCooldowns();
+        this._loadGameSaves();
+        this._cleanupOrphanedSaves();
+    }
+
+    get(key) {
+        if (key === 'serverAddress') {
+            return `${this.settings['cachedServerIp']}:${this.settings['cachedServerPort']}`;
+        }
+        return this.settings[this._resolveSettingKey(key)];
+    }
+
+    set(key, value) {
+        if (key === 'serverAddress' && typeof value === 'string') {
+            const parsed = this._parseServerAddress(value);
+            if (parsed) {
+                this.settings['cachedServerIp'] = parsed.ip;
+                this.settings['cachedServerPort'] = parsed.port;
+                this._saveSettings();
+            }
+            return;
+        }
+        this.settings[this._resolveSettingKey(key)] = value;
+        this._saveSettings();
+    }
+
+    getAll() {
+        return { ...this.settings };
+    }
+
+    _resolveSettingKey(key) {
+        return SETTINGS_KEY_ALIASES[key] || key;
+    }
+
+    _parseServerAddress(address) {
+        const raw = String(address || '').trim();
+        if (!raw) return null;
+
+        // Accept host:port and ws(s)://host:port
+        const stripped = raw.replace(/^wss?:\/\//i, '');
+        const lastColon = stripped.lastIndexOf(':');
+        if (lastColon <= 0 || lastColon === stripped.length - 1) return null;
+
+        const ip = stripped.slice(0, lastColon).trim();
+        const port = parseInt(stripped.slice(lastColon + 1), 10);
+        if (!ip || !Number.isFinite(port) || port <= 0 || port > 65535) return null;
+
+        return { ip, port };
+    }
+
+    _loadSettings() {
+        try {
+            const stored = localStorage.getItem(SETTINGS_STORAGE_KEY);
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                this.settings = { ...DEFAULT_SETTINGS, ...parsed };
+            }
+        } catch (e) {
+            // console.warn('[SettingsManager] Failed to load settings:', e);
+        }
+    }
+
+    _saveSettings() {
+        try {
+            localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(this.settings));
+        } catch (e) {
+            // console.warn('[SettingsManager] Failed to save settings:', e);
+        }
+    }
+
+    getSessionKey() {
+        const b64 = localStorage.getItem(SESSION_KEY_STORAGE_KEY);
+        if (!b64) return null;
+        try {
+            const binary = atob(b64);
+            const arr = new Uint8Array(16);
+            for (let i = 0; i < 16 && i < binary.length; i++) {
+                arr[i] = binary.charCodeAt(i);
+            }
+            return arr;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    setSessionKey(uint8arr) {
+        if (!uint8arr) {
+            localStorage.removeItem(SESSION_KEY_STORAGE_KEY);
+        } else {
+            let binary = '';
+            for (let i = 0; i < 16; i++) binary += String.fromCharCode(uint8arr[i]);
+            localStorage.setItem(SESSION_KEY_STORAGE_KEY, btoa(binary));
+        }
+    }
+
+    // ========================================================================
+    // Rejoin Death Cooldowns
+    // ========================================================================
+
+    saveRespawnCooldown(gameID, expiryTimeMs) {
+        this._respawnCooldowns[String(gameID)] = expiryTimeMs;
+        this._saveCooldowns();
+    }
+
+    getRespawnCooldown(gameID) {
+        return this._respawnCooldowns[String(gameID)] || 0;
+    }
+
+    cleanupExpiredCooldowns() {
+        const now = Date.now();
+        let changed = false;
+        for (const gameID in this._respawnCooldowns) {
+            if (now >= this._respawnCooldowns[gameID]) {
+                delete this._respawnCooldowns[gameID];
+                changed = true;
+            }
+        }
+        if (changed) this._saveCooldowns();
+    }
+
+    _loadCooldowns() {
+        try {
+            const raw = localStorage.getItem(COOLDOWNS_STORAGE_KEY);
+            if (!raw) {
+                this._respawnCooldowns = {};
+                return;
+            }
+            const parsed = JSON.parse(raw);
+            this._respawnCooldowns = parsed && typeof parsed === 'object' ? parsed : {};
+        } catch {
+            this._respawnCooldowns = {};
+        }
+    }
+
+    _saveCooldowns() {
+        try {
+            localStorage.setItem(COOLDOWNS_STORAGE_KEY, JSON.stringify(this._respawnCooldowns));
+        } catch {}
+    }
+
+    // ========================================================================
+    // Grid data key helpers (mirrors Qt SettingsManager)
+    // ========================================================================
+
+    _findGameModeLevel(gameModeId, gridData) {
+        const mode = OTHER_GAME_MODES.find(m => m.id === gameModeId);
+        if (!mode) return null;
+        for (const cat of mode.categories) {
+            for (const lv of cat.levels) {
+                if (gameModeId === 'infinite_minesweeper') {
+                    if (Number(lv.density) === Number(gridData.density)) return lv;
+                    continue;
+                }
+                if (lv.w === gridData.w && lv.h === gridData.h && lv.density === gridData.density
+                    && (lv.l || 0) === (gridData.l || 0)) {
+                    return lv;
+                }
+            }
+        }
+        return null;
+    }
+
+    gridDataKey(gridData, gameModeId = null) {
+        if (gameModeId === 'infinite_minesweeper') {
+            return `d${gridData.density}`;
+        }
+        if (gameModeId === 'fog_of_war') {
+            const level = this._findGameModeLevel(gameModeId, gridData);
+            if (level && Number.isFinite(level.visibleCells)) {
+                return `${gridData.w}x${gridData.h}x${gridData.density}x${level.visibleCells}`;
+            }
+        } else if (gameModeId === 'minesweeper_3d') {
+            const level = this._findGameModeLevel(gameModeId, gridData);
+            if (level && Number.isFinite(level.l)) {
+                return `${gridData.w}x${gridData.h}x${gridData.density}x${level.l}`;
+            }
+        }
+        return `${gridData.w}x${gridData.h}x${gridData.density}`;
+    }
+
+    isKnownLevelPreset(gridData) {
+        for (const cat of LEVEL_PRESETS) {
+            for (const lv of cat.levels) {
+                if (lv.w === gridData.w && lv.h === gridData.h && lv.density === gridData.density)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    isKnownGameModePreset(gameModeId, gridData) {
+        return !!this._findGameModeLevel(gameModeId, gridData);
+    }
+
+    getGameModeLevelCategory(gameModeId, gridData) {
+        const mode = OTHER_GAME_MODES.find(m => m.id === gameModeId);
+        if (!mode) return null;
+        for (const cat of mode.categories) {
+            for (const lv of cat.levels) {
+                if (gameModeId === 'infinite_minesweeper') {
+                    if (Number(lv.density) === Number(gridData.density)) return cat.name;
+                    continue;
+                }
+                if (lv.w === gridData.w && lv.h === gridData.h && lv.density === gridData.density
+                    && (lv.l || 0) === (gridData.l || 0)) {
+                    return cat.name;
+                }
+            }
+        }
+        return null;
+    }
+
+    getGameModeLevelShortName(gameModeId, gridData) {
+        const mode = OTHER_GAME_MODES.find(m => m.id === gameModeId);
+        if (!mode) return null;
+        for (const cat of mode.categories) {
+            for (const lv of cat.levels) {
+                if (gameModeId === 'infinite_minesweeper') {
+                    if (Number(lv.density) === Number(gridData.density)) return lv.name;
+                    continue;
+                }
+                if (lv.w === gridData.w && lv.h === gridData.h && lv.density === gridData.density
+                    && (lv.l || 0) === (gridData.l || 0)) {
+                    return lv.name;
+                }
+            }
+        }
+        return null;
+    }
+
+    getGameModeLevelName(gameModeId, gridData) {
+        const category = this.getGameModeLevelCategory(gameModeId, gridData);
+        const level = this.getGameModeLevelShortName(gameModeId, gridData);
+        if (!category || !level) return null;
+        return `${category}: ${level}`;
+    }
+
+    getLevelCategory(gridData) {
+        for (const cat of LEVEL_PRESETS) {
+            for (const lv of cat.levels) {
+                if (lv.w === gridData.w && lv.h === gridData.h && lv.density === gridData.density) {
+                    return cat.name;
+                }
+            }
+        }
+        return null;
+    }
+
+    getLevelShortName(gridData) {
+        for (const cat of LEVEL_PRESETS) {
+            for (const lv of cat.levels) {
+                if (lv.w === gridData.w && lv.h === gridData.h && lv.density === gridData.density) {
+                    return lv.name;
+                }
+            }
+        }
+        return null;
+    }
+
+    getLevelName(gridData) {
+        const category = this.getLevelCategory(gridData);
+        const level = this.getLevelShortName(gridData);
+        if (!category || !level) return null;
+        return `${category}: ${level}`;
+    }
+
+    // ========================================================================
+    // Game state persistence — multi-save keyed by level
+    // ========================================================================
+
+    /** Resolve save key: gridDataKey for known presets, "custom" otherwise. */
+    resolveGameSaveKey(gridData) {
+        return this.isKnownLevelPreset(gridData) ? this.gridDataKey(gridData) : 'custom';
+    }
+
+    /**
+     * Resolve the key that the ACTIVE game should use for saves.
+     * Custom games always go to "custom" regardless of dimensions.
+     */
+    resolveActiveSaveKey(gridData) {
+        return this._isCustomGame ? 'custom' : this.resolveGameSaveKey(gridData);
+    }
+
+    /** Mark the current game as custom (true) or preset (false). */
+    setCustomGame(isCustom) {
+        this._isCustomGame = !!isCustom;
+    }
+
+    _loadGameSaves() {
+        try {
+            const raw = localStorage.getItem(gameSaveStorageKeyForVariant('normal'));
+            if (!raw) { this._gameSaves = {}; this._lastGameKey = ''; return; }
+            const parsed = JSON.parse(raw);
+            if (!parsed || parsed.version !== 2) { this._gameSaves = {}; this._lastGameKey = ''; return; }
+            this._gameSaves = parsed.saves || {};
+            this._lastGameKey = parsed.lastGameKey || '';
+        } catch {
+            this._gameSaves = {};
+            this._lastGameKey = '';
+        }
+    }
+
+    _saveGameSaves() {
+        try {
+            localStorage.setItem(gameSaveStorageKeyForVariant('normal'), JSON.stringify({
+                version: 2,
+                lastGameKey: this._lastGameKey,
+                saves: this._gameSaves,
+            }));
+        } catch {}
+    }
+
+    _cleanupOrphanedSaves() {
+        let changed = false;
+        for (const key of Object.keys(this._gameSaves)) {
+            if (key === 'custom') continue;
+            const parts = key.split('x');
+            if (parts.length !== 3) { delete this._gameSaves[key]; changed = true; continue; }
+            const gd = { w: parseInt(parts[0]), h: parseInt(parts[1]), density: parseInt(parts[2]) };
+            if (!this.isKnownLevelPreset(gd)) {
+                delete this._gameSaves[key];
+                changed = true;
+            }
+        }
+        if (changed) {
+            if (this._lastGameKey && !this._gameSaves[this._lastGameKey]) this._lastGameKey = '';
+            this._saveGameSaves();
+        }
+    }
+
+    _buildSaveEntry(grid, gridData, elapsedTimeMs, fogCache = [], fogCacheLimit = 20) {
+        const cells = [];
+        for (let y = 0; y < gridData.h; y++) {
+            for (let x = 0; x < gridData.w; x++) {
+                const c = grid[y][x];
+                cells.push({ hasMine: c.content === 2, state: c.state });
+            }
+        }
+        const entry = {
+            w: gridData.w,
+            h: gridData.h,
+            density: gridData.density,
+            elapsedTimeMs,
+            cells,
+        };
+        if (this._isCustomGame) {
+            entry.isCustom = true;
+        }
+        if (fogCache && fogCache.length > 0) {
+            entry.fogCache = fogCache.map(p => ({ x: p.x, y: p.y }));
+        }
+        if (fogCacheLimit !== 20) {
+            entry.fogCacheLimit = fogCacheLimit;
+        }
+        return entry;
+    }
+
+    _loadSaveEntry(entry) {
+        if (!entry || !entry.w || !entry.h) return null;
+        const w = entry.w, h = entry.h;
+        if (!entry.cells || entry.cells.length !== w * h) return null;
+        const grid = [];
+        let idx = 0;
+        for (let y = 0; y < h; y++) {
+            grid[y] = [];
+            for (let x = 0; x < w; x++) {
+                const c = entry.cells[idx++];
+                grid[y][x] = { content: c.hasMine ? 2 : 1, state: c.state };
+            }
+        }
+        return {
+            grid,
+            gridData: { w, h, density: entry.density },
+            elapsedTimeMs: entry.elapsedTimeMs || 0,
+            fogCache: (entry.fogCache || []).map(o => ({ x: o.x, y: o.y })),
+            fogCacheLimit: entry.fogCacheLimit || 20,
+            isCustom: entry.isCustom || false,
+        };
+    }
+
+    _isEntryResumable(entry) {
+        if (!entry || !entry.cells || !entry.w || !entry.h) return false;
+
+        let hasHiddenSafe = false;
+        let hasRevealedMine = false;
+
+        for (const c of entry.cells) {
+            const isMine = !!c.hasMine;
+            const state = c.state;
+            const isRevealed = state === 1; // CellState.Revealed
+            const isHidden = state === 0;   // CellState.Hidden
+
+            if (!isMine && isHidden) hasHiddenSafe = true;
+            if (isMine && isRevealed) {
+                hasRevealedMine = true;
+                break;
+            }
+        }
+
+        // Resumable only when game is not finished: at least one hidden safe remains
+        // and no mine has been revealed.
+        return hasHiddenSafe && !hasRevealedMine;
+    }
+
+    _ensureResumableOrDrop(key) {
+        const entry = this._gameSaves[key];
+        if (!entry) return false;
+        if (this._isEntryResumable(entry)) return true;
+
+        delete this._gameSaves[key];
+        if (this._lastGameKey === key) this._lastGameKey = '';
+        this._saveGameSaves();
+        return false;
+    }
+
+    _buildSaveInfo(entry) {
+        if (!entry || !entry.w || !entry.h) return { exists: false };
+        let mineCount = 0;
+        for (const c of entry.cells) { if (c.hasMine) mineCount++; }
+        const gridData = { w: entry.w, h: entry.h, density: entry.density };
+        // If the save was made from a custom game, always label it 'Custom'
+        // even when the dimensions happen to match a known preset.
+        const levelName = entry.isCustom ? 'Custom' : this.getLevelName(gridData);
+        return {
+            exists: true,
+            w: entry.w,
+            h: entry.h,
+            density: entry.density,
+            mineCount,
+            elapsedTimeMs: entry.elapsedTimeMs || 0,
+            levelName,
+        };
+    }
+
+    // ── Public API ──
+
+    saveGameState(grid, gridData, elapsedTimeMs, fogCache = [], fogCacheLimit = 20) {
+        if (!grid || grid.length === 0) return;
+        const key = this.resolveActiveSaveKey(gridData);
+        this._gameSaves[key] = this._buildSaveEntry(grid, gridData, elapsedTimeMs, fogCache, fogCacheLimit);
+        this._lastGameKey = key;
+        this._saveGameSaves();
+    }
+
+    loadGameState() {
+        // Legacy compat: loads the last game
+        return this.loadLastGameState();
+    }
+
+    loadLastGameState() {
+        if (!this._lastGameKey || !this._gameSaves[this._lastGameKey]) return null;
+        if (!this._ensureResumableOrDrop(this._lastGameKey)) return null;
+        return this._loadSaveEntry(this._gameSaves[this._lastGameKey]);
+    }
+
+    loadGameStateForKey(key) {
+        if (!this._gameSaves[key]) return null;
+        if (!this._ensureResumableOrDrop(key)) return null;
+        return this._loadSaveEntry(this._gameSaves[key]);
+    }
+
+    getSavedGameInfo() {
+        if (!this._lastGameKey || !this._gameSaves[this._lastGameKey]) return { exists: false };
+        if (!this._ensureResumableOrDrop(this._lastGameKey)) return { exists: false };
+        return this._buildSaveInfo(this._gameSaves[this._lastGameKey]);
+    }
+
+    getSavedGameInfoForKey(key) {
+        if (!this._gameSaves[key]) return { exists: false };
+        if (!this._ensureResumableOrDrop(key)) return { exists: false };
+        return this._buildSaveInfo(this._gameSaves[key]);
+    }
+
+    hasSavedGameForLevel(gridData) {
+        const key = this.gridDataKey(gridData);
+        if (!this._gameSaves[key]) return false;
+        return this._ensureResumableOrDrop(key);
+    }
+
+    hasSavedGameForCurrentSelection(gridData) {
+        // Custom games always save to 'custom' slot; check that slot directly.
+        const entry = this._gameSaves['custom'];
+        if (!entry) return false;
+        if (!this._ensureResumableOrDrop('custom')) return false;
+        return entry.w === gridData.w && entry.h === gridData.h && entry.density === gridData.density;
+    }
+
+    hasSavedCustomGame() {
+        return !!this._gameSaves['custom'];
+    }
+
+    lastGameKey() {
+        return this._lastGameKey;
+    }
+
+    clearGameSave(key) {
+        if (!this._gameSaves[key]) return;
+        delete this._gameSaves[key];
+        if (this._lastGameKey === key) this._lastGameKey = '';
+        this._saveGameSaves();
+    }
+
+    clearLastGamePointer() {
+        this._lastGameKey = '';
+        this._saveGameSaves();
+    }
+
+    clearSavedGame() {
+        // Legacy compat: clears last game's save + pointer
+        if (this._lastGameKey) {
+            this.clearGameSave(this._lastGameKey);
+        }
+    }
+
+    // ========================================================================
+    // Level progress + best times (mirrors Qt SettingsManager)
+    // ========================================================================
+
+    _loadProgressData(variant = 'normal') {
+        try {
+            const raw = localStorage.getItem(progressStorageKeyForVariant(variant));
+            if (!raw) return { progress: {}, bestTimes: {} };
+            const parsed = JSON.parse(raw);
+            return {
+                progress:  parsed.progress  || {},
+                bestTimes: parsed.bestTimes || {},
+            };
+        } catch {
+            return { progress: {}, bestTimes: {} };
+        }
+    }
+
+    _saveProgressData(data, variant = 'normal') {
+        try {
+            localStorage.setItem(progressStorageKeyForVariant(variant), JSON.stringify(data));
+        } catch {}
+    }
+
+    saveLevelProgress(gridData, percentage, timeMs = -1) {
+        if (!this.isKnownLevelPreset(gridData)) return;
+
+        percentage = Math.max(0, Math.min(100, percentage));
+        const key = this.gridDataKey(gridData);
+        const data = this._loadProgressData('normal');
+        let changed = false;
+
+        const currentProgress = data.progress[key] || 0;
+        if (percentage > currentProgress) {
+            data.progress[key] = percentage;
+            changed = true;
+        }
+
+        if (percentage === 100 && timeMs >= 0) {
+            const currentBest = data.bestTimes[key];
+            if (currentBest === undefined || timeMs < currentBest) {
+                data.bestTimes[key] = timeMs;
+                changed = true;
+            }
+        }
+
+        if (changed) {
+            this._saveProgressData(data, 'normal');
+        }
+    }
+
+    getLevelProgress(gridData) {
+        const data = this._loadProgressData('normal');
+        return data.progress[this.gridDataKey(gridData)] || 0;
+    }
+
+    getLevelBestTime(gridData) {
+        const data = this._loadProgressData('normal');
+        return data.bestTimes[this.gridDataKey(gridData)] ?? null;
+    }
+
+    // ========================================================================
+    // Online game settings persistence
+    // ========================================================================
+
+    /** Save online game settings (used when hosting) */
+    saveOnlineGameSettings(gameData, visibility) {
+        this.settings['online/gridWidth'] = gameData.grid.w;
+        this.settings['online/gridHeight'] = gameData.grid.h;
+        this.settings['online/mineDensity'] = gameData.grid.density;
+        this.settings['online/gameType'] = gameData.gameType;
+        this.settings['online/lobbyVisibility'] = visibility;
+        this._saveSettings();
+    }
+
+    /** Load saved online game settings, or null if none */
+    loadOnlineGameSettings() {
+        return {
+            gameData: {
+                gameType: this.settings['online/gameType'] ?? 0,
+                grid: {
+                    w: this.settings['online/gridWidth'] ?? 20,
+                    h: this.settings['online/gridHeight'] ?? 20,
+                    density: this.settings['online/mineDensity'] ?? 20,
+                },
+            },
+            visibility: this.settings['online/lobbyVisibility'] ?? 0,
+        };
+    }
+
+    // ========================================================================
+    // Clear all progress
+    // ========================================================================
+
+    /** Clear all progress data (level progress + best times) */
+    clearAllProgress() {
+        localStorage.removeItem(progressStorageKeyForVariant('normal'));
+        for (const mode of OTHER_GAME_MODES) {
+            localStorage.removeItem(progressStorageKeyForVariant(mode.id));
+        }
+    }
+
+    // ========================================================================
+    // Reset all settings
+    // ========================================================================
+
+    /** Reset all app settings to their defaults (mirrors Qt UIManager::resetAllSettings). */
+    resetAllSettings() {
+        localStorage.removeItem(SETTINGS_STORAGE_KEY);
+        this.settings = { ...DEFAULT_SETTINGS };
+    }
+
+    // ========================================================================
+    // Infinite mode saves + preset score tracking
+    // ========================================================================
+
+    isInfinitePresetDensity(density) {
+        return INFINITE_PRESET_DENSITIES.includes(Number(density));
+    }
+
+    resolveInfiniteSaveKey(density, treatAsPreset) {
+        const d = Math.max(15, Math.min(40, Number(density) || 20));
+        if (treatAsPreset && this.isInfinitePresetDensity(d)) return `d${d}`;
+        return 'custom';
+    }
+
+    _loadInfiniteStore() {
+        const key = gameSaveStorageKeyForVariant('infinite_minesweeper');
+        const empty = { version: 3, lastGameKey: '', entries: {}, presetScores: {} };
+
+        try {
+            const raw = localStorage.getItem(key);
+            if (!raw) return empty;
+
+            const parsed = JSON.parse(raw);
+            if (!parsed || typeof parsed !== 'object') return empty;
+
+            // Backward compatibility: v2 shape used generic saves only.
+            if (parsed.version === 2) {
+                return {
+                    version: 3,
+                    lastGameKey: typeof parsed.lastGameKey === 'string' ? parsed.lastGameKey : '',
+                    entries: parsed.saves && typeof parsed.saves === 'object' ? parsed.saves : {},
+                    presetScores: {},
+                };
+            }
+
+            if (parsed.version !== 3) return empty;
+
+            return {
+                version: 3,
+                lastGameKey: typeof parsed.lastGameKey === 'string' ? parsed.lastGameKey : '',
+                entries: parsed.entries && typeof parsed.entries === 'object' ? parsed.entries : {},
+                presetScores: parsed.presetScores && typeof parsed.presetScores === 'object' ? parsed.presetScores : {},
+            };
+        } catch {
+            return empty;
+        }
+    }
+
+    _saveInfiniteStore(store) {
+        try {
+            localStorage.setItem(
+                gameSaveStorageKeyForVariant('infinite_minesweeper'),
+                JSON.stringify({
+                    version: 3,
+                    lastGameKey: store.lastGameKey || '',
+                    entries: store.entries || {},
+                    presetScores: store.presetScores || {},
+                })
+            );
+        } catch {}
+    }
+
+    _normalizeInfiniteChunkCells(rawCells) {
+        let bytes = null;
+
+        if (rawCells instanceof Uint8Array) {
+            bytes = rawCells;
+        } else if (Array.isArray(rawCells)) {
+            bytes = new Uint8Array(rawCells.length);
+            for (let i = 0; i < rawCells.length; i++) bytes[i] = Number(rawCells[i]) & 0xFF;
+        } else if (typeof rawCells === 'string') {
+            bytes = decodeBase64ToByteArray(rawCells);
+        }
+
+        if (!bytes) return null;
+
+        // Keep fixed 32x32 binary chunk payload.
+        if (bytes.length === INFINITE_CHUNK_CELLS) return bytes;
+        const fixed = new Uint8Array(INFINITE_CHUNK_CELLS);
+        fixed.set(bytes.subarray(0, Math.min(bytes.length, fixed.length)));
+        return fixed;
+    }
+
+    _buildInfiniteEntry(saveData, elapsedTimeMs) {
+        const density = Math.max(15, Math.min(40, Number(saveData?.density) || 20));
+        const score = Math.max(0, Number(saveData?.score) || 0);
+        const gameState = Number(saveData?.gameState) || 0;
+        const hasLastReveal = !!saveData?.hasLastReveal;
+        const lastRevealX = Number(saveData?.lastRevealX) || 0;
+        const lastRevealY = Number(saveData?.lastRevealY) || 0;
+
+        const chunks = [];
+        const sourceChunks = Array.isArray(saveData?.chunks) ? saveData.chunks : [];
+
+        for (const chunk of sourceChunks) {
+            const chunkX = Number(chunk?.chunkX) || 0;
+            const chunkY = Number(chunk?.chunkY) || 0;
+            const bytes = this._normalizeInfiniteChunkCells(chunk?.cells);
+            if (!bytes) continue;
+            chunks.push({
+                chunkX,
+                chunkY,
+                cells: encodeByteArrayToBase64(bytes),
+            });
+        }
+
+        chunks.sort((a, b) => (a.chunkY === b.chunkY ? a.chunkX - b.chunkX : a.chunkY - b.chunkY));
+
+        return {
+            density,
+            elapsedTimeMs: Math.max(0, Number(elapsedTimeMs) || 0),
+            score,
+            gameState,
+            hasLastReveal,
+            lastRevealX,
+            lastRevealY,
+            chunks,
+        };
+    }
+
+    _entryToInfiniteSaveData(entry) {
+        if (!entry || typeof entry !== 'object') return null;
+        const chunks = [];
+        const sourceChunks = Array.isArray(entry.chunks) ? entry.chunks : [];
+        for (const chunk of sourceChunks) {
+            const bytes = this._normalizeInfiniteChunkCells(chunk?.cells);
+            if (!bytes || bytes.length !== INFINITE_CHUNK_CELLS) return null;
+            chunks.push({
+                chunkX: Number(chunk?.chunkX) || 0,
+                chunkY: Number(chunk?.chunkY) || 0,
+                cells: bytes,
+            });
+        }
+
+        return {
+            density: Math.max(15, Math.min(40, Number(entry.density) || 20)),
+            score: Math.max(0, Number(entry.score) || 0),
+            gameState: Number(entry.gameState) || 0,
+            hasLastReveal: !!entry.hasLastReveal,
+            lastRevealX: Number(entry.lastRevealX) || 0,
+            lastRevealY: Number(entry.lastRevealY) || 0,
+            chunks,
+        };
+    }
+
+    _buildInfiniteSaveInfo(saveKey, entry, presetScores) {
+        const info = {
+            exists: true,
+            density: Math.max(15, Math.min(40, Number(entry?.density) || 20)),
+            elapsedTimeMs: Math.max(0, Number(entry?.elapsedTimeMs) || 0),
+            currentScore: Math.max(0, Number(entry?.score) || 0),
+            score: Math.max(0, Number(entry?.score) || 0),
+            width: 0,
+            height: 0,
+            mineCount: 0,
+            isInfinite: true,
+            saveKey,
+            categoryName: saveKey === 'custom' ? '' : 'Infinite Minesweeper',
+            levelName: saveKey === 'custom' ? '' : `${Math.max(15, Math.min(40, Number(entry?.density) || 20))}%`,
+            lastScore: 0,
+            highScore: 0,
+        };
+
+        if (saveKey !== 'custom' && this.isInfinitePresetDensity(info.density)) {
+            const score = presetScores[String(info.density)] || { lastScore: 0, highScore: 0 };
+            info.lastScore = Math.max(0, Number(score.lastScore) || 0);
+            info.highScore = Math.max(0, Number(score.highScore) || 0);
+        }
+
+        return info;
+    }
+
+    saveInfiniteGameForKey(saveKey, saveData, elapsedTimeMs) {
+        if (!saveKey || !saveData) return;
+
+        const store = this._loadInfiniteStore();
+        store.entries[saveKey] = this._buildInfiniteEntry(saveData, elapsedTimeMs);
+        store.lastGameKey = saveKey;
+        this._saveInfiniteStore(store);
+    }
+
+    loadInfiniteGameForKey(saveKey) {
+        const store = this._loadInfiniteStore();
+        const entry = store.entries[saveKey];
+        if (!entry) return null;
+
+        const saveData = this._entryToInfiniteSaveData(entry);
+        if (!saveData) {
+            delete store.entries[saveKey];
+            if (store.lastGameKey === saveKey) store.lastGameKey = '';
+            this._saveInfiniteStore(store);
+            return null;
+        }
+
+        return {
+            saveData,
+            elapsedTimeMs: Math.max(0, Number(entry.elapsedTimeMs) || 0),
+            key: saveKey,
+        };
+    }
+
+    loadInfiniteLastGame() {
+        const store = this._loadInfiniteStore();
+        if (!store.lastGameKey) return null;
+        return this.loadInfiniteGameForKey(store.lastGameKey);
+    }
+
+    clearInfiniteGameSave(saveKey) {
+        const store = this._loadInfiniteStore();
+        if (!store.entries[saveKey]) return;
+        delete store.entries[saveKey];
+        if (store.lastGameKey === saveKey) store.lastGameKey = '';
+        this._saveInfiniteStore(store);
+    }
+
+    clearInfiniteLastGamePointer() {
+        const store = this._loadInfiniteStore();
+        if (!store.lastGameKey) return;
+        store.lastGameKey = '';
+        this._saveInfiniteStore(store);
+    }
+
+    hasInfiniteSavedCustomGame() {
+        const store = this._loadInfiniteStore();
+        return !!store.entries.custom;
+    }
+
+    hasInfiniteSavedGameForDensity(density) {
+        const key = this.resolveInfiniteSaveKey(density, true);
+        const store = this._loadInfiniteStore();
+        return !!store.entries[key];
+    }
+
+    getInfiniteSavedGameInfo() {
+        const store = this._loadInfiniteStore();
+        const key = store.lastGameKey;
+        if (!key || !store.entries[key]) {
+            return {
+                exists: false,
+                density: 0,
+                elapsedTimeMs: 0,
+                currentScore: 0,
+                lastScore: 0,
+                highScore: 0,
+            };
+        }
+        return this._buildInfiniteSaveInfo(key, store.entries[key], store.presetScores || {});
+    }
+
+    getInfiniteSavedGameInfoForKey(saveKey) {
+        const store = this._loadInfiniteStore();
+        const entry = store.entries[saveKey];
+        if (!entry) return { exists: false };
+        return this._buildInfiniteSaveInfo(saveKey, entry, store.presetScores || {});
+    }
+
+    saveInfinitePresetScore(density, score) {
+        const d = Math.max(15, Math.min(40, Number(density) || 20));
+        if (!this.isInfinitePresetDensity(d)) return;
+
+        const store = this._loadInfiniteStore();
+        const key = String(d);
+        const existing = store.presetScores[key] || { lastScore: 0, highScore: 0 };
+        const lastScore = Math.max(0, Number(score) || 0);
+        const highScore = Math.max(Math.max(0, Number(existing.highScore) || 0), lastScore);
+        store.presetScores[key] = { lastScore, highScore };
+        this._saveInfiniteStore(store);
+    }
+
+    getInfinitePresetScoreInfo(density) {
+        const d = Math.max(15, Math.min(40, Number(density) || 20));
+        const store = this._loadInfiniteStore();
+        const score = store.presetScores[String(d)] || { lastScore: 0, highScore: 0 };
+        return {
+            lastScore: Math.max(0, Number(score.lastScore) || 0),
+            highScore: Math.max(0, Number(score.highScore) || 0),
+        };
+    }
+
+    // ========================================================================
+    // Game mode save/progress (mirrors Qt per-mode file separation)
+    // ========================================================================
+
+    _getGameModeSavesKey(gameModeId) {
+        return gameSaveStorageKeyForVariant(gameModeId);
+    }
+
+    _getGameModeProgressKey(gameModeId) {
+        return progressStorageKeyForVariant(gameModeId);
+    }
+
+    _loadGameModeSaves(gameModeId) {
+        if (gameModeId === 'infinite_minesweeper') {
+            const store = this._loadInfiniteStore();
+            return { saves: store.entries, lastGameKey: store.lastGameKey };
+        }
+        try {
+            const raw = localStorage.getItem(this._getGameModeSavesKey(gameModeId));
+            if (!raw) return { saves: {}, lastGameKey: '' };
+            const parsed = JSON.parse(raw);
+            if (!parsed || parsed.version !== 2) return { saves: {}, lastGameKey: '' };
+            return { saves: parsed.saves || {}, lastGameKey: parsed.lastGameKey || '' };
+        } catch {
+            return { saves: {}, lastGameKey: '' };
+        }
+    }
+
+    _saveGameModeSaves(gameModeId, saves, lastGameKey) {
+        if (gameModeId === 'infinite_minesweeper') {
+            const store = this._loadInfiniteStore();
+            store.entries = saves || {};
+            store.lastGameKey = lastGameKey || '';
+            this._saveInfiniteStore(store);
+            return;
+        }
+        try {
+            localStorage.setItem(this._getGameModeSavesKey(gameModeId), JSON.stringify({
+                version: 2,
+                lastGameKey,
+                saves,
+            }));
+        } catch {}
+    }
+
+    resolveGameModeSaveKey(gameModeId, gridData) {
+        if (gameModeId === 'infinite_minesweeper') {
+            const d = Number(gridData?.density) || 20;
+            return this.resolveInfiniteSaveKey(d, this.isKnownGameModePreset(gameModeId, { density: d }));
+        }
+        return this.isKnownGameModePreset(gameModeId, gridData) ? this.gridDataKey(gridData, gameModeId) : 'custom';
+    }
+
+    saveGameModeState(gameModeId, grid, gridData, elapsedTimeMs, fogCache = [], fogCacheLimit = 20) {
+        if (gameModeId === 'infinite_minesweeper') {
+            const density = Number(gridData?.density) || Number(grid?.density) || 20;
+            const isPreset = this.isInfinitePresetDensity(density) && this.isKnownGameModePreset(gameModeId, { density });
+            const saveKey = this.resolveInfiniteSaveKey(density, isPreset);
+            this.saveInfiniteGameForKey(saveKey, grid, elapsedTimeMs);
+            return;
+        }
+        if (!grid || grid.length === 0) return;
+        const key = this.resolveGameModeSaveKey(gameModeId, gridData);
+        const { saves } = this._loadGameModeSaves(gameModeId);
+        saves[key] = this._buildSaveEntry(grid, gridData, elapsedTimeMs, fogCache, fogCacheLimit);
+        this._saveGameModeSaves(gameModeId, saves, key);
+    }
+
+    loadGameModeStateForKey(gameModeId, key) {
+        if (gameModeId === 'infinite_minesweeper') {
+            return this.loadInfiniteGameForKey(key);
+        }
+        const { saves } = this._loadGameModeSaves(gameModeId);
+        if (!saves[key]) return null;
+        if (!this._isEntryResumable(saves[key])) {
+            delete saves[key];
+            this._saveGameModeSaves(gameModeId, saves, '');
+            return null;
+        }
+        return this._loadSaveEntry(saves[key]);
+    }
+
+    hasGameModeSavedGame(gameModeId, gridData) {
+        if (gameModeId === 'infinite_minesweeper') {
+            return this.hasInfiniteSavedGameForDensity(Number(gridData?.density) || 20);
+        }
+        const key = this.gridDataKey(gridData, gameModeId);
+        const { saves } = this._loadGameModeSaves(gameModeId);
+        if (!saves[key]) return false;
+        const entry = saves[key];
+        if (entry.is3D && entry.faces) return this._is3DEntryResumable(entry);
+        return this._isEntryResumable(entry);
+    }
+
+    getGameModeSavedGameInfo(gameModeId) {
+        if (gameModeId === 'infinite_minesweeper') {
+            return this.getInfiniteSavedGameInfo();
+        }
+        const { saves, lastGameKey } = this._loadGameModeSaves(gameModeId);
+        if (!lastGameKey || !saves[lastGameKey]) return { exists: false };
+        const entry = saves[lastGameKey];
+        if (!entry || !entry.w || !entry.h) return { exists: false };
+        const isCustom = (lastGameKey === 'custom');
+
+        // 3D entry
+        if (entry.is3D && entry.faces) {
+            if (!this._is3DEntryResumable(entry)) return { exists: false };
+            const gridData = { w: entry.w, h: entry.h, l: entry.l, density: entry.density };
+            const totalCells = 2 * (entry.w * entry.h + entry.w * entry.l + entry.h * entry.l);
+            const mineCount = Math.min(Math.round(totalCells * entry.density / 100), totalCells - 9);
+            return {
+                exists: true,
+                w: entry.w, h: entry.h, density: entry.density,
+                mineCount,
+                elapsedTimeMs: entry.elapsedTimeMs || 0,
+                levelName: isCustom ? '' : (this.getGameModeLevelName(gameModeId, gridData) || 'Custom level'),
+            };
+        }
+
+        // 2D entry
+        if (!this._isEntryResumable(entry)) return { exists: false };
+        let mineCount = 0;
+        for (const c of entry.cells) { if (c.hasMine) mineCount++; }
+        const gridData = { w: entry.w, h: entry.h, density: entry.density };
+        return {
+            exists: true,
+            w: entry.w,
+            h: entry.h,
+            density: entry.density,
+            mineCount,
+            elapsedTimeMs: entry.elapsedTimeMs || 0,
+            levelName: isCustom ? '' : (this.getGameModeLevelName(gameModeId, gridData) || 'Custom level'),
+        };
+    }
+
+    loadGameModeLastGameState(gameModeId) {
+        if (gameModeId === 'infinite_minesweeper') {
+            return this.loadInfiniteLastGame();
+        }
+        const { saves, lastGameKey } = this._loadGameModeSaves(gameModeId);
+        if (!lastGameKey || !saves[lastGameKey]) return null;
+        if (!this._isEntryResumable(saves[lastGameKey])) return null;
+        const result = this._loadSaveEntry(saves[lastGameKey]);
+        if (result) result.key = lastGameKey;
+        return result;
+    }
+
+    clearGameModeSave(gameModeId, key) {
+        if (gameModeId === 'infinite_minesweeper') {
+            this.clearInfiniteGameSave(key);
+            return;
+        }
+        const { saves, lastGameKey } = this._loadGameModeSaves(gameModeId);
+        if (!saves[key]) return;
+        delete saves[key];
+        const newLastKey = (lastGameKey === key) ? '' : lastGameKey;
+        this._saveGameModeSaves(gameModeId, saves, newLastKey);
+    }
+
+    // ── 3D game mode save/load ──
+
+    saveGameModeState3D(gameModeId, grid3DState, elapsedTimeMs) {
+        const gridData = { w: grid3DState.w, h: grid3DState.h, l: grid3DState.l, density: grid3DState.density };
+        const key = this.resolveGameModeSaveKey(gameModeId, gridData);
+        const { saves } = this._loadGameModeSaves(gameModeId);
+        saves[key] = { ...grid3DState, elapsedTimeMs, is3D: true };
+        this._saveGameModeSaves(gameModeId, saves, key);
+    }
+
+    loadGameModeState3DForKey(gameModeId, key) {
+        const { saves } = this._loadGameModeSaves(gameModeId);
+        const entry = saves[key];
+        if (!entry || !entry.faces || !entry.is3D) return null;
+        if (!this._is3DEntryResumable(entry)) {
+            delete saves[key];
+            this._saveGameModeSaves(gameModeId, saves, '');
+            return null;
+        }
+        return { grid3DState: entry, elapsedTimeMs: entry.elapsedTimeMs || 0 };
+    }
+
+    loadGameModeLastGameState3D(gameModeId) {
+        const { saves, lastGameKey } = this._loadGameModeSaves(gameModeId);
+        if (!lastGameKey || !saves[lastGameKey]) return null;
+        const entry = saves[lastGameKey];
+        if (!entry || !entry.faces || !entry.is3D) return null;
+        if (!this._is3DEntryResumable(entry)) return null;
+        return { grid3DState: entry, elapsedTimeMs: entry.elapsedTimeMs || 0, key: lastGameKey };
+    }
+
+    hasGameModeSavedGame3D(gameModeId, gridData) {
+        const key = this.gridDataKey(gridData, gameModeId);
+        const { saves } = this._loadGameModeSaves(gameModeId);
+        const entry = saves[key];
+        if (!entry || !entry.faces || !entry.is3D) return false;
+        return this._is3DEntryResumable(entry);
+    }
+
+    _is3DEntryResumable(entry) {
+        if (!entry || !entry.faces) return false;
+        let hasHiddenSafe = false;
+        let hasRevealedMine = false;
+        for (const faceArr of entry.faces) {
+            for (const cell of faceArr) {
+                const isMine = cell.c === 2; // CellContent.Mine
+                const isRevealed = cell.s === 1; // CellState.Revealed
+                const isHidden = cell.s === 0; // CellState.Hidden
+                if (!isMine && isHidden) hasHiddenSafe = true;
+                if (isMine && isRevealed) { hasRevealedMine = true; break; }
+            }
+            if (hasRevealedMine) break;
+        }
+        return hasHiddenSafe && !hasRevealedMine;
+    }
+
+    saveGameModeProgress(gameModeId, gridData, percentage, timeMs = -1) {
+        if (gameModeId === 'infinite_minesweeper') return;
+        if (!this.isKnownGameModePreset(gameModeId, gridData)) return;
+
+        percentage = Math.max(0, Math.min(100, percentage));
+        const key = this.gridDataKey(gridData, gameModeId);
+        const data = this._loadGameModeProgressData(gameModeId);
+        let changed = false;
+
+        const currentProgress = data.progress[key] || 0;
+        if (percentage > currentProgress) {
+            data.progress[key] = percentage;
+            changed = true;
+        }
+
+        if (percentage === 100 && timeMs >= 0) {
+            const currentBest = data.bestTimes[key];
+            if (currentBest === undefined || timeMs < currentBest) {
+                data.bestTimes[key] = timeMs;
+                changed = true;
+            }
+        }
+
+        if (changed) {
+            this._saveGameModeProgressData(gameModeId, data);
+        }
+    }
+
+    getGameModeProgress(gameModeId, gridData) {
+        if (gameModeId === 'infinite_minesweeper') return 0;
+        const data = this._loadGameModeProgressData(gameModeId);
+        return data.progress[this.gridDataKey(gridData, gameModeId)] || 0;
+    }
+
+    getGameModeBestTime(gameModeId, gridData) {
+        if (gameModeId === 'infinite_minesweeper') return null;
+        const data = this._loadGameModeProgressData(gameModeId);
+        return data.bestTimes[this.gridDataKey(gridData, gameModeId)] ?? null;
+    }
+
+    _loadGameModeProgressData(gameModeId) {
+        return this._loadProgressData(gameModeId);
+    }
+
+    _saveGameModeProgressData(gameModeId, data) {
+        this._saveProgressData(data, gameModeId);
+    }
+
+    // ── Game mode custom settings ──
+
+    saveGameModeCustomSettings(gameModeId, settings) {
+        const prefix = `gameModeCustom/${gameModeId}/`;
+        for (const key of Object.keys(this.settings)) {
+            if (key.startsWith(prefix)) {
+                delete this.settings[key];
+            }
+        }
+
+        for (const [k, v] of Object.entries(settings || {})) {
+            this.settings[prefix + k] = v;
+        }
+        this._saveSettings();
+    }
+
+    loadGameModeCustomSettings(gameModeId) {
+        const prefix = `gameModeCustom/${gameModeId}/`;
+        const result = {};
+        for (const [k, v] of Object.entries(this.settings)) {
+            if (k.startsWith(prefix)) {
+                result[k.substring(prefix.length)] = v;
+            }
+        }
+        return Object.keys(result).length ? result : null;
+    }
+}
