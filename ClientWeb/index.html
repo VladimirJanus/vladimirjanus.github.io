@@ -106,11 +106,10 @@
         <div id="wanLobby" class="screen">
             <div class="lobby-content">
                 <div class="lobby-scroll">
-                    <div class="lobby-header-row">
-                        <div id="lobbyTitle" class="lobby-title">🌍 Lobby</div>
-                        <div class="lobby-header-controls">
-                            <button id="btnLobbySettings" class="btn btn-icon" style="display:none;">⚙️</button>
-                        </div>
+                    <div class="screen-header-row lobby-header-row">
+                        <button id="btnLobbyLeave" class="screen-back-btn">⬅️</button>
+                        <div id="lobbyTitle" class="solo-title lobby-title">🌍 Lobby</div>
+                        <button id="btnLobbySettings" class="screen-back-btn screen-settings-btn" style="visibility:hidden;">⚙️</button>
                     </div>
 
                     <div id="lobbyGameID" class="lobby-gameid">Game ID: —</div>
@@ -133,7 +132,6 @@
                     <button id="btnReturnToGame" class="btn btn-return-game" style="display:none;">🎮 Return to Game</button>
                     <button id="btnJoinInProgress" class="btn btn-join-progress pulse-opacity" style="display:none;">🎮 Join Game in Progress</button>
                     <button id="btnLobbyStart" class="btn btn-accent" style="display:none;">🚀 Start Game</button>
-                    <button id="btnLobbyLeave" class="btn btn-danger">⬅️ Leave Lobby</button>
                 </div>
             </div>
         </div>
@@ -167,6 +165,16 @@
                 <div class="status-display status-timer" id="timerDisplay">00:00.00</div>
             </div>
 
+            <div id="duelBanner" style="display:none;">
+                <span class="duel-banner-left" id="duelBannerLeft"></span>
+                <span class="duel-banner-center">
+                    <span class="duel-banner-score-self" id="duelBannerScoreLeft">0</span>
+                    <span class="duel-banner-score-colon">:</span>
+                    <span class="duel-banner-score-opp" id="duelBannerScoreRight">0</span>
+                </span>
+                <span class="duel-banner-right" id="duelBannerRight"></span>
+            </div>
+
             <div id="fogCounterBar" style="display:none;">
                 Reveals until fog: <span id="fogCounterValue">20</span>
             </div>
@@ -192,6 +200,7 @@
                     <div id="opponentGridContainer">
                         <div class="opponent-label">Opponent Grid</div>
                         <canvas id="opponentGridCanvas"></canvas>
+                        <canvas id="opponentGrid3DCanvas" style="display:none;position:absolute;top:24px;left:0;width:100%;height:calc(100% - 24px)"></canvas>
                     </div>
                 </div>
             </div>
@@ -236,6 +245,14 @@
                             </thead>
                             <tbody id="communityStatsBody"></tbody>
                         </table>
+                    </div>
+
+                    <!-- PvP 2 Teams stats area -->
+                    <div id="pvp2TeamsStatsArea" style="display:none;">
+                        <div class="team-stats-panel">
+                            <div class="team-stats-col" id="pvp2Team1Col"></div>
+                            <div class="team-stats-col" id="pvp2Team2Col"></div>
+                        </div>
                     </div>
 
                     <!-- Duel stats area -->
@@ -314,17 +331,33 @@
                 <div id="settingsOnlineWarning" class="settings-warning" style="display:none;">
                     ⚠️ Settings will apply to the next game
                 </div>
+                <div class="form-group" id="gameVariantRow" style="display:none;">
+                    <label>Online Game Variant</label>
+                    <select id="settingsGameVariant">
+                        <option value="0">Normal</option>
+                        <option value="2">Fog of War</option>
+                        <option value="1">3D Minesweeper</option>
+                    </select>
+                </div>
                 <div class="form-group">
-                    <label>Grid Width (5–128)</label>
+                    <label id="settingsGridWLabel">Grid Width (5–128)</label>
                     <input type="number" id="settingsGridW" min="5" max="128" value="20">
                 </div>
                 <div class="form-group">
-                    <label>Grid Height (5–128)</label>
+                    <label id="settingsGridHLabel">Grid Height (5–128)</label>
                     <input type="number" id="settingsGridH" min="5" max="128" value="20">
+                </div>
+                <div class="form-group" id="gridLengthRow" style="display:none;">
+                    <label>Grid Length (2–32)</label>
+                    <input type="number" id="settingsGridL" min="2" max="32" value="5">
                 </div>
                 <div class="form-group">
                     <label id="settingsDensityLabel">Mine Density: 20%</label>
                     <input type="range" id="settingsGridDensity" min="5" max="40" value="20" class="density-slider">
+                </div>
+                <div class="form-group" id="visibleCellsRow" style="display:none;">
+                    <label id="settingsVisibleCellsLabel">Visible Cells (1–400)</label>
+                    <input type="number" id="settingsVisibleCells" min="1" max="400" value="20">
                 </div>
                 <div class="form-group" id="gameTypeRow" style="display:none;">
                     <label>Online Game Mode</label>
@@ -332,6 +365,7 @@
                         <option value="0">Cooperative Hardcore</option>
                         <option value="1">Cooperative Softcore</option>
                         <option value="3">PVP Duel</option>
+                        <option value="5">PVP 2 Teams</option>
                     </select>
                 </div>
                 <div class="form-group" id="levelPresetRow" style="display:none;">
@@ -524,6 +558,7 @@
                             <button class="lb-tab" id="browserFilterCoOpSoft">Co-Op Soft</button>
                             <button class="lb-tab" id="browserFilterCoOpHard">Co-Op Hard</button>
                             <button class="lb-tab" id="browserFilterPVP">PVP Duel</button>
+                            <button class="lb-tab" id="browserFilterPVP2Teams">PVP 2 Teams</button>
                         </div>
                     </div>
                 </div>
@@ -539,22 +574,32 @@
         </div>
 
         
-        <div id="leaderboardDialog" class="modal-backdrop">
-            <div class="modal modal-tall modal-wide">
-                <h3>🏆 Leaderboard</h3>
+        <div id="leaderboardPage" class="screen">
+            <div class="lb-page-content">
+                <div class="lb-page-header">
+                    <div class="screen-header-row">
+                        <button id="btnLbBack" class="screen-back-btn">⬅️</button>
+                        <h2 class="solo-title">🏆 Leaderboards</h2>
+                        <div class="screen-header-spacer"></div>
+                    </div>
+                </div>
+
+                <div class="lb-tabs-scroll lb-page-tabs-row">
+                    <div id="lbVariantTabs" class="lb-tabs"></div>
+                </div>
 
                 <!-- Category tabs -->
-                <div class="lb-tabs-scroll">
+                <div class="lb-tabs-scroll lb-page-tabs-row">
                     <div id="lbCategoryTabs" class="lb-tabs"></div>
                 </div>
 
                 <!-- Level tabs -->
-                <div class="lb-tabs-scroll">
+                <div class="lb-tabs-scroll lb-page-tabs-row">
                     <div id="lbLevelTabs" class="lb-tabs lb-level-tabs"></div>
                 </div>
 
                 <!-- Selection info row -->
-                <div class="lb-selection-row" id="lbSelectionRow">
+                <div class="lb-selection-row lb-page-selection-row" id="lbSelectionRow">
                     <span>📊</span>
                     <span id="lbSelectionText" class="lb-selection-text"></span>
                     <button class="btn btn-small btn-accent" id="btnLbPlayRated">▶ Rated</button>
@@ -562,19 +607,17 @@
                 </div>
 
                 <!-- Leaderboard list -->
-                <div id="leaderboardList" class="scrollable-list lb-list">
+                <div id="leaderboardList" class="lb-list lb-page-list">
                     <div class="list-empty">No entries yet.<br>Be the first!</div>
                 </div>
 
                 <!-- Pagination -->
-                <div class="pagination-row" id="lbPagination">
+                <div class="pagination-row lb-page-pagination" id="lbPagination">
                     <button class="btn btn-small" id="btnLbPrev" disabled>◀</button>
                     <span id="lbPageInfo">Page 1</span>
                     <button class="btn btn-small" id="btnLbNext" disabled>▶</button>
                 </div>
                 <div id="lbShowingInfo" class="lb-showing-info"></div>
-
-                <button class="btn" onclick="app._hideModal('leaderboardDialog')">Close</button>
             </div>
         </div>
 
@@ -645,16 +688,20 @@
                     <button class="stats-tab" data-mode="coopSoft">Co-Op Soft</button>
                     <button class="stats-tab" data-mode="pvpDuel">PVP Duel</button>
                     <button class="stats-tab" data-mode="community">Community</button>
+                    <button class="stats-tab" data-mode="pvp2Teams">PVP 2 Teams</button>
                 </div>
                 <div class="stats-variant-bar" id="statsVariantBar" style="display:none;">
                     <span class="stats-variant-label">Game Variant:</span>
                     <button class="stats-variant-tab active" data-variant="all">All</button>
                     <button class="stats-variant-tab" data-variant="normal">Normal</button>
-                    <button class="stats-variant-tab" data-variant="fog_of_war">Fog of War</button>
-                    <button class="stats-variant-tab" data-variant="minesweeper_3d">Minesweeper 3D</button>
-                    <button class="stats-variant-tab" data-variant="infinite_minesweeper">Infinite</button>
+                    <button class="stats-variant-tab" data-variant="Cuboid">3D Minesweeper</button>
+                    <button class="stats-variant-tab" data-variant="FOW">Fog of War</button>
+                    <button class="stats-variant-tab" data-variant="infinite">Infinite</button>
                 </div>
-                <div class="stats-cards" id="statsCards"></div>
+                <div class="stats-scroll" id="statsScroll">
+                    <div class="stats-mode-title" id="statsModeTitle">Total</div>
+                    <div class="stats-cards" id="statsCards"></div>
+                </div>
 
             </div>
         </div>
@@ -667,6 +714,18 @@
                 <div class="modal-actions">
                     <button class="btn btn-danger" onclick="app._confirmLeave()">Yes</button>
                     <button class="btn" onclick="app._hideModal('leaveConfirmDialog')">No</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="lobbyLeaveConfirmDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>Leave Lobby</h3>
+                <p class="modal-desc">Are you sure you want to leave this game?</p>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" onclick="app._confirmLobbyLeave()">Yes</button>
+                    <button class="btn" onclick="app._hideModal('lobbyLeaveConfirmDialog')">No</button>
                 </div>
             </div>
         </div>
