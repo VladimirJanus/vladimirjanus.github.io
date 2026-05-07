@@ -287,6 +287,14 @@
         
         <div id="toastContainer"></div>
 
+        <div id="killedOverlay" class="killed-overlay">
+            <div class="killed-overlay-content">
+                <div class="killed-overlay-icon">⚠</div>
+                <div class="killed-overlay-title">This version of the app is no longer supported.</div>
+                <div class="killed-overlay-message">Please update to the latest version to continue playing.</div>
+            </div>
+        </div>
+
         
 
         
@@ -391,36 +399,6 @@
 
         
         <div id="appSettingsDialog" class="modal-backdrop">
-
-        <div id="gmCustomSettingsDialog" class="modal-backdrop">
-            <div class="modal">
-                <h3>🎯 Custom Level Settings</h3>
-                <div class="form-group" id="gmCustomWRow">
-                    <label id="gmCustomWLabel">Width (5–128)</label>
-                    <input type="number" id="gmCustomW" min="5" max="128" value="10">
-                </div>
-                <div class="form-group" id="gmCustomHRow">
-                    <label id="gmCustomHLabel">Height (5–128)</label>
-                    <input type="number" id="gmCustomH" min="5" max="128" value="10">
-                </div>
-                <div class="form-group" id="gmCustomLRow" style="display:none">
-                    <label>Length (2–128)</label>
-                    <input type="number" id="gmCustomL" min="2" max="128" value="3">
-                </div>
-                <div class="form-group">
-                    <label id="gmCustomDLabel">Mine Density: 20%</label>
-                    <input type="range" id="gmCustomD" min="5" max="40" value="20" class="density-slider">
-                </div>
-                <div class="form-group" id="gmCustomVCRow" style="display:none">
-                    <label id="gmCustomVCLabel">Visible Cells (1–100)</label>
-                    <input type="number" id="gmCustomVC" min="1" max="100" value="15">
-                </div>
-                <div class="modal-actions">
-                    <button class="btn btn-accent" id="gmCustomApplyBtn">Apply</button>
-                    <button class="btn" onclick="app._hideModal('gmCustomSettingsDialog')">Cancel</button>
-                </div>
-            </div>
-        </div>
             <div class="modal">
                 <h3>⚙️ Application Settings</h3>
                 <div class="settings-tabs">
@@ -532,6 +510,47 @@
                 <div class="modal-actions">
                     <button class="btn btn-accent" onclick="app.handleAppSettingsConfirm()">Save</button>
                     <button class="btn" onclick="app._hideModal('appSettingsDialog')">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="gmCustomSettingsDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>🎯 Custom Level Settings</h3>
+                <div class="form-group" id="gmCustomWRow">
+                    <label id="gmCustomWLabel">Width (5–128)</label>
+                    <input type="number" id="gmCustomW" min="5" max="128" value="10">
+                </div>
+                <div class="form-group" id="gmCustomHRow">
+                    <label id="gmCustomHLabel">Height (5–128)</label>
+                    <input type="number" id="gmCustomH" min="5" max="128" value="10">
+                </div>
+                <div class="form-group" id="gmCustomLRow" style="display:none">
+                    <label>Length (2–48)</label>
+                    <input type="number" id="gmCustomL" min="2" max="48" value="3">
+                </div>
+                <div class="form-group">
+                    <label id="gmCustomDLabel">Mine Density: 20%</label>
+                    <input type="range" id="gmCustomD" min="5" max="40" value="20" class="density-slider">
+                </div>
+                <div class="form-group" id="gmCustomVCRow" style="display:none">
+                    <label id="gmCustomVCLabel">Visible Cells (1–100)</label>
+                    <input type="number" id="gmCustomVC" min="1" max="100" value="15">
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-accent" id="gmCustomApplyBtn">Apply</button>
+                    <button class="btn" onclick="app._hideModal('gmCustomSettingsDialog')">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="gmCustomOverwriteConfirmDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>Delete Progress?</h3>
+                <p class="modal-desc" id="gmCustomOverwriteText"></p>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" id="gmCustomOverwriteConfirmBtn">OK</button>
+                    <button class="btn" id="gmCustomOverwriteCancelBtn">Cancel</button>
                 </div>
             </div>
         </div>

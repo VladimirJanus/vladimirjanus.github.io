@@ -208,6 +208,41 @@ input[type="checkbox"] {
 .bg-failed       { background:var(--accent-red); }
 .bg-givenup      { background:#7F3C3C; }
 .bg-disconnected { background:var(--text-dimmed); }
+.bg-server-offline { background:var(--accent-red); }
+
+.killed-overlay {
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:rgba(0, 0, 0, 0.8);
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:24px;
+}
+.killed-overlay.active { display:flex; }
+.killed-overlay-content {
+    width:min(80vw, 620px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+}
+.killed-overlay-icon {
+    font-size:64px;
+    line-height:1;
+    color:#FF6B6B;
+}
+.killed-overlay-title {
+    color:#fff;
+    font-size:22px;
+    font-weight:bold;
+}
+.killed-overlay-message {
+    color:#CCCCCC;
+    font-size:16px;
+}
 
 /* Embedded indicator in dialogs */
 .connection-indicator-embed {
@@ -972,6 +1007,7 @@ input[type="checkbox"] {
 
 .modal h3 { font-size:20px; text-align:center; }
 .modal-desc { color:var(--text-secondary); font-size:13px; text-align:center; }
+#gmCustomOverwriteText { white-space:pre-line; }
 .modal label { color:var(--text-secondary); font-size:13px; display:block; margin-bottom:4px; }
 .form-group { display:flex; flex-direction:column; gap:4px; }
 .modal-actions { display:flex; gap:10px; margin-top:6px; }
