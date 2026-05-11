@@ -178,8 +178,16 @@ input[type="checkbox"] {
 
 /* Server address row at bottom of main menu */
 .server-address-row { display:flex; gap:8px; margin-top:4px; }
-.server-addr-row { display:flex; gap:8px; align-items:center; margin-top:4px; }
-.server-addr-row .server-input { flex:1; }
+.server-addr-row { display:flex; gap:8px; align-items:center; margin-top:4px; min-width:0; }
+.server-addr-row .server-input { flex:1; min-width:0; }
+.server-addr-row .refetch-btn {
+    position:relative; flex:0 0 34px; width:34px; height:32px;
+    padding:0; overflow:hidden; white-space:nowrap; text-indent:100%;
+}
+.server-addr-row .refetch-btn::after {
+    content:"↻"; position:absolute; inset:0; display:flex;
+    align-items:center; justify-content:center; text-indent:0; font-size:16px;
+}
 .refetch-btn { white-space:nowrap; flex-shrink:0; font-size:12px; padding:6px 10px; width:auto; }
 .server-input { font-size:13px; padding:8px 10px; text-align:center; }
 .address-error { color:var(--accent-red); font-size:12px; text-align:center; }
@@ -188,11 +196,11 @@ input[type="checkbox"] {
 .connection-indicator {
     display:flex; align-items:center; justify-content:center;
     gap:6px; padding:6px 12px; border-radius:4px;
-    margin:4px auto 0; max-width:320px;
+    margin:4px auto 0; max-width:320px; box-sizing:border-box;
     transition:background .3s;
 }
 .connection-indicator .ci-emoji { font-size:14px; line-height:1; }
-.connection-indicator .ci-text { font-size:12px; font-weight:bold; color:#fff; }
+.connection-indicator .ci-text { font-size:12px; font-weight:bold; color:#fff; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .connection-indicator .ci-btn {
     background:rgba(0,0,0,.15); border:1px solid rgba(255,255,255,.3);
     border-radius:4px; width:24px; height:24px;
@@ -532,12 +540,16 @@ input[type="checkbox"] {
 }
 
 /* Ready button in network bar */
+.netbar-ready-slot {
+    display:inline-flex; justify-content:flex-end;
+    flex:0 0 92px; margin-left:auto; min-width:92px;
+}
 .netbar-ready-btn {
     display:inline-flex; align-items:center; gap:4px;
     padding:2px 8px; border-radius:3px;
     background:var(--bg-lobby); border:2px solid var(--accent-blue);
     color:#fff; font-size:11px; font-weight:bold; cursor:pointer;
-    flex-shrink:0; margin-left:auto;
+    flex-shrink:0;
 }
 .netbar-ready-btn.is-ready { border-color:var(--ready-active); }
 
@@ -868,6 +880,8 @@ input[type="checkbox"] {
     position:relative;
     display:flex; flex-direction:column; gap:6px;
 }
+.game-modal-card.gm-community-stats { max-width:520px; }
+.game-modal-card.gm-pvp2teams-stats { max-width:640px; }
 .gm-close-btn {
     position:absolute; top:10px; right:10px;
     background:var(--danger-default); border:none;
@@ -883,6 +897,26 @@ input[type="checkbox"] {
 .gm-pause-specs { font-size:12px; color:#9a9a9a; margin-top:2px; }
 .gm-alive { font-size:17px; text-align:center; }
 .gm-time  { font-size:17px; text-align:center; }
+.gm-infinite-scores {
+    text-align:center;
+    font-size:16px;
+    color:var(--text-primary);
+    line-height:1.25;
+    max-width:100%;
+}
+.gm-infinite-score-row {
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    flex-wrap:wrap;
+    max-width:100%;
+}
+.gm-infinite-score-value {
+    font-weight:bold;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+}
+.gm-infinite-high-score { color:var(--text-continue); }
 
 /* Duel stats */
 .duel-score-row { display:flex; align-items:center; justify-content:center; gap:6px; margin:4px 0; }
@@ -946,18 +980,21 @@ input[type="checkbox"] {
 
 /* Community game stats table */
 #communityStatsArea {
-    max-height:clamp(120px, 30vh, 300px); overflow-y:auto;
+    max-height:clamp(148px, 42vh, 340px); overflow-y:auto;
     margin:4px 0;
     scrollbar-width:thin;
 }
 #pvp2TeamsStatsArea {
-    max-height:clamp(150px, 34vh, 320px);
-    overflow-y:auto;
+    max-height:clamp(176px, 46vh, 360px);
+    overflow:hidden;
     margin:4px 0;
-    scrollbar-width:thin;
 }
 .team-stats-panel { display:flex; gap:12px; }
 .team-stats-col { flex:1 1 0; min-width:0; }
+.team-stats-scroll {
+    overflow-y:auto;
+    scrollbar-width:thin;
+}
 .team-stats-title { font-size:16px; font-weight:bold; text-align:center; margin-bottom:2px; }
 .team-stats-total { font-size:11px; color:#ccc; text-align:center; margin-bottom:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .team-badge { display:inline-block; min-width:22px; padding:2px 5px; border-radius:3px; color:#fff; font-size:10px; font-weight:bold; text-align:center; }
@@ -1051,6 +1088,9 @@ input[type="checkbox"] {
 .settings-tab.active { background:var(--accent-blue); font-weight:bold; }
 .settings-tab-content { display:none; flex-direction:column; gap:14px; }
 .settings-tab-content.active { display:flex; }
+#appSettingsDialog .modal { width:min(340px, 92vw); max-width:340px; }
+#appSettingsDialog .connection-indicator { width:100%; max-width:100%; justify-content:flex-start; }
+#appSettingsDialog .modal-actions { flex-shrink:0; }
 
 /* Standalone close/action buttons at bottom of tall dialogs */
 .modal-tall > .btn:last-child,
