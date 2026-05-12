@@ -32,6 +32,7 @@
 
                 <div class="menu-separator"></div>
                 <button id="btnStats" class="btn">📊 Statistics</button>
+                <div id="activePlayerCount" class="online-count">Currently online: 0</div>
             </div>
         </div>
 
@@ -44,6 +45,7 @@
                         <h2 class="solo-title" id="soloMenuTitle">🎲 Solo Play</h2>
                         <div class="screen-header-spacer"></div>
                     </div>
+                    <div class="solo-variant-row" id="soloVariantButtons"></div>
                 </div>
                 <div class="solo-scroll-area" id="soloScrollArea">
                     <!-- Continue last game card (hidden when no save exists) -->
@@ -131,6 +133,7 @@
                 <div class="lobby-bottom-buttons">
                     <button id="btnReturnToGame" class="btn btn-return-game" style="display:none;">🎮 Return to Game</button>
                     <button id="btnJoinInProgress" class="btn btn-join-progress pulse-opacity" style="display:none;">🎮 Join Game in Progress</button>
+                    <button id="btnForceRestart" class="btn btn-force-restart" style="display:none;">Force restart</button>
                     <button id="btnLobbyStart" class="btn btn-accent" style="display:none;">🚀 Start Game</button>
                 </div>
             </div>
@@ -257,7 +260,7 @@
                         </table>
                     </div>
 
-                    <!-- PvP 2 Teams stats area -->
+                    <!-- PVP Teams stats area -->
                     <div id="pvp2TeamsStatsArea" style="display:none;">
                         <div class="team-stats-panel">
                             <div class="team-stats-col" id="pvp2Team1Col"></div>
@@ -383,8 +386,17 @@
                         <option value="0">Cooperative Hardcore</option>
                         <option value="1">Cooperative Softcore</option>
                         <option value="3">PVP Duel</option>
-                        <option value="5">PVP 2 Teams</option>
+                        <option value="5">PVP Teams</option>
+                        <option value="6">PVP Conquest</option>
                     </select>
+                </div>
+                <div class="form-group" id="teamCountRow" style="display:none;">
+                    <label>Teams</label>
+                    <input type="number" id="settingsTeamCount" min="2" max="4" value="2">
+                </div>
+                <div class="toggle-row" id="allowTeamSwitchingRow" style="display:none;">
+                    <label>Allow players to switch teams</label>
+                    <input type="checkbox" id="settingsAllowTeamSwitching">
                 </div>
                 <div class="form-group" id="levelPresetRow" style="display:none;">
                     <label>Level Preset</label>
@@ -587,7 +599,8 @@
                             <button class="lb-tab" id="browserFilterCoOpSoft">Co-Op Soft</button>
                             <button class="lb-tab" id="browserFilterCoOpHard">Co-Op Hard</button>
                             <button class="lb-tab" id="browserFilterPVP">PVP Duel</button>
-                            <button class="lb-tab" id="browserFilterPVP2Teams">PVP 2 Teams</button>
+                            <button class="lb-tab" id="browserFilterPVP2Teams">PVP Teams</button>
+                            <button class="lb-tab" id="browserFilterPVPConquest">PVP Conquest</button>
                         </div>
                     </div>
                 </div>
@@ -717,7 +730,8 @@
                     <button class="stats-tab" data-mode="coopSoft">Co-Op Soft</button>
                     <button class="stats-tab" data-mode="pvpDuel">PVP Duel</button>
                     <button class="stats-tab" data-mode="community">Community</button>
-                    <button class="stats-tab" data-mode="pvp2Teams">PVP 2 Teams</button>
+                    <button class="stats-tab" data-mode="pvp2Teams">PVP Teams</button>
+                    <button class="stats-tab" data-mode="pvpConquest">PVP Conquest</button>
                 </div>
                 <div class="stats-variant-bar" id="statsVariantBar" style="display:none;">
                     <span class="stats-variant-label">Game Variant:</span>

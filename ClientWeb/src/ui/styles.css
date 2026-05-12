@@ -169,6 +169,7 @@ input[type="checkbox"] {
 .subtitle { color:var(--text-secondary); text-align:center; font-size:16px; margin-bottom:8px; }
 .menu-separator { height:2px; background:var(--separator); margin:8px 0; }
 .menu-section-title { color:var(--text-muted); font-weight:bold; text-align:center; font-size:14px; margin-top:8px; }
+.online-count { color:var(--text-muted); text-align:center; font-size:14px; margin-top:4px; }
 .menu-row { display:flex; gap:10px; }
 .menu-row .btn { flex:1; }
 .version-text { color:var(--text-secondary); text-align:center; font-size:12px; margin-top:14px; }
@@ -217,6 +218,7 @@ input[type="checkbox"] {
 .bg-givenup      { background:#7F3C3C; }
 .bg-disconnected { background:var(--text-dimmed); }
 .bg-server-offline { background:var(--accent-red); }
+.bg-server-maintenance { background:#5A4A12; }
 
 .killed-overlay {
     display:none;
@@ -295,6 +297,33 @@ input[type="checkbox"] {
 .solo-title {
     font-size:24px; font-weight:bold; color:white; margin:0;
     text-align:center; flex:1;
+}
+.solo-variant-row {
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+    gap:8px;
+    margin-top:10px;
+}
+.solo-variant-button {
+    min-width:0;
+    min-height:36px;
+    padding:0 8px;
+    border:1px solid var(--separator);
+    border-radius:4px;
+    background:var(--card-primary);
+    color:var(--text-primary);
+    font-size:12px;
+    font-weight:600;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    cursor:pointer;
+}
+.solo-variant-button:hover { background:var(--card-active); }
+.solo-variant-button.active {
+    background:var(--accent-blue);
+    border-color:var(--accent-blue);
+    color:#fff;
 }
 .solo-scroll-area {
     flex:1; overflow-y:auto; overflow-x:hidden;
@@ -458,6 +487,7 @@ input[type="checkbox"] {
 /* Return to game / Join in progress */
 .btn-return-game { background:#9B59B6; font-size:18px; font-weight:bold; }
 .btn-join-progress { background:#27AE60; font-size:18px; font-weight:bold; }
+.btn-force-restart { background:#C0392B; font-size:17px; font-weight:bold; }
 
 /* Pulse animation */
 .pulse-opacity {
@@ -759,6 +789,15 @@ input[type="checkbox"] {
 #duelBanner .duel-banner-score-colon { color:var(--text-muted); }
 #duelBanner.team-banner .duel-banner-left { color:#5DADE2; }
 #duelBanner.team-banner .duel-banner-right { color:#F5B041; }
+#duelBanner.team-banner-multi .duel-banner-left,
+#duelBanner.team-banner-multi .duel-banner-right {
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    white-space:normal;
+}
+#duelBanner.team-banner-multi .duel-banner-left { justify-content:flex-start; }
+#duelBanner.team-banner-multi .duel-banner-right { justify-content:flex-end; }
 
 /* Grid area — wrapper for own + opponent grid */
 #gridsWrapper { flex:1; display:flex; overflow:hidden; }
@@ -801,6 +840,32 @@ input[type="checkbox"] {
     font-size:12px; font-weight:bold;
     display:flex; align-items:center; justify-content:center;
     z-index:5; pointer-events:none;
+}
+.opponent-label.opponent-tabs {
+    gap:2px;
+    padding:2px;
+    pointer-events:auto;
+}
+.opponent-team-tab {
+    flex:1 1 0;
+    min-width:0;
+    height:20px;
+    border:1px solid rgba(255,255,255,0.16);
+    border-radius:3px;
+    background:rgba(255,255,255,0.08);
+    color:#ffffff;
+    font-size:11px;
+    font-weight:bold;
+    line-height:18px;
+    cursor:pointer;
+}
+.opponent-team-tab.active {
+    border-color:#F6F1D0;
+    background:rgba(93,173,226,0.42);
+}
+.opponent-team-tab:focus-visible {
+    outline:1px solid #F6F1D0;
+    outline-offset:-2px;
 }
 
 /* Freeze time overlay */
@@ -881,7 +946,7 @@ input[type="checkbox"] {
     display:flex; flex-direction:column; gap:6px;
 }
 .game-modal-card.gm-community-stats { max-width:520px; }
-.game-modal-card.gm-pvp2teams-stats { max-width:640px; }
+.game-modal-card.gm-pvp2teams-stats { max-width:700px; }
 .gm-close-btn {
     position:absolute; top:10px; right:10px;
     background:var(--danger-default); border:none;
@@ -985,18 +1050,20 @@ input[type="checkbox"] {
     scrollbar-width:thin;
 }
 #pvp2TeamsStatsArea {
-    max-height:clamp(176px, 46vh, 360px);
-    overflow:hidden;
+    max-height:clamp(220px, 52vh, 520px);
+    overflow-y:auto;
     margin:4px 0;
+    scrollbar-width:thin;
 }
-.team-stats-panel { display:flex; gap:12px; }
-.team-stats-col { flex:1 1 0; min-width:0; }
+.team-stats-panel { display:grid; gap:12px; }
+.team-stats-col { min-width:0; }
 .team-stats-scroll {
     overflow-y:auto;
     scrollbar-width:thin;
 }
 .team-stats-title { font-size:16px; font-weight:bold; text-align:center; margin-bottom:2px; }
 .team-stats-total { font-size:11px; color:#ccc; text-align:center; margin-bottom:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.team-winner-badge { margin-left:8px; color:#00FF00; font-size:11px; letter-spacing:0; }
 .team-badge { display:inline-block; min-width:22px; padding:2px 5px; border-radius:3px; color:#fff; font-size:10px; font-weight:bold; text-align:center; }
 .team-badge.team1 { background:#2E86C1; }
 .team-badge.team2 { background:#B9770E; }
@@ -1401,6 +1468,7 @@ input[type="checkbox"] {
 .gb-type-coophard  { background: #D32F2F; }
 .gb-type-pvpduel   { background: #7B1FA2; }
 .gb-type-pvp2teams { background: #B9770E; }
+.gb-type-pvpconquest { background: #2E7D6E; }
 .gb-type-other     { background: var(--bg-networkbar); }
 
 /* Left strip color per type is applied inline via --gb-accent */
