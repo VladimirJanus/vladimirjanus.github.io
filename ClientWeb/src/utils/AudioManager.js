@@ -1,1 +1,72 @@
-const a35_0x421cf0=a35_0x60b5;function a35_0x60b5(_0x569c81,_0x2f34d7){_0x569c81=_0x569c81-0x1a9;const _0x3bcd24=a35_0x3bcd();let _0x60b58b=_0x3bcd24[_0x569c81];return _0x60b58b;}(function(_0x20ea0d,_0x4de566){const _0x116506=a35_0x60b5,_0x117ab3=_0x20ea0d();while(!![]){try{const _0x2c4736=parseInt(_0x116506(0x1be))/0x1*(-parseInt(_0x116506(0x1b1))/0x2)+-parseInt(_0x116506(0x1ae))/0x3*(parseInt(_0x116506(0x1c0))/0x4)+parseInt(_0x116506(0x1b2))/0x5+parseInt(_0x116506(0x1c4))/0x6*(-parseInt(_0x116506(0x1a9))/0x7)+parseInt(_0x116506(0x1b8))/0x8+-parseInt(_0x116506(0x1c2))/0x9+parseInt(_0x116506(0x1aa))/0xa*(parseInt(_0x116506(0x1bc))/0xb);if(_0x2c4736===_0x4de566)break;else _0x117ab3['push'](_0x117ab3['shift']());}catch(_0x424a7f){_0x117ab3['push'](_0x117ab3['shift']());}}}(a35_0x3bcd,0x7f900));export class AudioManager{constructor(){const _0x30132d=a35_0x60b5;this[_0x30132d(0x1ad)]=0.1,this['flagVolume']=0.1,this[_0x30132d(0x1bd)]=!![],this[_0x30132d(0x1ac)]=null,this[_0x30132d(0x1b5)]=null,this[_0x30132d(0x1bf)]=null;}['init'](){const _0x49458b=a35_0x60b5;this[_0x49458b(0x1ac)]=this[_0x49458b(0x1c1)](_0x49458b(0x1ba),this[_0x49458b(0x1ad)]),this[_0x49458b(0x1b5)]=this[_0x49458b(0x1c1)](_0x49458b(0x1b6),this[_0x49458b(0x1b9)]),this[_0x49458b(0x1bf)]=this[_0x49458b(0x1c1)]('../assets/sounds/explosion.wav',this[_0x49458b(0x1ad)]);}['_createAudio'](_0x4c0108,_0x4dcac7){const _0x53ee42=a35_0x60b5,_0x33c72c=new URL(_0x4c0108,import.meta.url)[_0x53ee42(0x1b4)],_0xbdb18f=new Audio(_0x33c72c);return _0xbdb18f[_0x53ee42(0x1c9)]='auto',_0xbdb18f[_0x53ee42(0x1af)]=_0x4dcac7,_0xbdb18f;}['_play'](_0x2184a5){const _0x596cc3=a35_0x60b5;if(!_0x2184a5||!this['enabled'])return;try{_0x2184a5[_0x596cc3(0x1c5)](),_0x2184a5['currentTime']=0x0;const _0x1c3ba0=_0x2184a5[_0x596cc3(0x1c6)]();_0x1c3ba0&&typeof _0x1c3ba0['catch']===_0x596cc3(0x1bb)&&_0x1c3ba0[_0x596cc3(0x1c3)](()=>{});}catch(_0x299e15){}}[a35_0x421cf0(0x1b0)](){this['_play'](this['_revealAudio']);}[a35_0x421cf0(0x1b7)](){const _0x1b0245=a35_0x421cf0;this[_0x1b0245(0x1ab)](this[_0x1b0245(0x1b5)]);}['playExplosion'](){const _0x3232b0=a35_0x421cf0;this['_play'](this[_0x3232b0(0x1bf)]);}[a35_0x421cf0(0x1c8)](_0x375311){const _0x1d257f=a35_0x421cf0;this[_0x1d257f(0x1ad)]=_0x375311;if(this['_revealAudio'])this['_revealAudio']['volume']=_0x375311;if(this['_explosionAudio'])this[_0x1d257f(0x1bf)]['volume']=_0x375311;}[a35_0x421cf0(0x1c7)](_0x5c3d2c){const _0x350d71=a35_0x421cf0;this[_0x350d71(0x1b9)]=_0x5c3d2c;if(this['_flagAudio'])this[_0x350d71(0x1b5)][_0x350d71(0x1af)]=_0x5c3d2c;}[a35_0x421cf0(0x1b3)](_0x3501c5){const _0x5d2984=a35_0x421cf0;this[_0x5d2984(0x1bd)]=_0x3501c5;}}function a35_0x3bcd(){const _0x277620=['_revealAudio','revealVolume','1194189UZjPEr','volume','playReveal','14102XvcEVd','105540IlbFIN','setEnabled','href','_flagAudio','../assets/sounds/flag.wav','playFlag','4418584wrWmPr','flagVolume','../assets/sounds/reveal.wav','function','29117bshhcW','enabled','29KBhTCJ','_explosionAudio','4ldZOLM','_createAudio','7956GcNvgl','catch','120ROaAYc','pause','play','setFlagVolume','setRevealVolume','preload','300426cVeHhH','5330bsRfll','_play'];a35_0x3bcd=function(){return _0x277620;};return a35_0x3bcd();}
+// AudioManager.js - Sound effects for reveal, flag, and explosion actions
+// ============================================================================
+
+export class AudioManager {
+    constructor() {
+        this.revealVolume = 0.1;
+        this.flagVolume = 0.1;
+        this.enabled = true;
+
+        // Keep one audio element per SFX and restart it on each play call,
+        // matching the Qt client behavior (stop + play from start).
+        this._revealAudio = null;
+        this._flagAudio = null;
+        this._explosionAudio = null;
+    }
+
+    init() {
+        this._revealAudio = this._createAudio('../assets/sounds/reveal.wav', this.revealVolume);
+        this._flagAudio = this._createAudio('../assets/sounds/flag.wav', this.flagVolume);
+        // Keep explosion volume tied to reveal volume, same as Qt AudioManager.
+        this._explosionAudio = this._createAudio('../assets/sounds/explosion.wav', this.revealVolume);
+    }
+
+    _createAudio(relativePath, volume) {
+        const src = new URL(relativePath, import.meta.url).href;
+        const audio = new Audio(src);
+        audio.preload = 'auto';
+        audio.volume = volume;
+        return audio;
+    }
+
+    _play(audio) {
+        if (!audio || !this.enabled) return;
+        try {
+            audio.pause();
+            audio.currentTime = 0;
+            const playPromise = audio.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => {
+                    // Ignore autoplay/user-gesture restrictions silently.
+                });
+            }
+        } catch (e) {
+            // Ignore audio playback failures.
+        }
+    }
+
+    playReveal() {
+        this._play(this._revealAudio);
+    }
+
+    playFlag() {
+        this._play(this._flagAudio);
+    }
+
+    playExplosion() {
+        this._play(this._explosionAudio);
+    }
+
+    setRevealVolume(v) {
+        this.revealVolume = v;
+        if (this._revealAudio) this._revealAudio.volume = v;
+        if (this._explosionAudio) this._explosionAudio.volume = v;
+    }
+
+    setFlagVolume(v) {
+        this.flagVolume = v;
+        if (this._flagAudio) this._flagAudio.volume = v;
+    }
+
+    setEnabled(e) { this.enabled = e; }
+}

@@ -1,1 +1,238 @@
-function a37_0xe0bd(_0x25ea57,_0xb07710){_0x25ea57=_0x25ea57-0xc4;const _0x3ea9a0=a37_0x3ea9();let _0xe0bd2b=_0x3ea9a0[_0x25ea57];return _0xe0bd2b;}const a37_0x2af309=a37_0xe0bd;function a37_0x3ea9(){const _0x221991=['number','gamesWon','infinite_minesweeper','flags','addGamePlayed','minesweeper_online_stats','addReveal','normal','1623792RSMHtO','Cuboid','_flush','beforeunload','1428784XeWrlt','parse','addFlag','total','14nljTFa','duelsWon','6693090nnVKnk','minesClicked','community','20hscmIW','addGameWon','timeAliveMs','duelsLost','soloRated','addDuelLost','gamesPlayed','stringify','_dirty','infinite','22002960eEtrfV','addTimeAlive','4948605bFQpno','minesweeper_3d','addDuelWon','gridsCompleted','_stats','map','Solo','length','pvp2Teams','now','variants','reveals','2NjDqPz','addGridCompleted','setItem','_flushInterval','4616jmhLhk','toJSON','FOW','freeze','_load','coopHard','addMineClicked','fog_of_war','solo','133167qrOSKr'];a37_0x3ea9=function(){return _0x221991;};return a37_0x3ea9();}(function(_0x2fc850,_0x37f590){const _0x1ac2cd=a37_0xe0bd,_0x33e3a1=_0x2fc850();while(!![]){try{const _0x5c4ead=parseInt(_0x1ac2cd(0xc7))/0x1*(-parseInt(_0x1ac2cd(0xfe))/0x2)+-parseInt(_0x1ac2cd(0xd0))/0x3+parseInt(_0x1ac2cd(0xdd))/0x4*(-parseInt(_0x1ac2cd(0xe6))/0x5)+parseInt(_0x1ac2cd(0xe3))/0x6+-parseInt(_0x1ac2cd(0xe1))/0x7*(parseInt(_0x1ac2cd(0xd9))/0x8)+-parseInt(_0x1ac2cd(0xf2))/0x9+parseInt(_0x1ac2cd(0xf0))/0xa;if(_0x5c4ead===_0x37f590)break;else _0x33e3a1['push'](_0x33e3a1['shift']());}catch(_0xd8f7d){_0x33e3a1['push'](_0x33e3a1['shift']());}}}(a37_0x3ea9,0xd7635));import{GameVariant}from'../core/CoreEnums.js';const STATS_KEY=a37_0x2af309(0xd6),SOLO_NORMAL_TIME_ALIVE_REPAIR_THRESHOLD_MS=0x96*0x3c*0x3c*0x3e8,SOLO_NORMAL_TIME_ALIVE_REPAIR_PER_GAME_MS=0x3c*0x3e8,SOLO_NORMAL_TIME_ALIVE_REPAIR_DEADLINE_MS=new Date(0x7ea,0x5,0x1)['getTime'](),MODE_KEYS=[a37_0x2af309(0xcf),a37_0x2af309(0xea),a37_0x2af309(0xcc),'coopSoft','pvpDuel',a37_0x2af309(0xe5),a37_0x2af309(0xfa),'pvpConquest'],VARIANT_KEYS=['normal','Cuboid','FOW',a37_0x2af309(0xef)],LEGACY_VARIANT_KEYS=['normal',a37_0x2af309(0xf3),a37_0x2af309(0xce),'infinite_minesweeper'];export const StatsMode=Object[a37_0x2af309(0xca)]({'Solo':0x0,'SoloRated':0x1,'CoOpHard':0x2,'CoOpSoft':0x3,'PVPDuel':0x4,'Community':0x5,'PVP2Teams':0x6,'PVPConquest':0x7});export const StatsVariant=GameVariant;export function variantFromString(_0x58a880){const _0x166a09=a37_0x2af309;if(_0x58a880===_0x166a09(0xda)||_0x58a880===_0x166a09(0xf3))return GameVariant[_0x166a09(0xda)];if(_0x58a880===_0x166a09(0xc9)||_0x58a880===_0x166a09(0xce))return GameVariant[_0x166a09(0xc9)];if(_0x58a880===_0x166a09(0xef)||_0x58a880===_0x166a09(0xd3))return GameVariant[_0x166a09(0xef)];return GameVariant[_0x166a09(0xd8)];}function emptyModeStats(){return{'reveals':0x0,'flags':0x0,'minesClicked':0x0,'gridsCompleted':0x0,'timeAliveMs':0x0,'gamesPlayed':0x0,'duelsWon':0x0,'duelsLost':0x0,'gamesWon':0x0};}export class StatsManager{constructor(){const _0x10831=a37_0x2af309;this['_stats']=MODE_KEYS[_0x10831(0xf7)](()=>VARIANT_KEYS[_0x10831(0xf7)](()=>emptyModeStats())),this[_0x10831(0xee)]=![],this['_load'](),this['_dirty']&&this[_0x10831(0xdb)](),this[_0x10831(0xc6)]=setInterval(()=>this[_0x10831(0xdb)](),0x7530),window['addEventListener'](_0x10831(0xdc),()=>this['_flush']());}[a37_0x2af309(0xd7)](_0x373cdc,_0x21ee29=0x1,_0xe7ce02=StatsVariant[a37_0x2af309(0xd8)]){const _0xb774de=a37_0x2af309;this['_stats'][_0x373cdc][_0xe7ce02][_0xb774de(0xfd)]+=_0x21ee29,this[_0xb774de(0xee)]=!![];}[a37_0x2af309(0xdf)](_0x378a10,_0x58081c=0x1,_0x2f254d=StatsVariant[a37_0x2af309(0xd8)]){const _0x3f301d=a37_0x2af309;this[_0x3f301d(0xf6)][_0x378a10][_0x2f254d][_0x3f301d(0xd4)]+=_0x58081c,this['_dirty']=!![];}[a37_0x2af309(0xcd)](_0x3f5d2c,_0x111041=StatsVariant['normal']){const _0x1448c6=a37_0x2af309;this[_0x1448c6(0xf6)][_0x3f5d2c][_0x111041][_0x1448c6(0xe4)]++,this[_0x1448c6(0xee)]=!![];}[a37_0x2af309(0xc4)](_0x13e6b9,_0x24fcd4=StatsVariant[a37_0x2af309(0xd8)]){const _0xc66f01=a37_0x2af309;this[_0xc66f01(0xf6)][_0x13e6b9][_0x24fcd4]['gridsCompleted']++,this[_0xc66f01(0xee)]=!![];}[a37_0x2af309(0xf1)](_0x556d5b,_0x37256d,_0x15c56b=StatsVariant[a37_0x2af309(0xd8)]){const _0x200725=a37_0x2af309;this[_0x200725(0xf6)][_0x556d5b][_0x15c56b][_0x200725(0xe8)]+=_0x37256d,this[_0x200725(0xee)]=!![];}[a37_0x2af309(0xd5)](_0x4c5037,_0x14425b=StatsVariant[a37_0x2af309(0xd8)]){const _0x348a24=a37_0x2af309;this['_stats'][_0x4c5037][_0x14425b]['gamesPlayed']++,this[_0x348a24(0xee)]=!![];}[a37_0x2af309(0xf4)](_0x2bb520,_0x658a7a=StatsVariant['normal']){const _0x4a4311=a37_0x2af309;this[_0x4a4311(0xf6)][_0x2bb520][_0x658a7a][_0x4a4311(0xe2)]++,this['_dirty']=!![];}[a37_0x2af309(0xeb)](_0x523652,_0x184ffa=StatsVariant[a37_0x2af309(0xd8)]){const _0x2dbc59=a37_0x2af309;this[_0x2dbc59(0xf6)][_0x523652][_0x184ffa][_0x2dbc59(0xe9)]++,this['_dirty']=!![];}[a37_0x2af309(0xe7)](_0x324799,_0x12da2a=StatsVariant[a37_0x2af309(0xd8)]){const _0x13f68=a37_0x2af309;this[_0x13f68(0xf6)][_0x324799][_0x12da2a]['gamesWon']++,this[_0x13f68(0xee)]=!![];}[a37_0x2af309(0xc8)](){const _0x38eec0=a37_0x2af309,_0x47be08={},_0x1b8b6b=emptyModeStats(),_0x4e147f=emptyModeStats(),_0x5ba883={};for(let _0x208cca=0x0;_0x208cca<MODE_KEYS['length'];_0x208cca++){const _0x2e9e19=emptyModeStats(),_0x4f3de6={};for(let _0x31291e=0x0;_0x31291e<VARIANT_KEYS['length'];_0x31291e++){const _0x14b905=this[_0x38eec0(0xf6)][_0x208cca][_0x31291e];_0x2e9e19[_0x38eec0(0xfd)]+=_0x14b905['reveals'],_0x2e9e19[_0x38eec0(0xd4)]+=_0x14b905['flags'],_0x2e9e19[_0x38eec0(0xe4)]+=_0x14b905[_0x38eec0(0xe4)],_0x2e9e19[_0x38eec0(0xf5)]+=_0x14b905[_0x38eec0(0xf5)],_0x2e9e19['timeAliveMs']+=_0x14b905[_0x38eec0(0xe8)],_0x2e9e19['gamesPlayed']+=_0x14b905['gamesPlayed'],_0x2e9e19['duelsWon']+=_0x14b905[_0x38eec0(0xe2)],_0x2e9e19[_0x38eec0(0xe9)]+=_0x14b905[_0x38eec0(0xe9)],_0x2e9e19[_0x38eec0(0xd2)]+=_0x14b905['gamesWon'],_0x4f3de6[VARIANT_KEYS[_0x31291e]]={..._0x14b905};}_0x5ba883[MODE_KEYS[_0x208cca]]=_0x4f3de6,_0x47be08[MODE_KEYS[_0x208cca]]=_0x2e9e19,_0x1b8b6b[_0x38eec0(0xfd)]+=_0x2e9e19[_0x38eec0(0xfd)],_0x1b8b6b[_0x38eec0(0xd4)]+=_0x2e9e19['flags'],_0x1b8b6b[_0x38eec0(0xe4)]+=_0x2e9e19[_0x38eec0(0xe4)],_0x1b8b6b[_0x38eec0(0xf5)]+=_0x2e9e19[_0x38eec0(0xf5)],_0x1b8b6b[_0x38eec0(0xe8)]+=_0x2e9e19[_0x38eec0(0xe8)],_0x1b8b6b[_0x38eec0(0xec)]+=_0x2e9e19['gamesPlayed'],_0x1b8b6b[_0x38eec0(0xe2)]+=_0x2e9e19['duelsWon'],_0x1b8b6b['duelsLost']+=_0x2e9e19['duelsLost'],_0x1b8b6b['gamesWon']+=_0x2e9e19[_0x38eec0(0xd2)],_0x208cca!==StatsMode[_0x38eec0(0xf8)]&&(_0x4e147f[_0x38eec0(0xfd)]+=_0x2e9e19['reveals'],_0x4e147f[_0x38eec0(0xd4)]+=_0x2e9e19[_0x38eec0(0xd4)],_0x4e147f['minesClicked']+=_0x2e9e19['minesClicked'],_0x4e147f['gridsCompleted']+=_0x2e9e19[_0x38eec0(0xf5)],_0x4e147f[_0x38eec0(0xe8)]+=_0x2e9e19[_0x38eec0(0xe8)],_0x4e147f['gamesPlayed']+=_0x2e9e19[_0x38eec0(0xec)],_0x4e147f[_0x38eec0(0xe2)]+=_0x2e9e19['duelsWon'],_0x4e147f[_0x38eec0(0xe9)]+=_0x2e9e19['duelsLost'],_0x4e147f[_0x38eec0(0xd2)]+=_0x2e9e19[_0x38eec0(0xd2)]);}return _0x47be08[_0x38eec0(0xe0)]=_0x1b8b6b,_0x47be08['onlineTotal']=_0x4e147f,_0x47be08[_0x38eec0(0xfc)]=_0x5ba883,_0x47be08;}[a37_0x2af309(0xcb)](){const _0xfed36c=a37_0x2af309;try{const _0x3ec76a=localStorage['getItem'](STATS_KEY);if(!_0x3ec76a)return;const _0x4ad276=JSON[_0xfed36c(0xde)](_0x3ec76a);for(let _0x32afbc=0x0;_0x32afbc<MODE_KEYS[_0xfed36c(0xf9)];_0x32afbc++){const _0xd95bd4=_0x4ad276[MODE_KEYS[_0x32afbc]];if(!_0xd95bd4)continue;if(typeof _0xd95bd4[_0xfed36c(0xfd)]===_0xfed36c(0xd1)){const _0x1529c4=this[_0xfed36c(0xf6)][_0x32afbc][StatsVariant['normal']];_0x1529c4['reveals']=_0xd95bd4['reveals']||0x0,_0x1529c4['flags']=_0xd95bd4['flags']||0x0,_0x1529c4[_0xfed36c(0xe4)]=_0xd95bd4[_0xfed36c(0xe4)]||0x0,_0x1529c4['gridsCompleted']=_0xd95bd4[_0xfed36c(0xf5)]||0x0,_0x1529c4[_0xfed36c(0xe8)]=_0xd95bd4[_0xfed36c(0xe8)]||0x0,_0x1529c4[_0xfed36c(0xec)]=_0xd95bd4[_0xfed36c(0xec)]||0x0,_0x1529c4[_0xfed36c(0xe2)]=_0xd95bd4['duelsWon']||0x0,_0x1529c4[_0xfed36c(0xe9)]=_0xd95bd4['duelsLost']||0x0,_0x1529c4[_0xfed36c(0xd2)]=_0xd95bd4[_0xfed36c(0xd2)]||0x0;}else for(let _0x17cd11=0x0;_0x17cd11<VARIANT_KEYS[_0xfed36c(0xf9)];_0x17cd11++){const _0x212097=_0xd95bd4[VARIANT_KEYS[_0x17cd11]]||_0xd95bd4[LEGACY_VARIANT_KEYS[_0x17cd11]];if(!_0x212097)continue;const _0x15877e=this[_0xfed36c(0xf6)][_0x32afbc][_0x17cd11];_0x15877e[_0xfed36c(0xfd)]=_0x212097[_0xfed36c(0xfd)]||0x0,_0x15877e[_0xfed36c(0xd4)]=_0x212097[_0xfed36c(0xd4)]||0x0,_0x15877e[_0xfed36c(0xe4)]=_0x212097[_0xfed36c(0xe4)]||0x0,_0x15877e[_0xfed36c(0xf5)]=_0x212097['gridsCompleted']||0x0,_0x15877e[_0xfed36c(0xe8)]=_0x212097[_0xfed36c(0xe8)]||0x0,_0x15877e[_0xfed36c(0xec)]=_0x212097['gamesPlayed']||0x0,_0x15877e['duelsWon']=_0x212097[_0xfed36c(0xe2)]||0x0,_0x15877e[_0xfed36c(0xe9)]=_0x212097[_0xfed36c(0xe9)]||0x0,_0x15877e[_0xfed36c(0xd2)]=_0x212097[_0xfed36c(0xd2)]||0x0;}}if(Date[_0xfed36c(0xfb)]()<SOLO_NORMAL_TIME_ALIVE_REPAIR_DEADLINE_MS){const _0x265b23=this[_0xfed36c(0xf6)][StatsMode[_0xfed36c(0xf8)]][StatsVariant[_0xfed36c(0xd8)]];if(_0x265b23[_0xfed36c(0xe8)]>SOLO_NORMAL_TIME_ALIVE_REPAIR_THRESHOLD_MS){const _0x4d40f7=_0x265b23[_0xfed36c(0xec)]*SOLO_NORMAL_TIME_ALIVE_REPAIR_PER_GAME_MS;_0x265b23['timeAliveMs']!==_0x4d40f7&&(_0x265b23['timeAliveMs']=_0x4d40f7,this[_0xfed36c(0xee)]=!![]);}}}catch(_0x55a77c){}}[a37_0x2af309(0xdb)](){const _0x31571f=a37_0x2af309;if(!this[_0x31571f(0xee)])return;this[_0x31571f(0xee)]=![];try{const _0xbfb5e7={};for(let _0x8b79a8=0x0;_0x8b79a8<MODE_KEYS[_0x31571f(0xf9)];_0x8b79a8++){const _0x2998f0={};for(let _0x1968fa=0x0;_0x1968fa<VARIANT_KEYS[_0x31571f(0xf9)];_0x1968fa++){_0x2998f0[VARIANT_KEYS[_0x1968fa]]={...this[_0x31571f(0xf6)][_0x8b79a8][_0x1968fa]};}_0xbfb5e7[MODE_KEYS[_0x8b79a8]]=_0x2998f0;}localStorage[_0x31571f(0xc5)](STATS_KEY,JSON[_0x31571f(0xed)](_0xbfb5e7));}catch(_0x30c75c){}}}
+// StatsManager.js - Local statistics tracking with localStorage persistence
+// ============================================================================
+
+import { GameVariant } from '../core/CoreEnums.js';
+
+const STATS_KEY = 'minesweeper_online_stats';
+const SOLO_TIME_ALIVE_MAX_SINGLE_RUN_MS = 12 * 60 * 60 * 1000;
+const SOLO_TIME_ALIVE_REPAIR_MAX_AVERAGE_MS = 6 * 60 * 60 * 1000;
+const SOLO_TIME_ALIVE_REPAIR_PER_GAME_MS = 60 * 1000;
+const SOLO_TIME_ALIVE_REPAIR_DEADLINE_MS = new Date(2026, 5, 1).getTime();
+
+const MODE_KEYS = ['solo', 'soloRated', 'coopHard', 'coopSoft', 'pvpDuel', 'community', 'pvp2Teams', 'pvpConquest'];
+const VARIANT_KEYS = ['normal', 'Cuboid', 'FOW', 'infinite'];
+const LEGACY_VARIANT_KEYS = ['normal', 'minesweeper_3d', 'fog_of_war', 'infinite_minesweeper'];
+
+export const StatsMode = Object.freeze({
+    Solo:       0,
+    SoloRated:  1,
+    CoOpHard:   2,
+    CoOpSoft:   3,
+    PVPDuel:    4,
+    Community:  5,
+    PVP2Teams:  6,
+    PVPConquest: 7,
+});
+
+// Alias to the global GameVariant enum (kept for backwards compatibility with existing imports)
+export const StatsVariant = GameVariant;
+
+export function variantFromString(s) {
+    if (s === 'Cuboid' || s === 'minesweeper_3d') return GameVariant.Cuboid;
+    if (s === 'FOW' || s === 'fog_of_war') return GameVariant.FOW;
+    if (s === 'infinite' || s === 'infinite_minesweeper') return GameVariant.infinite;
+    return GameVariant.normal;
+}
+
+function emptyModeStats() {
+    return { reveals: 0, flags: 0, minesClicked: 0, gridsCompleted: 0, timeAliveMs: 0, gamesPlayed: 0, duelsWon: 0, duelsLost: 0, gamesWon: 0 };
+}
+
+function sanitizedTimeAliveMs(mode, ms) {
+    if (!Number.isFinite(ms) || ms <= 0) return 0;
+    if (mode === StatsMode.Solo && ms > SOLO_TIME_ALIVE_MAX_SINGLE_RUN_MS) {
+        console.warn('[StatsManager] Ignored implausible solo time-alive', ms, 'ms');
+        return 0;
+    }
+    return ms;
+}
+
+export class StatsManager {
+    constructor() {
+        this._stats = MODE_KEYS.map(() => VARIANT_KEYS.map(() => emptyModeStats()));
+        this._dirty = false;
+        this._load();
+        if (this._dirty) {
+            this._flush();
+        }
+        // Periodic flush every 30 seconds
+        this._flushInterval = setInterval(() => this._flush(), 30000);
+        // Flush on unload
+        window.addEventListener('beforeunload', () => this._flush());
+    }
+
+    // ── Fast in-memory increments ──
+
+    addReveal(mode, count = 1, variant = StatsVariant.normal) {
+        this._stats[mode][variant].reveals += count;
+        this._dirty = true;
+    }
+
+    addFlag(mode, count = 1, variant = StatsVariant.normal) {
+        this._stats[mode][variant].flags += count;
+        this._dirty = true;
+    }
+
+    addMineClicked(mode, variant = StatsVariant.normal) {
+        this._stats[mode][variant].minesClicked++;
+        this._dirty = true;
+    }
+
+    addGridCompleted(mode, variant = StatsVariant.normal) {
+        this._stats[mode][variant].gridsCompleted++;
+        this._dirty = true;
+    }
+
+    addTimeAlive(mode, ms, variant = StatsVariant.normal) {
+        const safeMs = sanitizedTimeAliveMs(mode, ms);
+        if (safeMs <= 0) return;
+        this._stats[mode][variant].timeAliveMs += safeMs;
+        this._dirty = true;
+    }
+
+    addGamePlayed(mode, variant = StatsVariant.normal) {
+        this._stats[mode][variant].gamesPlayed++;
+        this._dirty = true;
+    }
+
+    addDuelWon(mode, variant = StatsVariant.normal) {
+        this._stats[mode][variant].duelsWon++;
+        this._dirty = true;
+    }
+
+    addDuelLost(mode, variant = StatsVariant.normal) {
+        this._stats[mode][variant].duelsLost++;
+        this._dirty = true;
+    }
+
+    addGameWon(mode, variant = StatsVariant.normal) {
+        this._stats[mode][variant].gamesWon++;
+        this._dirty = true;
+    }
+
+    // ── Read access for UI ──
+
+    toJSON() {
+        const result = {};
+        const totals = emptyModeStats();
+        const onlineTotals = emptyModeStats();
+        const variants = {};
+        for (let i = 0; i < MODE_KEYS.length; i++) {
+            const agg = emptyModeStats();
+            const modeVariants = {};
+            for (let v = 0; v < VARIANT_KEYS.length; v++) {
+                const s = this._stats[i][v];
+                agg.reveals        += s.reveals;
+                agg.flags          += s.flags;
+                agg.minesClicked   += s.minesClicked;
+                agg.gridsCompleted += s.gridsCompleted;
+                agg.timeAliveMs    += s.timeAliveMs;
+                agg.gamesPlayed    += s.gamesPlayed;
+                agg.duelsWon       += s.duelsWon;
+                agg.duelsLost      += s.duelsLost;
+                agg.gamesWon       += s.gamesWon;
+                modeVariants[VARIANT_KEYS[v]] = { ...s };
+            }
+            variants[MODE_KEYS[i]] = modeVariants;
+            result[MODE_KEYS[i]] = agg;
+
+            totals.reveals        += agg.reveals;
+            totals.flags          += agg.flags;
+            totals.minesClicked   += agg.minesClicked;
+            totals.gridsCompleted += agg.gridsCompleted;
+            totals.timeAliveMs    += agg.timeAliveMs;
+            totals.gamesPlayed    += agg.gamesPlayed;
+            totals.duelsWon       += agg.duelsWon;
+            totals.duelsLost      += agg.duelsLost;
+            totals.gamesWon       += agg.gamesWon;
+            if (i !== StatsMode.Solo) {
+                onlineTotals.reveals        += agg.reveals;
+                onlineTotals.flags          += agg.flags;
+                onlineTotals.minesClicked   += agg.minesClicked;
+                onlineTotals.gridsCompleted += agg.gridsCompleted;
+                onlineTotals.timeAliveMs    += agg.timeAliveMs;
+                onlineTotals.gamesPlayed    += agg.gamesPlayed;
+                onlineTotals.duelsWon       += agg.duelsWon;
+                onlineTotals.duelsLost      += agg.duelsLost;
+                onlineTotals.gamesWon       += agg.gamesWon;
+            }
+        }
+        result.total = totals;
+        result.onlineTotal = onlineTotals;
+        result.variants = variants;
+        return result;
+    }
+
+    // ── Persistence ──
+
+    _load() {
+        try {
+            const stored = localStorage.getItem(STATS_KEY);
+            if (!stored) return;
+            const data = JSON.parse(stored);
+            for (let i = 0; i < MODE_KEYS.length; i++) {
+                const saved = data[MODE_KEYS[i]];
+                if (!saved) continue;
+                // Migration: old flat format has "reveals" directly
+                if (typeof saved.reveals === 'number') {
+                    const s = this._stats[i][StatsVariant.normal];
+                    s.reveals        = saved.reveals        || 0;
+                    s.flags          = saved.flags          || 0;
+                    s.minesClicked   = saved.minesClicked   || 0;
+                    s.gridsCompleted = saved.gridsCompleted || 0;
+                    s.timeAliveMs    = saved.timeAliveMs    || 0;
+                    s.gamesPlayed    = saved.gamesPlayed    || 0;
+                    s.duelsWon       = saved.duelsWon       || 0;
+                    s.duelsLost      = saved.duelsLost      || 0;
+                    s.gamesWon       = saved.gamesWon       || 0;
+                } else {
+                    // New nested format
+                    for (let v = 0; v < VARIANT_KEYS.length; v++) {
+                        const vs = saved[VARIANT_KEYS[v]] || saved[LEGACY_VARIANT_KEYS[v]];
+                        if (!vs) continue;
+                        const s = this._stats[i][v];
+                        s.reveals        = vs.reveals        || 0;
+                        s.flags          = vs.flags          || 0;
+                        s.minesClicked   = vs.minesClicked   || 0;
+                        s.gridsCompleted = vs.gridsCompleted || 0;
+                        s.timeAliveMs    = vs.timeAliveMs    || 0;
+                        s.gamesPlayed    = vs.gamesPlayed    || 0;
+                        s.duelsWon       = vs.duelsWon       || 0;
+                        s.duelsLost      = vs.duelsLost      || 0;
+                        s.gamesWon       = vs.gamesWon       || 0;
+                    }
+                }
+            }
+
+            if (Date.now() < SOLO_TIME_ALIVE_REPAIR_DEADLINE_MS) {
+                for (const soloStats of this._stats[StatsMode.Solo]) {
+                    const gamesPlayed = Math.max(1, soloStats.gamesPlayed || 0);
+                    const maxExpectedTimeAliveMs = gamesPlayed * SOLO_TIME_ALIVE_REPAIR_MAX_AVERAGE_MS;
+                    if (soloStats.timeAliveMs > maxExpectedTimeAliveMs) {
+                        const repairedTimeAliveMs = (soloStats.gamesPlayed || 0) * SOLO_TIME_ALIVE_REPAIR_PER_GAME_MS;
+                        if (soloStats.timeAliveMs !== repairedTimeAliveMs) {
+                            soloStats.timeAliveMs = repairedTimeAliveMs;
+                            this._dirty = true;
+                        }
+                    }
+                }
+            }
+        } catch (_) { /* ignore corrupt data */ }
+    }
+
+    _flush() {
+        if (!this._dirty) return;
+        this._dirty = false;
+        try {
+            const data = {};
+            for (let i = 0; i < MODE_KEYS.length; i++) {
+                const modeObj = {};
+                for (let v = 0; v < VARIANT_KEYS.length; v++) {
+                    modeObj[VARIANT_KEYS[v]] = { ...this._stats[i][v] };
+                }
+                data[MODE_KEYS[i]] = modeObj;
+            }
+            localStorage.setItem(STATS_KEY, JSON.stringify(data));
+        } catch (_) { /* storage full */ }
+    }
+}

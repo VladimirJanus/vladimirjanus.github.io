@@ -28,7 +28,6 @@
 
                 <button id="btnCreateLobby" class="btn">🌍 Create Online Lobby</button>
                 <button id="btnBrowseLobbies" class="btn">🧭 Game Browser</button>
-                <button id="btnJoinByID" class="btn">🎯 Join by Game ID</button>
 
                 <div class="menu-separator"></div>
                 <button id="btnStats" class="btn">📊 Statistics</button>
@@ -91,11 +90,6 @@
 
                     <!-- Game mode level sub-view (hidden by default) -->
                     <div id="gameModeLevelView" style="display:none">
-                        <div class="game-mode-back" id="gameModeBackBtn">
-                            <span class="category-arrow">◀</span>
-                            <span>Back</span>
-                            <span class="game-mode-title" id="gameModeLevelTitle"></span>
-                        </div>
                         <div id="gameModeLevelCategories"></div>
                     </div>
                 </div>
@@ -115,6 +109,10 @@
                     </div>
 
                     <div id="lobbyGameID" class="lobby-gameid">Game ID: —</div>
+                    <div id="lobbyShareRow" class="lobby-share-row" style="display:none">
+                        <button id="btnCopyLobbyLink" class="btn lobby-share-btn">🔗 Copy invite link</button>
+                        <span id="lobbyShareStatus" class="lobby-share-status"></span>
+                    </div>
                     <div id="lobbyConfig" class="lobby-config">—</div>
                     <div id="lobbyHint" class="lobby-hint">Waiting...</div>
 
@@ -191,6 +189,10 @@
 
                     <div id="kbdPositionBadge" class="kbd-pos-badge" style="display:none;"></div>
                     <div id="chatToastStack" class="chat-toast-stack" style="display:none;"></div>
+                    <div id="inGameNoticeBanner" class="in-game-notice-banner" style="display:none;">
+                        <div id="inGameNoticeMessage" class="in-game-notice-message"></div>
+                        <button id="btnInGameNoticeClose" class="in-game-notice-close" aria-label="Close notice">x</button>
+                    </div>
                     
                     <div id="freezeOverlay" style="display:none;">
                         <canvas id="freezeCanvas" width="200" height="200"></canvas>
@@ -212,7 +214,7 @@
             <div id="chatPanel" class="chat-panel" style="display:none;">
                 <div class="chat-header">
                     <span class="chat-title">💬 Chat</span>
-                    <button class="chat-close-btn" id="btnChatClose">✕</button>
+                    <button class="chat-close-btn" id="btnChatClose" aria-label="Close chat">&times;</button>
                 </div>
                 <div class="chat-separator"></div>
                 <div class="chat-messages" id="chatMessages"></div>
@@ -308,44 +310,23 @@
             </div>
         </div>
 
-        
-
-        
-        <div id="hostDialog" class="modal-backdrop">
-            <div class="modal">
-                <h3>🌍 Create Online Lobby</h3>
-                <p class="modal-desc">Choose a username that other players will see:</p>
+        <div id="welcomeNameDialog" class="modal-backdrop">
+            <div class="modal welcome-name-modal">
+                <h3>Welcome to Minesweeper Online</h3>
+                <p class="modal-desc">Pick the name other players will see.</p>
                 <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" id="hostPlayerName" maxlength="16" placeholder="Enter username">
+                    <label>Player Name</label>
+                    <input type="text" id="welcomePlayerName" data-protocol-maxlength="player-name" placeholder="Player name" autocomplete="nickname">
+                    <div id="welcomeNameError" class="field-error" aria-live="polite"></div>
                 </div>
                 <div class="modal-actions">
-                    <button class="btn btn-accent" onclick="app.handleHostConfirm()">Create</button>
-                    <button class="btn" onclick="app._hideModal('hostDialog')">Cancel</button>
+                    <button class="btn btn-accent" id="welcomeNameConfirm">Set Name</button>
                 </div>
             </div>
         </div>
 
         
-        <div id="joinDialog" class="modal-backdrop">
-            <div class="modal">
-                <h3>🎯 Join Online Game</h3>
-                <div class="form-group">
-                    <label>Your username</label>
-                    <input type="text" id="joinPlayerName" maxlength="16" placeholder="Enter username">
-                </div>
-                <div class="form-group">
-                    <label>Game ID</label>
-                    <input type="number" id="joinGameID" placeholder="Enter Game ID" min="1" max="999999">
-                </div>
-                <div class="modal-actions">
-                    <button class="btn btn-accent" onclick="app.handleJoinConfirm()">Join</button>
-                    <button class="btn" onclick="app._hideModal('joinDialog')">Cancel</button>
-                </div>
-            </div>
-        </div>
 
-        
         <div id="gameSettingsDialog" class="modal-backdrop">
             <div class="modal">
                 <h3 id="gameSettingsTitle">🎯 Game Settings</h3>
@@ -362,15 +343,15 @@
                 </div>
                 <div class="form-group">
                     <label id="settingsGridWLabel">Grid Width (5–128)</label>
-                    <input type="number" id="settingsGridW" min="5" max="128" value="20">
+                    <input type="text" id="settingsGridW" inputmode="numeric" value="20">
                 </div>
                 <div class="form-group">
                     <label id="settingsGridHLabel">Grid Height (5–128)</label>
-                    <input type="number" id="settingsGridH" min="5" max="128" value="20">
+                    <input type="text" id="settingsGridH" inputmode="numeric" value="20">
                 </div>
                 <div class="form-group" id="gridLengthRow" style="display:none;">
                     <label>Grid Length (2–32)</label>
-                    <input type="number" id="settingsGridL" min="2" max="32" value="5">
+                    <input type="text" id="settingsGridL" inputmode="numeric" value="5">
                 </div>
                 <div class="form-group">
                     <label id="settingsDensityLabel">Mine Density: 20%</label>
@@ -378,7 +359,7 @@
                 </div>
                 <div class="form-group" id="visibleCellsRow" style="display:none;">
                     <label id="settingsVisibleCellsLabel">Visible Cells (1–400)</label>
-                    <input type="number" id="settingsVisibleCells" min="1" max="400" value="20">
+                    <input type="text" id="settingsVisibleCells" inputmode="numeric" value="20">
                 </div>
                 <div class="form-group" id="gameTypeRow" style="display:none;">
                     <label>Online Game Mode</label>
@@ -392,7 +373,7 @@
                 </div>
                 <div class="form-group" id="teamCountRow" style="display:none;">
                     <label>Teams</label>
-                    <input type="number" id="settingsTeamCount" min="2" max="4" value="2">
+                    <input type="text" id="settingsTeamCount" inputmode="numeric" value="2">
                 </div>
                 <div class="toggle-row" id="allowTeamSwitchingRow" style="display:none;">
                     <label>Allow players to switch teams</label>
@@ -434,7 +415,7 @@
                 <div class="settings-tab-content active" id="settingsTab-general">
                     <div class="form-group">
                         <label>Player Name</label>
-                        <input type="text" id="appPlayerName" maxlength="16" placeholder="Enter username">
+                        <input type="text" id="appPlayerName" data-protocol-maxlength="player-name" placeholder="Enter username">
                     </div>
                     <div class="toggle-row">
                         <label>Show Action Decals</label>
@@ -541,15 +522,15 @@
                 <h3>🎯 Custom Level Settings</h3>
                 <div class="form-group" id="gmCustomWRow">
                     <label id="gmCustomWLabel">Width (5–128)</label>
-                    <input type="number" id="gmCustomW" min="5" max="128" value="10">
+                    <input type="text" id="gmCustomW" inputmode="numeric" value="10">
                 </div>
                 <div class="form-group" id="gmCustomHRow">
                     <label id="gmCustomHLabel">Height (5–128)</label>
-                    <input type="number" id="gmCustomH" min="5" max="128" value="10">
+                    <input type="text" id="gmCustomH" inputmode="numeric" value="10">
                 </div>
                 <div class="form-group" id="gmCustomLRow" style="display:none">
                     <label>Length (2–48)</label>
-                    <input type="number" id="gmCustomL" min="2" max="48" value="3">
+                    <input type="text" id="gmCustomL" inputmode="numeric" value="3">
                 </div>
                 <div class="form-group">
                     <label id="gmCustomDLabel">Mine Density: 20%</label>
@@ -557,7 +538,7 @@
                 </div>
                 <div class="form-group" id="gmCustomVCRow" style="display:none">
                     <label id="gmCustomVCLabel">Visible Cells (1–100)</label>
-                    <input type="number" id="gmCustomVC" min="1" max="100" value="15">
+                    <input type="text" id="gmCustomVC" inputmode="numeric" value="15">
                 </div>
                 <div class="modal-actions">
                     <button class="btn btn-accent" id="gmCustomApplyBtn">Apply</button>
@@ -585,6 +566,10 @@
                         <button id="btnGameBrowserBack" class="screen-back-btn">⬅️</button>
                         <h2 class="solo-title">🧭 Game Browser</h2>
                         <button id="btnPublicRefresh" class="screen-back-btn">🔄</button>
+                    </div>
+                    <div class="gb-join-row">
+                        <input type="text" id="browserJoinGameID" class="gb-join-input" inputmode="numeric" maxlength="6" placeholder="Game ID">
+                        <button id="btnBrowserJoinByID" class="btn btn-accent gb-join-btn">Join</button>
                     </div>
                 </div>
                 <div class="gb-filters-area">
