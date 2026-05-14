@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vladimir Janus</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #164e63 100%);
+            color: #e5eef7;
+        }
+        .card {
+            width: min(480px, 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            background: rgba(15, 23, 42, 0.82);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+            text-align: center;
+        }
+        .eyebrow {
+            color: #67e8f9;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+        h1 {
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            line-height: 1.05;
+            margin-bottom: 0.7rem;
+        }
+        .game-id { color: #93c5fd; font-size: 1.05rem; margin-bottom: 1.4rem; }
+        .message { color: #b6c5d8; line-height: 1.5; margin-bottom: 1.4rem; }
+        .actions { display: grid; gap: 0.75rem; }
+        a, button {
+            width: 100%;
+            border: 0;
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            color: #f8fafc;
+            font: inherit;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .primary { background: linear-gradient(135deg, #2563eb, #06b6d4); }
+        .android { background: linear-gradient(135deg, #16a34a, #22c55e); }
+        .desktop, .home { background: rgba(255, 255, 255, 0.11); border: 1px solid rgba(255, 255, 255, 0.16); }
+        .web { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.14); }
+        .fallback { display: none; margin-top: 1.1rem; color: #cbd5e1; font-size: 0.92rem; line-height: 1.45; }
+        .fallback.visible { display: block; }
+        .not-found .join-only { display: none; }
+        .not-found .home { display: block; }
+        .home { display: none; }
+    </style>
+</head>
+<body>
+    <main class="card" id="card">
+        <div class="eyebrow" id="eyebrow">Minesweeper Online Invite</div>
+        <h1 id="title">Join a game</h1>
+        <div class="game-id join-only" id="gameIdText"></div>
+        <p class="message" id="message">Opening Minesweeper Online...</p>
+        <div class="actions join-only">
+            <button class="primary" id="openAppButton" type="button">Open Minesweeper Online</button>
+            <a class="android" href="https://play.google.com/store/apps/details?id=com.vladjsoftware.minesweeperonline">Get the Android app</a>
+            <a class="desktop" href="https://vladimirjanus.github.io/ClientQtBuilds/Windows/MinesweeperOnline-8.1-Windows.zip">Download for Windows</a>
+            <a class="web" id="webClientLink" href="https://vladimirjanus.github.io/ClientWeb/index.html">Open the web client</a>
+        </div>
+        <a class="home" href="https://vladimirjanus.github.io/">Go home</a>
+        <p class="fallback join-only" id="fallbackText">If the app did not open, install it for your platform, then come back to this invite.</p>
+    </main>
+
+    <script>
+        const playStoreUrl = "https://play.google.com/store/apps/details?id=com.vladjsoftware.minesweeperonline";
+        const origin = "https://vladimirjanus.github.io";
+
+        function parseGameId() {
+            const pathMatch = window.location.pathname.match(/\/command\/join\/(\d+)\/?$/i);
+            if (pathMatch) return pathMatch[1];
+            const params = new URLSearchParams(window.location.search);
+            const fromQuery = params.get("game") || params.get("gameId") || params.get("id") || "";
+            return /^\d+$/.test(fromQuery) ? fromQuery : "";
+        }
+
+        const gameId = parseGameId();
+        const card = document.getElementById("card");
+        const eyebrow = document.getElementById("eyebrow");
+        const title = document.getElementById("title");
+        const message = document.getElementById("message");
+        const gameIdText = document.getElementById("gameIdText");
+        const fallbackText = document.getElementById("fallbackText");
+        const openAppButton = document.getElementById("openAppButton");
+        const webClientLink = document.getElementById("webClientLink");
+
+        function customSchemeUrl() {
+            return "minesweeperonline://join/" + encodeURIComponent(gameId);
+        }
+
+        function androidIntentUrl() {
+            return "intent://join/" + encodeURIComponent(gameId)
+                + "#Intent;scheme=minesweeperonline;package=com.vladjsoftware.minesweeperonline;S.browser_fallback_url="
+                + encodeURIComponent(playStoreUrl) + ";end";
+        }
+
+        function isAndroid() { return /Android/i.test(navigator.userAgent); }
+
+        function showFallbackSoon() {
+            window.setTimeout(function () {
+                if (document.visibilityState === "visible") fallbackText.classList.add("visible");
+            }, 1400);
+        }
+
+        function openApp() {
+            if (!gameId) return;
+            message.textContent = "Trying to open the app for this invite...";
+            window.location.href = isAndroid() ? androidIntentUrl() : customSchemeUrl();
+            showFallbackSoon();
+        }
+
+        if (!gameId) {
+            card.classList.add("not-found");
+            eyebrow.textContent = "404";
+            title.textContent = "Page not found";
+            message.textContent = "That page does not exist.";
+        } else {
+            document.title = "Join game " + gameId + " - Minesweeper Online";
+            title.textContent = "Join game " + gameId;
+            gameIdText.textContent = "Game ID: " + gameId;
+            message.textContent = "Use this invite to open Minesweeper Online and join the lobby.";
+            webClientLink.href = origin + "/ClientWeb/index.html?join=" + encodeURIComponent(gameId);
+            openAppButton.addEventListener("click", openApp);
+            window.setTimeout(openApp, 450);
+        }
+    </script>
+</body>
+</html>

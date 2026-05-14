@@ -75,6 +75,15 @@
         a.builds:hover {
             background: linear-gradient(135deg, #047857, #059669);
         }
+        a.android {
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+            border: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        a.android:hover {
+            background: linear-gradient(135deg, #15803d, #16a34a);
+        }
         .builds-panel {
             display: none;
             margin-top: 1rem;
@@ -123,6 +132,7 @@
         <h1>Vladimir Januš</h1>
         <p class="tagline">I make cool stuff.</p>
         <div class="links">
+            <a class="android" href="https://play.google.com/store/apps/details?id=com.vladjsoftware.minesweeperonline">▶ Minesweeper Online for Android on Google Play</a>
             <a class="play" href="ClientWeb/index.html">💣 Minesweeper Online Web</a>
             <a class="builds" href="#" id="buildsToggle" onclick="toggleBuilds(event)">📦 MinesweeperOnline Builds</a>
             <div class="builds-panel" id="buildsPanel">
