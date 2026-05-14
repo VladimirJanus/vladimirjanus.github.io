@@ -1101,7 +1101,6 @@ export class SoloMenuManager {
         const slider = document.getElementById('gmCustomD');
         slider.oninput = () => {
             document.getElementById('gmCustomDLabel').textContent = `Mine Density: ${slider.value}%`;
-        }
         };
 
         // Wire apply
