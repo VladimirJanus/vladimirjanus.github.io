@@ -12,26 +12,48 @@
 
         
         <div id="mainMenu" class="screen active">
+            <header class="main-menu-header">
+                <h1>Minesweeper Online</h1>
+            </header>
+
             <div class="menu-content">
-                <h1>🎮 Minesweeper Online</h1>
+                <section class="menu-section">
+                    <div class="menu-section-title">Singleplayer</div>
+                    <button id="btnSoloPlay" class="btn menu-action menu-action-solo">
+                        <span>Solo Play</span><span class="menu-arrow">&gt;</span>
+                    </button>
+                </section>
 
-                <div class="menu-separator"></div>
+                <section class="menu-section">
+                    <div class="menu-section-title">Online Multiplayer</div>
+                    <button id="btnCreateLobby" class="btn menu-action menu-action-online">
+                        <span>Create Online Lobby</span><span class="menu-arrow">&gt;</span>
+                    </button>
+                    <button id="btnBrowseLobbies" class="btn menu-action menu-action-browser">
+                        <span>Game Browser</span><span class="menu-arrow">&gt;</span>
+                    </button>
+                </section>
 
-                <button id="btnAppSettings" class="btn">⚙️ App Settings</button>
+                <section class="menu-section">
+                    <div class="menu-section-title">Records</div>
+                    <button id="btnLeaderboards" class="btn menu-action menu-action-records">
+                        <span>Leaderboards</span><span class="menu-arrow">&gt;</span>
+                    </button>
+                    <button id="btnStats" class="btn menu-action menu-action-stats">
+                        <span>Statistics</span><span class="menu-arrow">&gt;</span>
+                    </button>
+                </section>
 
-                <div class="menu-separator"></div>
+                <section class="menu-section">
+                    <div class="menu-section-title">App</div>
+                    <button id="btnAppSettings" class="btn menu-action menu-action-app">
+                        <span>App Settings</span><span class="menu-arrow">&gt;</span>
+                    </button>
+                </section>
+            </div>
 
-                <button id="btnSoloPlay" class="btn">🎲 Solo Play</button>
-                <button id="btnLeaderboards" class="btn">🏆 Leaderboards</button>
-
-                <div class="menu-section-title">Online Multiplayer</div>
-
-                <button id="btnCreateLobby" class="btn">🌍 Create Online Lobby</button>
-                <button id="btnBrowseLobbies" class="btn">🧭 Game Browser</button>
-
-                <div class="menu-separator"></div>
-                <button id="btnStats" class="btn">📊 Statistics</button>
-                <div id="activePlayerCount" class="online-count">Currently online: 0</div>
+            <div class="main-menu-status">
+                <span id="activePlayerCount" class="online-count">Players online: 0</span>
             </div>
         </div>
 
@@ -213,7 +235,7 @@
             
             <div id="chatPanel" class="chat-panel" style="display:none;">
                 <div class="chat-header">
-                    <span class="chat-title">💬 Chat</span>
+                    <span class="chat-title">Chat</span>
                     <button class="chat-close-btn" id="btnChatClose" aria-label="Close chat">&times;</button>
                 </div>
                 <div class="chat-separator"></div>
@@ -417,6 +439,33 @@
                         <label>Player Name</label>
                         <input type="text" id="appPlayerName" data-protocol-maxlength="player-name" placeholder="Enter username">
                     </div>
+                    <div class="settings-section-title">Appearance</div>
+                    <div class="form-group">
+                        <label>Color Theme</label>
+                        <select id="appThemeMode" class="settings-select">
+                            <option value="dark">Dark</option>
+                            <option value="blue">Blue</option>
+                            <option value="light">Light</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>GUI Size</label>
+                        <select id="appUiSize" class="settings-select">
+                            <option value="micro">Micro</option>
+                            <option value="small">Small</option>
+                            <option value="normal">Normal</option>
+                            <option value="big">Big</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>UI Density</label>
+                        <select id="appUiDensity" class="settings-select">
+                            <option value="veryCompact">Very Compact</option>
+                            <option value="compact">Compact</option>
+                            <option value="normal">Normal</option>
+                        </select>
+                    </div>
+                    <div class="settings-section-title">Game Display</div>
                     <div class="toggle-row">
                         <label>Show Action Decals</label>
                         <input type="checkbox" id="appShowDecals" checked>
@@ -593,7 +642,7 @@
                     <div class="list-empty">No public games available</div>
                 </div>
                 <div class="pagination-row gb-pagination">
-                    <button class="btn btn-small" id="btnPublicPrev" disabled>◀</button>
+                    <button class="btn btn-small" id="btnPublicPrev" disabled>Prev</button>
                     <span id="publicPageInfo">Page 1</span>
                     <button class="btn btn-small" id="btnPublicNext" disabled>▶</button>
                 </div>
@@ -606,7 +655,7 @@
                 <div class="lb-page-header">
                     <div class="screen-header-row">
                         <button id="btnLbBack" class="screen-back-btn">⬅️</button>
-                        <h2 class="solo-title">🏆 Leaderboards</h2>
+                        <h2 class="solo-title">Leaderboards</h2>
                         <div class="screen-header-spacer"></div>
                     </div>
                 </div>
@@ -629,7 +678,7 @@
                 <div class="lb-selection-row lb-page-selection-row" id="lbSelectionRow">
                     <span>📊</span>
                     <span id="lbSelectionText" class="lb-selection-text"></span>
-                    <button class="btn btn-small btn-accent" id="btnLbPlayRated">▶ Rated</button>
+                    <button class="btn btn-small btn-accent" id="btnLbPlayRated">Play Rated</button>
                     <button class="btn btn-small" id="btnLbRefresh">🔄</button>
                 </div>
 
