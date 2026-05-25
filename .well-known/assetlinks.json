@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.vladjsoftware.minesweeperonline",
+      "sha256_cert_fingerprints": [
+        "A3:C5:86:87:B4:32:34:47:3E:04:94:79:B7:62:0C:41:E5:88:9B:A4:20:31:77:C6:34:99:C1:19:71:F2:BE:D6"
+      ]
+    }
+  }
+]
