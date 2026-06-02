@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Minesweeper Online</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="src/ui/styles.css">
+    <link rel="stylesheet" href="Client/src/ui/web/styles.css">
 </head>
 <body>
     <div id="app">
@@ -31,6 +31,12 @@
                     </button>
                     <button id="btnBrowseLobbies" class="btn menu-action menu-action-browser">
                         <span>Game Browser</span><span class="menu-arrow">&gt;</span>
+                    </button>
+                    <button id="btnRankedDuel" class="btn menu-action menu-action-ranked">
+                        <span>Ranked Duel</span><span id="rankedMenuPlayingCount" class="menu-action-count">playing: 0</span><span class="menu-arrow">&gt;</span>
+                    </button>
+                    <button id="btnFriends" class="btn menu-action menu-action-friends">
+                        <span>Friends</span><span class="menu-arrow">&gt;</span>
                     </button>
                 </section>
 
@@ -130,17 +136,30 @@
                         <button id="btnLobbySettings" class="screen-back-btn screen-settings-btn" style="visibility:hidden;">⚙️</button>
                     </div>
 
-                    <div id="lobbyGameID" class="lobby-gameid">Game ID: —</div>
+                    <div id="lobbyGameIDRow" class="lobby-gameid-row">
+                        <div id="lobbyGameID" class="lobby-gameid">Game ID: —</div>
+                        <button id="btnCopyLobbyLink" class="lobby-icon-btn lobby-share-btn" title="Copy invite link" aria-label="Copy invite link">🔗</button>
+                        <button id="btnLobbyFriendsOpen" class="lobby-icon-btn lobby-friends-open" title="Friends" aria-label="Friends">👥</button>
+                    </div>
                     <div id="lobbyShareRow" class="lobby-share-row" style="display:none">
-                        <button id="btnCopyLobbyLink" class="btn lobby-share-btn">🔗 Copy invite link</button>
                         <span id="lobbyShareStatus" class="lobby-share-status"></span>
+                    </div>
+                    <div id="lobbyFriendsPanel" class="lobby-friends-panel" style="display:none">
+                        <div class="lobby-friends-header">
+                            <span>Friends</span>
+                            <span id="lobbyFriendsStatus">Invite friends to this lobby</span>
+                        </div>
+                        <div id="lobbyFriendsList" class="lobby-friends-list"></div>
                     </div>
                     <div id="lobbyConfig" class="lobby-config">—</div>
                     <div id="lobbyHint" class="lobby-hint">Waiting...</div>
 
                     <div class="menu-separator"></div>
 
-                    <div class="player-list-title">👥 Connected Players</div>
+                    <div class="player-list-title-row">
+                        <div id="playerListTitle" class="player-list-title">👥 Connected Players</div>
+                        <button id="btnMakeHost" class="btn btn-small btn-accent make-host-btn" style="display:none;">Make Host</button>
+                    </div>
                     <div id="playerList"></div>
 
                     <div id="pendingSection" style="display:none">
@@ -160,8 +179,45 @@
         </div>
 
         
+        <div id="friendsScreen" class="screen social-screen">
+            <div class="social-content">
+                <div class="screen-header-row social-header-row">
+                    <button id="btnFriendsBack" class="screen-back-btn">&lt;</button>
+                    <h2 class="solo-title social-title">Friends</h2>
+                    <div class="screen-header-spacer"></div>
+                </div>
+
+                <div class="social-toolbar">
+                    <div class="social-status-box">
+                        <div class="social-id-tools">
+                            <div id="friendsOwnID" class="social-own-id">Your player ID: Not connected</div>
+                            <form id="friendsAddByIDForm" class="social-add-id">
+                                <input id="friendsAddByIDInput" type="text" maxlength="8" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Player ID">
+                                <button id="btnFriendsAddByID" class="btn btn-small btn-accent" type="submit">Add Friend</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-tabs">
+                    <div class="social-tab-buttons">
+                        <button class="social-tab active" data-tab="friends">Friends</button>
+                        <button class="social-tab" data-tab="recent">Recent</button>
+                        <button class="social-tab" data-tab="blocked">Blocked</button>
+                    </div>
+                    <div class="social-tabs-status">
+                        <div id="friendsStatus" class="social-status"></div>
+                        <div id="friendsCooldown" class="social-cooldown"></div>
+                    </div>
+                </div>
+
+                <div id="friendsList" class="social-list"></div>
+            </div>
+        </div>
+
+
         <div id="gameView" class="screen">
-            
+
             <div id="networkBar">
                 <div class="netbar-header">
                     <span class="netbar-role" id="netRole">🔌 Connected</span>
@@ -220,6 +276,8 @@
                         <canvas id="freezeCanvas" width="200" height="200"></canvas>
                         <div id="freezeText">0.00</div>
                     </div>
+
+                    <div id="rankedIntroOverlay" class="ranked-intro-overlay" style="display:none;"></div>
                     
                     <div id="spectatorFeedback" style="display:none;">
                         <span id="spectatorEmoji">👁️</span>
@@ -241,7 +299,7 @@
                 <div class="chat-separator"></div>
                 <div class="chat-messages" id="chatMessages"></div>
                 <div class="chat-input-row">
-                    <input type="text" id="chatInput" class="chat-input" maxlength="128" placeholder="Type a message…" autocomplete="off">
+                    <input type="text" id="chatInput" class="chat-input" maxlength="128" placeholder="Type a message..." autocomplete="off">
                     <button class="chat-send-btn" id="btnChatSend">Send</button>
                 </div>
             </div>
@@ -249,7 +307,7 @@
             
             <div id="gameModal" style="display:none;">
                 <div class="game-modal-card" id="gameModalCard">
-                    <button class="gm-close-btn" id="btnModalClose">❌</button>
+                    <button class="gm-close-btn" id="btnModalClose">X</button>
                     <h2 id="modalTitle" class="gm-title">PAUSED</h2>
                     <div id="modalPauseInfo" class="gm-pause-info" style="display:none;">
                         <div id="modalPauseCategory" class="gm-pause-category"></div>
@@ -285,10 +343,10 @@
                     </div>
 
                     <!-- PVP Teams stats area -->
-                    <div id="pvp2TeamsStatsArea" style="display:none;">
+                    <div id="pvpTeamsStatsArea" style="display:none;">
                         <div class="team-stats-panel">
-                            <div class="team-stats-col" id="pvp2Team1Col"></div>
-                            <div class="team-stats-col" id="pvp2Team2Col"></div>
+                            <div class="team-stats-col" id="pvpTeam1Col"></div>
+                            <div class="team-stats-col" id="pvpTeam2Col"></div>
                         </div>
                     </div>
 
@@ -323,6 +381,7 @@
 
         
         <div id="toastContainer"></div>
+        <div id="socialInviteToastStack" class="social-invite-toast-stack"></div>
 
         <div id="killedOverlay" class="killed-overlay">
             <div class="killed-overlay-content">
@@ -343,6 +402,22 @@
                 </div>
                 <div class="modal-actions">
                     <button class="btn btn-accent" id="welcomeNameConfirm">Set Name</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="illegalNameDialog" class="modal-backdrop">
+            <div class="modal welcome-name-modal">
+                <h3>Player Name Not Allowed</h3>
+                <p class="modal-desc">You may not use online features with this player name because it contains words that are not allowed. Please choose a different name.</p>
+                <div class="form-group">
+                    <label>Player Name</label>
+                    <input type="text" id="illegalNamePlayerName" data-protocol-maxlength="player-name" placeholder="Player name" autocomplete="nickname">
+                    <div id="illegalNameError" class="field-error" aria-live="polite"></div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn" id="illegalNameCancel">Not Now</button>
+                    <button class="btn btn-accent" id="illegalNameConfirm">Save Name</button>
                 </div>
             </div>
         </div>
@@ -425,9 +500,10 @@
         
         <div id="appSettingsDialog" class="modal-backdrop">
             <div class="modal">
-                <h3>⚙️ Application Settings</h3>
+                <h3>Application Settings</h3>
                 <div class="settings-tabs">
                     <button class="settings-tab active" data-tab="general">General</button>
+                    <button class="settings-tab" data-tab="appearance">Appearance</button>
                     <button class="settings-tab" data-tab="audio">Audio</button>
                     <button class="settings-tab" data-tab="controls">Controls</button>
                     <button class="settings-tab" data-tab="misc">Misc</button>
@@ -439,7 +515,24 @@
                         <label>Player Name</label>
                         <input type="text" id="appPlayerName" data-protocol-maxlength="player-name" placeholder="Enter username">
                     </div>
-                    <div class="settings-section-title">Appearance</div>
+                    <div class="settings-section-title">Game Display</div>
+                    <div class="toggle-row">
+                        <label>Show Action Decals</label>
+                        <input type="checkbox" id="appShowDecals" checked>
+                    </div>
+                    <div class="toggle-row">
+                        <label>Show chat pop-up notifications</label>
+                        <input type="checkbox" id="appChatNotifications">
+                    </div>
+                    <div class="toggle-row">
+                        <label>Show friend invite notifications</label>
+                        <input type="checkbox" id="appFriendInviteNotifications">
+                    </div>
+                </div>
+
+                <!-- Appearance tab -->
+                <div class="settings-tab-content" id="settingsTab-appearance">
+                    <div class="settings-section-title">Application Theme</div>
                     <div class="form-group">
                         <label>Color Theme</label>
                         <select id="appThemeMode" class="settings-select">
@@ -465,24 +558,10 @@
                             <option value="normal">Normal</option>
                         </select>
                     </div>
-                    <div class="settings-section-title">Game Display</div>
-                    <div class="toggle-row">
-                        <label>Show Action Decals</label>
-                        <input type="checkbox" id="appShowDecals" checked>
+                    <div class="settings-section-title">Board Theme</div>
+                    <div id="appBoardThemeGrid" class="board-theme-grid"></div>
+                    <input type="hidden" id="appBoardThemeId" value="0">
                     </div>
-                    <div class="toggle-row">
-                        <label>Digital Numbers</label>
-                        <input type="checkbox" id="appDigitalNumbers">
-                    </div>
-                    <div class="toggle-row">
-                        <label>Digital Textures</label>
-                        <input type="checkbox" id="appDigitalTextures">
-                    </div>
-                    <div class="toggle-row">
-                        <label>Show chat pop-up notifications</label>
-                        <input type="checkbox" id="appChatNotifications">
-                    </div>
-                </div>
 
                 <!-- Audio tab -->
                 <div class="settings-tab-content" id="settingsTab-audio">
@@ -539,7 +618,7 @@
                     <div class="form-group">
                         <label>Server Address</label>
                         <div class="server-addr-row">
-                            <input type="text" id="appServerAddress" placeholder="host:port or wss://host:port" class="server-input">
+                            <input type="text" id="appServerAddress" placeholder="server:port" class="server-input">
                             <button id="refetchServerBtn" class="btn refetch-btn" title="Re-fetch server address">🔄 Re-fetch</button>
                         </div>
                         <div id="addressError" class="address-error" style="display:none;"></div>
@@ -633,7 +712,7 @@
                             <button class="lb-tab" id="browserFilterCoOpSoft">Co-Op Soft</button>
                             <button class="lb-tab" id="browserFilterCoOpHard">Co-Op Hard</button>
                             <button class="lb-tab" id="browserFilterPVP">PVP Duel</button>
-                            <button class="lb-tab" id="browserFilterPVP2Teams">PVP Teams</button>
+                            <button class="lb-tab" id="browserFilterPVPTeams">PVP Teams</button>
                             <button class="lb-tab" id="browserFilterPVPConquest">PVP Conquest</button>
                         </div>
                     </div>
@@ -721,6 +800,16 @@
             </div>
         </div>
 
+        <div id="serverMaintenanceDialog" class="modal-backdrop">
+            <div class="modal" style="text-align:center;">
+                <h3>Server Maintenance</h3>
+                <p class="modal-desc">This feature is currently unavailable because the server is under maintenance.</p>
+                <div class="modal-actions">
+                    <button class="btn btn-accent" onclick="app._hideModal('serverMaintenanceDialog')">OK</button>
+                </div>
+            </div>
+        </div>
+
         
         <div id="connectingDialog" class="modal-backdrop">
             <div class="modal" style="text-align:center;">
@@ -745,7 +834,102 @@
             </div>
         </div>
 
+        <div id="lobbyFriendsDialog" class="modal-backdrop">
+            <div class="modal lobby-friends-modal">
+                <h3>Friends</h3>
+                <p class="modal-desc" id="lobbyFriendsDialogStatus">Invite friends to this lobby</p>
+                <div id="lobbyFriendsDialogList" class="lobby-friends-list lobby-friends-dialog-list"></div>
+                <div class="modal-actions">
+                    <button class="btn" id="btnLobbyFriendsClose">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="promoteHostDialog" class="modal-backdrop">
+            <div class="modal promote-host-modal">
+                <h3>Make Host</h3>
+                <p class="modal-desc">Select a connected player.</p>
+                <div id="promoteHostList" class="promote-host-list"></div>
+                <div class="modal-actions">
+                    <button class="btn" id="btnPromoteHostCancel">Cancel</button>
+                    <button class="btn btn-accent" id="btnPromoteHostConfirm">Make Host</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="friendProfileDialog" class="modal-backdrop">
+            <div class="modal social-profile-modal">
+                <div class="social-profile-head">
+                    <div id="friendProfileAvatar" class="social-profile-avatar">?</div>
+                    <div class="social-profile-title-block">
+                        <h3 id="friendProfileName">Player</h3>
+                        <div id="friendProfileMeta" class="social-profile-meta">ID --</div>
+                        <div id="friendProfileBadges" class="social-profile-badges"></div>
+                    </div>
+                    <button class="social-profile-icon social-profile-friend" id="btnFriendProfileFriend" title="Add friend">&#128100; +</button>
+                    <button class="social-profile-icon social-profile-block" id="btnFriendProfileBlock" title="Block player">🚫</button>
+                    <button class="social-profile-exit" id="btnFriendProfileHeadClose" title="Close profile">X</button>
+                </div>
+                <button class="btn" id="btnFriendProfileUpdateName" style="display:none;">Update player name</button>
+                <div class="social-note-editor">
+                    <label for="friendProfileNote">Local note</label>
+                    <textarea id="friendProfileNote" maxlength="500" rows="3" placeholder="Only saved on this device"></textarea>
+                </div>
+                <div class="social-profile-actions">
+                    <button class="btn btn-success" id="btnFriendProfileInvite">→ Invite</button>
+                    <button class="btn btn-duel" id="btnFriendProfileDuel">⚔ Duel</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="friendDuelDialog" class="modal-backdrop">
+            <div class="modal social-duel-modal">
+                <h3 id="friendDuelTitle">Ranked Duel</h3>
+                <p class="modal-desc" id="friendDuelBody">Choose a category.</p>
+                <div id="friendDuelCategories" class="social-duel-categories"></div>
+                <div class="modal-actions">
+                    <button class="btn btn-accent" id="btnFriendDuelSend">Send Challenge</button>
+                    <button class="btn" id="btnFriendDuelCancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+
         
+        <div id="rankedDuelDialog" class="screen ranked-screen">
+            <div class="ranked-page-content">
+                <div class="screen-header-row ranked-header-row">
+                    <button id="btnRankedClose" class="screen-back-btn">&lt;</button>
+                    <h2 class="ranked-page-title">Ranked Duel</h2>
+                    <button id="btnRankedRefresh" class="screen-back-btn">&#8635;</button>
+                </div>
+                <div class="ranked-scroll">
+                    <div id="rankedStatusPanel" class="ranked-status-panel">
+                        <span class="ranked-status-strip"></span>
+                        <span id="rankedStatusDot" class="ranked-status-dot"></span>
+                        <span class="ranked-status-copy">
+                            <span id="rankedQueueStatus" class="ranked-status" data-state="idle"></span>
+                            <span id="rankedQueueMeta" class="ranked-status-meta"></span>
+                        </span>
+                        <span id="rankedActivePlayerCount" class="ranked-active-pill">online: 0 | playing: 0</span>
+                        <button class="btn ranked-status-cancel" id="btnRankedCancel" style="display:none;">Cancel</button>
+                    </div>
+                    <div class="ranked-page-grid">
+                        <section class="ranked-page-section ranked-ladders-section">
+                            <div class="ranked-section-title"><span>Ladders</span><span id="rankedCategoryCount">0 available</span></div>
+                            <div id="rankedCategoryGrid" class="ranked-category-grid"></div>
+                        </section>
+                        <section class="ranked-page-section ranked-history-section">
+                            <div class="ranked-section-title"><span>Recent Matches</span><span>local</span></div>
+                            <div id="rankedHistoryList" class="ranked-history-list">
+                                <div class="ranked-history-empty">No ranked matches yet.</div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="ranked-page-bottom-spacer"></div>
+                </div>
+            </div>
+        </div>
+
         <div id="statsMenu" class="screen">
             <div class="stats-content">
                 <div class="stats-header">
@@ -764,7 +948,7 @@
                     <button class="stats-tab" data-mode="coopSoft">Co-Op Soft</button>
                     <button class="stats-tab" data-mode="pvpDuel">PVP Duel</button>
                     <button class="stats-tab" data-mode="community">Community</button>
-                    <button class="stats-tab" data-mode="pvp2Teams">PVP Teams</button>
+                    <button class="stats-tab" data-mode="pvpTeams">PVP Teams</button>
                     <button class="stats-tab" data-mode="pvpConquest">PVP Conquest</button>
                 </div>
                 <div class="stats-variant-bar" id="statsVariantBar" style="display:none;">
@@ -833,6 +1017,6 @@
 
     </div>
 
-    <script type="module" src="src/main.js"></script>
+    <script type="module" src="Client/src/main.js"></script>
 </body>
 </html>
