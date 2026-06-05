@@ -68,7 +68,7 @@
             <div class="solo-content">
                 <div class="solo-header">
                     <div class="screen-header-row">
-                        <button id="btnSoloBack" class="screen-back-btn">⬅️</button>
+                        <button id="btnSoloBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
                         <h2 class="solo-title" id="soloMenuTitle">🎲 Solo Play</h2>
                         <div class="screen-header-spacer"></div>
                     </div>
@@ -131,7 +131,7 @@
             <div class="lobby-content">
                 <div class="lobby-scroll">
                     <div class="screen-header-row lobby-header-row">
-                        <button id="btnLobbyLeave" class="screen-back-btn">⬅️</button>
+                        <button id="btnLobbyLeave" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
                         <div id="lobbyTitle" class="solo-title lobby-title">🌍 Lobby</div>
                         <button id="btnLobbySettings" class="screen-back-btn screen-settings-btn" style="visibility:hidden;">⚙️</button>
                     </div>
@@ -182,9 +182,9 @@
         <div id="friendsScreen" class="screen social-screen">
             <div class="social-content">
                 <div class="screen-header-row social-header-row">
-                    <button id="btnFriendsBack" class="screen-back-btn">&lt;</button>
+                    <button id="btnFriendsBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
                     <h2 class="solo-title social-title">Friends</h2>
-                    <div class="screen-header-spacer"></div>
+                    <button id="btnFriendsRefresh" class="screen-back-btn" aria-label="Refresh"><span class="hdr-icon icon-refresh"></span></button>
                 </div>
 
                 <div class="social-toolbar">
@@ -307,6 +307,7 @@
             
             <div id="gameModal" style="display:none;">
                 <div class="game-modal-card" id="gameModalCard">
+                    <button class="gm-settings-btn" id="btnModalSettings" title="Settings">⚙️</button>
                     <button class="gm-close-btn" id="btnModalClose">X</button>
                     <h2 id="modalTitle" class="gm-title">PAUSED</h2>
                     <div id="modalPauseInfo" class="gm-pause-info" style="display:none;">
@@ -524,9 +525,13 @@
                         <label>Show chat pop-up notifications</label>
                         <input type="checkbox" id="appChatNotifications">
                     </div>
-                    <div class="toggle-row">
-                        <label>Show friend invite notifications</label>
-                        <input type="checkbox" id="appFriendInviteNotifications">
+                    <div class="form-group">
+                        <label>Receive game &amp; duel invites from</label>
+                        <select id="appInviteSource" class="settings-select">
+                            <option value="nobody">Nobody</option>
+                            <option value="friends">Friends only</option>
+                            <option value="anyone">Anyone</option>
+                        </select>
                     </div>
                 </div>
 
@@ -584,6 +589,7 @@
                             <option value="1">Flag</option>
                             <option value="2">Primary Action</option>
                             <option value="3">Secondary Action</option>
+                            <option value="4">None</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -593,6 +599,7 @@
                             <option value="1">Flag</option>
                             <option value="2">Primary Action</option>
                             <option value="3">Secondary Action</option>
+                            <option value="4">None</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -602,10 +609,19 @@
                             <option value="1">Flag</option>
                             <option value="2">Primary Action</option>
                             <option value="3">Secondary Action</option>
+                            <option value="4">None</option>
                         </select>
                     </div>
                     <div id="appClickMappingWarning" class="settings-warning click-mapping-warning" style="display:none;">
                         Since primary/seconday is not used the button wont be visible in game
+                    </div>
+                    <div class="toggle-row" id="appLeftClickPanRow">
+                        <label>Hold left click to pan</label>
+                        <input type="checkbox" id="appLeftClickPan" checked>
+                    </div>
+                    <div class="toggle-row">
+                        <label>Enable chording (hold number to preview &amp; reveal neighbours)</label>
+                        <input type="checkbox" id="appChordingEnabled" checked>
                     </div>
                     <div class="form-group" style="margin-top:10px">
                         <button class="btn" onclick="app.resetControlsToDefaults()">Reset to Defaults</button>
@@ -691,9 +707,9 @@
             <div class="game-browser-content">
                 <div class="game-browser-header">
                     <div class="screen-header-row">
-                        <button id="btnGameBrowserBack" class="screen-back-btn">⬅️</button>
+                        <button id="btnGameBrowserBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
                         <h2 class="solo-title">🧭 Game Browser</h2>
-                        <button id="btnPublicRefresh" class="screen-back-btn">🔄</button>
+                        <button id="btnPublicRefresh" class="screen-back-btn" aria-label="Refresh"><span class="hdr-icon icon-refresh"></span></button>
                     </div>
                     <div class="gb-join-row">
                         <input type="text" id="browserJoinGameID" class="gb-join-input" inputmode="numeric" maxlength="6" placeholder="Game ID">
@@ -733,7 +749,7 @@
             <div class="lb-page-content">
                 <div class="lb-page-header">
                     <div class="screen-header-row">
-                        <button id="btnLbBack" class="screen-back-btn">⬅️</button>
+                        <button id="btnLbBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
                         <h2 class="solo-title">Leaderboards</h2>
                         <div class="screen-header-spacer"></div>
                     </div>
@@ -748,8 +764,8 @@
                     <div id="lbCategoryTabs" class="lb-tabs"></div>
                 </div>
 
-                <!-- Level tabs -->
-                <div class="lb-tabs-scroll lb-page-tabs-row">
+                <!-- Level tabs — hidden in ELO mode -->
+                <div class="lb-tabs-scroll lb-page-tabs-row" id="lbLevelTabsRow">
                     <div id="lbLevelTabs" class="lb-tabs lb-level-tabs"></div>
                 </div>
 
@@ -758,13 +774,21 @@
                     <span>📊</span>
                     <span id="lbSelectionText" class="lb-selection-text"></span>
                     <button class="btn btn-small btn-accent" id="btnLbPlayRated">Play Rated</button>
-                    <button class="btn btn-small" id="btnLbRefresh">🔄</button>
+                    <button class="btn btn-small" id="btnLbRefresh" aria-label="Refresh"><span class="hdr-icon icon-refresh"></span></button>
                 </div>
 
-                <!-- Leaderboard list -->
+                <!-- Normal leaderboard list -->
                 <div id="leaderboardList" class="lb-list lb-page-list">
                     <div class="list-empty">No entries yet.<br>Be the first!</div>
                 </div>
+
+                <!-- ELO leaderboard list (shown in ELO mode) -->
+                <div id="eloLeaderboardList" class="lb-list lb-page-list" style="display:none">
+                    <div class="list-empty">No ranked games yet.</div>
+                </div>
+
+                <!-- ELO pinned own-card -->
+                <div id="eloPinnedCard" class="elo-pinned-card" style="display:none"></div>
 
                 <!-- Pagination -->
                 <div class="pagination-row lb-page-pagination" id="lbPagination">
@@ -878,7 +902,23 @@
                 <div class="social-profile-actions">
                     <button class="btn btn-success" id="btnFriendProfileInvite">→ Invite</button>
                     <button class="btn btn-duel" id="btnFriendProfileDuel">⚔ Duel</button>
+                    <button class="btn" id="btnFriendProfileStats">STATS</button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Player Stats Modal -->
+        <div id="playerStatsDialog" class="modal-backdrop">
+            <div class="modal player-stats-modal">
+                <div class="player-stats-head">
+                    <div class="player-stats-title-block">
+                        <h3 id="playerStatsName">Player</h3>
+                        <div id="playerStatsSubtitle" class="player-stats-subtitle"></div>
+                    </div>
+                    <button class="social-profile-exit" id="btnPlayerStatsClose" title="Close">X</button>
+                </div>
+                <div id="playerStatsLoading" class="player-stats-loading">Loading…</div>
+                <div id="playerStatsBody" class="player-stats-body" style="display:none"></div>
             </div>
         </div>
 
@@ -898,9 +938,9 @@
         <div id="rankedDuelDialog" class="screen ranked-screen">
             <div class="ranked-page-content">
                 <div class="screen-header-row ranked-header-row">
-                    <button id="btnRankedClose" class="screen-back-btn">&lt;</button>
+                    <button id="btnRankedClose" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
                     <h2 class="ranked-page-title">Ranked Duel</h2>
-                    <button id="btnRankedRefresh" class="screen-back-btn">&#8635;</button>
+                    <button id="btnRankedRefresh" class="screen-back-btn" aria-label="Refresh"><span class="hdr-icon icon-refresh"></span></button>
                 </div>
                 <div class="ranked-scroll">
                     <div id="rankedStatusPanel" class="ranked-status-panel">
@@ -934,7 +974,7 @@
             <div class="stats-content">
                 <div class="stats-header">
                     <div class="screen-header-row">
-                        <button id="btnStatsBack" class="screen-back-btn">⬅️</button>
+                        <button id="btnStatsBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
                         <h2>📊 Statistics</h2>
                         <div class="screen-header-spacer"></div>
                     </div>
@@ -950,6 +990,7 @@
                     <button class="stats-tab" data-mode="community">Community</button>
                     <button class="stats-tab" data-mode="pvpTeams">PVP Teams</button>
                     <button class="stats-tab" data-mode="pvpConquest">PVP Conquest</button>
+                    <button class="stats-tab" data-mode="rankedConquestDuel">Ranked Conquest Duel</button>
                 </div>
                 <div class="stats-variant-bar" id="statsVariantBar" style="display:none;">
                     <span class="stats-variant-label">Game Variant:</span>
