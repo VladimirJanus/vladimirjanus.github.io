@@ -126,7 +126,200 @@
             </div>
         </div>
 
-        
+        <!-- ===== Custom Level Builder ===== -->
+        <style>
+            .cb-content { display:flex; flex-direction:column; height:100%; gap:12px; padding:14px; box-sizing:border-box; }
+            .cb-header { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+            .cb-header .solo-title { margin:0; }
+            .cb-name-input { flex:1; min-width:160px; max-width:240px; padding:8px 10px; border-radius:8px;
+                background: var(--input-bg, #1b2333); color: var(--text-primary, #e6edf3);
+                border:1px solid var(--panel-border, #2c3a4f); font-size:14px; }
+            .cb-spacer { flex:1; }
+            .cb-panels { display:grid; grid-template-columns:1fr; gap:12px; }
+            @media (min-width:680px){ .cb-panels { grid-template-columns:1fr 1fr; } }
+            .cb-panel { background: var(--card-secondary, #182233); border:1px solid var(--panel-border, #2c3a4f);
+                border-radius:10px; padding:12px; display:flex; flex-direction:column; gap:10px; }
+            .cb-panel-title { font-weight:700; font-size:13px; color: var(--text-primary, #e6edf3); }
+            .cb-seg-row { display:flex; gap:6px; flex-wrap:wrap; align-items:flex-end; }
+            .cb-seg { padding:7px 12px; border-radius:7px; cursor:pointer; font-size:12px;
+                background: var(--card-primary, #1e2a3d); color: var(--text-secondary, #9fb0c3);
+                border:1px solid var(--panel-border, #2c3a4f); }
+            .cb-seg.active { background: var(--accent-blue, #2f6fed); color:#fff; border-color: var(--focus-ring, #4f8bff); font-weight:700; }
+            .cb-seg.accent-purple.active { background: var(--accent-purple, #7a4fed); }
+            .cb-field-row { display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; }
+            .cb-field-row label { display:flex; flex-direction:column; gap:2px; font-size:11px; color: var(--text-muted, #7d8ca0); }
+            .cb-field-row input { width:96px; padding:6px 8px; border-radius:6px; font-size:13px;
+                background: var(--input-bg, #1b2333); color: var(--text-primary, #e6edf3); border:1px solid var(--panel-border, #2c3a4f); }
+            .cb-hint { font-size:11px; color: var(--text-detail, #8a9bb0); }
+            .cb-status { font-size:11px; color: var(--text-detail, #8a9bb0); }
+            .cb-canvas-wrap { position:relative; flex:1; min-height:200px; border-radius:8px;
+                background: var(--bg-grid, #202124); border:1px solid var(--panel-border, #2c3a4f); overflow:hidden; }
+            #cbCanvas { width:100%; height:100%; display:block; }
+            .cb-zoom-controls { position:absolute; top:12px; right:12px; display:flex; gap:6px; z-index:2; }
+            .cb-preview-hint { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+                width:70%; text-align:center; color: var(--text-muted, #7d8ca0); font-size:13px; pointer-events:none; }
+            .cb-code-area { width:100%; height:130px; box-sizing:border-box; resize:none; font-family:monospace; font-size:11px;
+                padding:8px; border-radius:6px; background: var(--panel-background, #0e1622);
+                color: var(--text-primary, #e6edf3); border:1px solid var(--panel-border, #2c3a4f); word-break:break-all; }
+            .cb-import-error { color: var(--accent-red, #e5534b); font-size:11px; margin-top:6px; min-height:14px; }
+
+            /* ── Narrow / portrait screens ────────────────────────────────────
+               Header collapses to: [✕  title] / [name field] / [Save | Play],
+               control buttons and number fields stretch to fill the width so
+               they stay comfortably tappable. */
+            @media (max-width:560px) {
+                /* Let the whole builder scroll; the canvas becomes a fixed block
+                   so the controls above it stay reachable. */
+                .cb-content { padding:10px; gap:10px; overflow-y:auto; }
+                .cb-header { gap:8px; row-gap:8px; }
+                .cb-header .solo-title { font-size:17px; }
+                .cb-spacer { display:none; }
+                .cb-name-input { flex:1 1 100%; max-width:none; min-width:0; }
+                .cb-header .btn { flex:1 1 0; }
+                .cb-panels { gap:10px; }
+                .cb-panel { padding:10px; gap:8px; }
+                .cb-seg { flex:1 1 auto; text-align:center; padding:8px 8px; }
+                .cb-field-row { gap:8px; }
+                .cb-field-row label { flex:1 1 110px; }
+                .cb-field-row input { width:100%; box-sizing:border-box; }
+                #cbRandomRow .btn, #cbPlaceOwnRow .btn, #cbShapeToolRow .btn { flex:1 1 auto; }
+                #cbRandomRow .btn { align-self:flex-end; }
+                .cb-canvas-wrap { flex:0 0 auto; height:48vh; min-height:260px; }
+                .cb-zoom-controls { top:8px; right:8px; }
+            }
+        </style>
+        <div id="customBuilderScreen" class="screen">
+            <div class="solo-content cb-content">
+                <div class="cb-header">
+                    <button id="cbCloseBtn" class="screen-back-btn" aria-label="Close">✕</button>
+                    <h2 class="solo-title">🛠️ Level Builder</h2>
+                    <div class="cb-spacer"></div>
+                    <input type="text" id="cbNameField" class="cb-name-input" placeholder="Name (Draft if empty)" maxlength="64">
+                    <button class="btn btn-accent" id="cbSaveBtn">Save</button>
+                    <button class="btn btn-accent" id="cbPlayBtn">▶ Play</button>
+                </div>
+
+                <div class="cb-panels">
+                    <div class="cb-panel">
+                        <div class="cb-panel-title">Grid shape</div>
+                        <div class="cb-seg-row" id="cbShapeRow">
+                            <button class="cb-seg" data-shape="0">▭ Rectangle</button>
+                            <button class="cb-seg" data-shape="1">◯ Circle</button>
+                            <button class="cb-seg" data-shape="2">✎ Custom</button>
+                        </div>
+                        <div class="cb-field-row" id="cbRectRow">
+                            <label>Width<input type="number" id="cbWidth" min="2" max="128"></label>
+                            <label>Height<input type="number" id="cbHeight" min="2" max="128"></label>
+                        </div>
+                        <div class="cb-field-row" id="cbDiamRow">
+                            <label>Diameter<input type="number" id="cbDiameter" min="2" max="128"></label>
+                        </div>
+                        <div id="cbPaintRow">
+                            <div class="cb-hint">Paint the playable area on the grid below.</div>
+                            <div class="cb-seg-row" id="cbShapeToolRow">
+                                <button class="cb-seg" data-tool="pan">Move</button>
+                                <button class="cb-seg" data-tool="add">＋ Add</button>
+                                <button class="cb-seg" data-tool="erase">－ Erase</button>
+                                <button class="btn" id="cbFillBtn">Fill</button>
+                                <button class="btn" id="cbClearShapeBtn">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cb-panel">
+                        <div class="cb-panel-title">Mines</div>
+                        <div class="cb-seg-row" id="cbMineModeRow">
+                            <button class="cb-seg" data-mode="0">🎲 Random</button>
+                            <button class="cb-seg" data-mode="1">💣 Place own</button>
+                        </div>
+                        <div class="cb-hint" id="cbMineHint"></div>
+                        <div class="cb-field-row" id="cbRandomRow">
+                            <label>Density %<input type="number" id="cbDensity" min="0" max="100"></label>
+                            <label>Mines<input type="number" id="cbMines" min="0"></label>
+                            <button class="btn" id="cbRerollBtn">🎲 Reroll</button>
+                        </div>
+                        <div id="cbFirstClickWrap" style="display:none">
+                            <div class="cb-hint">First click</div>
+                            <div class="cb-seg-row" id="cbFirstClickRow">
+                                <button class="cb-seg" data-fc="0">Not guaranteed</button>
+                                <button class="cb-seg" data-fc="1">First safe</button>
+                                <button class="cb-seg" data-fc="2">First 9 safe</button>
+                            </div>
+                        </div>
+                        <div class="cb-seg-row" id="cbPlaceOwnRow">
+                            <button class="cb-seg accent-purple" data-tool="mine">💣 Paint mine</button>
+                            <button class="cb-seg" data-tool="pan">Move</button>
+                            <button class="btn" id="cbClearMinesBtn">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cb-status" id="cbStatus"></div>
+
+                <div class="cb-canvas-wrap" id="cbCanvasWrap">
+                    <canvas id="cbCanvas"></canvas>
+                    <div class="cb-zoom-controls">
+                        <button class="btn" id="cbZoomOut">−</button>
+                        <button class="btn" id="cbZoomFit">Fit</button>
+                        <button class="btn" id="cbZoomIn">+</button>
+                    </div>
+                    <div class="cb-preview-hint" id="cbPreviewHint">Preview — switch to “Custom” shape or “Place own” mines to edit the grid.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom level: rename -->
+        <div id="cbRenameDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>Rename Level</h3>
+                <input type="text" id="cbRenameField" class="cb-name-input" style="width:100%;max-width:none" placeholder="Level name" maxlength="64">
+                <div class="modal-actions">
+                    <button class="btn btn-accent" id="cbRenameConfirm">OK</button>
+                    <button class="btn" id="cbRenameCancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom level: delete -->
+        <div id="cbDeleteDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>Delete Level?</h3>
+                <p class="modal-desc" id="cbDeleteText"></p>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" id="cbDeleteConfirm">Delete</button>
+                    <button class="btn" id="cbDeleteCancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom level: export code -->
+        <div id="cbExportDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>Export Level Code</h3>
+                <p class="modal-desc">Copy this code and share it. Anyone can Import it on their device.</p>
+                <textarea id="cbExportField" class="cb-code-area" readonly></textarea>
+                <div class="modal-actions">
+                    <button class="btn btn-accent" id="cbExportCopy">Copy</button>
+                    <button class="btn" id="cbExportClose">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom level: import code -->
+        <div id="cbImportDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>Import Level Code</h3>
+                <p class="modal-desc">Paste a level code you received:</p>
+                <textarea id="cbImportField" class="cb-code-area" placeholder="Paste level code…"></textarea>
+                <div class="cb-import-error" id="cbImportError"></div>
+                <div class="modal-actions">
+                    <button class="btn btn-accent" id="cbImportConfirm">Import</button>
+                    <button class="btn" id="cbImportCancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+
         <div id="wanLobby" class="screen">
             <div class="lobby-content">
                 <div class="lobby-scroll">
@@ -266,6 +459,14 @@
                     <canvas id="grid3DCanvas" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%"></canvas>
 
                     <div id="kbdPositionBadge" class="kbd-pos-badge" style="display:none;"></div>
+
+                    <!-- Inline "Generating…" pill for No-Guess boards (shown debounced
+                         by NoGuessGenService so quick boards never flash it). -->
+                    <style>@keyframes ngspin { to { transform: rotate(360deg); } }</style>
+                    <div id="noGuessGeneratingPill" style="display:none;position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:19000;align-items:center;gap:8px;padding:6px 14px;border-radius:8px;background:rgba(20,22,28,0.92);border:1px solid rgba(255,255,255,0.16);color:#fff;font-size:13px;font-weight:600;pointer-events:none;">
+                        <span style="width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;display:inline-block;animation:ngspin 0.8s linear infinite;"></span>
+                        Generating board…
+                    </div>
                     <div id="chatToastStack" class="chat-toast-stack" style="display:none;"></div>
                     <div id="inGameNoticeBanner" class="in-game-notice-banner" style="display:none;">
                         <div id="inGameNoticeMessage" class="in-game-notice-message"></div>
@@ -327,14 +528,21 @@
                         </div>
                     </div>
 
+                    <!-- Solo rated leaderboard placement (shown after a SoloLeaderboard win) -->
+                    <div id="modalLeaderboard" class="gm-leaderboard" style="display:none;"></div>
+
+                    <!-- Top-3 podium (completed community games) -->
+                    <div id="communityPodium" class="gm-podium" style="display:none;"></div>
+
                     <!-- Community game stats area -->
                     <div id="communityStatsArea" style="display:none;">
                         <table class="cs-table">
                             <thead>
                                 <tr>
                                     <th class="cs-th cs-th-name" data-sort="playerName">Name</th>
+                                    <th class="cs-th cs-th-num cs-sorted" data-sort="score">Score ▼</th>
                                     <th class="cs-th cs-th-num" data-sort="attemptCount">Attempts</th>
-                                    <th class="cs-th cs-th-num cs-sorted" data-sort="revealCount">Reveals ▼</th>
+                                    <th class="cs-th cs-th-num" data-sort="revealCount">Reveals</th>
                                     <th class="cs-th cs-th-num" data-sort="flagCount">Flags</th>
                                     <th class="cs-th cs-th-num" data-sort="timeAliveMs">Alive</th>
                                 </tr>
@@ -437,6 +645,7 @@
                         <option value="0">Normal</option>
                         <option value="2">Fog of War</option>
                         <option value="1">3D Minesweeper</option>
+                        <option value="5">No Guessing</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -458,6 +667,13 @@
                 <div class="form-group" id="visibleCellsRow" style="display:none;">
                     <label id="settingsVisibleCellsLabel">Visible Cells (1–400)</label>
                     <input type="text" id="settingsVisibleCells" inputmode="numeric" value="20">
+                </div>
+                <div class="form-group" id="noGuessModeRow" style="display:none;">
+                    <label>No-Guess Mode</label>
+                    <select id="settingsNoGuessMode">
+                        <option value="0">Deterministic</option>
+                        <option value="1">No coinflip</option>
+                    </select>
                 </div>
                 <div class="form-group" id="gameTypeRow" style="display:none;">
                     <label>Online Game Mode</label>
@@ -505,9 +721,9 @@
                 <div class="settings-tabs">
                     <button class="settings-tab active" data-tab="general">General</button>
                     <button class="settings-tab" data-tab="appearance">Appearance</button>
-                    <button class="settings-tab" data-tab="audio">Audio</button>
                     <button class="settings-tab" data-tab="controls">Controls</button>
                     <button class="settings-tab" data-tab="misc">Misc</button>
+                    <button class="settings-tab" data-tab="account">Account</button>
                 </div>
 
                 <!-- General tab -->
@@ -532,6 +748,15 @@
                             <option value="friends">Friends only</option>
                             <option value="anyone">Anyone</option>
                         </select>
+                    </div>
+                    <div class="settings-section-title">Audio</div>
+                    <div class="form-group">
+                        <label id="appFlagVolumeLabel">Flag Place Volume: 1.00</label>
+                        <input type="range" id="appFlagVolume" min="0" max="100" value="100" class="volume-slider">
+                    </div>
+                    <div class="form-group">
+                        <label id="appRevealVolumeLabel">Cell Reveal Volume: 1.00</label>
+                        <input type="range" id="appRevealVolume" min="0" max="100" value="100" class="volume-slider">
                     </div>
                 </div>
 
@@ -567,18 +792,6 @@
                     <div id="appBoardThemeGrid" class="board-theme-grid"></div>
                     <input type="hidden" id="appBoardThemeId" value="0">
                     </div>
-
-                <!-- Audio tab -->
-                <div class="settings-tab-content" id="settingsTab-audio">
-                    <div class="form-group">
-                        <label id="appFlagVolumeLabel">Flag Place Volume: 1.00</label>
-                        <input type="range" id="appFlagVolume" min="0" max="100" value="100" class="volume-slider">
-                    </div>
-                    <div class="form-group">
-                        <label id="appRevealVolumeLabel">Cell Reveal Volume: 1.00</label>
-                        <input type="range" id="appRevealVolume" min="0" max="100" value="100" class="volume-slider">
-                    </div>
-                </div>
 
                 <!-- Controls tab -->
                 <div class="settings-tab-content" id="settingsTab-controls">
@@ -653,6 +866,37 @@
                     <a href="https://vladimirjanus.github.io/privacy.html" target="_blank" rel="noopener" class="privacy-link">Privacy Policy</a>
                 </div>
 
+                <!-- Account tab -->
+                <div class="settings-tab-content" id="settingsTab-account">
+                    <div class="settings-section-title">Account</div>
+                    <p class="settings-desc-text" id="accountFriendCode">Friend code: (offline)</p>
+                    <p class="settings-desc-text" id="accountOfflineNote" style="display:none;">Connect to the server to manage your account.</p>
+                    <p class="settings-desc-text" id="accountDevicesSummary"></p>
+                    <div id="accountDevicesList"></div>
+
+                    <div class="settings-section-title">Play on another device</div>
+                    <p class="settings-desc-text">Create a one-time transfer phrase and type it into the other device's Account tab. The phrase adds ONE device and expires after 10 minutes. Anyone with the phrase can add a device, so keep it private.</p>
+                    <button id="btnCreateTransferPhrase" class="btn">Create Transfer Phrase</button>
+                    <div id="accountExportPhrase" class="account-transfer-phrase" style="display:none;"></div>
+                    <p class="settings-desc-text" id="accountExportCountdown" style="display:none;"></p>
+                    <p class="settings-desc-text account-status-error" id="accountExportStatus" style="display:none;"></p>
+                    <p class="settings-desc-text" id="accountLimitNote" style="display:none;">Device limit reached. Remove the other device below to free a slot.</p>
+
+                    <div class="settings-section-title">Use an account from another device</div>
+                    <p class="settings-desc-text">Enter the transfer phrase shown on your other device. This device will switch to that account; its current account is left behind.</p>
+                    <div class="server-addr-row">
+                        <input type="text" id="accountImportPhrase" placeholder="word-word-word-…" class="server-input">
+                        <button id="btnImportPhrase" class="btn">Link</button>
+                    </div>
+                    <p class="settings-desc-text" id="accountImportStatus" style="display:none;"></p>
+
+                    <div id="accountRevokeSection" style="display:none;">
+                        <div class="settings-section-title">Remove other device</div>
+                        <p class="settings-desc-text">Signs the other device out of this account. It will get a fresh account the next time it connects. Any unused transfer phrase is also invalidated.</p>
+                        <button id="btnRevokeDevice" class="btn">Remove Other Device</button>
+                        <p class="settings-desc-text" id="accountRevokeStatus" style="display:none;"></p>
+                    </div>
+                </div>
 
                 <div class="modal-actions">
                     <button class="btn btn-accent" onclick="app.handleAppSettingsConfirm()">Save</button>
@@ -683,6 +927,13 @@
                 <div class="form-group" id="gmCustomVCRow" style="display:none">
                     <label id="gmCustomVCLabel">Visible Cells (1–100)</label>
                     <input type="text" id="gmCustomVC" inputmode="numeric" value="15">
+                </div>
+                <div class="form-group" id="gmCustomNoGuessModeRow" style="display:none">
+                    <label>No-Guess Mode</label>
+                    <select id="gmCustomNoGuessMode">
+                        <option value="0">Deterministic</option>
+                        <option value="1">No coinflip</option>
+                    </select>
                 </div>
                 <div class="modal-actions">
                     <button class="btn btn-accent" id="gmCustomApplyBtn">Apply</button>
@@ -801,17 +1052,6 @@
         </div>
 
         
-        <div id="leaderboardNotifDialog" class="modal-backdrop">
-            <div class="modal lb-notif-modal">
-                <div id="lbNotifHeader" class="lb-notif-header">🎉 Leaderboard!</div>
-                <div id="lbNotifBody" class="lb-notif-body"></div>
-                <div class="modal-actions">
-                    <button class="btn btn-accent" onclick="app._hideModal('leaderboardNotifDialog')">OK</button>
-                </div>
-            </div>
-        </div>
-
-        
         <div id="notConnectedDialog" class="modal-backdrop">
             <div class="modal">
                 <h3>⚠️ Not Connected</h3>
@@ -911,11 +1151,17 @@
         <div id="playerStatsDialog" class="modal-backdrop">
             <div class="modal player-stats-modal">
                 <div class="player-stats-head">
+                    <div class="player-stats-avatar" id="playerStatsAvatar">P</div>
                     <div class="player-stats-title-block">
                         <h3 id="playerStatsName">Player</h3>
                         <div id="playerStatsSubtitle" class="player-stats-subtitle"></div>
                     </div>
                     <button class="social-profile-exit" id="btnPlayerStatsClose" title="Close">X</button>
+                </div>
+                <div class="player-stats-tabs" id="playerStatsTabs">
+                    <button class="player-stats-tab active" data-tab="0">📊 Statistics</button>
+                    <button class="player-stats-tab" data-tab="1">🏅 Ranked</button>
+                    <button class="player-stats-tab" data-tab="2">🏆 Achievements</button>
                 </div>
                 <div id="playerStatsLoading" class="player-stats-loading">Loading…</div>
                 <div id="playerStatsBody" class="player-stats-body" style="display:none"></div>
@@ -976,7 +1222,7 @@
                     <div class="screen-header-row">
                         <button id="btnStatsBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
                         <h2>📊 Statistics</h2>
-                        <div class="screen-header-spacer"></div>
+                        <button id="btnAchievements" class="screen-back-btn stats-trophy-btn" aria-label="Achievements" title="Achievements">🏆</button>
                     </div>
                 </div>
                 <div class="stats-tab-bar" id="statsTabBar">
@@ -987,6 +1233,7 @@
                     <button class="stats-tab" data-mode="coopHard">Co-Op Hard</button>
                     <button class="stats-tab" data-mode="coopSoft">Co-Op Soft</button>
                     <button class="stats-tab" data-mode="pvpDuel">PVP Duel</button>
+                    <button class="stats-tab" data-mode="rankedDuel">Ranked Duel</button>
                     <button class="stats-tab" data-mode="community">Community</button>
                     <button class="stats-tab" data-mode="pvpTeams">PVP Teams</button>
                     <button class="stats-tab" data-mode="pvpConquest">PVP Conquest</button>
@@ -999,6 +1246,7 @@
                     <button class="stats-variant-tab" data-variant="Cuboid">3D Minesweeper</button>
                     <button class="stats-variant-tab" data-variant="FOW">Fog of War</button>
                     <button class="stats-variant-tab" data-variant="infinite">Infinite</button>
+                    <button class="stats-variant-tab" data-variant="NoGuess">No Guessing</button>
                 </div>
                 <div class="stats-scroll" id="statsScroll">
                     <div class="stats-mode-title" id="statsModeTitle">Total</div>
@@ -1052,6 +1300,23 @@
                 <div class="modal-actions">
                     <button class="btn btn-danger" id="btnResetSettingsConfirm">Yes</button>
                     <button class="btn" onclick="app._hideModal('resetSettingsConfirmDialog')">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active session take-over box: shown while the account is in use on
+             another device. Take over (kick the other device), exit (stay
+             offline), or leave the account entirely on this device. -->
+        <div id="sessionTakeoverDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>📱 Account in use elsewhere</h3>
+                <p class="modal-desc">Your account is currently being used on another device. You can take over the session here — this will disconnect the other device.</p>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="sessionTakeoverConfirm">Take over session</button>
+                    <button class="btn" id="sessionTakeoverExit">Exit</button>
+                </div>
+                <div class="session-takeover-leave">
+                    <button class="btn btn-link btn-compact" id="sessionTakeoverLeave">Leave this account on this device</button>
                 </div>
             </div>
         </div>
