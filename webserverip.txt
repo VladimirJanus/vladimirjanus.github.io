@@ -1,1 +1,1 @@
-wss://5949-146-212-164-206.ngrok-free.app
+tcp://5.tcp.eu.ngrok.io:22720
