@@ -576,6 +576,8 @@ input[type="checkbox"] {
 
 /* Custom level cards: keep them compact — flow the icon buttons in a row */
 .custom-level-card .level-card-body { flex-wrap:nowrap; align-items:center; }
+/* Compact shape-silhouette thumbnail (overrides the 150px preset preview). */
+.custom-level-card .custom-level-thumb { width:54px; height:54px; }
 .custom-level-card .level-actions {
     flex-direction:row;
     flex-wrap:wrap;
@@ -2837,17 +2839,23 @@ input[type="checkbox"] {
     display:flex;
     align-items:center;
     gap:4px;
-    flex-wrap:wrap;
+    /* Scroll the chip strip horizontally rather than wrapping/clipping, so a
+       long variant list never hides its last chips. No visible scrollbar — it
+       reads as a swipe/drag chip strip, matching the Qt Flickable. */
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    scrollbar-width:none;
     padding:0 12px 10px;
-    overflow-x:visible;
     flex-shrink:0;
 }
+.stats-variant-bar::-webkit-scrollbar { display:none; }
 
 .stats-variant-label {
     font-size:12px;
     color:var(--text-secondary);
     margin-right:4px;
     white-space:nowrap;
+    flex:0 0 auto;
 }
 
 .stats-variant-tab {
@@ -2859,6 +2867,7 @@ input[type="checkbox"] {
     cursor:pointer;
     font-size:11px;
     white-space:nowrap;
+    flex:0 0 auto;
     transition:filter .12s;
 }
 
