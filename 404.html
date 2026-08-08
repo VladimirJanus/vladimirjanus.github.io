@@ -71,8 +71,8 @@
         <p class="message" id="message">Opening Minesweeper Online...</p>
         <div class="actions join-only">
             <button class="primary" id="openAppButton" type="button">Open Minesweeper Online</button>
-            <a class="android" href="https://play.google.com/store/apps/details?id=com.vladjsoftware.minesweeperonline">Get the Android app</a>
-            <a class="desktop" href="https://vladimirjanus.github.io/ClientQtBuilds/Windows/MinesweeperOnline-11.5.0-Windows-Setup.exe">Download Windows installer</a>
+            <a class="android" id="androidLink" href="https://play.google.com/store/apps/details?id=com.vladjsoftware.minesweeperonline">Get the Android app</a>
+            <a class="desktop" id="desktopLink" href="https://vladimirjanus.github.io/ClientQtBuilds/Windows/MinesweeperOnline-11.5.0-Windows-Setup.exe">Download Windows installer</a>
             <a class="web" id="webClientLink" href="https://vladimirjanus.github.io/ClientWeb/index.html">Open the web client</a>
         </div>
         <a class="home" href="https://vladimirjanus.github.io/">Go home</a>
@@ -80,18 +80,73 @@
     </main>
 
     <script>
-        const playStoreUrl = "https://play.google.com/store/apps/details?id=com.vladjsoftware.minesweeperonline";
-        const origin = "https://vladimirjanus.github.io";
+        // ---------------------------------------------------------------
+        // Site-wide deep-link router.
+        //
+        // GitHub Pages serves THIS file for every path that is not a real
+        // file, including invite URLs like /command/join/12345. It is the
+        // only 404 handler the site has: nested 404.html files are not
+        // relied upon. Keep it at the repository root forever.
+        //
+        // To add a project, append one entry to PROJECTS. Patterns are
+        // anchored, so entry order does not matter.
+        // ---------------------------------------------------------------
 
-        function parseGameId() {
-            const pathMatch = window.location.pathname.match(/\/command\/join\/(\d+)\/?$/i);
-            if (pathMatch) return pathMatch[1];
+        const ORIGIN = "https://vladimirjanus.github.io";
+
+        const PROJECTS = [
+            {
+                // Minesweeper Online 12.0+
+                id: "minesweeper",
+                label: "Minesweeper Online Invite",
+                appName: "Minesweeper Online",
+                joinPattern: /^\/MinesweeperOnline\/command\/join\/(\d+)\/?$/i,
+                scheme: "minesweeperonline",
+                androidPackage: "com.vladjsoftware.minesweeperonline",
+                playStoreUrl: "https://play.google.com/store/apps/details?id=com.vladjsoftware.minesweeperonline",
+                webClientUrl: ORIGIN + "/MinesweeperOnline/webclient/index.html",
+                windowsUrl: ORIGIN + "/MinesweeperOnline/builds/windows/MinesweeperOnline-Windows-Setup.exe"
+            },
+            {
+                // Minesweeper Online 11.5 and below.
+                // MIGRATION-12.0: keep this entry forever — invite links
+                // already shared in chats point here — but retarget
+                // webClientUrl/windowsUrl once ClientWeb and ClientQtBuilds
+                // are deleted.
+                id: "minesweeper-legacy",
+                label: "Minesweeper Online Invite",
+                appName: "Minesweeper Online",
+                joinPattern: /^\/command\/join\/(\d+)\/?$/i,
+                scheme: "minesweeperonline",
+                androidPackage: "com.vladjsoftware.minesweeperonline",
+                playStoreUrl: "https://play.google.com/store/apps/details?id=com.vladjsoftware.minesweeperonline",
+                webClientUrl: ORIGIN + "/ClientWeb/index.html",
+                windowsUrl: ORIGIN + "/ClientQtBuilds/Windows/MinesweeperOnline-11.5.0-Windows-Setup.exe"
+            }
+        ];
+
+        // Used when an invite arrives as ?game=<id> with no project in the path.
+        // MIGRATION-12.0: switch to "minesweeper".
+        const DEFAULT_PROJECT_ID = "minesweeper-legacy";
+
+        function resolveInvite() {
+            const path = window.location.pathname;
+            for (const project of PROJECTS) {
+                const match = path.match(project.joinPattern);
+                if (match) return { project: project, gameId: match[1] };
+            }
+
             const params = new URLSearchParams(window.location.search);
             const fromQuery = params.get("game") || params.get("gameId") || params.get("id") || "";
-            return /^\d+$/.test(fromQuery) ? fromQuery : "";
+            if (/^\d+$/.test(fromQuery)) {
+                const fallback = PROJECTS.find(function (p) { return p.id === DEFAULT_PROJECT_ID; });
+                if (fallback) return { project: fallback, gameId: fromQuery };
+            }
+
+            return null;
         }
 
-        const gameId = parseGameId();
+        const invite = resolveInvite();
         const card = document.getElementById("card");
         const eyebrow = document.getElementById("eyebrow");
         const title = document.getElementById("title");
@@ -100,15 +155,18 @@
         const fallbackText = document.getElementById("fallbackText");
         const openAppButton = document.getElementById("openAppButton");
         const webClientLink = document.getElementById("webClientLink");
+        const desktopLink = document.getElementById("desktopLink");
+        const androidLink = document.getElementById("androidLink");
 
-        function customSchemeUrl() {
-            return "minesweeperonline://join/" + encodeURIComponent(gameId);
+        function customSchemeUrl(project, gameId) {
+            return project.scheme + "://join/" + encodeURIComponent(gameId);
         }
 
-        function androidIntentUrl() {
+        function androidIntentUrl(project, gameId) {
             return "intent://join/" + encodeURIComponent(gameId)
-                + "#Intent;scheme=minesweeperonline;package=com.vladjsoftware.minesweeperonline;S.browser_fallback_url="
-                + encodeURIComponent(playStoreUrl) + ";end";
+                + "#Intent;scheme=" + project.scheme
+                + ";package=" + project.androidPackage
+                + ";S.browser_fallback_url=" + encodeURIComponent(project.playStoreUrl) + ";end";
         }
 
         function isAndroid() { return /Android/i.test(navigator.userAgent); }
@@ -120,23 +178,34 @@
         }
 
         function openApp() {
-            if (!gameId) return;
+            if (!invite) return;
             message.textContent = "Trying to open the app for this invite...";
-            window.location.href = isAndroid() ? androidIntentUrl() : customSchemeUrl();
+            window.location.href = isAndroid()
+                ? androidIntentUrl(invite.project, invite.gameId)
+                : customSchemeUrl(invite.project, invite.gameId);
             showFallbackSoon();
         }
 
-        if (!gameId) {
+        if (!invite) {
             card.classList.add("not-found");
             eyebrow.textContent = "404";
             title.textContent = "Page not found";
             message.textContent = "That page does not exist.";
         } else {
-            document.title = "Join game " + gameId + " - Minesweeper Online";
+            const project = invite.project;
+            const gameId = invite.gameId;
+
+            document.title = "Join game " + gameId + " - " + project.appName;
+            eyebrow.textContent = project.label;
             title.textContent = "Join game " + gameId;
             gameIdText.textContent = "Game ID: " + gameId;
-            message.textContent = "Use this invite to open Minesweeper Online and join the lobby.";
-            webClientLink.href = origin + "/ClientWeb/index.html?join=" + encodeURIComponent(gameId);
+            message.textContent = "Use this invite to open " + project.appName + " and join the lobby.";
+
+            openAppButton.textContent = "Open " + project.appName;
+            androidLink.href = project.playStoreUrl;
+            desktopLink.href = project.windowsUrl;
+            webClientLink.href = project.webClientUrl + "?join=" + encodeURIComponent(gameId);
+
             openAppButton.addEventListener("click", openApp);
             window.setTimeout(openApp, 450);
         }
