@@ -350,6 +350,63 @@ h2 {
     width: 100%;
 }
 
+/* ── Footer ──
+   Every page ends on the same VladJ Software line, so the studio name and the
+   contact address are one click away from anywhere on the site. */
+.site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    width: min(1120px, 100%);
+    margin: 4px auto 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    color: var(--subtle);
+    font-size: 0.88rem;
+}
+
+.site-footer a {
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 160ms ease, border-color 160ms ease;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+    color: var(--text);
+    border-bottom-color: var(--border-strong);
+    outline: none;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+}
+
+/* ── Contact ── */
+.contact-panel {
+    grid-template-columns: 1fr;
+}
+
+.contact-actions {
+    grid-template-columns: 1fr;
+    max-width: 560px;
+}
+
+.contact-note {
+    margin: 22px 0 0;
+    color: var(--subtle);
+    font-size: 0.92rem;
+}
+
+.mark-cyan {
+    background: linear-gradient(135deg, var(--cyan), var(--blue));
+}
+
 .join-page {
     justify-content: center;
 }
