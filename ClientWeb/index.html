@@ -13,47 +13,61 @@
         
         <div id="mainMenu" class="screen active">
             <header class="main-menu-header">
-                <h1>Minesweeper Online</h1>
+                <h1 class="main-menu-title">
+                    <span class="app-icon main-menu-logo" aria-hidden="true"
+                          style="--app-icon-src:url('../../../res/icons/menu/logo.svg');--app-icon-size:32px"></span>
+                    <span data-i18n>Minesweeper Online</span>
+                </h1>
             </header>
 
+            <!-- The menu-action icons are the same SVGs the Qt client uses; the
+                 chip tints them with the button's own --menu-accent. -->
             <div class="menu-content">
                 <section class="menu-section">
-                    <div class="menu-section-title">Singleplayer</div>
+                    <div class="menu-section-title" data-i18n>Singleplayer</div>
                     <button id="btnSoloPlay" class="btn menu-action menu-action-solo">
-                        <span>Solo Play</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/solo.svg');--app-icon-size:20px"></span></span>
+                        <span class="menu-action-title" data-i18n>Solo Play</span><span class="menu-arrow">&gt;</span>
                     </button>
                 </section>
 
                 <section class="menu-section">
-                    <div class="menu-section-title">Online Multiplayer</div>
+                    <div class="menu-section-title" data-i18n>Online Multiplayer</div>
                     <button id="btnCreateLobby" class="btn menu-action menu-action-online">
-                        <span>Create Online Lobby</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/create_lobby.svg');--app-icon-size:20px"></span></span>
+                        <span class="menu-action-title" data-i18n>Create Online Lobby</span><span class="menu-arrow">&gt;</span>
                     </button>
                     <button id="btnBrowseLobbies" class="btn menu-action menu-action-browser">
-                        <span>Game Browser</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/game_browser.svg');--app-icon-size:20px"></span></span>
+                        <span class="menu-action-title" data-i18n>Game Browser</span><span class="menu-arrow">&gt;</span>
                     </button>
                     <button id="btnRankedDuel" class="btn menu-action menu-action-ranked">
-                        <span>Ranked Duel</span><span id="rankedMenuPlayingCount" class="menu-action-count">playing: 0</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/ranked_duel.svg');--app-icon-size:20px"></span></span>
+                        <span class="menu-action-title" data-i18n>Ranked Duel</span><span id="rankedMenuPlayingCount" class="menu-action-count">playing: 0</span><span class="menu-arrow">&gt;</span>
                     </button>
                     <button id="btnFriends" class="btn menu-action menu-action-friends">
-                        <span>Friends</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/friends.svg');--app-icon-size:20px"></span></span>
+                        <span class="menu-action-title" data-i18n>Friends</span><span class="menu-arrow">&gt;</span>
                     </button>
                 </section>
 
                 <section class="menu-section">
-                    <div class="menu-section-title">Records</div>
+                    <div class="menu-section-title" data-i18n>Records</div>
                     <button id="btnLeaderboards" class="btn menu-action menu-action-records">
-                        <span>Leaderboards</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/leaderboards.svg');--app-icon-size:20px"></span></span>
+                        <span class="menu-action-title" data-i18n>Leaderboards</span><span class="menu-arrow">&gt;</span>
                     </button>
                     <button id="btnStats" class="btn menu-action menu-action-stats">
-                        <span>Statistics</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/statistics.svg');--app-icon-size:20px"></span></span>
+                        <span class="menu-action-title" data-i18n>Statistics</span><span class="menu-arrow">&gt;</span>
                     </button>
                 </section>
 
                 <section class="menu-section">
-                    <div class="menu-section-title">App</div>
+                    <div class="menu-section-title" data-i18n>App</div>
                     <button id="btnAppSettings" class="btn menu-action menu-action-app">
-                        <span>App Settings</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/settings.svg');--app-icon-size:20px"></span></span>
+                        <span class="menu-action-title" data-i18n>App Settings</span><span class="menu-arrow">&gt;</span>
                     </button>
                 </section>
             </div>
@@ -80,8 +94,8 @@
                         <div class="level-card-body" id="continueCardBody">
                             <div class="level-preview-container" id="continuePreview"></div>
                             <div class="level-info">
-                                <div class="level-name continue-title">Continue Last Game</div>
-                                <div class="level-detail" id="continueLevelName">Custom level</div>
+                                <div class="level-name continue-title" data-i18n>Continue Last Game</div>
+                                <div class="level-detail" id="continueLevelName" data-i18n>Custom level</div>
                                 <div class="level-detail" id="continueSize">20 × 20</div>
                                 <div class="level-detail" id="continueDensity">Density: 20% (80 mines)</div>
                                 <div class="level-detail" id="continueTime">Time: 00:00:00</div>
@@ -97,7 +111,7 @@
                         <div class="level-card-body">
                             <div class="level-preview-container" id="customPreview"></div>
                             <div class="level-info">
-                                <div class="level-name">Custom</div>
+                                <div class="level-name" data-i18n>Custom</div>
                                 <div class="level-detail" id="soloCustomSize">20 × 20</div>
                                 <div class="level-detail" id="soloCustomDensity">Density: 20%</div>
                                 <div class="level-detail" id="soloCustomMines">Mines: 80</div>
@@ -105,7 +119,7 @@
                             <div class="level-actions">
                                 <button class="btn btn-icon" id="btnSoloStart">▶</button>
                                 <button class="btn btn-icon" id="btnSoloSettings">Settings</button>
-                                <button class="btn btn-icon" id="btnCustomContinue" style="display:none">Continue</button>
+                                <button class="btn btn-icon" id="btnCustomContinue" style="display:none" data-i18n>Continue</button>
                             </div>
                         </div>
                     </div>
@@ -195,13 +209,13 @@
                     <h2 class="solo-title">🛠️ Level Builder</h2>
                     <div class="cb-spacer"></div>
                     <input type="text" id="cbNameField" class="cb-name-input" placeholder="Name (Draft if empty)" maxlength="64">
-                    <button class="btn btn-accent" id="cbSaveBtn">Save</button>
+                    <button class="btn btn-accent" id="cbSaveBtn" data-i18n>Save</button>
                     <button class="btn btn-accent" id="cbPlayBtn">▶ Play</button>
                 </div>
 
                 <div class="cb-panels">
                     <div class="cb-panel">
-                        <div class="cb-panel-title">Grid shape</div>
+                        <div class="cb-panel-title" data-i18n>Grid shape</div>
                         <div class="cb-seg-row" id="cbShapeRow">
                             <button class="cb-seg" data-shape="0">▭ Rectangle</button>
                             <button class="cb-seg" data-shape="1">◯ Circle</button>
@@ -215,41 +229,41 @@
                             <label>Diameter<input type="number" id="cbDiameter" min="2" max="128"></label>
                         </div>
                         <div id="cbPaintRow">
-                            <div class="cb-hint">Paint the playable area on the grid below.</div>
+                            <div class="cb-hint" data-i18n>Paint the playable area on the grid below.</div>
                             <div class="cb-seg-row" id="cbShapeToolRow">
-                                <button class="cb-seg" data-tool="pan">Move</button>
+                                <button class="cb-seg" data-tool="pan" data-i18n>Move</button>
                                 <button class="cb-seg" data-tool="add">＋ Add</button>
                                 <button class="cb-seg" data-tool="erase">－ Erase</button>
-                                <button class="btn" id="cbFillBtn">Fill</button>
-                                <button class="btn" id="cbClearShapeBtn">Clear</button>
+                                <button class="btn" id="cbFillBtn" data-i18n>Fill</button>
+                                <button class="btn" id="cbClearShapeBtn" data-i18n>Clear</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="cb-panel">
-                        <div class="cb-panel-title">Mines</div>
+                        <div class="cb-panel-title" data-i18n>Mines</div>
                         <div class="cb-seg-row" id="cbMineModeRow">
-                            <button class="cb-seg" data-mode="0">🎲 Random</button>
-                            <button class="cb-seg" data-mode="1">💣 Place own</button>
+                            <button class="cb-seg" data-mode="0" data-i18n>🎲 Random</button>
+                            <button class="cb-seg" data-mode="1" data-i18n>💣 Place own</button>
                         </div>
                         <div class="cb-hint" id="cbMineHint"></div>
                         <div class="cb-field-row" id="cbRandomRow">
                             <label>Density %<input type="number" id="cbDensity" min="0" max="100"></label>
                             <label>Mines<input type="number" id="cbMines" min="0"></label>
-                            <button class="btn" id="cbRerollBtn">🎲 Reroll</button>
+                            <button class="btn" id="cbRerollBtn" data-i18n>🎲 Reroll</button>
                         </div>
                         <div id="cbFirstClickWrap" style="display:none">
-                            <div class="cb-hint">First click</div>
+                            <div class="cb-hint" data-i18n>First click</div>
                             <div class="cb-seg-row" id="cbFirstClickRow">
-                                <button class="cb-seg" data-fc="0">Not guaranteed</button>
-                                <button class="cb-seg" data-fc="1">First safe</button>
-                                <button class="cb-seg" data-fc="2">First 9 safe</button>
+                                <button class="cb-seg" data-fc="0" data-i18n>Not guaranteed</button>
+                                <button class="cb-seg" data-fc="1" data-i18n>First safe</button>
+                                <button class="cb-seg" data-fc="2" data-i18n>First 9 safe</button>
                             </div>
                         </div>
                         <div class="cb-seg-row" id="cbPlaceOwnRow">
-                            <button class="cb-seg accent-purple" data-tool="mine">💣 Paint mine</button>
-                            <button class="cb-seg" data-tool="pan">Move</button>
-                            <button class="btn" id="cbClearMinesBtn">Clear</button>
+                            <button class="cb-seg accent-purple" data-tool="mine" data-i18n>💣 Paint mine</button>
+                            <button class="cb-seg" data-tool="pan" data-i18n>Move</button>
+                            <button class="btn" id="cbClearMinesBtn" data-i18n>Clear</button>
                         </div>
                     </div>
                 </div>
@@ -260,10 +274,10 @@
                     <canvas id="cbCanvas"></canvas>
                     <div class="cb-zoom-controls">
                         <button class="btn" id="cbZoomOut">−</button>
-                        <button class="btn" id="cbZoomFit">Fit</button>
+                        <button class="btn" id="cbZoomFit" data-i18n>Fit</button>
                         <button class="btn" id="cbZoomIn">+</button>
                     </div>
-                    <div class="cb-preview-hint" id="cbPreviewHint">Preview — switch to “Custom” shape or “Place own” mines to edit the grid.</div>
+                    <div class="cb-preview-hint" id="cbPreviewHint" data-i18n>Preview — switch to “Custom” shape or “Place own” mines to edit the grid.</div>
                 </div>
             </div>
         </div>
@@ -271,11 +285,11 @@
         <!-- Custom level: rename -->
         <div id="cbRenameDialog" class="modal-backdrop">
             <div class="modal">
-                <h3>Rename Level</h3>
+                <h3 data-i18n>Rename Level</h3>
                 <input type="text" id="cbRenameField" class="cb-name-input" style="width:100%;max-width:none" placeholder="Level name" maxlength="64">
                 <div class="modal-actions">
-                    <button class="btn btn-accent" id="cbRenameConfirm">OK</button>
-                    <button class="btn" id="cbRenameCancel">Cancel</button>
+                    <button class="btn btn-accent" id="cbRenameConfirm" data-i18n>OK</button>
+                    <button class="btn" id="cbRenameCancel" data-i18n>Cancel</button>
                 </div>
             </div>
         </div>
@@ -283,11 +297,36 @@
         <!-- Custom level: delete -->
         <div id="cbDeleteDialog" class="modal-backdrop">
             <div class="modal">
-                <h3>Delete Level?</h3>
+                <h3 data-i18n>Delete Level?</h3>
                 <p class="modal-desc" id="cbDeleteText"></p>
                 <div class="modal-actions">
-                    <button class="btn btn-danger" id="cbDeleteConfirm">Delete</button>
-                    <button class="btn" id="cbDeleteCancel">Cancel</button>
+                    <button class="btn btn-danger" id="cbDeleteConfirm" data-i18n>Delete</button>
+                    <button class="btn" id="cbDeleteCancel" data-i18n>Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom level: leaving the builder with unsaved work -->
+        <div id="cbUnsavedDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3 data-i18n>Unsaved changes</h3>
+                <p class="modal-desc" id="cbUnsavedText"></p>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="cbUnsavedSave" data-i18n>Save</button>
+                    <button class="btn" id="cbUnsavedDiscard" data-i18n>Discard</button>
+                    <button class="btn" id="cbUnsavedCancel" data-i18n>Keep editing</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom level: saving an edited level clears its record -->
+        <div id="cbResetStatsDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3 data-i18n>Reset level record?</h3>
+                <p class="modal-desc" data-i18n>This level has changed, so its best time and completion will be cleared.</p>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" id="cbResetStatsConfirm" data-i18n>Save anyway</button>
+                    <button class="btn" id="cbResetStatsCancel" data-i18n>Cancel</button>
                 </div>
             </div>
         </div>
@@ -295,12 +334,12 @@
         <!-- Custom level: export code -->
         <div id="cbExportDialog" class="modal-backdrop">
             <div class="modal">
-                <h3>Export Level Code</h3>
+                <h3 data-i18n>Export Level Code</h3>
                 <p class="modal-desc">Copy this code and share it. Anyone can Import it on their device.</p>
                 <textarea id="cbExportField" class="cb-code-area" readonly></textarea>
                 <div class="modal-actions">
                     <button class="btn btn-accent" id="cbExportCopy">Copy</button>
-                    <button class="btn" id="cbExportClose">Close</button>
+                    <button class="btn" id="cbExportClose" data-i18n>Close</button>
                 </div>
             </div>
         </div>
@@ -308,13 +347,13 @@
         <!-- Custom level: import code -->
         <div id="cbImportDialog" class="modal-backdrop">
             <div class="modal">
-                <h3>Import Level Code</h3>
-                <p class="modal-desc">Paste a level code you received:</p>
+                <h3 data-i18n>Import Level Code</h3>
+                <p class="modal-desc" data-i18n>Paste a level code you received:</p>
                 <textarea id="cbImportField" class="cb-code-area" placeholder="Paste level code…"></textarea>
                 <div class="cb-import-error" id="cbImportError"></div>
                 <div class="modal-actions">
-                    <button class="btn btn-accent" id="cbImportConfirm">Import</button>
-                    <button class="btn" id="cbImportCancel">Cancel</button>
+                    <button class="btn btn-accent" id="cbImportConfirm" data-i18n>Import</button>
+                    <button class="btn" id="cbImportCancel" data-i18n>Cancel</button>
                 </div>
             </div>
         </div>
@@ -339,8 +378,8 @@
                     </div>
                     <div id="lobbyFriendsPanel" class="lobby-friends-panel" style="display:none">
                         <div class="lobby-friends-header">
-                            <span>Friends</span>
-                            <span id="lobbyFriendsStatus">Invite friends to this lobby</span>
+                            <span data-i18n>Friends</span>
+                            <span id="lobbyFriendsStatus" data-i18n>Invite friends to this lobby</span>
                         </div>
                         <div id="lobbyFriendsList" class="lobby-friends-list"></div>
                     </div>
@@ -350,22 +389,22 @@
                     <div class="menu-separator"></div>
 
                     <div class="player-list-title-row">
-                        <div id="playerListTitle" class="player-list-title">👥 Connected Players</div>
-                        <button id="btnMakeHost" class="btn btn-small btn-accent make-host-btn" style="display:none;">Make Host</button>
+                        <div id="playerListTitle" class="player-list-title" data-i18n>👥 Connected Players</div>
+                        <button id="btnMakeHost" class="btn btn-small btn-accent make-host-btn" style="display:none;" data-i18n>Make Host</button>
                     </div>
                     <div id="playerList"></div>
 
                     <div id="pendingSection" style="display:none">
                         <div class="menu-separator"></div>
-                        <div class="player-list-title pending-title">⏳ Pending Players</div>
+                        <div class="player-list-title pending-title" data-i18n>⏳ Pending Players</div>
                         <div id="pendingList"></div>
                     </div>
                 </div>
 
                 <div class="lobby-bottom-buttons">
-                    <button id="btnReturnToGame" class="btn btn-return-game" style="display:none;">🎮 Return to Game</button>
-                    <button id="btnJoinInProgress" class="btn btn-join-progress pulse-opacity" style="display:none;">🎮 Join Game in Progress</button>
-                    <button id="btnForceRestart" class="btn btn-force-restart" style="display:none;">Force restart</button>
+                    <button id="btnReturnToGame" class="btn btn-return-game" style="display:none;" data-i18n>🎮 Return to Game</button>
+                    <button id="btnJoinInProgress" class="btn btn-join-progress pulse-opacity" style="display:none;" data-i18n>🎮 Join Game in Progress</button>
+                    <button id="btnForceRestart" class="btn btn-force-restart" style="display:none;" data-i18n>Force restart</button>
                     <button id="btnLobbyStart" class="btn btn-accent" style="display:none;">🚀 Start Game</button>
                 </div>
             </div>
@@ -376,7 +415,7 @@
             <div class="social-content">
                 <div class="screen-header-row social-header-row">
                     <button id="btnFriendsBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
-                    <h2 class="solo-title social-title">Friends</h2>
+                    <h2 class="solo-title social-title" data-i18n>Friends</h2>
                     <button id="btnFriendsRefresh" class="screen-back-btn" aria-label="Refresh"><span class="hdr-icon icon-refresh"></span></button>
                 </div>
 
@@ -386,7 +425,7 @@
                             <div id="friendsOwnID" class="social-own-id">Your player ID: Not connected</div>
                             <form id="friendsAddByIDForm" class="social-add-id">
                                 <input id="friendsAddByIDInput" type="text" maxlength="8" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Player ID">
-                                <button id="btnFriendsAddByID" class="btn btn-small btn-accent" type="submit">Add Friend</button>
+                                <button id="btnFriendsAddByID" class="btn btn-small btn-accent" type="submit" data-i18n>Add Friend</button>
                             </form>
                         </div>
                     </div>
@@ -394,9 +433,9 @@
 
                 <div class="social-tabs">
                     <div class="social-tab-buttons">
-                        <button class="social-tab active" data-tab="friends">Friends</button>
-                        <button class="social-tab" data-tab="recent">Recent</button>
-                        <button class="social-tab" data-tab="blocked">Blocked</button>
+                        <button class="social-tab active" data-tab="friends" data-i18n>Friends</button>
+                        <button class="social-tab" data-tab="recent" data-i18n>Recent</button>
+                        <button class="social-tab" data-tab="blocked" data-i18n>Blocked</button>
                     </div>
                     <div class="social-tabs-status">
                         <div id="friendsStatus" class="social-status"></div>
@@ -484,7 +523,7 @@
                         <span id="spectatorEmoji">👁️</span>
                     </div>
                     <div id="opponentGridContainer">
-                        <div class="opponent-label">Opponent Grid</div>
+                        <div class="opponent-label" data-i18n>Opponent Grid</div>
                         <canvas id="opponentGridCanvas"></canvas>
                         <canvas id="opponentGrid3DCanvas" style="display:none;position:absolute;top:24px;left:0;width:100%;height:calc(100% - 24px)"></canvas>
                     </div>
@@ -494,13 +533,13 @@
             
             <div id="chatPanel" class="chat-panel" style="display:none;">
                 <div class="chat-header">
-                    <span class="chat-title">Chat</span>
+                    <span class="chat-title" data-i18n>Chat</span>
                     <button class="chat-close-btn" id="btnChatClose" aria-label="Close chat">&times;</button>
                 </div>
                 <div class="chat-separator"></div>
                 <div class="chat-messages" id="chatMessages"></div>
                 <div class="chat-input-row">
-                    <input type="text" id="chatInput" class="chat-input" maxlength="128" placeholder="Type a message..." autocomplete="off">
+                    <input type="text" id="chatInput" class="chat-input" data-wire-text="chat-message" placeholder="Type a message..." autocomplete="off">
                     <button class="chat-send-btn" id="btnChatSend">Send</button>
                 </div>
             </div>
@@ -509,12 +548,14 @@
             <div id="gameModal" style="display:none;">
                 <div class="game-modal-card" id="gameModalCard">
                     <button class="gm-settings-btn" id="btnModalSettings" title="Settings">⚙️</button>
+                    <button class="gm-screenshot-btn" id="btnModalScreenshot" title="Save screenshot" aria-label="Save screenshot" style="display:none;">📷</button>
                     <button class="gm-close-btn" id="btnModalClose">X</button>
-                    <h2 id="modalTitle" class="gm-title">PAUSED</h2>
+                    <h2 id="modalTitle" class="gm-title" data-i18n>PAUSED</h2>
                     <div id="modalPauseInfo" class="gm-pause-info" style="display:none;">
                         <div id="modalPauseCategory" class="gm-pause-category"></div>
                         <div id="modalPauseSpecs" class="gm-pause-specs"></div>
                     </div>
+                    <div id="modalLevelStars" class="gm-level-stars" style="display:none;"></div>
                     <div id="modalAliveCount" class="gm-alive" style="display:none;"></div>
                     <div id="modalTimeDisplay" class="gm-time" style="display:none;"></div>
                     <div id="modalInfiniteScores" class="gm-infinite-scores" style="display:none;">
@@ -539,12 +580,12 @@
                         <table class="cs-table">
                             <thead>
                                 <tr>
-                                    <th class="cs-th cs-th-name" data-sort="playerName">Name</th>
+                                    <th class="cs-th cs-th-name" data-sort="playerName" data-i18n>Name</th>
                                     <th class="cs-th cs-th-num cs-sorted" data-sort="score">Score ▼</th>
-                                    <th class="cs-th cs-th-num" data-sort="attemptCount">Attempts</th>
-                                    <th class="cs-th cs-th-num" data-sort="revealCount">Reveals</th>
-                                    <th class="cs-th cs-th-num" data-sort="flagCount">Flags</th>
-                                    <th class="cs-th cs-th-num" data-sort="timeAliveMs">Alive</th>
+                                    <th class="cs-th cs-th-num" data-sort="attemptCount" data-i18n>Attempts</th>
+                                    <th class="cs-th cs-th-num" data-sort="revealCount" data-i18n>Reveals</th>
+                                    <th class="cs-th cs-th-num" data-sort="flagCount" data-i18n>Flags</th>
+                                    <th class="cs-th cs-th-num" data-sort="timeAliveMs" data-i18n>Alive</th>
                                 </tr>
                             </thead>
                             <tbody id="communityStatsBody"></tbody>
@@ -576,16 +617,16 @@
 
                     <div class="gm-bottom-buttons">
                         <div id="modalActionRow" class="gm-action-row">
-                            <button id="btnModalPrimary" class="btn btn-accent gm-btn gm-primary-btn">Resume</button>
-                            <button id="btnModalNext" class="btn gm-next-btn">Next</button>
+                            <button id="btnModalPrimary" class="btn btn-accent gm-btn gm-primary-btn" data-i18n>Resume</button>
+                            <button id="btnModalNext" class="btn btn-accent gm-next-btn" data-i18n>Next</button>
                         </div>
-                        <button id="btnModalMenu" class="btn gm-btn">Main Menu</button>
+                        <button id="btnModalMenu" class="btn gm-btn" data-i18n>Main Menu</button>
                     </div>
                 </div>
             </div>
 
             
-            <button id="btnClaimVictory" class="btn-claim-victory" style="display:none;">⭐ Claim Victory</button>
+            <button id="btnClaimVictory" class="btn-claim-victory" style="display:none;" data-i18n>⭐ Claim Victory</button>
         </div>
 
         
@@ -595,38 +636,42 @@
         <div id="killedOverlay" class="killed-overlay">
             <div class="killed-overlay-content">
                 <div class="killed-overlay-icon">⚠</div>
-                <div class="killed-overlay-title">This version of the app is no longer supported.</div>
-                <div class="killed-overlay-message">Please update to the latest version to continue playing.</div>
+                <div class="killed-overlay-title" data-i18n>This version of the app is no longer supported.</div>
+                <div class="killed-overlay-message" data-i18n>Please update to the latest version to continue playing.</div>
             </div>
         </div>
 
         <div id="welcomeNameDialog" class="modal-backdrop">
             <div class="modal welcome-name-modal">
-                <h3>Welcome to Minesweeper Online</h3>
-                <p class="modal-desc">Pick the name other players will see.</p>
+                <h3 data-i18n>Welcome to Minesweeper Online</h3>
+                <p class="modal-desc" data-i18n>Pick the name other players will see.</p>
                 <div class="form-group">
                     <label>Player Name</label>
-                    <input type="text" id="welcomePlayerName" data-protocol-maxlength="player-name" placeholder="Player name" autocomplete="nickname">
+                    <input type="text" id="welcomePlayerName" data-wire-text="player-name" placeholder="Player name" autocomplete="nickname">
                     <div id="welcomeNameError" class="field-error" aria-live="polite"></div>
                 </div>
+                <div class="form-group">
+                    <label>Country (optional)</label>
+                    <button type="button" class="btn settings-select" id="welcomeCountryBtn">Global / Anonymous</button>
+                </div>
                 <div class="modal-actions">
-                    <button class="btn btn-accent" id="welcomeNameConfirm">Set Name</button>
+                    <button class="btn btn-accent" id="welcomeNameConfirm" data-i18n>Set Name</button>
                 </div>
             </div>
         </div>
 
         <div id="illegalNameDialog" class="modal-backdrop">
             <div class="modal welcome-name-modal">
-                <h3>Player Name Not Allowed</h3>
-                <p class="modal-desc">You may not use online features with this player name because it contains words that are not allowed. Please choose a different name.</p>
+                <h3 data-i18n>Player Name Not Allowed</h3>
+                <p class="modal-desc" data-i18n>You may not use online features with this player name because it contains words that are not allowed. Please choose a different name.</p>
                 <div class="form-group">
                     <label>Player Name</label>
-                    <input type="text" id="illegalNamePlayerName" data-protocol-maxlength="player-name" placeholder="Player name" autocomplete="nickname">
+                    <input type="text" id="illegalNamePlayerName" data-wire-text="player-name" placeholder="Player name" autocomplete="nickname">
                     <div id="illegalNameError" class="field-error" aria-live="polite"></div>
                 </div>
                 <div class="modal-actions">
-                    <button class="btn" id="illegalNameCancel">Not Now</button>
-                    <button class="btn btn-accent" id="illegalNameConfirm">Save Name</button>
+                    <button class="btn" id="illegalNameCancel" data-i18n>Not Now</button>
+                    <button class="btn btn-accent" id="illegalNameConfirm" data-i18n>Save Name</button>
                 </div>
             </div>
         </div>
@@ -642,10 +687,10 @@
                 <div class="form-group" id="gameVariantRow" style="display:none;">
                     <label>Online Game Variant</label>
                     <select id="settingsGameVariant">
-                        <option value="0">Normal</option>
-                        <option value="2">Fog of War</option>
-                        <option value="1">3D Minesweeper</option>
-                        <option value="5">No Guessing</option>
+                        <option value="0" data-i18n>Normal</option>
+                        <option value="2" data-i18n>Fog of War</option>
+                        <option value="1" data-i18n>3D Minesweeper</option>
+                        <option value="5" data-i18n>No Guessing</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -671,8 +716,8 @@
                 <div class="form-group" id="noGuessModeRow" style="display:none;">
                     <label>No-Guess Mode</label>
                     <select id="settingsNoGuessMode">
-                        <option value="0">Deterministic</option>
-                        <option value="1">No coinflip</option>
+                        <option value="0" data-i18n>Deterministic</option>
+                        <option value="1" data-i18n>No coinflip</option>
                     </select>
                 </div>
                 <div class="form-group" id="gameTypeRow" style="display:none;">
@@ -680,17 +725,17 @@
                     <select id="settingsGameType">
                         <option value="0">Cooperative Hardcore</option>
                         <option value="1">Cooperative Softcore</option>
-                        <option value="3">PVP Duel</option>
-                        <option value="5">PVP Teams</option>
-                        <option value="6">PVP Conquest</option>
+                        <option value="3" data-i18n>PVP Duel</option>
+                        <option value="5" data-i18n>PVP Teams</option>
+                        <option value="6" data-i18n>PVP Conquest</option>
                     </select>
                 </div>
                 <div class="form-group" id="teamCountRow" style="display:none;">
-                    <label>Teams</label>
+                    <label data-i18n>Teams</label>
                     <input type="text" id="settingsTeamCount" inputmode="numeric" value="2">
                 </div>
                 <div class="toggle-row" id="allowTeamSwitchingRow" style="display:none;">
-                    <label>Allow players to switch teams</label>
+                    <label data-i18n>Allow players to switch teams</label>
                     <input type="checkbox" id="settingsAllowTeamSwitching">
                 </div>
                 <div class="form-group" id="levelPresetRow" style="display:none;">
@@ -700,16 +745,16 @@
                     </select>
                 </div>
                 <div class="toggle-row" id="lobbyPublicRow" style="display:none;">
-                    <label>Public Lobby</label>
+                    <label data-i18n>Public Lobby</label>
                     <input type="checkbox" id="settingsLobbyPublic" checked>
                 </div>
                 <div class="toggle-row" id="autoApproveRow" style="display:none;">
-                    <label>Auto-approve pending players</label>
+                    <label data-i18n>Auto-approve pending players</label>
                     <input type="checkbox" id="settingsAutoApprove">
                 </div>
                 <div class="modal-actions">
                     <button class="btn btn-accent" onclick="app.handleSettingsConfirm()">Apply</button>
-                    <button class="btn" onclick="app._hideModal('gameSettingsDialog')">Cancel</button>
+                    <button class="btn" onclick="app._hideModal('gameSettingsDialog')" data-i18n>Cancel</button>
                 </div>
             </div>
         </div>
@@ -717,36 +762,48 @@
         
         <div id="appSettingsDialog" class="modal-backdrop">
             <div class="modal">
-                <h3>Application Settings</h3>
+                <h3 data-i18n>Application Settings</h3>
                 <div class="settings-tabs">
-                    <button class="settings-tab active" data-tab="general">General</button>
-                    <button class="settings-tab" data-tab="appearance">Appearance</button>
-                    <button class="settings-tab" data-tab="controls">Controls</button>
-                    <button class="settings-tab" data-tab="misc">Misc</button>
-                    <button class="settings-tab" data-tab="account">Account</button>
+                    <button class="settings-tab active" data-tab="general"><span class="app-icon" style="--app-icon-src:url('../../../res/icons/ui/settings_general.svg');--app-icon-size:17px"></span><span data-i18n>General</span></button>
+                    <button class="settings-tab" data-tab="appearance"><span class="app-icon" style="--app-icon-src:url('../../../res/icons/ui/settings_appearance.svg');--app-icon-size:17px"></span><span data-i18n>Appearance</span></button>
+                    <button class="settings-tab" data-tab="controls"><span class="app-icon" style="--app-icon-src:url('../../../res/icons/ui/settings_controls.svg');--app-icon-size:17px"></span><span data-i18n>Controls</span></button>
+                    <button class="settings-tab" data-tab="guide"><span class="app-icon" style="--app-icon-src:url('../../../res/icons/ui/settings_guide.svg');--app-icon-size:17px"></span><span data-i18n>Guide</span></button>
+                    <button class="settings-tab" data-tab="account"><span class="app-icon" style="--app-icon-src:url('../../../res/icons/ui/settings_account.svg');--app-icon-size:17px"></span><span data-i18n>Account</span></button>
+                    <button class="settings-tab" data-tab="system"><span class="app-icon" style="--app-icon-src:url('../../../res/icons/ui/settings_system.svg');--app-icon-size:17px"></span><span data-i18n>System</span></button>
                 </div>
 
                 <!-- General tab -->
                 <div class="settings-tab-content active" id="settingsTab-general">
                     <div class="form-group">
                         <label>Player Name</label>
-                        <input type="text" id="appPlayerName" data-protocol-maxlength="player-name" placeholder="Enter username">
+                        <input type="text" id="appPlayerName" data-wire-text="player-name" data-wire-text-required="1" placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label>Country</label>
+                        <button type="button" class="btn settings-select" id="appCountryBtn">Global / Anonymous</button>
                     </div>
                     <div class="settings-section-title">Game Display</div>
                     <div class="toggle-row">
-                        <label>Show Action Decals</label>
+                        <label data-i18n>Show Action Decals</label>
                         <input type="checkbox" id="appShowDecals" checked>
                     </div>
                     <div class="toggle-row">
-                        <label>Show chat pop-up notifications</label>
+                        <label data-i18n>Show chat pop-up notifications</label>
                         <input type="checkbox" id="appChatNotifications">
+                    </div>
+                    <div class="toggle-row" id="appBackgroundDisconnectRow">
+                        <div>
+                            <label for="appBackgroundDisconnectNotification" data-i18n>Notify when disconnected in the background</label>
+                            <p class="settings-desc-text" data-i18n>Shows a browser notification if an active online session is unexpectedly lost while this page is hidden.</p>
+                        </div>
+                        <input type="checkbox" id="appBackgroundDisconnectNotification">
                     </div>
                     <div class="form-group">
                         <label>Receive game &amp; duel invites from</label>
                         <select id="appInviteSource" class="settings-select">
-                            <option value="nobody">Nobody</option>
-                            <option value="friends">Friends only</option>
-                            <option value="anyone">Anyone</option>
+                            <option value="nobody" data-i18n>Nobody</option>
+                            <option value="friends" data-i18n>Friends only</option>
+                            <option value="anyone" data-i18n>Anyone</option>
                         </select>
                     </div>
                     <div class="settings-section-title">Audio</div>
@@ -762,11 +819,11 @@
 
                 <!-- Appearance tab -->
                 <div class="settings-tab-content" id="settingsTab-appearance">
-                    <div class="settings-section-title">Application Theme</div>
+                    <div class="settings-section-title" data-i18n>Application Theme</div>
                     <div class="form-group">
                         <label>Color Theme</label>
                         <select id="appThemeMode" class="settings-select">
-                            <option value="dark">Dark</option>
+                            <option value="dark" data-i18n>Dark</option>
                             <option value="blue">Blue</option>
                             <option value="light">Light</option>
                         </select>
@@ -774,29 +831,36 @@
                     <div class="form-group">
                         <label>GUI Size</label>
                         <select id="appUiSize" class="settings-select">
-                            <option value="micro">Micro</option>
-                            <option value="small">Small</option>
-                            <option value="normal">Normal</option>
-                            <option value="big">Big</option>
+                            <option value="micro" data-i18n>Micro</option>
+                            <option value="small" data-i18n>Small</option>
+                            <option value="normal" data-i18n>Normal</option>
+                            <option value="big" data-i18n>Big</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="Language">Language</label>
+                        <!-- Options are filled from TranslationManager's shipped
+                             list so a new catalog appears here automatically. -->
+                        <select id="appLanguage" class="settings-select"></select>
                     </div>
                     <div class="form-group">
                         <label>UI Density</label>
                         <select id="appUiDensity" class="settings-select">
-                            <option value="veryCompact">Very Compact</option>
-                            <option value="compact">Compact</option>
-                            <option value="normal">Normal</option>
+                            <option value="veryCompact" data-i18n>Very Compact</option>
+                            <option value="compact" data-i18n>Compact</option>
+                            <option value="normal" data-i18n>Normal</option>
                         </select>
                     </div>
-                    <div class="settings-section-title">Board Theme</div>
+                    <div class="settings-section-title" data-i18n>Board Theme</div>
                     <div id="appBoardThemeGrid" class="board-theme-grid"></div>
                     <input type="hidden" id="appBoardThemeId" value="0">
+                    <button class="btn btn-ghost" id="btnEditCustomBoardTheme">Edit Custom Theme…</button>
                     </div>
 
                 <!-- Controls tab -->
                 <div class="settings-tab-content" id="settingsTab-controls">
                     <div class="form-group">
-                        <label>Left Click</label>
+                        <label id="appLeftClickLabel" data-i18n>Left Click</label>
                         <select id="appLeftClickBehaviour" class="settings-select">
                             <option value="0">Reveal</option>
                             <option value="1">Flag</option>
@@ -805,8 +869,8 @@
                             <option value="4">None</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Right Click</label>
+                    <div class="form-group" id="appRightClickRow">
+                        <label data-i18n>Right Click</label>
                         <select id="appRightClickBehaviour" class="settings-select">
                             <option value="0">Reveal</option>
                             <option value="1">Flag</option>
@@ -816,7 +880,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Long Press</label>
+                        <label data-i18n>Long Press</label>
                         <select id="appLongPressBehaviour" class="settings-select">
                             <option value="0">Reveal</option>
                             <option value="1">Flag</option>
@@ -825,68 +889,94 @@
                             <option value="4">None</option>
                         </select>
                     </div>
-                    <div id="appClickMappingWarning" class="settings-warning click-mapping-warning" style="display:none;">
+                    <div id="appClickMappingWarning" class="settings-warning click-mapping-warning" style="display:none;" data-i18n>
                         Since primary/seconday is not used the button wont be visible in game
                     </div>
                     <div class="toggle-row" id="appLeftClickPanRow">
-                        <label>Hold left click to pan</label>
+                        <label id="appLeftClickPanLabel">Pan with one finger or the left mouse button (three or more fingers always pan; slightly delays chording <b>preview</b>)</label>
                         <input type="checkbox" id="appLeftClickPan" checked>
                     </div>
                     <div class="toggle-row">
-                        <label>Enable chording (hold number to preview &amp; reveal neighbours)</label>
+                        <label data-i18n>Enable chording (hold a revealed number to preview and reveal its unflagged neighbours)</label>
                         <input type="checkbox" id="appChordingEnabled" checked>
                     </div>
+                    <div class="toggle-row">
+                        <label>Enable long press (hold to trigger the long-press action)</label>
+                        <input type="checkbox" id="appLongPressEnabled" checked>
+                    </div>
+                    <div class="form-group" id="appLongPressDurationRow">
+                        <label>Long press duration (ms)</label>
+                        <input type="number" id="appLongPressDuration" class="server-input"
+                               min="100" max="2000" step="50" value="300">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n>Follow Selection</label>
+                        <select id="appFollowSelection" class="settings-select">
+                            <option value="0" data-i18n>Never</option>
+                            <option value="1" data-i18n>When the board doesn't fit</option>
+                            <option value="2" data-i18n>Always</option>
+                        </select>
+                        <p class="settings-desc-text" data-i18n>Whether moving the selection with the arrow keys or D-pad brings the view with it.</p>
+                    </div>
                     <div class="form-group" style="margin-top:10px">
-                        <button class="btn" onclick="app.resetControlsToDefaults()">Reset to Defaults</button>
+                        <button class="btn" onclick="app.resetControlsToDefaults()" data-i18n>Reset to Defaults</button>
                     </div>
                 </div>
 
-                <!-- Misc tab -->
-                <div class="settings-tab-content" id="settingsTab-misc">
-                    <div class="settings-section-title">Server Connection</div>
+                <!-- Guide tab: generated from the Qt GuideSection source. -->
+                <div class="settings-tab-content" id="settingsTab-guide">
+                    <div id="appGuideContent" class="guide-content" aria-live="polite">Loading guide…</div>
+                </div>
+
+                <!-- System tab -->
+                <div class="settings-tab-content" id="settingsTab-system">
+                    <div class="settings-section-title" data-i18n>Server Connection</div>
                     <div class="form-group">
                         <label>Server Address</label>
                         <div class="server-addr-row">
                             <input type="text" id="appServerAddress" placeholder="server:port" class="server-input">
-                            <button id="refetchServerBtn" class="btn refetch-btn" title="Re-fetch server address">🔄 Re-fetch</button>
+                            <button id="refetchServerBtn" class="btn refetch-btn" title="Re-fetch server address" data-i18n>🔄 Re-fetch</button>
                         </div>
                         <div id="addressError" class="address-error" style="display:none;"></div>
                     </div>
                     <div id="connectionIndicator"></div>
 
-                    <div class="settings-section-title">Local Data</div>
+                    <div class="settings-section-title" data-i18n>Local Data</div>
 
-                    <button id="btnClearProgress" class="btn" style="margin-bottom:4px;">🗑 Delete All Solo Progress</button>
-                    <p class="settings-desc-text">Deletes saved level progress and local run data. This cannot be undone.</p>
+                    <button id="btnClearProgress" class="btn" style="margin-bottom:4px;">🗑 Delete Solo Progress On This Device</button>
+                    <p class="settings-desc-text">Deletes saved level progress and local run data on this device. Levels you have cleared are also recorded on your account, so they will reappear the next time this device syncs.</p>
 
-                    <button id="btnResetSettings" class="btn" style="margin-bottom:4px;">↺ Reset All Settings</button>
-                    <p class="settings-desc-text">Resets all app settings to their defaults. This cannot be undone.</p>
+                    <button id="btnEraseAccountProgress" class="btn" style="margin-bottom:4px;">🗑 Erase Level Progress From Account</button>
+                    <p class="settings-desc-text" id="eraseAccountProgressDesc">Removes every completed level and best time from your account, on all devices. Achievements and lifetime statistics are kept.</p>
+
+                    <button id="btnResetSettings" class="btn" style="margin-bottom:4px;" data-i18n>↺ Reset All Settings</button>
+                    <p class="settings-desc-text" data-i18n>Resets all app settings to their defaults. This cannot be undone.</p>
 
                     <div id="appVersionText" class="version-text"></div>
-                    <a href="https://vladimirjanus.github.io/privacy.html" target="_blank" rel="noopener" class="privacy-link">Privacy Policy</a>
+                    <a href="https://vladimirjanus.github.io/MinesweeperOnline/privacy.html" target="_blank" rel="noopener" class="privacy-link">Privacy Policy</a>
                 </div>
 
                 <!-- Account tab -->
                 <div class="settings-tab-content" id="settingsTab-account">
-                    <div class="settings-section-title">Account</div>
+                    <div class="settings-section-title" data-i18n>Account</div>
                     <p class="settings-desc-text" id="accountFriendCode">Friend code: (offline)</p>
-                    <p class="settings-desc-text" id="accountOfflineNote" style="display:none;">Connect to the server to manage your account.</p>
+                    <p class="settings-desc-text" id="accountOfflineNote" style="display:none;" data-i18n>Connect to the server to manage your account.</p>
                     <p class="settings-desc-text" id="accountDevicesSummary"></p>
                     <div id="accountDevicesList"></div>
 
-                    <div class="settings-section-title">Play on another device</div>
-                    <p class="settings-desc-text">Create a one-time transfer phrase and type it into the other device's Account tab. The phrase adds ONE device and expires after 10 minutes. Anyone with the phrase can add a device, so keep it private.</p>
-                    <button id="btnCreateTransferPhrase" class="btn">Create Transfer Phrase</button>
+                    <div class="settings-section-title" data-i18n>Play on another device</div>
+                    <p class="settings-desc-text" data-i18n>Create a one-time transfer phrase and type it into the other device's Account tab. The phrase adds ONE device and expires after 10 minutes. Anyone with the phrase can add a device, so keep it private.</p>
+                    <button id="btnCreateTransferPhrase" class="btn" data-i18n>Create Transfer Phrase</button>
                     <div id="accountExportPhrase" class="account-transfer-phrase" style="display:none;"></div>
                     <p class="settings-desc-text" id="accountExportCountdown" style="display:none;"></p>
                     <p class="settings-desc-text account-status-error" id="accountExportStatus" style="display:none;"></p>
-                    <p class="settings-desc-text" id="accountLimitNote" style="display:none;">Device limit reached. Remove the other device below to free a slot.</p>
+                    <p class="settings-desc-text" id="accountLimitNote" style="display:none;" data-i18n>Device limit reached. Remove the other device below to free a slot.</p>
 
-                    <div class="settings-section-title">Use an account from another device</div>
-                    <p class="settings-desc-text">Enter the transfer phrase shown on your other device. This device will switch to that account; its current account is left behind.</p>
+                    <div class="settings-section-title" data-i18n>Use an account from another device</div>
+                    <p class="settings-desc-text" data-i18n>Enter the transfer phrase shown on your other device. This device will switch to that account; its current account is left behind.</p>
                     <div class="server-addr-row">
                         <input type="text" id="accountImportPhrase" placeholder="word-word-word-…" class="server-input">
-                        <button id="btnImportPhrase" class="btn">Link</button>
+                        <button id="btnImportPhrase" class="btn" data-i18n>Link</button>
                     </div>
                     <p class="settings-desc-text" id="accountImportStatus" style="display:none;"></p>
 
@@ -899,8 +989,8 @@
                 </div>
 
                 <div class="modal-actions">
-                    <button class="btn btn-accent" onclick="app.handleAppSettingsConfirm()">Save</button>
-                    <button class="btn" onclick="app._hideModal('appSettingsDialog')">Cancel</button>
+                    <button class="btn btn-accent" onclick="app.handleAppSettingsConfirm()" data-i18n>Save</button>
+                    <button class="btn" onclick="app._hideModal('appSettingsDialog')" data-i18n>Cancel</button>
                 </div>
             </div>
         </div>
@@ -931,24 +1021,28 @@
                 <div class="form-group" id="gmCustomNoGuessModeRow" style="display:none">
                     <label>No-Guess Mode</label>
                     <select id="gmCustomNoGuessMode">
-                        <option value="0">Deterministic</option>
-                        <option value="1">No coinflip</option>
+                        <option value="0" data-i18n>Deterministic</option>
+                        <option value="1" data-i18n>No coinflip</option>
                     </select>
+                </div>
+                <div class="toggle-row" id="gmCustomNoGuessBigRow" style="display:none">
+                    <label data-i18n>Allow bigger boards (may take up to 30s to generate)</label>
+                    <input type="checkbox" id="gmCustomNoGuessBig">
                 </div>
                 <div class="modal-actions">
                     <button class="btn btn-accent" id="gmCustomApplyBtn">Apply</button>
-                    <button class="btn" onclick="app._hideModal('gmCustomSettingsDialog')">Cancel</button>
+                    <button class="btn" onclick="app._hideModal('gmCustomSettingsDialog')" data-i18n>Cancel</button>
                 </div>
             </div>
         </div>
 
         <div id="gmCustomOverwriteConfirmDialog" class="modal-backdrop">
             <div class="modal">
-                <h3>Delete Progress?</h3>
+                <h3 data-i18n>Delete Progress?</h3>
                 <p class="modal-desc" id="gmCustomOverwriteText"></p>
                 <div class="modal-actions">
-                    <button class="btn btn-danger" id="gmCustomOverwriteConfirmBtn">OK</button>
-                    <button class="btn" id="gmCustomOverwriteCancelBtn">Cancel</button>
+                    <button class="btn btn-danger" id="gmCustomOverwriteConfirmBtn" data-i18n>OK</button>
+                    <button class="btn" id="gmCustomOverwriteCancelBtn" data-i18n>Cancel</button>
                 </div>
             </div>
         </div>
@@ -964,23 +1058,23 @@
                     </div>
                     <div class="gb-join-row">
                         <input type="text" id="browserJoinGameID" class="gb-join-input" inputmode="numeric" maxlength="6" placeholder="Game ID">
-                        <button id="btnBrowserJoinByID" class="btn btn-accent gb-join-btn">Join</button>
+                        <button id="btnBrowserJoinByID" class="btn btn-accent gb-join-btn" data-i18n>Join</button>
                     </div>
                 </div>
                 <div class="gb-filters-area">
                     <div class="lb-tabs-scroll">
                         <div class="lb-tabs" id="gbCategoryTabs">
-                            <button class="lb-tab active" id="browserTabPlayerLobbies">Player Lobbies</button>
-                            <button class="lb-tab active" id="browserTabCommunity">Community</button>
+                            <button class="lb-tab active" id="browserTabPlayerLobbies" data-i18n>Player Lobbies</button>
+                            <button class="lb-tab active" id="browserTabCommunity" data-i18n>Community</button>
                         </div>
                     </div>
                     <div class="lb-tabs-scroll" id="browserFilters">
                         <div class="lb-tabs">
-                            <button class="lb-tab" id="browserFilterCoOpSoft">Co-Op Soft</button>
-                            <button class="lb-tab" id="browserFilterCoOpHard">Co-Op Hard</button>
-                            <button class="lb-tab" id="browserFilterPVP">PVP Duel</button>
-                            <button class="lb-tab" id="browserFilterPVPTeams">PVP Teams</button>
-                            <button class="lb-tab" id="browserFilterPVPConquest">PVP Conquest</button>
+                            <button class="lb-tab" id="browserFilterCoOpSoft" data-i18n>Co-Op Soft</button>
+                            <button class="lb-tab" id="browserFilterCoOpHard" data-i18n>Co-Op Hard</button>
+                            <button class="lb-tab" id="browserFilterPVP" data-i18n>PVP Duel</button>
+                            <button class="lb-tab" id="browserFilterPVPTeams" data-i18n>PVP Teams</button>
+                            <button class="lb-tab" id="browserFilterPVPConquest" data-i18n>PVP Conquest</button>
                         </div>
                     </div>
                 </div>
@@ -988,7 +1082,7 @@
                     <div class="list-empty">No public games available</div>
                 </div>
                 <div class="pagination-row gb-pagination">
-                    <button class="btn btn-small" id="btnPublicPrev" disabled>Prev</button>
+                    <button class="btn btn-small" id="btnPublicPrev" disabled data-i18n>Prev</button>
                     <span id="publicPageInfo">Page 1</span>
                     <button class="btn btn-small" id="btnPublicNext" disabled>▶</button>
                 </div>
@@ -1001,7 +1095,7 @@
                 <div class="lb-page-header">
                     <div class="screen-header-row">
                         <button id="btnLbBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
-                        <h2 class="solo-title">Leaderboards</h2>
+                        <h2 class="solo-title" data-i18n>Leaderboards</h2>
                         <div class="screen-header-spacer"></div>
                     </div>
                 </div>
@@ -1024,7 +1118,7 @@
                 <div class="lb-selection-row lb-page-selection-row" id="lbSelectionRow">
                     <span>📊</span>
                     <span id="lbSelectionText" class="lb-selection-text"></span>
-                    <button class="btn btn-small btn-accent" id="btnLbPlayRated">Play Rated</button>
+                    <button class="btn btn-small btn-accent" id="btnLbPlayRated" data-i18n>Play Rated</button>
                     <button class="btn btn-small" id="btnLbRefresh" aria-label="Refresh"><span class="hdr-icon icon-refresh"></span></button>
                 </div>
 
@@ -1059,17 +1153,17 @@
                 <p class="modal-desc">Please connect to the server before using online features.</p>
                 <div id="notConnectedIndicator" class="connection-indicator-embed"></div>
                 <div class="modal-actions">
-                    <button class="btn" onclick="app.connection._pendingAction = null; app._hideModal('notConnectedDialog')">Close</button>
+                    <button class="btn" onclick="app.connection._pendingAction = null; app._hideModal('notConnectedDialog')" data-i18n>Close</button>
                 </div>
             </div>
         </div>
 
         <div id="serverMaintenanceDialog" class="modal-backdrop">
             <div class="modal" style="text-align:center;">
-                <h3>Server Maintenance</h3>
-                <p class="modal-desc">This feature is currently unavailable because the server is under maintenance.</p>
+                <h3 data-i18n>Server Maintenance</h3>
+                <p class="modal-desc" data-i18n>This feature is currently unavailable because the server is under maintenance.</p>
                 <div class="modal-actions">
-                    <button class="btn btn-accent" onclick="app._hideModal('serverMaintenanceDialog')">OK</button>
+                    <button class="btn btn-accent" onclick="app._hideModal('serverMaintenanceDialog')" data-i18n>OK</button>
                 </div>
             </div>
         </div>
@@ -1081,7 +1175,7 @@
                 <p class="modal-desc">Connecting to server…</p>
                 <div class="spinner"></div>
                 <div class="modal-actions">
-                    <button class="btn" onclick="app._hideModal('connectingDialog'); app.stopReconnection();">Cancel</button>
+                    <button class="btn" onclick="app._hideModal('connectingDialog'); app.stopReconnection();" data-i18n>Cancel</button>
                 </div>
             </div>
         </div>
@@ -1093,30 +1187,30 @@
                 <p class="modal-desc">Waiting for host to accept your join request…</p>
                 <div class="spinner"></div>
                 <div class="modal-actions">
-                    <button class="btn" onclick="app._hideModal('waitingApprovalDialog'); app.lobbyHandler.cancelPendingJoin();">Cancel</button>
+                    <button class="btn" onclick="app._hideModal('waitingApprovalDialog'); app.lobbyHandler.cancelPendingJoin();" data-i18n>Cancel</button>
                 </div>
             </div>
         </div>
 
         <div id="lobbyFriendsDialog" class="modal-backdrop">
             <div class="modal lobby-friends-modal">
-                <h3>Friends</h3>
-                <p class="modal-desc" id="lobbyFriendsDialogStatus">Invite friends to this lobby</p>
+                <h3 data-i18n>Friends</h3>
+                <p class="modal-desc" id="lobbyFriendsDialogStatus" data-i18n>Invite friends to this lobby</p>
                 <div id="lobbyFriendsDialogList" class="lobby-friends-list lobby-friends-dialog-list"></div>
                 <div class="modal-actions">
-                    <button class="btn" id="btnLobbyFriendsClose">Close</button>
+                    <button class="btn" id="btnLobbyFriendsClose" data-i18n>Close</button>
                 </div>
             </div>
         </div>
 
         <div id="promoteHostDialog" class="modal-backdrop">
             <div class="modal promote-host-modal">
-                <h3>Make Host</h3>
+                <h3 data-i18n>Make Host</h3>
                 <p class="modal-desc">Select a connected player.</p>
                 <div id="promoteHostList" class="promote-host-list"></div>
                 <div class="modal-actions">
-                    <button class="btn" id="btnPromoteHostCancel">Cancel</button>
-                    <button class="btn btn-accent" id="btnPromoteHostConfirm">Make Host</button>
+                    <button class="btn" id="btnPromoteHostCancel" data-i18n>Cancel</button>
+                    <button class="btn btn-accent" id="btnPromoteHostConfirm" data-i18n>Make Host</button>
                 </div>
             </div>
         </div>
@@ -1126,7 +1220,7 @@
                 <div class="social-profile-head">
                     <div id="friendProfileAvatar" class="social-profile-avatar">?</div>
                     <div class="social-profile-title-block">
-                        <h3 id="friendProfileName">Player</h3>
+                        <h3 id="friendProfileName" data-i18n>Player</h3>
                         <div id="friendProfileMeta" class="social-profile-meta">ID --</div>
                         <div id="friendProfileBadges" class="social-profile-badges"></div>
                     </div>
@@ -1134,26 +1228,40 @@
                     <button class="social-profile-icon social-profile-block" id="btnFriendProfileBlock" title="Block player">🚫</button>
                     <button class="social-profile-exit" id="btnFriendProfileHeadClose" title="Close profile">X</button>
                 </div>
-                <button class="btn" id="btnFriendProfileUpdateName" style="display:none;">Update player name</button>
+                <button class="btn" id="btnFriendProfileUpdateName" style="display:none;" data-i18n>Update player name</button>
                 <div class="social-note-editor">
-                    <label for="friendProfileNote">Local note</label>
+                    <label for="friendProfileNote" data-i18n>Local note</label>
                     <textarea id="friendProfileNote" maxlength="500" rows="3" placeholder="Only saved on this device"></textarea>
                 </div>
                 <div class="social-profile-actions">
-                    <button class="btn btn-success" id="btnFriendProfileInvite">→ Invite</button>
-                    <button class="btn btn-duel" id="btnFriendProfileDuel">⚔ Duel</button>
-                    <button class="btn" id="btnFriendProfileStats">STATS</button>
+                    <button class="btn btn-success" id="btnFriendProfileInvite" data-i18n>→ Invite</button>
+                    <button class="btn btn-duel" id="btnFriendProfileDuel" data-i18n>⚔ Duel</button>
+                    <button class="btn" id="btnFriendProfileStats" data-i18n>STATS</button>
                 </div>
             </div>
         </div>
 
         <!-- Player Stats Modal -->
+        <div id="countryPickerDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>Choose your country</h3>
+                <p class="modal-desc">Shown as a flag after your name. Global / Anonymous shows no flag.</p>
+                <div class="form-group">
+                    <input type="text" id="countryPickerSearch" placeholder="Search countries…" autocomplete="off">
+                </div>
+                <div class="country-picker-list" id="countryPickerList"></div>
+                <div class="modal-actions">
+                    <button class="btn" id="countryPickerCancel" data-i18n>Cancel</button>
+                </div>
+            </div>
+        </div>
+
         <div id="playerStatsDialog" class="modal-backdrop">
             <div class="modal player-stats-modal">
                 <div class="player-stats-head">
                     <div class="player-stats-avatar" id="playerStatsAvatar">P</div>
                     <div class="player-stats-title-block">
-                        <h3 id="playerStatsName">Player</h3>
+                        <h3 id="playerStatsName" data-i18n>Player</h3>
                         <div id="playerStatsSubtitle" class="player-stats-subtitle"></div>
                     </div>
                     <button class="social-profile-exit" id="btnPlayerStatsClose" title="Close">X</button>
@@ -1161,7 +1269,7 @@
                 <div class="player-stats-tabs" id="playerStatsTabs">
                     <button class="player-stats-tab active" data-tab="0">📊 Statistics</button>
                     <button class="player-stats-tab" data-tab="1">🏅 Ranked</button>
-                    <button class="player-stats-tab" data-tab="2">🏆 Achievements</button>
+                    <button class="player-stats-tab" data-tab="2" data-i18n>🏆 Achievements</button>
                 </div>
                 <div id="playerStatsLoading" class="player-stats-loading">Loading…</div>
                 <div id="playerStatsBody" class="player-stats-body" style="display:none"></div>
@@ -1170,12 +1278,12 @@
 
         <div id="friendDuelDialog" class="modal-backdrop">
             <div class="modal social-duel-modal">
-                <h3 id="friendDuelTitle">Ranked Duel</h3>
+                <h3 id="friendDuelTitle" data-i18n>Ranked Duel</h3>
                 <p class="modal-desc" id="friendDuelBody">Choose a category.</p>
                 <div id="friendDuelCategories" class="social-duel-categories"></div>
                 <div class="modal-actions">
-                    <button class="btn btn-accent" id="btnFriendDuelSend">Send Challenge</button>
-                    <button class="btn" id="btnFriendDuelCancel">Cancel</button>
+                    <button class="btn btn-accent" id="btnFriendDuelSend" data-i18n>Send Challenge</button>
+                    <button class="btn" id="btnFriendDuelCancel" data-i18n>Cancel</button>
                 </div>
             </div>
         </div>
@@ -1185,7 +1293,7 @@
             <div class="ranked-page-content">
                 <div class="screen-header-row ranked-header-row">
                     <button id="btnRankedClose" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
-                    <h2 class="ranked-page-title">Ranked Duel</h2>
+                    <h2 class="ranked-page-title" data-i18n>Ranked Duel</h2>
                     <button id="btnRankedRefresh" class="screen-back-btn" aria-label="Refresh"><span class="hdr-icon icon-refresh"></span></button>
                 </div>
                 <div class="ranked-scroll">
@@ -1197,17 +1305,17 @@
                             <span id="rankedQueueMeta" class="ranked-status-meta"></span>
                         </span>
                         <span id="rankedActivePlayerCount" class="ranked-active-pill">online: 0 | playing: 0</span>
-                        <button class="btn ranked-status-cancel" id="btnRankedCancel" style="display:none;">Cancel</button>
+                        <button class="btn ranked-status-cancel" id="btnRankedCancel" style="display:none;" data-i18n>Cancel</button>
                     </div>
                     <div class="ranked-page-grid">
                         <section class="ranked-page-section ranked-ladders-section">
-                            <div class="ranked-section-title"><span>Ladders</span><span id="rankedCategoryCount">0 available</span></div>
+                            <div class="ranked-section-title"><span data-i18n>Ladders</span><span id="rankedCategoryCount">0 available</span></div>
                             <div id="rankedCategoryGrid" class="ranked-category-grid"></div>
                         </section>
                         <section class="ranked-page-section ranked-history-section">
-                            <div class="ranked-section-title"><span>Recent Matches</span><span>local</span></div>
+                            <div class="ranked-section-title"><span data-i18n>Recent Matches</span><span data-i18n>local</span></div>
                             <div id="rankedHistoryList" class="ranked-history-list">
-                                <div class="ranked-history-empty">No ranked matches yet.</div>
+                                <div class="ranked-history-empty" data-i18n>No ranked matches yet.</div>
                             </div>
                         </section>
                     </div>
@@ -1222,34 +1330,37 @@
                     <div class="screen-header-row">
                         <button id="btnStatsBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
                         <h2>📊 Statistics</h2>
-                        <button id="btnAchievements" class="screen-back-btn stats-trophy-btn" aria-label="Achievements" title="Achievements">🏆</button>
+                        <div class="stats-header-actions">
+                            <button id="btnScreenshotGallery" class="screen-back-btn" aria-label="Screenshot gallery" title="Screenshot gallery">🖼️</button>
+                            <button id="btnAchievements" class="screen-back-btn stats-trophy-btn" aria-label="Achievements" title="Achievements">🏆</button>
+                        </div>
                     </div>
                 </div>
                 <div class="stats-tab-bar" id="statsTabBar">
-                    <button class="stats-tab active" data-mode="total">Total</button>
-                    <button class="stats-tab" data-mode="onlineTotal">Online Total</button>
-                    <button class="stats-tab" data-mode="solo">Solo</button>
-                    <button class="stats-tab" data-mode="soloRated">Solo Rated</button>
-                    <button class="stats-tab" data-mode="coopHard">Co-Op Hard</button>
-                    <button class="stats-tab" data-mode="coopSoft">Co-Op Soft</button>
-                    <button class="stats-tab" data-mode="pvpDuel">PVP Duel</button>
-                    <button class="stats-tab" data-mode="rankedDuel">Ranked Duel</button>
-                    <button class="stats-tab" data-mode="community">Community</button>
-                    <button class="stats-tab" data-mode="pvpTeams">PVP Teams</button>
-                    <button class="stats-tab" data-mode="pvpConquest">PVP Conquest</button>
-                    <button class="stats-tab" data-mode="rankedConquestDuel">Ranked Conquest Duel</button>
+                    <button class="stats-tab active" data-mode="total" data-i18n>Total</button>
+                    <button class="stats-tab" data-mode="onlineTotal" data-i18n>Online Total</button>
+                    <button class="stats-tab" data-mode="solo" data-i18n>Solo</button>
+                    <button class="stats-tab" data-mode="soloRated" data-i18n>Solo Rated</button>
+                    <button class="stats-tab" data-mode="coopHard" data-i18n>Co-Op Hard</button>
+                    <button class="stats-tab" data-mode="coopSoft" data-i18n>Co-Op Soft</button>
+                    <button class="stats-tab" data-mode="pvpDuel" data-i18n>PVP Duel</button>
+                    <button class="stats-tab" data-mode="rankedDuel" data-i18n>Ranked Duel</button>
+                    <button class="stats-tab" data-mode="community" data-i18n>Community</button>
+                    <button class="stats-tab" data-mode="pvpTeams" data-i18n>PVP Teams</button>
+                    <button class="stats-tab" data-mode="pvpConquest" data-i18n>PVP Conquest</button>
+                    <button class="stats-tab" data-mode="rankedConquestDuel" data-i18n>Ranked Conquest Duel</button>
                 </div>
                 <div class="stats-variant-bar" id="statsVariantBar" style="display:none;">
                     <span class="stats-variant-label">Game Variant:</span>
-                    <button class="stats-variant-tab active" data-variant="all">All</button>
-                    <button class="stats-variant-tab" data-variant="normal">Normal</button>
-                    <button class="stats-variant-tab" data-variant="Cuboid">3D Minesweeper</button>
-                    <button class="stats-variant-tab" data-variant="FOW">Fog of War</button>
-                    <button class="stats-variant-tab" data-variant="infinite">Infinite</button>
-                    <button class="stats-variant-tab" data-variant="NoGuess">No Guessing</button>
+                    <button class="stats-variant-tab active" data-variant="all" data-i18n>All</button>
+                    <button class="stats-variant-tab" data-variant="normal" data-i18n>Normal</button>
+                    <button class="stats-variant-tab" data-variant="Cuboid" data-i18n>3D Minesweeper</button>
+                    <button class="stats-variant-tab" data-variant="FOW" data-i18n>Fog of War</button>
+                    <button class="stats-variant-tab" data-variant="infinite" data-i18n>Infinite</button>
+                    <button class="stats-variant-tab" data-variant="NoGuess" data-i18n>No Guessing</button>
                 </div>
                 <div class="stats-scroll" id="statsScroll">
-                    <div class="stats-mode-title" id="statsModeTitle">Total</div>
+                    <div class="stats-mode-title" id="statsModeTitle" data-i18n>Total</div>
                     <div class="stats-cards" id="statsCards"></div>
                 </div>
 
@@ -1257,10 +1368,31 @@
         </div>
 
         
+        <div id="screenshotGalleryDialog" class="modal-backdrop">
+            <div class="modal screenshot-gallery-modal">
+                <div class="screenshot-gallery-header">
+                    <h3 data-i18n>Screenshots</h3>
+                    <button id="btnScreenshotGalleryClose" class="screen-back-btn" aria-label="Close">×</button>
+                </div>
+                <div id="screenshotGalleryGrid" class="screenshot-gallery-grid"></div>
+                <div id="screenshotPreviewPane" class="screenshot-preview-pane">
+                    <button id="btnScreenshotPreviewClose" class="screen-back-btn screenshot-preview-close" aria-label="Back">←</button>
+                    <img id="screenshotPreviewImage" alt="Minesweeper screenshot">
+                    <p id="screenshotPreviewMeta" class="settings-desc-text"></p>
+                    <div class="screenshot-preview-actions">
+                        <button id="btnScreenshotShare" class="btn" data-i18n>Share</button>
+                        <button id="btnScreenshotDownload" class="btn" data-i18n>Download</button>
+                        <button id="btnScreenshotCopy" class="btn" data-i18n>Copy</button>
+                        <button id="btnScreenshotDelete" class="btn btn-danger" data-i18n>Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="leaveConfirmDialog" class="modal-backdrop">
             <div class="modal">
                 <h3>⚠️ Leave Game</h3>
-                <p class="modal-desc">Are you sure you want to leave this game?</p>
+                <p class="modal-desc" data-i18n>Are you sure you want to leave this game?</p>
                 <div class="modal-actions">
                     <button class="btn btn-danger" onclick="app._confirmLeave()">Yes</button>
                     <button class="btn" onclick="app._hideModal('leaveConfirmDialog')">No</button>
@@ -1271,8 +1403,8 @@
 
         <div id="lobbyLeaveConfirmDialog" class="modal-backdrop">
             <div class="modal">
-                <h3>Leave Lobby</h3>
-                <p class="modal-desc">Are you sure you want to leave this game?</p>
+                <h3 data-i18n>Leave Lobby</h3>
+                <p class="modal-desc" data-i18n>Are you sure you want to leave this game?</p>
                 <div class="modal-actions">
                     <button class="btn btn-danger" onclick="app._confirmLobbyLeave()">Yes</button>
                     <button class="btn" onclick="app._hideModal('lobbyLeaveConfirmDialog')">No</button>
@@ -1283,11 +1415,22 @@
 
         <div id="clearProgressConfirmDialog" class="modal-backdrop">
             <div class="modal">
-                <h3>⚠️ Delete All Progress</h3>
-                <p class="modal-desc">Are you sure you want to delete all level progress? This cannot be undone.</p>
+                <h3>⚠️ Delete Progress On This Device</h3>
+                <p class="modal-desc">Delete this device's saved level progress and run data? Levels recorded on your account will come back the next time this device syncs — use "Erase Level Progress From Account" to remove those as well.</p>
                 <div class="modal-actions">
                     <button class="btn btn-danger" id="btnClearProgressConfirm">Yes</button>
                     <button class="btn" onclick="app._hideModal('clearProgressConfirmDialog')">No</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="eraseAccountProgressConfirmDialog" class="modal-backdrop">
+            <div class="modal">
+                <h3>⚠️ Erase Level Progress From Account</h3>
+                <p class="modal-desc">Erase every completed level and best time from your account? This also clears them on this device, and on every other device the next time it connects. Achievements and lifetime statistics are kept. Another device that still holds its own local progress will upload it again when it next connects. This cannot be undone.</p>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" id="btnEraseAccountProgressConfirm">Yes</button>
+                    <button class="btn" onclick="app._hideModal('eraseAccountProgressConfirmDialog')">No</button>
                 </div>
             </div>
         </div>
@@ -1296,10 +1439,137 @@
         <div id="resetSettingsConfirmDialog" class="modal-backdrop">
             <div class="modal">
                 <h3>⚠️ Reset All Settings</h3>
-                <p class="modal-desc">Are you sure you want to reset all settings to their defaults? This cannot be undone.</p>
+                <p class="modal-desc" data-i18n>Are you sure you want to reset all settings to their defaults? This cannot be undone.</p>
                 <div class="modal-actions">
                     <button class="btn btn-danger" id="btnResetSettingsConfirm">Yes</button>
                     <button class="btn" onclick="app._hideModal('resetSettingsConfirmDialog')">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Editor for the one board theme the user owns (BoardThemeId.Custom).
+             Edits are live: every change is pushed straight into the running
+             theme, which repaints the preview at the top of this dialog, the tile
+             in the settings grid and — if the custom theme is the selected one —
+             the board itself. Cancel puts back the spec as it was on open.
+
+             The style keys below are the contract with BoardTheme.js
+             (mineStyleGlyphs / flagStyleGlyphs / numberStyleFields); the labels
+             next to them are ours. Adding a style means adding it in both. -->
+        <div id="customBoardThemeDialog" class="modal-backdrop">
+            <div class="modal modal-tall">
+                <h3>Custom Board Theme</h3>
+                <p class="modal-desc">Changes apply as you make them</p>
+
+                <div id="ctPreviewHost" class="ct-preview-host"></div>
+
+                <div class="ct-row">
+                    <select id="ctStartFrom" class="settings-select"></select>
+                    <button class="btn btn-small" id="btnCtCopyFrom">Copy</button>
+                </div>
+                <p class="ct-hint">Copies that theme's colours and styles in as a starting point.</p>
+
+                <div class="settings-section-title">Colours</div>
+                <div class="ct-row"><label for="ctBackgroundColor">Board background</label><input type="color" id="ctBackgroundColor" data-spec-key="backgroundColor"></div>
+                <div class="ct-row"><label for="ctBorderColor">Grid lines</label><input type="color" id="ctBorderColor" data-spec-key="borderColor"></div>
+                <div class="ct-row"><label for="ctHiddenCellColor">Hidden cell</label><input type="color" id="ctHiddenCellColor" data-spec-key="hiddenCellColor"></div>
+                <div class="ct-row"><label for="ctRevealedCellColor">Revealed cell</label><input type="color" id="ctRevealedCellColor" data-spec-key="revealedCellColor"></div>
+                <div class="ct-row"><label for="ctMineCellColor">Exploded mine</label><input type="color" id="ctMineCellColor" data-spec-key="mineCellColor"></div>
+                <div class="ct-row"><label for="ctFocusRingColor">Selection ring</label><input type="color" id="ctFocusRingColor" data-spec-key="focusRingColor"></div>
+
+                <div class="settings-section-title">Cell Edges</div>
+                <div class="ct-row">
+                    <label for="ctBorderStyle">Style</label>
+                    <!-- Option order matches BorderStyle. -->
+                    <select id="ctBorderStyle" class="settings-select">
+                        <option value="0">Flat</option>
+                        <option value="1">3D bevel</option>
+                        <option value="2">None</option>
+                    </select>
+                </div>
+                <div class="ct-bevel-only">
+                    <div class="ct-row"><label for="ctBevelLightColor">Bevel highlight</label><input type="color" id="ctBevelLightColor" data-spec-key="bevelLightColor"></div>
+                    <div class="ct-row"><label for="ctBevelShadowColor">Bevel shadow</label><input type="color" id="ctBevelShadowColor" data-spec-key="bevelShadowColor"></div>
+                    <label id="ctBevelWidthLabel" for="ctBevelWidth">Bevel width</label>
+                    <input type="range" id="ctBevelWidth" min="0.05" max="0.35" step="0.01">
+                </div>
+
+                <div class="settings-section-title">Numbers</div>
+                <div class="ct-row">
+                    <label for="ctNumberStyle">Style</label>
+                    <select id="ctNumberStyle" class="settings-select">
+                        <option value="text">Text</option>
+                        <option value="digital">Digital</option>
+                    </select>
+                </div>
+                <div class="ct-row">
+                    <label for="ctNumberFont">Font</label>
+                    <!-- Digital numbers are SVG art, so the text styling below has
+                         nothing to act on. -->
+                    <select id="ctNumberFont" class="settings-select">
+                        <option value="">Default</option>
+                        <option value="Tahoma">Tahoma</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Trebuchet MS">Trebuchet MS</option>
+                        <option value="Impact">Impact</option>
+                    </select>
+                </div>
+                <div class="ct-row ct-checks">
+                    <label><input type="checkbox" id="ctNumberBold"> Bold</label>
+                    <label><input type="checkbox" id="ctNumberItalic"> Italic</label>
+                </div>
+                <label id="ctNumberSizeLabel" for="ctNumberSize">Number size</label>
+                <input type="range" id="ctNumberSize" min="0.4" max="1" step="0.01">
+
+                <label>Number colours (tap a digit to change it)</label>
+                <div id="ctNumberColors" class="ct-digits"></div>
+                <div class="ct-presets">
+                    <button class="btn btn-small" data-preset="classic">Classic</button>
+                    <button class="btn btn-small" data-preset="bright">Bright</button>
+                    <button class="btn btn-small" data-preset="neon">Neon</button>
+                    <button class="btn btn-small" data-preset="mono">Mono</button>
+                </div>
+                <div class="ct-row">
+                    <!-- Only 3D boards produce adjacency counts above 8. -->
+                    <label for="ctOverflowColor">9 and above</label>
+                    <select id="ctOverflowColor" class="settings-select">
+                        <option value="0">Black</option>
+                        <option value="1">Grey</option>
+                        <option value="2">Magenta</option>
+                    </select>
+                </div>
+
+                <div class="settings-section-title">Mines and Flags</div>
+                <div class="ct-row">
+                    <label for="ctMineStyle" data-i18n>Mines</label>
+                    <select id="ctMineStyle" class="settings-select">
+                        <option value="emoji">Bomb emoji</option>
+                        <option value="modern">Modern</option>
+                        <option value="classic">Classic</option>
+                        <option value="dot">Dot</option>
+                        <option value="skull">Skull</option>
+                        <option value="asterisk">Asterisk</option>
+                    </select>
+                </div>
+                <div class="ct-row">
+                    <label for="ctFlagStyle" data-i18n>Flags</label>
+                    <select id="ctFlagStyle" class="settings-select">
+                        <option value="emoji">Flag emoji</option>
+                        <option value="modern">Modern</option>
+                        <option value="classic">Classic</option>
+                        <option value="triangle">Triangle</option>
+                        <option value="pin">Pin</option>
+                        <option value="star">Star</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-small" id="btnCtResetDefaults" data-i18n>Reset to Defaults</button>
+
+                <div class="modal-actions">
+                    <button class="btn btn-accent" id="btnCtAccept" data-i18n>OK</button>
+                    <button class="btn" id="btnCtCancel" data-i18n>Cancel</button>
                 </div>
             </div>
         </div>
@@ -1310,13 +1580,13 @@
         <div id="sessionTakeoverDialog" class="modal-backdrop">
             <div class="modal">
                 <h3>📱 Account in use elsewhere</h3>
-                <p class="modal-desc">Your account is currently being used on another device. You can take over the session here — this will disconnect the other device.</p>
+                <p class="modal-desc" data-i18n>Your account is currently being used on another device. You can take over the session here — this will disconnect the other device.</p>
                 <div class="modal-actions">
-                    <button class="btn btn-primary" id="sessionTakeoverConfirm">Take over session</button>
-                    <button class="btn" id="sessionTakeoverExit">Exit</button>
+                    <button class="btn btn-primary" id="sessionTakeoverConfirm" data-i18n>Take over session</button>
+                    <button class="btn" id="sessionTakeoverExit" data-i18n>Exit</button>
                 </div>
                 <div class="session-takeover-leave">
-                    <button class="btn btn-link btn-compact" id="sessionTakeoverLeave">Leave this account on this device</button>
+                    <button class="btn btn-link btn-compact" id="sessionTakeoverLeave" data-i18n>Leave this account on this device</button>
                 </div>
             </div>
         </div>

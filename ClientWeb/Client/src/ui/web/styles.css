@@ -44,6 +44,9 @@
     --separator:#3A4552; --modal-border:#DCE6F0; --modal-overlay:rgba(10,14,20,0.82);
     --duel-stat-text:#D5DCE4; --duel-divider:#46515F; --duel-score-text:#D5DCE4; --duel-score-colon:#8793A1; --reason-box-bg:#181C22; --reason-box-border:#3A4552;
     --progress-bg:#1E232B; --progress-complete:#39D98A; --progress-partial:#4F8CFF;
+    /* Level stars are GOLD, not green — green is the "completed" colour and the
+       stars vanished into the completed card's green when they shared it. */
+    --star-earned:#F6C453; --star-pending:#9A874F; --star-track:#4A5361;
     --ready-active:#2ECC71; --ready-inactive:#7F8C8D;
     --avatar-bg:#2A303B; --avatar-text:#F7FAFC; --avatar-border:#46515F;
     --input-bg:#20252D; --input-border:#46515F;
@@ -66,6 +69,7 @@
     --separator:#70869A; --modal-border:#78A6C7; --modal-overlay:rgba(7,17,30,0.78);
     --duel-stat-text:#DCE8F2; --duel-divider:#7890A3; --duel-score-text:#E4EFF7; --duel-score-colon:#A7BBCC; --reason-box-bg:#263A4C; --reason-box-border:#70869A;
     --progress-bg:#2D4357; --progress-complete:#3BE39A; --progress-partial:#62A6FF; --ready-active:#3BE39A; --ready-inactive:#99AAB7;
+    --star-earned:#FFD166; --star-pending:#B39A5E; --star-track:#5D7B93;
     --avatar-bg:#3A5268; --avatar-text:#F3F8FC; --avatar-border:#7895AA;
     --input-bg:#2F455A; --input-border:#7895AA;
 }
@@ -87,6 +91,7 @@
     --separator:#B9CAD8; --modal-border:#AFC1D0; --modal-overlay:rgba(68,84,102,0.48);
     --duel-stat-text:#42566B; --duel-divider:#B6C8D7; --duel-score-text:#31465C; --duel-score-colon:#6F8397; --reason-box-bg:#E3ECF4; --reason-box-border:#B8CAD8;
     --progress-bg:#D6E4EE; --progress-complete:#199D64; --progress-partial:#347FEB; --ready-active:#199D64; --ready-inactive:#8EA0AF;
+    --star-earned:#C8890F; --star-pending:#A8945E; --star-track:#B9C7D4;
     --avatar-bg:#DDEAF4; --avatar-text:#1F2D3D; --avatar-border:#AFC2D2;
     --input-bg:#F5F9FC; --input-border:#AFC2D2;
 }
@@ -251,7 +256,7 @@ input[type="checkbox"] {
 }
 .menu-action:hover,
 .menu-action:focus-visible { background:var(--card-hover); border-color:var(--focus-ring); border-left-color:var(--menu-accent, var(--accent-blue)); }
-.menu-action > span:first-child {
+.menu-action-title {
     flex:1 1 auto;
     min-width:0;
     overflow:hidden;
@@ -547,6 +552,47 @@ input[type="checkbox"] {
 /* Inline (non-header) refresh buttons size the icon to the text line instead. */
 .btn .hdr-icon { width:1.1em; height:1.1em; vertical-align:-0.15em; }
 
+/* Tinted monochrome glyphs from res/icons/ — the web twin of AppIcon.qml. Same
+   mask trick as .hdr-icon, but the asset is a file rather than an inline data
+   URI, so the whole icon set is shared with the Qt client byte for byte.
+   See Client/src/ui/web/AppIcon.js. */
+.app-icon {
+    display:inline-block;
+    flex:0 0 auto;
+    width:var(--app-icon-size, 16px);
+    height:var(--app-icon-size, 16px);
+    background-color:currentColor;
+    -webkit-mask-image:var(--app-icon-src); mask-image:var(--app-icon-src);
+    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+    -webkit-mask-position:center; mask-position:center;
+    -webkit-mask-size:contain; mask-size:contain;
+}
+/* Turns a glyph around so one asset can serve a symmetric pair (play/previous,
+   skip-to-end/skip-to-start) — the web twin of AppIcon.qml's `rotation`. */
+.app-icon.flip-180 { transform:rotate(180deg); }
+
+/* Menu-button icon chip: a rounded accent-tinted square holding the glyph. */
+.menu-action-icon {
+    flex:0 0 auto;
+    width:34px; height:34px;
+    display:inline-flex; align-items:center; justify-content:center;
+    border-radius:var(--radius-md);
+    border:1px solid var(--menu-accent, var(--accent-blue));
+    background:color-mix(in srgb, var(--menu-accent, var(--accent-blue)) 13%, transparent);
+    color:var(--menu-accent, var(--accent-blue));
+    transition:background-color 120ms;
+}
+.menu-action:hover .menu-action-icon,
+.menu-action:focus-visible .menu-action-icon {
+    background:color-mix(in srgb, var(--menu-accent, var(--accent-blue)) 22%, transparent);
+}
+.menu-action:active .menu-action-icon {
+    background:color-mix(in srgb, var(--menu-accent, var(--accent-blue)) 28%, transparent);
+}
+
+.main-menu-title { display:flex; align-items:center; justify-content:center; gap:12px; }
+.main-menu-logo { color:var(--accent-teal); }
+
 /* Level cards */
 .level-card {
     background: var(--card-primary);
@@ -612,9 +658,92 @@ input[type="checkbox"] {
 .level-card-preset .level-card-body {
     flex-wrap:wrap;
 }
-.level-best-time { font-size:11px; font-weight:bold; }
-.level-best-none { color:var(--duel-score-colon); }
-.level-best-set  { color:var(--text-continue); }
+/* The record strip owns the "best time" treatment on level cards now; this is
+   only still used for the custom-size card's current-score line. */
+.level-best-set { color:var(--text-continue); }
+
+/* ── Star ladder + level record strip ────────────────────────────────────────
+   Twin of StarRow.qml / LevelRecordStrip.qml. The ladder is a LADDER, not a
+   score: every bar keeps its time on screen in every state, so a mastered level
+   still says what it was mastered at. State is carried by emphasis, not by
+   presence — earned = gold fill, next up = pending colour with the label in
+   bold (the live target), locked = track outline with a dimmed label. */
+.star-row {
+    display:flex; align-items:flex-start; gap:10px; line-height:1;
+}
+.star-cell {
+    display:flex; flex-direction:column; align-items:center; gap:2px;
+}
+/* The glyph is an .app-icon (res/icons/ui/star{,_outline}.svg), so the state
+   colours below tint it through currentColor. */
+.star-cell-glyph {
+    line-height:1;
+    /* transform-origin keeps the pop centred on the glyph, not the column. */
+    transform-origin:50% 50%;
+}
+.star-cell-label { font-size:9px; white-space:nowrap; }
+.star-cell.earned  .star-cell-glyph { color:var(--star-earned); }
+.star-cell.earned  .star-cell-label { color:var(--text-secondary); }
+.star-cell.pending .star-cell-glyph { color:var(--star-pending); }
+.star-cell.pending .star-cell-label { color:var(--text-primary); font-weight:bold; }
+.star-cell.locked  .star-cell-glyph { color:var(--star-track); }
+.star-cell.locked  .star-cell-label { color:var(--text-dimmed); }
+
+/* Staggered pop across the earned stars on a win. Celebrates the run, not a
+   newly-earned star — the client cannot know what the count was before it. */
+.star-cell.pop .star-cell-glyph {
+    animation:star-pop 300ms ease-out both;
+    animation-delay:var(--star-pop-delay, 0ms);
+}
+@keyframes star-pop {
+    0%   { transform:scale(0.55); }
+    57%  { transform:scale(1.2); }
+    100% { transform:scale(1); }
+}
+@media (prefers-reduced-motion:reduce) {
+    .star-cell.pop .star-cell-glyph { animation:none; }
+}
+
+/* The record for a level as one object: the time, the ladder that time is
+   scored against, and (in the modal) how the run is pacing against the next
+   bar. Shared by the solo-menu level cards and the game modal. */
+.record-strip {
+    display:flex; flex-direction:column; gap:5px;
+    margin-top:4px; padding:7px 10px;
+    background:var(--panel-bg);
+    border:1px solid var(--panel-border);
+    border-radius:8px;
+}
+.record-strip.mastered { border-color:color-mix(in srgb, var(--star-earned) 45%, transparent); }
+.record-strip.centered { align-items:center; text-align:center; }
+.record-strip-header {
+    display:flex; align-items:baseline; gap:6px;
+}
+.record-strip.centered .record-strip-header { justify-content:center; }
+.record-strip-best-label {
+    font-size:9px; font-weight:bold; color:var(--text-dimmed);
+}
+.record-strip-time { font-size:13px; font-weight:bold; color:var(--text-primary); }
+.record-strip-time.run   { font-size:20px; }
+.record-strip-time.empty { color:var(--text-dimmed); }
+/* How the run is pacing against the next bar, as one line of text. This was a
+   drainable bar and it earned its removal: it read as a progress meter
+   (full = done) when it meant the opposite. */
+.record-strip-pace { font-size:11px; }
+.record-strip-pace.met    { color:var(--text-secondary); }
+.record-strip-pace.missed { color:var(--text-muted); }
+.record-strip-note { font-size:10px; color:var(--text-muted); }
+.record-strip-scores {
+    display:grid; grid-template-columns:auto auto; gap:3px 8px; align-items:baseline;
+}
+.record-strip-score-label { font-size:11px; color:var(--text-detail); }
+.record-strip-score-value { font-size:11px; color:var(--text-detail); }
+.record-strip-score-value.high { font-weight:bold; color:var(--text-continue); }
+
+/* The modal's strip matches the leaderboard placement card below it, so the two
+   read as one stack rather than a framed panel next to loose glyphs. */
+.gm-level-stars { display:flex; justify-content:center; margin-top:6px; }
+.gm-level-stars .record-strip { width:100%; max-width:280px; }
 
 /* Progress bar */
 .progress-bar-container {
@@ -1469,20 +1598,83 @@ input[type="checkbox"] {
 .achievements-page.visible { display:block; }
 .achievements-inner {
     height:100%;
-    max-width:760px; margin:0 auto;
+    /* Cards are laid out in an auto-fill grid, so the page is allowed to use a
+       wide window — the same "how many 380px cards fit" rule the Qt page has. */
+    max-width:1600px; margin:0 auto;
     padding:clamp(14px, 3.5vw, 24px);
     display:flex; flex-direction:column;
 }
 .achievements-header { display:flex; align-items:center; gap:var(--space-2); margin-bottom:10px; }
 .achievements-title-block { flex:1; min-width:0; text-align:center; }
-.achievements-title { color:var(--text-primary); font-size:calc(24px * var(--ui-scale)); font-weight:800; }
+.achievements-title {
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    color:var(--text-primary); font-size:calc(24px * var(--ui-scale)); font-weight:800;
+}
+.ach-title-icon { color:var(--star-earned); }
 .achievements-subtitle { color:var(--text-secondary); font-size:calc(11px * var(--ui-scale)); }
+
+/* Hero: two numbers over one bar measured in stars (the finer of the two
+   scales). No panel frame — the page already has enough chrome. */
+.ach-hero { display:flex; flex-direction:column; gap:5px; margin-bottom:var(--space-3); }
+.ach-hero-row { display:flex; align-items:center; gap:8px; }
+.ach-hero-count { color:var(--text-secondary); font-size:calc(12px * var(--ui-scale)); }
+.ach-hero-stars {
+    margin-left:auto; display:flex; align-items:center; gap:5px;
+    color:var(--text-primary); font-size:calc(12px * var(--ui-scale)); font-weight:bold;
+}
+.ach-hero-star-icon { color:var(--star-earned); }
+.ach-hero-bar { height:6px; border-radius:3px; background:var(--progress-bg); overflow:hidden; }
+.ach-hero-fill {
+    height:100%; border-radius:3px; background:var(--star-earned);
+    transition:width 320ms cubic-bezier(.22,.61,.36,1);
+}
+
+/* Filters: one panel, not three stacked ones. Rows that do not apply are
+   hidden rather than left as empty boxes. */
+.ach-filters {
+    display:flex; flex-direction:column; gap:6px;
+    padding:var(--space-2);
+    background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:8px;
+    margin-bottom:var(--space-3);
+}
+.ach-filters .achievements-cats { margin-bottom:0; padding:0; background:none; border:none; }
+.ach-filter-top { display:flex; gap:6px; }
+.ach-search-wrap { position:relative; flex:1; min-width:0; }
+.ach-search-icon {
+    position:absolute; left:10px; top:50%; transform:translateY(-50%);
+    color:var(--text-dimmed); pointer-events:none;
+}
+.ach-search {
+    width:100%; height:34px;
+    padding:0 10px 0 32px;
+    border:1px solid var(--panel-border); border-radius:8px;
+    background:var(--card-primary); color:var(--text-primary);
+    font-size:calc(12px * var(--ui-scale));
+}
+.ach-search:focus { outline:none; border-color:var(--focus-ring); }
+.ach-sort { flex:0 0 auto; width:auto; min-width:140px; }
+/* Status chips share the width equally, so the four read as one control. */
+.ach-status-row { flex-wrap:nowrap; }
+.ach-status-chip { flex:1 1 0; min-width:0; }
+
 .achievements-cats {
     display:flex; flex-wrap:wrap; gap:4px;
     padding:var(--space-2);
     background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:8px;
     margin-bottom:var(--space-3);
 }
+/* Mode / variant sub-filter: same chips as the category tabs, but centred on one
+   line that scrolls horizontally once the mode list outgrows a narrow window
+   (mirrors the leaderboard's selector rows). */
+.achievements-subfilter {
+    flex-wrap:nowrap;
+    /* `safe` keeps the first chips reachable once the row overflows — plain
+       centring would push them past the left edge with no way to scroll back. */
+    justify-content:center; justify-content:safe center;
+    overflow-x:auto; overflow-y:hidden;
+    scrollbar-width:thin;
+}
+.achievements-subfilter .achievements-cat { flex:0 0 auto; }
 .achievements-cat {
     min-width:54px; height:32px; padding:0 10px;
     border:1px solid var(--panel-border); border-radius:8px;
@@ -1500,29 +1692,68 @@ input[type="checkbox"] {
     display:flex; flex-direction:column; gap:8px;
     padding-right:4px;
 }
-.achievements-empty { padding:40px; text-align:center; color:var(--text-muted); }
-.ach-card {
-    display:flex; gap:12px; padding:14px;
-    background:var(--card-primary); border:1px solid var(--panel-border);
-    border-radius:12px;
+/* Empty state: a blank void gave no clue that a filter, not the catalog, was
+   the reason nothing was on screen. */
+.achievements-empty-state {
+    flex:1; min-height:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
 }
+.ach-empty-icon { color:var(--text-dimmed); opacity:.6; }
+.ach-empty-text { color:var(--text-secondary); font-size:calc(13px * var(--ui-scale)); }
+
+/* Level group header — collapsible, the way the solo menu groups presets. */
+.ach-group-header {
+    width:100%; min-height:38px;
+    display:flex; align-items:center; gap:8px;
+    padding:0 12px;
+    background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:8px;
+    color:var(--text-primary); font-size:calc(13px * var(--ui-scale)); font-weight:bold;
+    cursor:pointer; text-align:left;
+}
+.ach-group-header:hover { background:var(--card-hover); }
+.ach-group-caret { color:var(--text-muted); transform:rotate(90deg); transition:transform 140ms; }
+.ach-group-header.collapsed .ach-group-caret { transform:rotate(0deg); }
+.ach-group-icon { color:var(--text-secondary); }
+.ach-group-label { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ach-group-count { color:var(--text-secondary); font-size:calc(11px * var(--ui-scale)); font-weight:normal; }
+.ach-group-count.complete { color:var(--win-green); }
+.ach-group-star { color:var(--star-earned); }
+
+/* One line of cards. What a card actually needs — the star ladder with its
+   threshold labels plus a pair of action buttons — sits a little under 380px,
+   so the column count is "how many of these fit" rather than a breakpoint
+   ladder. */
+.ach-card-row {
+    display:grid; gap:8px;
+    grid-template-columns:repeat(auto-fill, minmax(min(380px, 100%), 1fr));
+}
+.ach-card {
+    display:flex; gap:12px; padding:12px 12px 12px 14px;
+    background:var(--card-primary); border:1px solid var(--panel-border);
+    border-left:4px solid var(--text-dimmed);
+    border-radius:10px;
+    align-items:flex-start;
+}
+.ach-card:not(.locked) { border-left-color:var(--progress-partial); }
 .ach-card.complete {
     background:color-mix(in srgb, var(--win-green), transparent 90%);
     border-color:color-mix(in srgb, var(--win-green), transparent 55%);
+    border-left-color:var(--progress-complete);
 }
 .ach-card-icon {
-    width:46px; height:46px; flex:0 0 46px;
+    width:44px; height:44px; flex:0 0 44px; margin-top:2px;
     display:flex; align-items:center; justify-content:center;
     border-radius:10px;
-    background:var(--panel-bg); border:1px solid var(--panel-border);
-    font-size:calc(22px * var(--ui-scale));
+    background:var(--panel-elevated); border:1px solid color-mix(in srgb, var(--ach-accent), transparent 55%);
 }
-.ach-card.locked .ach-card-icon { opacity:.65; }
+.ach-card-icon.idle {
+    background:var(--panel-bg); border-color:var(--panel-border); opacity:.75;
+}
 .ach-card-icon.complete {
     background:color-mix(in srgb, var(--win-green), transparent 80%);
-    border-color:var(--win-green);
+    border-color:color-mix(in srgb, var(--win-green), transparent 50%);
 }
-.ach-card-main { flex:1; min-width:0; display:flex; flex-direction:column; gap:5px; }
+.ach-card-main { flex:1; min-width:0; display:flex; flex-direction:column; gap:6px; }
 .ach-card-top { display:flex; align-items:center; gap:8px; }
 .ach-card-name {
     flex:1; min-width:0;
@@ -1530,32 +1761,85 @@ input[type="checkbox"] {
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
 .ach-card-name.complete { color:var(--win-green); }
-.ach-stage-badge {
-    padding:2px 8px; border-radius:6px;
+/* Recorded best time on a level card — the value its stars are derived from. */
+.ach-best { display:flex; align-items:baseline; gap:4px; white-space:nowrap; }
+.ach-best-label { color:var(--text-dimmed); font-size:calc(9px * var(--ui-scale)); font-weight:800; }
+.ach-best-value { color:var(--text-primary); font-size:calc(12px * var(--ui-scale)); font-weight:bold; }
+.ach-best-value.dim { color:var(--text-dimmed); }
+/* Stage pill: N / M, plus a check or a padlock at the extremes. */
+.ach-stage-pill {
+    flex:0 0 auto;
+    display:inline-flex; align-items:center; gap:4px;
+    padding:3px 8px; border-radius:6px;
     background:var(--panel-bg); border:1px solid var(--panel-border);
     color:var(--text-secondary); font-size:calc(10px * var(--ui-scale));
 }
-.ach-stage-badge.complete { color:var(--win-green); }
-.ach-single-pill { font-size:calc(11px * var(--ui-scale)); color:var(--text-muted); }
-.ach-single-pill.complete { color:var(--win-green); }
-.ach-stars { display:flex; gap:6px; }
+.ach-stage-pill.complete {
+    border-color:color-mix(in srgb, var(--win-green), transparent 50%); color:var(--win-green);
+}
+
+.ach-ladder-row { display:flex; align-items:center; gap:10px; }
+/* The star ladder. State is carried by emphasis, never by presence: every bar
+   stays on screen, and the selected column carries a raised pill behind it so
+   the interaction is visible before it is discovered. */
+.ach-stars { display:flex; gap:4px; }
 .ach-star {
-    width:28px; height:28px;
-    display:flex; align-items:center; justify-content:center;
-    border-radius:6px;
-    background:var(--panel-bg); border:1px solid var(--panel-border);
-    color:var(--text-muted); font-size:calc(15px * var(--ui-scale));
-    cursor:pointer; transition:border-color .12s;
+    display:flex; flex-direction:column; align-items:center; gap:2px;
+    min-width:25px; padding:3px 4px;
+    border:1px solid transparent; border-radius:6px;
+    background:transparent;
+    cursor:pointer; transition:background .12s, border-color .12s;
 }
-.ach-star.earned {
-    background:color-mix(in srgb, var(--win-green), transparent 78%);
-    border-color:var(--win-green); color:var(--win-green);
+.ach-star:hover { background:var(--card-hover); }
+.ach-star.selected { background:var(--panel-elevated); border-color:var(--panel-border); }
+.ach-star-label { font-size:calc(9px * var(--ui-scale)); line-height:1; white-space:nowrap; }
+.ach-star.earned  .ach-star-glyph { color:var(--star-earned); }
+.ach-star.earned  .ach-star-label { color:var(--text-secondary); }
+.ach-star.pending .ach-star-glyph { color:var(--star-pending); }
+.ach-star.pending .ach-star-label { color:var(--text-primary); font-weight:bold; }
+.ach-star.locked  .ach-star-glyph { color:var(--star-track); }
+.ach-star.locked  .ach-star-label { color:var(--text-dimmed); }
+.ach-star.selected .ach-star-label { font-weight:bold; }
+
+/* Level actions: a filled primary (Play) and an outlined secondary (Rated).
+   The labels drop out on a narrow card rather than squeezing the ladder. */
+.ach-actions { margin-left:auto; display:flex; gap:6px; }
+.ach-action {
+    height:32px; min-width:32px; padding:0 10px;
+    display:inline-flex; align-items:center; justify-content:center; gap:6px;
+    border-radius:7px; border:1px solid transparent;
+    font-size:calc(12px * var(--ui-scale)); font-weight:bold;
+    cursor:pointer;
 }
-.ach-star.selected { border-width:2px; border-color:var(--accent-blue); }
-.ach-goal { color:var(--text-secondary); font-size:calc(12px * var(--ui-scale)); }
+.ach-action.filled { background:var(--accent-blue); color:var(--text-on-accent); }
+.ach-action.filled:hover { background:color-mix(in srgb, var(--accent-blue), white 12%); }
+.ach-action.rated {
+    background:var(--panel-elevated); border-color:var(--accent-orange); color:var(--accent-orange);
+}
+.ach-action.rated:hover { background:var(--card-hover); }
+.ach-action-label { white-space:nowrap; }
+@media (max-width:560px) {
+    .ach-action { padding:0; min-width:32px; }
+    .ach-action-label { display:none; }
+}
+
+.ach-goal {
+    display:flex; align-items:center; gap:5px;
+    color:var(--text-secondary); font-size:calc(12px * var(--ui-scale));
+}
+.ach-goal > span { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .ach-goal.done { color:var(--win-green); }
-.ach-progress { display:flex; flex-direction:column; gap:3px; }
-.ach-progress-text { text-align:right; color:var(--text-muted); font-size:calc(10px * var(--ui-scale)); }
+.ach-progress { display:flex; align-items:center; gap:8px; }
+.ach-progress-track {
+    flex:1; min-width:0; height:6px; border-radius:3px;
+    background:var(--progress-bg); overflow:hidden;
+}
+.ach-progress-fill {
+    height:100%; border-radius:3px; background:var(--progress-partial);
+    transition:width 220ms cubic-bezier(.22,.61,.36,1);
+}
+.ach-progress-fill.complete { background:var(--progress-complete); }
+.ach-progress-text { color:var(--text-muted); font-size:calc(10px * var(--ui-scale)); white-space:nowrap; }
 
 /* ====================================================================
    ACHIEVEMENT UNLOCK TOAST
@@ -1589,6 +1873,44 @@ input[type="checkbox"] {
 }
 .achievement-toast-stars { color:var(--win-green); font-size:calc(14px * var(--ui-scale)); }
 .achievement-toast-sub { color:var(--text-secondary); font-size:calc(11px * var(--ui-scale)); }
+
+/* Server announcements — operator broadcasts. Sit above the achievement toast:
+   a maintenance warning is the one thing that must never be covered. */
+.server-announcement-stack {
+    position:fixed; top:16px; left:0; right:0; z-index:95;
+    display:flex; justify-content:center; pointer-events:none;
+}
+.server-announcement {
+    pointer-events:auto; position:relative;
+    width:min(520px, calc(100vw - 24px));
+    padding:16px 44px 16px 18px;
+    background:var(--panel-elevated); border:2px solid var(--accent-orange);
+    border-radius:14px;
+    box-shadow:0 12px 36px rgba(0,0,0,.4);
+    transform:translateY(-130%); opacity:0;
+    transition:transform .32s cubic-bezier(.22,.61,.36,1), opacity .26s;
+    cursor:pointer;
+}
+.server-announcement.visible { transform:translateY(0); opacity:1; }
+.server-announcement-close {
+    position:absolute; top:10px; right:14px;
+    color:var(--text-secondary); font-size:calc(15px * var(--ui-scale)); line-height:1;
+}
+.server-announcement-head { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+.server-announcement-icon { font-size:calc(16px * var(--ui-scale)); line-height:1; }
+.server-announcement-label {
+    color:var(--accent-orange); font-size:calc(11px * var(--ui-scale));
+    font-weight:800; letter-spacing:1.5px;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.server-announcement-text {
+    color:var(--text-primary); font-size:calc(15px * var(--ui-scale));
+    /* A 255-byte message can run to several lines; the banner grows to fit. */
+    white-space:pre-wrap; overflow-wrap:anywhere;
+}
+.server-announcement-sub {
+    color:var(--text-secondary); font-size:calc(11px * var(--ui-scale)); margin-top:6px;
+}
 
 .modal.social-invite-modal {
     width:min(340px, calc(100vw - 24px));
@@ -1944,7 +2266,9 @@ input[type="checkbox"] {
 .chat-msg-blocked { opacity:0.55; }
 .chat-text-blocked { font-style:italic; color:var(--text-muted); }
 .chat-input-row {
-    display:flex; gap:4px; align-items:center;
+    /* wrap so the charset warning (.wire-text-warning) drops to its own line
+       instead of competing with the input and the Send button for this one. */
+    display:flex; gap:4px; align-items:center; flex-wrap:wrap;
 }
 .chat-input {
     flex:1; background:#2a2a2a; border:1px solid var(--border);
@@ -1953,6 +2277,38 @@ input[type="checkbox"] {
 }
 .chat-input:focus { border-color:var(--accent-blue); }
 .chat-input::placeholder { color:var(--text-muted); }
+
+/* The "13/20" readout beside a wire-text input (see ui/web/WireTextInput.js).
+   The element is created by that module, so the layout it needs lives here
+   rather than in the markup: it sits inline after its input, stays out of the
+   flex stretch, and turns red at the limit. */
+.wire-text-counter {
+    flex:0 0 auto;
+    font-size:11px;
+    color:var(--text-muted);
+    font-variant-numeric:tabular-nums;
+    white-space:nowrap;
+    transition:color 110ms ease;
+}
+.wire-text-counter[hidden] { display:none; }
+.wire-text-counter.at-limit { color:var(--accent-red); }
+
+/* Charset rejection notice — see WireTextInput.js. The module inserts it as a
+   flex sibling of its input, and the two containers that host one disagree
+   about direction: .form-group is a column, .chat-input-row is a row. Hence
+   width rather than flex-basis — a basis of 100% would resolve against HEIGHT
+   in the column case — plus flex-wrap on the row below, which is what sends
+   this onto its own line instead of squeezing the input and the Send button. */
+.wire-text-warning {
+    flex:0 0 auto;
+    width:100%;
+    box-sizing:border-box;
+    margin-top:4px;
+    font-size:11px;
+    line-height:1.35;
+    color:#F1C40F;
+}
+.wire-text-warning[hidden] { display:none; }
 .chat-send-btn {
     background:var(--accent-blue); color:#fff; border:none;
     border-radius:4px; padding:6px 12px; font-size:12px;
@@ -2622,6 +2978,56 @@ input[type="checkbox"] {
     margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
 .gm-podium-reveals { font-size:11px; color:var(--text-muted); margin-top:1px; }
+.gm-screenshot-btn {
+    position:absolute; top:10px; right:calc(90px * var(--ui-scale)); z-index:2;
+    width:calc(34px * var(--ui-scale)); height:calc(34px * var(--ui-scale)); padding:0;
+    border:1px solid var(--panel-border); border-radius:8px;
+    background:var(--card-primary); color:var(--text-primary); cursor:pointer;
+}
+.gm-screenshot-btn { font-size:0; }
+.gm-screenshot-btn::before,
+#btnScreenshotGallery::before {
+    content:""; display:block; width:19px; height:19px; margin:auto;
+    background:currentColor;
+    -webkit-mask:center / contain no-repeat var(--screenshot-icon);
+    mask:center / contain no-repeat var(--screenshot-icon);
+}
+.gm-screenshot-btn::before { --screenshot-icon:url('../../../res/icons/ui/camera.svg'); }
+#btnScreenshotGallery { font-size:0; }
+#btnScreenshotGallery::before { --screenshot-icon:url('../../../res/icons/ui/gallery.svg'); }
+.gm-screenshot-btn:disabled { opacity:.45; cursor:wait; }
+.stats-header-actions { display:flex; gap:6px; }
+.modal.screenshot-gallery-modal {
+    position:relative;
+    width:min(900px, 96vw); max-width:900px;
+    height:min(820px, 92vh);
+}
+.screenshot-gallery-header { display:flex; align-items:center; border-bottom:1px solid var(--separator); }
+.screenshot-gallery-header h3 { flex:1; border-bottom:0; }
+.screenshot-gallery-header .screen-back-btn { margin-right:var(--space-3); }
+.screenshot-gallery-grid {
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
+    gap:12px; padding:16px; overflow:auto;
+}
+.screenshot-tile {
+    display:flex; flex-direction:column; gap:5px; padding:7px;
+    border:1px solid var(--panel-border); border-radius:10px;
+    background:var(--card-primary); color:var(--text-primary); text-align:left; cursor:pointer;
+}
+.screenshot-tile:hover { border-color:var(--focus-ring); background:var(--card-hover); }
+.screenshot-tile img { width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:6px; background:#020617; }
+.screenshot-tile span { font-size:12px; font-weight:800; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.screenshot-tile small { color:var(--text-muted); }
+.screenshot-empty { grid-column:1/-1; padding:48px; color:var(--text-muted); text-align:center; }
+.screenshot-preview-pane {
+    display:none; position:absolute; inset:0; z-index:3;
+    flex-direction:column; align-items:center; gap:10px;
+    padding:18px; background:var(--bg-modal); overflow:auto;
+}
+.screenshot-preview-pane.visible { display:flex; }
+.screenshot-preview-close { align-self:flex-start; }
+.screenshot-preview-pane img { max-width:100%; min-height:0; flex:1; object-fit:contain; background:#020617; }
+.screenshot-preview-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
 
 /* ====================================================================
    MODAL DIALOGS  (host / join / settings / etc.)
@@ -2683,6 +3089,10 @@ input[type="checkbox"] {
     display:flex; gap:8px; flex-wrap:wrap;
 }
 .settings-tab {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
     min-width:0;
     min-height:36px;
     padding:0 8px;
@@ -2703,9 +3113,43 @@ input[type="checkbox"] {
 .settings-tab.active:hover { background:var(--accent-blue); }
 .settings-tab-content { display:none; flex-direction:column; gap:14px; }
 .settings-tab-content.active { display:flex; }
-#appSettingsDialog .modal { width:min(340px, 92vw); max-width:340px; }
+#appSettingsDialog .modal { width:min(720px, 94vw); max-width:720px; }
 #appSettingsDialog .connection-indicator { width:100%; max-width:100%; justify-content:flex-start; }
 #appSettingsDialog .modal-actions { flex-shrink:0; }
+.guide-content { display:flex; flex-direction:column; gap:8px; }
+.guide-intro,
+.guide-topic {
+    border:1px solid var(--separator);
+    border-radius:var(--radius-md);
+    background:var(--card-primary);
+}
+.guide-intro { padding:12px; }
+.guide-intro h4,
+.guide-intro p { margin:0 0 6px; }
+.guide-intro p:last-child { margin-bottom:0; }
+.guide-muted { color:var(--text-muted); font-size:12px; }
+.guide-group {
+    margin:14px 2px 2px;
+    color:var(--accent-blue);
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+}
+.guide-topic { overflow:hidden; }
+.guide-topic summary {
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    padding:10px 12px;
+    cursor:pointer;
+    color:var(--text-primary);
+}
+.guide-topic summary span { font-weight:800; }
+.guide-topic summary small { color:var(--text-muted); font-size:11px; }
+.guide-topic-body { padding:0 14px 12px; color:var(--text-secondary); font-size:13px; line-height:1.45; }
+.guide-topic-body p { margin:8px 0 0; }
+.guide-topic-body ul { margin:8px 0 0; padding-left:20px; }
+.guide-topic-body li + li { margin-top:6px; }
 .board-theme-grid {
     display:grid;
     grid-template-columns:repeat(2, minmax(0, 1fr));
@@ -2769,6 +3213,55 @@ input[type="checkbox"] {
     white-space:nowrap;
 }
 
+/* ── Custom board theme editor ─────────────────────────────────────── */
+.ct-preview-host {
+    padding:3px;
+    border:1px solid var(--panel-border);
+    border-radius:var(--radius-md);
+    background:var(--panel-bg);
+}
+/* The editor's preview is the same widget the tiles use, just larger. */
+.ct-preview-host .board-theme-preview { min-height:70px; }
+.ct-preview-host .board-theme-preview-cell span { font-size:15px; }
+
+.ct-row { display:flex; align-items:center; gap:10px; }
+.ct-row > label {
+    flex:1; min-width:0; margin-bottom:0;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.ct-row > .settings-select { flex:2; min-width:0; }
+.ct-row > .btn { flex:0 0 auto; width:auto; }
+.ct-row.ct-checks { gap:18px; }
+.ct-row.ct-checks > label { flex:0 0 auto; display:flex; align-items:center; gap:6px; }
+.ct-hint { color:var(--text-muted); font-size:12px; margin:0; }
+.ct-bevel-only { display:flex; flex-direction:column; gap:10px; }
+
+.ct-row input[type="color"] {
+    flex:0 0 auto; width:44px; height:26px; padding:0;
+    border:1px solid var(--panel-border); border-radius:var(--radius-sm);
+    background:none; cursor:pointer;
+}
+
+.ct-digits { display:flex; flex-wrap:wrap; gap:6px; }
+/* Each digit swatch is a colour input sitting on the revealed-cell colour, with
+   the digit itself drawn on top — clicking anywhere opens the picker. */
+.ct-digit { position:relative; width:34px; height:34px; }
+.ct-digit input[type="color"] {
+    position:absolute; inset:0; width:100%; height:100%; padding:0;
+    border:1px solid var(--panel-border); border-radius:var(--radius-md);
+    background:none; cursor:pointer; opacity:0;
+}
+.ct-digit-face {
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--panel-border); border-radius:var(--radius-md);
+    font-size:17px; font-weight:800; pointer-events:none;
+}
+.ct-digit:hover .ct-digit-face { border-width:2px; border-color:var(--focus-ring); }
+
+.ct-presets { display:flex; flex-wrap:wrap; gap:6px; }
+.ct-presets .btn { flex:1 1 auto; width:auto; min-width:64px; }
+
 /* Standalone close/action buttons at bottom of tall dialogs */
 .modal-tall > .btn:last-child,
 .modal-wide > .btn:last-child { width:auto; max-width:200px; margin:4px auto 0; }
@@ -2780,6 +3273,9 @@ input[type="checkbox"] {
 .lobby-list-header { display:flex; align-items:center; justify-content:space-between; }
 .scrollable-list { max-height:250px; overflow-y:auto; }
 .list-empty { color:var(--text-muted); text-align:center; padding:20px; }
+/* Same slot as .list-empty, but for a page request still in flight. */
+.list-loading { display:flex; flex-direction:column; align-items:center; gap:4px; }
+.list-loading .spinner { width:24px; height:24px; margin:0; }
 
 .lobby-list-entry {
     display:flex; flex-direction:column; gap:4px;
@@ -3006,7 +3502,137 @@ input[type="checkbox"] {
 .lb-time { font-family:monospace; color:var(--leaderboard-row-accent); white-space:nowrap; }
 .lb-date { font-size:10px; color:var(--leaderboard-row-muted); white-space:nowrap; }
 
+/* WATCH — shown only on rows whose run has a stored recording. */
+.lb-watch {
+    flex:0 0 auto;
+    padding:2px 8px;
+    border:1px solid var(--leaderboard-row-accent); border-radius:5px;
+    background:transparent; color:var(--leaderboard-row-accent);
+    font-size:10px; font-weight:bold; white-space:nowrap; cursor:pointer;
+}
+.lb-watch:hover { background:color-mix(in srgb, var(--leaderboard-row-accent) 18%, transparent); }
+
 .lb-showing-info { font-size:10px; color:var(--text-dimmed); text-align:center; margin-top:4px; padding:0 12px 6px; }
+
+/* ====================================================================
+   REPLAY VIEWER (full screen)
+   ==================================================================== */
+.replay-page {
+    position:fixed; inset:0; z-index:70;
+    display:none;
+    background:
+        linear-gradient(165deg, var(--bg-menu-top), var(--bg-menu-bottom)),
+        var(--bg-menu);
+}
+.replay-page.visible { display:block; }
+.replay-inner {
+    height:100%;
+    max-width:1100px; margin:0 auto;
+    padding:clamp(12px, 3vw, 22px);
+    display:flex; flex-direction:column; gap:10px;
+}
+.replay-header { display:flex; align-items:center; gap:var(--space-2); }
+.replay-title-block { flex:1; min-width:0; }
+.replay-title {
+    display:flex; align-items:center; gap:6px;
+    color:var(--text-primary); font-size:calc(20px * var(--ui-scale)); font-weight:800;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.replay-subtitle { color:var(--text-muted); font-size:calc(11px * var(--ui-scale)); }
+.replay-xray { width:auto; flex:0 0 auto; }
+.replay-xray.active {
+    background:var(--accent-orange); border-color:var(--accent-orange);
+    color:var(--text-on-accent);
+}
+
+/* Board slot. The two canvases are stacked in the same box; the controller
+   shows whichever variant the recording needs. */
+.replay-board {
+    position:relative; flex:1; min-height:0;
+    border:1px solid var(--panel-border); border-radius:10px;
+    background:var(--bg-grid); overflow:hidden;
+}
+.replay-canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+
+.replay-truncated {
+    position:absolute; top:8px; left:50%; transform:translateX(-50%);
+    padding:4px 10px; border-radius:6px; z-index:50;
+    background:var(--panel-elevated); border:1px solid var(--accent-orange);
+    color:var(--accent-orange); font-size:calc(10px * var(--ui-scale));
+}
+.replay-overlay {
+    position:absolute; inset:0; z-index:100;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--bg-grid);
+}
+.replay-overlay-inner {
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    max-width:360px; text-align:center;
+}
+.replay-overlay-text { color:var(--text-secondary); font-size:calc(13px * var(--ui-scale)); }
+.replay-overlay-text.error { color:var(--danger-default); }
+.replay-spinner {
+    width:28px; height:28px; border-radius:50%;
+    border:3px solid var(--panel-border); border-top-color:var(--leaderboard-row-accent);
+    animation:replay-spin 800ms linear infinite;
+}
+@keyframes replay-spin { to { transform:rotate(360deg); } }
+@media (prefers-reduced-motion:reduce) { .replay-spinner { animation-duration:2s; } }
+
+/* Transport bar */
+.replay-transport {
+    flex:0 0 auto;
+    display:flex; flex-direction:column; gap:6px;
+    padding:7px;
+    background:var(--leaderboard-panel-raised);
+    border:1px solid var(--leaderboard-row-border); border-radius:10px;
+}
+.replay-transport.disabled { opacity:.45; pointer-events:none; }
+.replay-scrub-row { display:flex; align-items:center; gap:8px; }
+.replay-clock, .replay-total {
+    flex:0 0 auto; width:84px; font-family:monospace;
+    font-size:calc(13px * var(--ui-scale));
+}
+.replay-clock { color:var(--leaderboard-row-accent); font-weight:bold; text-align:right; }
+.replay-total { color:var(--text-muted); font-size:calc(11px * var(--ui-scale)); }
+.replay-scrub { flex:1; min-width:0; }
+
+.replay-controls { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+.replay-buttons { display:flex; gap:4px; }
+/* A plain button rather than .btn: the transport glyphs are single symbols that
+   need to sit optically centred at a fixed square size. */
+.replay-btn {
+    width:38px; height:30px;
+    display:inline-flex; align-items:center; justify-content:center;
+    border:1px solid var(--panel-border); border-radius:7px;
+    background:var(--panel-elevated); color:var(--text-primary);
+    font-size:calc(13px * var(--ui-scale)); font-weight:bold; cursor:pointer;
+}
+.replay-btn.wide { width:54px; }
+.replay-btn:hover:not(:disabled) { background:var(--card-hover); }
+.replay-btn:disabled { opacity:.4; cursor:not-allowed; }
+.replay-btn.primary {
+    background:var(--leaderboard-row-accent);
+    border-color:var(--leaderboard-row-accent);
+    color:var(--leaderboard-time-bg);
+}
+
+.replay-speeds { display:flex; gap:3px; }
+.replay-speed {
+    width:46px; height:30px;
+    border:1px solid var(--panel-border); border-radius:7px;
+    background:transparent; color:var(--text-secondary);
+    font-size:calc(11px * var(--ui-scale)); cursor:pointer;
+}
+.replay-speed.active {
+    background:var(--accent-purple); border-color:var(--accent-purple);
+    color:var(--text-on-accent); font-weight:bold;
+}
+.replay-counters {
+    margin-left:auto; display:flex; gap:10px; align-items:center;
+    font-family:monospace; font-size:calc(11px * var(--ui-scale));
+    color:var(--text-secondary);
+}
 
 /* ====================================================================
    LEADERBOARD PAGE (full screen)
@@ -4116,7 +4742,7 @@ input[type="checkbox"] {
     color:var(--pause-yellow);
     font-size:calc(26px * var(--ui-scale));
     letter-spacing:0;
-    margin-right:calc(84px * var(--ui-scale));
+    margin-right:calc(124px * var(--ui-scale));
 }
 .gm-pause-category,
 .gm-pause-specs,
@@ -5146,3 +5772,36 @@ input[type="checkbox"] {
 @media (max-width:330px) {
     .ranked-category-grid { grid-template-columns:1fr; }
 }
+
+/* ---- Player country flag -------------------------------------------------
+   Sits immediately after a player's name. Sized in em so it tracks whatever
+   text it trails (lobby rows, leaderboards, chat, the ranked banner) without
+   each call site restating a size. Global/anonymous players render no element
+   at all, so there is no empty-state rule here. */
+.player-flag {
+    display:inline-block;
+    height:1em;
+    width:calc(1em * 4 / 3);
+    min-height:14px;
+    min-width:19px;
+    margin-left:0.4em;
+    vertical-align:-0.06em;
+    border-radius:1px;
+    object-fit:cover;
+    flex:none;
+}
+
+/* The country picker reuses the app's list-row look; the flag there is a
+   leading icon at a fixed readable size rather than a name suffix. */
+.country-picker-list { max-height:min(52vh, 420px); overflow-y:auto; }
+.country-row {
+    display:flex; align-items:center; gap:10px;
+    width:100%; padding:8px 10px; border:none; border-radius:8px;
+    background:transparent; color:inherit; font:inherit; text-align:left; cursor:pointer;
+}
+.country-row:hover { background:rgba(127,127,127,0.16); }
+.country-row.selected { background:rgba(127,127,127,0.28); font-weight:bold; }
+.country-row .player-flag { height:16px; width:22px; margin-left:0; }
+.country-row-name { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.country-row-sub { font-size:12px; opacity:0.7; }
+.country-picker-divider { height:1px; margin:6px 2px; background:rgba(127,127,127,0.3); }
