@@ -14,10 +14,8 @@
             <span>Vladimir Januš</span>
         </a>
         <nav class="site-nav" aria-label="Primary links">
-            <!-- MIGRATION-12.0: retarget to webclient/index.html -->
-            <a href="../ClientWeb/index.html">Play in browser</a>
-            <!-- MIGRATION-12.0: contact.html stays at the root — site-wide, not
-                 a Minesweeper page. This relative link needs no retarget. -->
+            <a href="webclient/index.html">Play in browser</a>
+            <!-- contact.html stays at the root — site-wide, not a Minesweeper page. -->
             <a href="../contact.html">Contact</a>
             <a href="https://github.com/VladimirJanus">GitHub</a>
         </nav>
@@ -32,8 +30,7 @@
             </div>
 
             <div class="play-actions" aria-label="Minesweeper Online downloads">
-                <!-- MIGRATION-12.0: retarget to webclient/index.html -->
-                <a class="button button-primary button-hero" href="../ClientWeb/index.html">
+                <a class="button button-primary button-hero" href="webclient/index.html">
                     <span class="button-mark mark-blue" aria-hidden="true">WEB</span>
                     <span>
                         <span class="button-title">Play in your browser</span>
@@ -41,8 +38,8 @@
                     </span>
                 </a>
                 <div class="install-actions">
-                    <!-- MIGRATION-12.0: retarget to builds/windows/MinesweeperOnline-Windows-Setup.exe -->
-                    <a class="button button-amber" href="../ClientQtBuilds/Windows/MinesweeperOnline-11.5.0-Windows-Setup.exe" download>
+                    <!-- Stable alias: shipping a release overwrites the file, never this link. -->
+                    <a class="button button-amber" href="builds/windows/MinesweeperOnline-Windows-Setup.exe" download>
                         <span class="button-mark mark-amber" aria-hidden="true">WIN</span>
                         <span>
                             <span class="button-title">Download for Windows</span>
@@ -107,8 +104,7 @@
                 </div>
             </div>
             <div class="resource-grid">
-                <!-- MIGRATION-12.0: retarget to privacy.html -->
-                <a class="resource-card" href="../privacy.html">
+                <a class="resource-card" href="privacy.html">
                     <span class="button-mark" aria-hidden="true">DOC</span>
                     <span>
                         <span class="resource-title">Privacy policy</span>
@@ -122,7 +118,7 @@
                         <span class="resource-subtitle">See more repositories</span>
                     </span>
                 </a>
-                <!-- MIGRATION-12.0: root page, no retarget needed -->
+                <!-- contact.html is site-wide and stays at the root. -->
                 <a class="resource-card" href="../contact.html">
                     <span class="button-mark mark-cyan" aria-hidden="true">@</span>
                     <span>
@@ -139,8 +135,7 @@
         <span class="footer-links">
             <a href="../contact.html">Contact</a>
             <a href="mailto:vladjsoftware@gmail.com">vladjsoftware@gmail.com</a>
-            <!-- MIGRATION-12.0: retarget to privacy.html -->
-            <a href="../privacy.html">Privacy</a>
+            <a href="privacy.html">Privacy</a>
         </span>
     </footer>
 </body>

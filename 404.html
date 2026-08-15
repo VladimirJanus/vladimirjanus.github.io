@@ -72,8 +72,8 @@
         <div class="actions join-only">
             <button class="primary" id="openAppButton" type="button">Open Minesweeper Online</button>
             <a class="android" id="androidLink" href="https://play.google.com/store/apps/details?id=com.vladjsoftware.minesweeperonline">Get the Android app</a>
-            <a class="desktop" id="desktopLink" href="https://vladimirjanus.github.io/ClientQtBuilds/Windows/MinesweeperOnline-12.0-Windows-Setup.exe">Download Windows installer</a>
-            <a class="web" id="webClientLink" href="https://vladimirjanus.github.io/ClientWeb/index.html">Open the web client</a>
+            <a class="desktop" id="desktopLink" href="https://vladimirjanus.github.io/MinesweeperOnline/builds/windows/MinesweeperOnline-Windows-Setup.exe">Download Windows installer</a>
+            <a class="web" id="webClientLink" href="https://vladimirjanus.github.io/MinesweeperOnline/webclient/index.html">Open the web client</a>
         </div>
         <a class="home" href="https://vladimirjanus.github.io/">Go home</a>
         <p class="fallback join-only" id="fallbackText">If the app did not open, install it for your platform, then come back to this invite.</p>
@@ -109,10 +109,9 @@
             },
             {
                 // Minesweeper Online 11.5 and below.
-                // MIGRATION-12.0: keep this entry forever — invite links
-                // already shared in chats point here — but retarget
-                // webClientUrl/windowsUrl once ClientWeb and ClientQtBuilds
-                // are deleted.
+                // Keep this entry forever — invite links already shared in chats
+                // point here. /ClientWeb and /ClientQtBuilds no longer exist, so
+                // the URLs below deliberately resolve to the 12.0 assets.
                 id: "minesweeper-legacy",
                 label: "Minesweeper Online Invite",
                 appName: "Minesweeper Online",
@@ -120,14 +119,13 @@
                 scheme: "minesweeperonline",
                 androidPackage: "com.vladjsoftware.minesweeperonline",
                 playStoreUrl: "https://play.google.com/store/apps/details?id=com.vladjsoftware.minesweeperonline",
-                webClientUrl: ORIGIN + "/ClientWeb/index.html",
-                windowsUrl: ORIGIN + "/ClientQtBuilds/Windows/MinesweeperOnline-12.0-Windows-Setup.exe"
+                webClientUrl: ORIGIN + "/MinesweeperOnline/webclient/index.html",
+                windowsUrl: ORIGIN + "/MinesweeperOnline/builds/windows/MinesweeperOnline-Windows-Setup.exe"
             }
         ];
 
         // Used when an invite arrives as ?game=<id> with no project in the path.
-        // MIGRATION-12.0: switch to "minesweeper".
-        const DEFAULT_PROJECT_ID = "minesweeper-legacy";
+        const DEFAULT_PROJECT_ID = "minesweeper";
 
         function resolveInvite() {
             const path = window.location.pathname;

@@ -1,134 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join Minesweeper Online</title>
-    <link rel="stylesheet" href="../../site.css">
+<meta charset="UTF-8">
+<title>Join Minesweeper Online</title>
+<!-- Permanent redirect shim. Invite links in this form are already shared in chats,
+     so this URL must outlive the last 11.5 install. Never delete.
+     Only catches /command/join/?game=… — the path form /command/join/12345 is not a
+     real file, so GitHub Pages serves 404.html, whose minesweeper-legacy entry handles it. -->
 </head>
-<body class="site-page join-page">
-    <header class="site-header">
-        <a class="site-brand" href="../../index.html" aria-label="Vladimir Januš home">
-            <span class="brand-mark" aria-hidden="true">VJ</span>
-            <span>Vladimir Januš</span>
-        </a>
-        <nav class="site-nav" aria-label="Invite links">
-            <a href="../../ClientWeb/index.html">Play in browser</a>
-        </nav>
-    </header>
-
-    <main class="join-layout">
-        <section class="invite-surface" id="card" aria-labelledby="title">
-            <div class="invite-header">
-                <span class="brand-mark" aria-hidden="true">MS</span>
-                <div>
-                    <p class="eyebrow">Minesweeper Online Invite</p>
-                    <h1 id="title">Join a game</h1>
-                </div>
-            </div>
-            <div class="game-id join-only" id="gameIdText"></div>
-            <p class="message" id="message" aria-live="polite">Choose how you want to join this Minesweeper Online game.</p>
-            <div class="actions join-only">
-                <a class="button button-primary button-hero" id="webClientLink" href="https://vladimirjanus.github.io/ClientWeb/index.html">
-                    <span class="button-mark mark-blue" aria-hidden="true">WEB</span>
-                    <span>
-                        <span class="button-title">Play in your browser</span>
-                        <span class="button-subtitle">Join from the web client</span>
-                    </span>
-                </a>
-                <div class="install-actions">
-                    <a class="button button-amber" href="https://vladimirjanus.github.io/ClientQtBuilds/Windows/MinesweeperOnline-12.0-Windows-Setup.exe">
-                        <span class="button-mark mark-amber" aria-hidden="true">WIN</span>
-                        <span>
-                            <span class="button-title">Download for Windows</span>
-                            <span class="button-subtitle">Desktop installer</span>
-                        </span>
-                    </a>
-                    <a class="button button-green" id="playStoreLink" href="https://play.google.com/store/apps/details?id=com.vladjsoftware.minesweeperonline">
-                        <span class="button-mark mark-green" aria-hidden="true">GP</span>
-                        <span>
-                            <span class="button-title">Get it on Google Play</span>
-                            <span class="button-subtitle">Android app</span>
-                        </span>
-                    </a>
-                </div>
-                <button class="button" id="openAppButton" type="button">
-                    <span class="button-mark" aria-hidden="true">APP</span>
-                    <span>
-                        <span class="button-title">Open installed app</span>
-                        <span class="button-subtitle">Use this if Minesweeper Online is already installed</span>
-                    </span>
-                </button>
-            </div>
-            <p class="fallback join-only" id="fallbackText">If the app did not open, install it for your platform, then come back to this invite.</p>
-        </section>
-    </main>
-
-    <script>
-        const playStoreUrl = "https://play.google.com/store/apps/details?id=com.vladjsoftware.minesweeperonline";
-        const origin = "https://vladimirjanus.github.io";
-
-        function parseGameId() {
-            const params = new URLSearchParams(window.location.search);
-            const fromQuery = params.get("game") || params.get("gameId") || params.get("id") || "";
-            const queryMatch = fromQuery.match(/^\d+$/);
-            if (queryMatch) return fromQuery;
-
-            const hashMatch = window.location.hash.match(/(\d+)/);
-            if (hashMatch) return hashMatch[1];
-
-            const pathMatch = window.location.pathname.match(/\/command\/join\/(\d+)\/?$/i);
-            return pathMatch ? pathMatch[1] : "";
-        }
-
-        const gameId = parseGameId();
-        const card = document.getElementById("card");
-        const title = document.getElementById("title");
-        const message = document.getElementById("message");
-        const gameIdText = document.getElementById("gameIdText");
-        const fallbackText = document.getElementById("fallbackText");
-        const openAppButton = document.getElementById("openAppButton");
-        const webClientLink = document.getElementById("webClientLink");
-
-        function customSchemeUrl() {
-            return "minesweeperonline://join/" + encodeURIComponent(gameId);
-        }
-
-        function androidIntentUrl() {
-            return "intent://join/" + encodeURIComponent(gameId)
-                + "#Intent;scheme=minesweeperonline;package=com.vladjsoftware.minesweeperonline;S.browser_fallback_url="
-                + encodeURIComponent(playStoreUrl) + ";end";
-        }
-
-        function isAndroid() {
-            return /Android/i.test(navigator.userAgent);
-        }
-
-        function showFallbackSoon() {
-            window.setTimeout(function () {
-                if (document.visibilityState === "visible") fallbackText.classList.add("visible");
-            }, 1400);
-        }
-
-        function openApp() {
-            if (!gameId) return;
-            message.textContent = "Trying to open the app for this invite...";
-            window.location.href = isAndroid() ? androidIntentUrl() : customSchemeUrl();
-            showFallbackSoon();
-        }
-
-        if (!gameId) {
-            card.classList.add("not-found");
-            title.textContent = "Invite not found";
-            message.textContent = "This join link is missing a valid game ID.";
-        } else {
-            document.title = "Join game " + gameId + " - Minesweeper Online";
-            title.textContent = "Join game " + gameId;
-            gameIdText.textContent = "Game ID: " + gameId;
-            message.textContent = "Choose how you want to join this Minesweeper Online game.";
-            webClientLink.href = origin + "/ClientWeb/index.html?join=" + encodeURIComponent(gameId);
-            openAppButton.addEventListener("click", openApp);
-        }
-    </script>
+<body>
+<p>Redirecting to your <a id="target" href="/MinesweeperOnline/command/join/">invite</a>.</p>
+<script>
+    var p = new URLSearchParams(location.search);
+    var raw = p.get("game") || p.get("gameId") || p.get("id") || "";
+    if (!/^\d+$/.test(raw)) {
+        var h = location.hash.match(/(\d+)/);
+        raw = h ? h[1] : "";
+    }
+    var url = "/MinesweeperOnline/command/join/"
+        + (raw ? "?game=" + encodeURIComponent(raw) : "");
+    document.getElementById("target").href = url;
+    location.replace(url);
+</script>
 </body>
 </html>
