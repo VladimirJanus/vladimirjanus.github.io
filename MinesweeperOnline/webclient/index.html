@@ -1192,6 +1192,22 @@
             </div>
         </div>
 
+        <!-- Losing the connection with a board still on screen is not a dismissable
+             "OK" error: the game becomes a stranded online board that the player
+             either plays out offline or abandons, so this box makes them choose.
+             data-no-dismiss keeps Back/Escape from closing it (mirrors the Qt
+             dialog's Popup.NoAutoClose). -->
+        <div id="connectionLostInGameDialog" class="modal-backdrop" data-no-dismiss>
+            <div class="modal">
+                <h3 data-i18n>Connection Lost</h3>
+                <p class="modal-desc" data-i18n>You were disconnected from the online game.</p>
+                <div class="modal-actions">
+                    <button class="btn" id="btnConnectionLostContinueOffline" data-i18n>Continue Offline</button>
+                    <button class="btn btn-accent" id="btnConnectionLostLeave" data-i18n>Leave Game</button>
+                </div>
+            </div>
+        </div>
+
         <div id="lobbyFriendsDialog" class="modal-backdrop">
             <div class="modal lobby-friends-modal">
                 <h3 data-i18n>Friends</h3>

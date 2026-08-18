@@ -2597,6 +2597,11 @@ input[type="checkbox"] {
     z-index:55; box-shadow:0 4px 12px rgba(0,0,0,.4);
 }
 
+/* The connection-lost choice box is raised over the game modal: it opens while
+   that modal is being shown by the disconnect teardown, and it owns the board's
+   fate, so it must not end up behind it. */
+#connectionLostInGameDialog { z-index:2100; }
+
 /* ====================================================================
    GAME MODAL (pause / game-over / duel results)
    ==================================================================== */
