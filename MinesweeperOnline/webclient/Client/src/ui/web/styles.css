@@ -3056,7 +3056,10 @@ input[type="checkbox"] {
 .modal-wide { max-width:600px; }
 
 .modal h3 { font-size:20px; text-align:center; }
-.modal-desc { color:var(--text-secondary); font-size:13px; text-align:center; }
+/* Qt keeps multi-paragraph confirmations in ONE translatable string, split by
+   newlines — so the web has to render those newlines rather than re-splitting
+   the sentence into separate elements the catalog would not have keys for. */
+.modal-desc { color:var(--text-secondary); font-size:13px; text-align:center; white-space:pre-line; }
 #gmCustomOverwriteText { white-space:pre-line; }
 .modal label { color:var(--text-secondary); font-size:13px; display:block; margin-bottom:4px; }
 .form-group { display:flex; flex-direction:column; gap:4px; }
@@ -3219,6 +3222,28 @@ input[type="checkbox"] {
 }
 
 /* ── Custom board theme editor ─────────────────────────────────────── */
+/* The modal itself stops scrolling: the preview, the "start from" row and the
+   tabs are pinned, and .ct-body is the only thing that moves. A fixed height
+   keeps the tabs still while sections of very different lengths swap under
+   them (mirrors CustomBoardThemeDialog.qml). */
+.ct-modal {
+    height:min(88vh, 640px);
+    overflow:hidden;
+}
+.ct-body {
+    flex:1 1 auto; min-height:0; overflow-y:auto;
+    display:flex; flex-direction:column; gap:14px;
+}
+.ct-pane { display:flex; flex-direction:column; gap:10px; }
+.ct-pane[hidden] { display:none; }
+
+.ct-tabs { display:flex; gap:6px; }
+.ct-tabs .ct-tab { flex:1 1 0; width:auto; min-width:0; }
+.ct-tabs .ct-tab.active {
+    background:var(--accent-blue); color:var(--text-primary);
+    border-color:var(--focus-ring); font-weight:700;
+}
+
 .ct-preview-host {
     padding:3px;
     border:1px solid var(--panel-border);
@@ -3277,7 +3302,7 @@ input[type="checkbox"] {
    ==================================================================== */
 .lobby-list-header { display:flex; align-items:center; justify-content:space-between; }
 .scrollable-list { max-height:250px; overflow-y:auto; }
-.list-empty { color:var(--text-muted); text-align:center; padding:20px; }
+.list-empty { color:var(--text-muted); text-align:center; padding:20px; white-space:pre-line; }
 /* Same slot as .list-empty, but for a page request still in flight. */
 .list-loading { display:flex; flex-direction:column; align-items:center; gap:4px; }
 .list-loading .spinner { width:24px; height:24px; margin:0; }
@@ -3621,6 +3646,11 @@ input[type="checkbox"] {
     border-color:var(--leaderboard-row-accent);
     color:var(--leaderboard-time-bg);
 }
+.replay-btn.replay-sound.active {
+    background:var(--leaderboard-row-accent);
+    border-color:var(--leaderboard-row-accent);
+    color:var(--leaderboard-time-bg);
+}
 
 .replay-speeds { display:flex; gap:3px; }
 .replay-speed {
@@ -3638,6 +3668,11 @@ input[type="checkbox"] {
     font-family:monospace; font-size:calc(11px * var(--ui-scale));
     color:var(--text-secondary);
 }
+.replay-tallies, .replay-tally {
+    display:inline-flex; align-items:center;
+}
+.replay-tallies { gap:calc(8px * var(--ui-scale)); }
+.replay-tally { gap:calc(3px * var(--ui-scale)); }
 
 /* ====================================================================
    LEADERBOARD PAGE (full screen)
