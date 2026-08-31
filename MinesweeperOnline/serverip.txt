@@ -1,3 +1,2 @@
-5.tcp.eu.ngrok.io:22720
-wss://cloudiest-ileen-nonpsychological.ngrok-free.dev
-wss://cloudiest-ileen-nonpsychological.ngrok-free.dev
+maint
+1788215569
