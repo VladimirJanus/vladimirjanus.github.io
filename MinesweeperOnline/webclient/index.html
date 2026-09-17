@@ -11,7 +11,7 @@
     <div id="app">
 
         
-        <div id="mainMenu" class="screen active">
+        <div id="mainMenu" class="screen active" data-nav-scroll="Main menu" tabindex="0">
             <header class="main-menu-header">
                 <h1 class="main-menu-title">
                     <span class="app-icon main-menu-logo" aria-hidden="true"
@@ -27,7 +27,7 @@
                     <div class="menu-section-title" data-i18n>Singleplayer</div>
                     <button id="btnSoloPlay" class="btn menu-action menu-action-solo">
                         <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/solo.svg');--app-icon-size:20px"></span></span>
-                        <span class="menu-action-title" data-i18n>Solo Play</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-title" data-i18n>Solo Play</span><span class="menu-arrow"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/ui/caret.svg');--app-icon-size:18px"></span></span>
                     </button>
                 </section>
 
@@ -35,19 +35,19 @@
                     <div class="menu-section-title" data-i18n>Online Multiplayer</div>
                     <button id="btnCreateLobby" class="btn menu-action menu-action-online">
                         <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/create_lobby.svg');--app-icon-size:20px"></span></span>
-                        <span class="menu-action-title" data-i18n>Create Online Lobby</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-title" data-i18n>Create Online Lobby</span><span class="menu-arrow"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/ui/caret.svg');--app-icon-size:18px"></span></span>
                     </button>
                     <button id="btnBrowseLobbies" class="btn menu-action menu-action-browser">
                         <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/game_browser.svg');--app-icon-size:20px"></span></span>
-                        <span class="menu-action-title" data-i18n>Game Browser</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-title" data-i18n>Game Browser</span><span id="browserMenuOnlineCount" class="menu-action-count">online: 0</span><span class="menu-arrow"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/ui/caret.svg');--app-icon-size:18px"></span></span>
                     </button>
                     <button id="btnRankedDuel" class="btn menu-action menu-action-ranked">
                         <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/ranked_duel.svg');--app-icon-size:20px"></span></span>
-                        <span class="menu-action-title" data-i18n>Ranked Duel</span><span id="rankedMenuPlayingCount" class="menu-action-count">playing: 0</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-title" data-i18n>Ranked Duel</span><span id="rankedMenuPlayingCount" class="menu-action-count">playing: 0</span><span class="menu-arrow"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/ui/caret.svg');--app-icon-size:18px"></span></span>
                     </button>
                     <button id="btnFriends" class="btn menu-action menu-action-friends">
                         <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/friends.svg');--app-icon-size:20px"></span></span>
-                        <span class="menu-action-title" data-i18n>Friends</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-title" data-i18n>Friends</span><span class="menu-arrow"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/ui/caret.svg');--app-icon-size:18px"></span></span>
                     </button>
                 </section>
 
@@ -55,11 +55,11 @@
                     <div class="menu-section-title" data-i18n>Records</div>
                     <button id="btnLeaderboards" class="btn menu-action menu-action-records">
                         <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/leaderboards.svg');--app-icon-size:20px"></span></span>
-                        <span class="menu-action-title" data-i18n>Leaderboards</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-title" data-i18n>Leaderboards</span><span class="menu-arrow"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/ui/caret.svg');--app-icon-size:18px"></span></span>
                     </button>
                     <button id="btnStats" class="btn menu-action menu-action-stats">
                         <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/statistics.svg');--app-icon-size:20px"></span></span>
-                        <span class="menu-action-title" data-i18n>Statistics</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-title" data-i18n>Statistics</span><span class="menu-arrow"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/ui/caret.svg');--app-icon-size:18px"></span></span>
                     </button>
                 </section>
 
@@ -67,14 +67,11 @@
                     <div class="menu-section-title" data-i18n>App</div>
                     <button id="btnAppSettings" class="btn menu-action menu-action-app">
                         <span class="menu-action-icon"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/menu/settings.svg');--app-icon-size:20px"></span></span>
-                        <span class="menu-action-title" data-i18n>Application Settings</span><span class="menu-arrow">&gt;</span>
+                        <span class="menu-action-title" data-i18n>Settings</span><span id="settingsMenuVersion" class="menu-action-count">v0</span><span class="menu-arrow"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/ui/caret.svg');--app-icon-size:18px"></span></span>
                     </button>
                 </section>
             </div>
 
-            <div class="main-menu-status">
-                <span id="activePlayerCount" class="online-count">Players online: 0</span>
-            </div>
         </div>
 
         
@@ -88,7 +85,7 @@
                     </div>
                     <div class="solo-variant-row" id="soloVariantButtons"></div>
                 </div>
-                <div class="solo-scroll-area" id="soloScrollArea">
+                <div class="solo-scroll-area" id="soloScrollArea" data-nav-scroll="Solo menu" tabindex="0">
                     <!-- Continue last game card (hidden when no save exists) -->
                     <div class="level-card continue-card" id="continueCard" style="display:none">
                         <div class="level-card-body" id="continueCardBody">
@@ -361,7 +358,7 @@
 
         <div id="wanLobby" class="screen">
             <div class="lobby-content">
-                <div class="lobby-scroll">
+                <div class="lobby-scroll" data-nav-scroll="Lobby" tabindex="0">
                     <div class="screen-header-row lobby-header-row">
                         <button id="btnLobbyLeave" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
                         <div id="lobbyTitle" class="solo-title lobby-title">🌍 Lobby</div>
@@ -381,7 +378,7 @@
                             <span data-i18n>Friends</span>
                             <span id="lobbyFriendsStatus" data-i18n>Invite friends to this lobby</span>
                         </div>
-                        <div id="lobbyFriendsList" class="lobby-friends-list"></div>
+                        <div id="lobbyFriendsList" class="lobby-friends-list" data-nav-scroll="Lobby friends" tabindex="0"></div>
                     </div>
                     <div id="lobbyConfig" class="lobby-config">—</div>
                     <div id="lobbyHint" class="lobby-hint">Waiting...</div>
@@ -443,7 +440,7 @@
                     </div>
                 </div>
 
-                <div id="friendsList" class="social-list"></div>
+                <div id="friendsList" class="social-list" data-nav-scroll="Friends" tabindex="0"></div>
             </div>
         </div>
 
@@ -466,7 +463,11 @@
                 <div class="netbar-pending" id="netPendingRow" style="display:none;"></div>
             </div>
 
-            
+            <!-- Everything the network bar takes room FROM, under one parent, so
+                 the whole game-facing subtree loses height for a top bar or width
+                 for a side bar together. Mirrors the Qt playArea. -->
+            <div id="playArea">
+
             <div id="statusBar">
                 <div class="status-left">
                     <div class="status-display status-mines" id="minesDisplay">0000</div>
@@ -520,13 +521,30 @@
                     <div id="spectatorFeedback" style="display:none;">
                         <span id="spectatorEmoji">👁️</span>
                     </div>
-                    <div id="opponentGridContainer">
-                        <div class="opponent-label" data-i18n>Opponent Grid</div>
-                        <canvas id="opponentGridCanvas"></canvas>
-                        <canvas id="opponentGrid3DCanvas" style="display:none;position:absolute;top:24px;left:0;width:100%;height:calc(100% - 24px)"></canvas>
-                    </div>
                 </div>
             </div>
+
+            <!-- The small view: a movable, tabbed holder for any secondary look
+                 at a board (a minimap of your own, an opponent's, a team's).
+                 A sibling of the board area rather than a child, so its stacking
+                 can rise above the modal while it holds attention; the board
+                 area is still what bounds it. See ui/web/game/SmallViewPanel.js. -->
+            <div id="smallViewPanel" class="small-view-panel" style="display:none;">
+                <div class="sv-header">
+                    <button type="button" class="sv-btn sv-caret" aria-label="Minimise board overview"></button>
+                    <div class="sv-tabs"></div>
+                    <div class="sv-title"></div>
+                    <button type="button" class="sv-btn sv-follow" aria-label="Reset view"></button>
+                </div>
+                <div class="sv-content">
+                    <canvas class="sv-pane" id="smallViewMinimapCanvas"></canvas>
+                    <canvas class="sv-pane" id="smallViewInfiniteCanvas" style="display:none;"></canvas>
+                    <canvas class="sv-pane" id="opponentGridCanvas" style="display:none;"></canvas>
+                    <canvas class="sv-pane" id="opponentGrid3DCanvas" style="display:none;"></canvas>
+                </div>
+            </div>
+
+            </div><!-- /#playArea -->
 
             
             <div id="chatPanel" class="chat-panel" style="display:none;">
@@ -535,16 +553,16 @@
                     <button class="chat-close-btn" id="btnChatClose" aria-label="Close chat">&times;</button>
                 </div>
                 <div class="chat-separator"></div>
-                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-messages" id="chatMessages" data-nav-scroll="Chat messages" tabindex="0"></div>
                 <div class="chat-input-row">
-                    <input type="text" id="chatInput" class="chat-input" data-wire-text="chat-message" placeholder="Type a message..." autocomplete="off">
+                    <input type="text" id="chatInput" class="chat-input" data-wire-text="chat-message" data-nav-multiline placeholder="Type a message..." autocomplete="off">
                     <button class="chat-send-btn" id="btnChatSend" data-i18n>Send</button>
                 </div>
             </div>
 
             
             <div id="gameModal" style="display:none;">
-                <div class="game-modal-card" id="gameModalCard">
+                <div class="game-modal-card" id="gameModalCard" data-nav-scroll="Game dialog" tabindex="0">
                     <button class="gm-settings-btn" id="btnModalSettings" title="Settings">⚙️</button>
                     <button class="gm-screenshot-btn" id="btnModalScreenshot" title="Save screenshot" aria-label="Save screenshot" style="display:none;">📷</button>
                     <button class="gm-close-btn" id="btnModalClose">X</button>
@@ -572,16 +590,16 @@
                     <div id="communityPodium" class="gm-podium" style="display:none;"></div>
 
                     <!-- Community game stats area -->
-                    <div id="communityStatsArea" style="display:none;">
+                    <div id="communityStatsArea" data-nav-scroll="Community results" tabindex="0" style="display:none;">
                         <table class="cs-table">
                             <thead>
                                 <tr>
-                                    <th class="cs-th cs-th-name" data-sort="playerName" data-i18n>Name</th>
-                                    <th class="cs-th cs-th-num cs-sorted" data-sort="score"><span data-i18n>Score</span> ▼</th>
-                                    <th class="cs-th cs-th-num" data-sort="attemptCount" data-i18n>Attempts</th>
-                                    <th class="cs-th cs-th-num" data-sort="revealCount" data-i18n>Reveals</th>
-                                    <th class="cs-th cs-th-num" data-sort="flagCount" data-i18n>Flags</th>
-                                    <th class="cs-th cs-th-num" data-sort="timeAliveMs" data-i18n>Alive</th>
+                                    <th class="cs-th cs-th-name" data-sort="playerName"><span data-i18n>Name</span><span class="cs-th-arrow"></span></th>
+                                    <th class="cs-th cs-th-num cs-sorted" data-sort="score"><span data-i18n>Score</span><span class="cs-th-arrow"> ▼</span></th>
+                                    <th class="cs-th cs-th-num" data-sort="attemptCount"><span data-i18n>Att</span><span class="cs-th-arrow"></span></th>
+                                    <th class="cs-th cs-th-num" data-sort="revealCount"><span data-i18n>Reveals</span><span class="cs-th-arrow"></span></th>
+                                    <th class="cs-th cs-th-num" data-sort="flagCount"><span data-i18n>Flags</span><span class="cs-th-arrow"></span></th>
+                                    <th class="cs-th cs-th-num" data-sort="timeAliveMs"><span data-i18n>Alive</span><span class="cs-th-arrow"></span></th>
                                 </tr>
                             </thead>
                             <tbody id="communityStatsBody"></tbody>
@@ -589,7 +607,7 @@
                     </div>
 
                     <!-- PVP Teams stats area -->
-                    <div id="pvpTeamsStatsArea" style="display:none;">
+                    <div id="pvpTeamsStatsArea" data-nav-scroll="Team results" tabindex="0" style="display:none;">
                         <div class="team-stats-panel">
                             <div class="team-stats-col" id="pvpTeam1Col"></div>
                             <div class="team-stats-col" id="pvpTeam2Col"></div>
@@ -597,7 +615,7 @@
                     </div>
 
                     <!-- Duel stats area -->
-                    <div id="duelStatsArea" style="display:none;">
+                    <div id="duelStatsArea" data-nav-scroll="Duel results" tabindex="0" style="display:none;">
                         <div class="duel-score-row">
                             <span id="duelScoreLeft" class="duel-score">0</span>
                             <span class="duel-score-colon">:</span>
@@ -650,8 +668,33 @@
                     <label data-i18n>Country (optional)</label>
                     <button type="button" class="btn settings-select" id="welcomeCountryBtn">Global / Anonymous</button>
                 </div>
+                <a href="https://vladimirjanus.github.io/MinesweeperOnline/privacy.html" target="_blank" rel="noopener" class="privacy-link" data-i18n>Privacy Policy</a>
                 <div class="modal-actions">
                     <button class="btn btn-accent" id="welcomeNameConfirm" data-i18n>Set Name</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Follows the first-run welcome dialog. Unlike that one it can simply
+             be dismissed: a name is required to play online, a language is not.
+             The English notice is deliberately NOT data-i18n — it must stay
+             English so it is readable even when the translation of it is the
+             thing that is wrong. #welcomeLanguageNoticeTranslated is written by
+             JS (and so carries no data-i18n either). -->
+        <div id="languageNoticeDialog" class="modal-backdrop">
+            <div class="modal welcome-name-modal">
+                <div class="modal-title-row">
+                    <h3 data-i18n>Language</h3>
+                    <button type="button" class="modal-close-btn" id="languageNoticeClose" aria-label="Close">&times;</button>
+                </div>
+                <p class="modal-desc" data-i18n>Pick the language the game speaks. You can change it later in Settings.</p>
+                <div class="form-group">
+                    <select id="welcomeLanguage" class="settings-select"></select>
+                </div>
+                <p class="settings-desc-text">Languages other than English are a work in progress and may be inaccurate.</p>
+                <p class="settings-desc-text" id="welcomeLanguageNoticeTranslated" style="display:none;"></p>
+                <div class="modal-actions">
+                    <button class="btn btn-accent" id="languageNoticeConfirm" data-i18n>Close</button>
                 </div>
             </div>
         </div>
@@ -766,6 +809,7 @@
                     <button class="settings-tab" data-tab="guide"><span class="app-icon" style="--app-icon-src:url('../../../res/icons/ui/settings_guide.svg');--app-icon-size:17px"></span><span data-i18n>Guide</span></button>
                     <button class="settings-tab" data-tab="account"><span class="app-icon" style="--app-icon-src:url('../../../res/icons/ui/settings_account.svg');--app-icon-size:17px"></span><span data-i18n>Account</span></button>
                     <button class="settings-tab" data-tab="system"><span class="app-icon" style="--app-icon-src:url('../../../res/icons/ui/settings_system.svg');--app-icon-size:17px"></span><span data-i18n>System</span></button>
+                    <button class="settings-tab" data-tab="about"><span class="app-icon" style="--app-icon-src:url('../../../res/icons/ui/settings_about.svg');--app-icon-size:17px"></span><span data-i18n>About</span></button>
                 </div>
 
                 <!-- General tab -->
@@ -778,11 +822,7 @@
                         <label data-i18n>Country</label>
                         <button type="button" class="btn settings-select" id="appCountryBtn" data-i18n>Global / Anonymous</button>
                     </div>
-                    <div class="settings-section-title" data-i18n>In-game Visuals</div>
-                    <div class="toggle-row">
-                        <label data-i18n>Show Action Decals</label>
-                        <input type="checkbox" id="appShowDecals" checked>
-                    </div>
+                    <div class="settings-section-title" data-i18n>Notifications</div>
                     <div class="toggle-row">
                         <label data-i18n>Show chat pop-up notifications</label>
                         <input type="checkbox" id="appChatNotifications">
@@ -820,8 +860,8 @@
                         <label data-i18n>Theme</label>
                         <select id="appThemeMode" class="settings-select">
                             <option value="dark" data-i18n>Dark</option>
-                            <option value="blue">Blue</option>
-                            <option value="light">Light</option>
+                            <option value="blue" data-i18n>Classic Blue</option>
+                            <option value="light" data-i18n>Soft Light</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -834,12 +874,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label data-i18n="Language">Language</label>
-                        <!-- Options are filled from TranslationManager's shipped
-                             list so a new catalog appears here automatically. -->
-                        <select id="appLanguage" class="settings-select"></select>
-                    </div>
-                    <div class="form-group">
                         <label data-i18n>Density</label>
                         <select id="appUiDensity" class="settings-select">
                             <option value="veryCompact" data-i18n>Very Compact</option>
@@ -847,6 +881,47 @@
                             <option value="normal" data-i18n>Normal</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label data-i18n>Network Bar</label>
+                        <select id="appNetworkBarPosition" class="settings-select">
+                            <option value="top" data-i18n>Top</option>
+                            <option value="left" data-i18n>Left Side</option>
+                            <option value="right" data-i18n>Right Side</option>
+                            <option value="automatic" data-i18n>Automatic</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="Language">Language</label>
+                        <!-- Options are filled from TranslationManager's shipped
+                             list so a new catalog appears here automatically. -->
+                        <select id="appLanguage" class="settings-select"></select>
+                    </div>
+                    <div class="settings-section-title" data-i18n>Board Overview</div>
+                    <div class="form-group">
+                        <label data-i18n>Position</label>
+                        <select id="appSmallViewPosition" class="settings-select">
+                            <option value="topLeft" data-i18n>Top Left</option>
+                            <option value="topRight" data-i18n>Top Right</option>
+                            <option value="bottomLeft" data-i18n>Bottom Left</option>
+                            <option value="bottomRight" data-i18n>Bottom Right</option>
+                            <option value="hidden" data-i18n>Hidden</option>
+                        </select>
+                    </div>
+                    <div class="toggle-row" id="appSmallViewMinimisedRow">
+                        <label data-i18n>Start Minimised</label>
+                        <input type="checkbox" id="appSmallViewMinimised">
+                    </div>
+                    <div class="toggle-row" id="appSmallViewMinimapRow">
+                        <label data-i18n>Show Minimap On Large Boards</label>
+                        <input type="checkbox" id="appSmallViewMinimap">
+                    </div>
+                    <div class="settings-desc-text" id="appSmallViewHint"></div>
+                    <div class="settings-section-title" data-i18n>In-game Visuals</div>
+                    <div class="toggle-row">
+                        <label data-i18n>Show Action Decals</label>
+                        <input type="checkbox" id="appShowDecals" checked>
+                    </div>
+                    <p class="settings-desc-text" data-i18n>Marks the cell each player just revealed or flagged, so a shared board shows who did what.</p>
                     <div class="settings-section-title" data-i18n>Board Theme</div>
                     <div id="appBoardThemeGrid" class="board-theme-grid"></div>
                     <input type="hidden" id="appBoardThemeId" value="0">
@@ -858,31 +933,31 @@
                     <div class="form-group">
                         <label id="appLeftClickLabel" data-i18n>Left Click</label>
                         <select id="appLeftClickBehaviour" class="settings-select">
-                            <option value="0">Reveal</option>
-                            <option value="1">Flag</option>
-                            <option value="2">Primary Action</option>
-                            <option value="3">Secondary Action</option>
-                            <option value="4">None</option>
+                            <option value="0" data-i18n data-i18n-context="SettingsContent">Reveal</option>
+                            <option value="1" data-i18n data-i18n-context="SettingsContent">Flag</option>
+                            <option value="2" data-i18n data-i18n-context="SettingsContent">Primary action</option>
+                            <option value="3" data-i18n data-i18n-context="SettingsContent">Secondary action</option>
+                            <option value="4" data-i18n data-i18n-context="SettingsContent">Do nothing</option>
                         </select>
                     </div>
                     <div class="form-group" id="appRightClickRow">
                         <label data-i18n>Right Click</label>
                         <select id="appRightClickBehaviour" class="settings-select">
-                            <option value="0">Reveal</option>
-                            <option value="1">Flag</option>
-                            <option value="2">Primary Action</option>
-                            <option value="3">Secondary Action</option>
-                            <option value="4">None</option>
+                            <option value="0" data-i18n data-i18n-context="SettingsContent">Reveal</option>
+                            <option value="1" data-i18n data-i18n-context="SettingsContent">Flag</option>
+                            <option value="2" data-i18n data-i18n-context="SettingsContent">Primary action</option>
+                            <option value="3" data-i18n data-i18n-context="SettingsContent">Secondary action</option>
+                            <option value="4" data-i18n data-i18n-context="SettingsContent">Do nothing</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label data-i18n>Press and Hold</label>
                         <select id="appLongPressBehaviour" class="settings-select">
-                            <option value="0">Reveal</option>
-                            <option value="1">Flag</option>
-                            <option value="2">Primary Action</option>
-                            <option value="3">Secondary Action</option>
-                            <option value="4">None</option>
+                            <option value="0" data-i18n data-i18n-context="SettingsContent">Reveal</option>
+                            <option value="1" data-i18n data-i18n-context="SettingsContent">Flag</option>
+                            <option value="2" data-i18n data-i18n-context="SettingsContent">Primary action</option>
+                            <option value="3" data-i18n data-i18n-context="SettingsContent">Secondary action</option>
+                            <option value="4" data-i18n data-i18n-context="SettingsContent">Do nothing</option>
                         </select>
                     </div>
                     <div id="appClickMappingWarning" class="settings-warning click-mapping-warning" style="display:none;" data-i18n>
@@ -927,15 +1002,32 @@
                 <!-- System tab -->
                 <div class="settings-tab-content" id="settingsTab-system">
                     <div class="settings-section-title" data-i18n>Server Connection</div>
-                    <div class="form-group">
-                        <label data-i18n>Server Address</label>
-                        <div class="server-addr-row">
-                            <input type="text" id="appServerAddress" placeholder="server:port" class="server-input">
-                            <button id="refetchServerBtn" class="btn refetch-btn" title="Re-fetch server address" data-i18n>🔄 Re-fetch</button>
+                    <!-- First in the section, because it governs whether anything
+                         else here matters: with it on, the address is never dialled
+                         and never even looked up. -->
+                    <div class="toggle-row">
+                        <label data-i18n>Play offline only</label>
+                        <input type="checkbox" id="appPlayOfflineOnly">
+                    </div>
+                    <p class="settings-desc-text" id="appPlayOfflineOnlyDesc"></p>
+                    <div id="appServerConnectionControls">
+                        <div class="form-group">
+                            <label data-i18n>Server Address</label>
+                            <div class="server-addr-row">
+                                <input type="text" id="appServerAddress" placeholder="server:port" class="server-input">
+                                <button id="refetchServerBtn" class="btn refetch-btn" title="Re-fetch server address" data-i18n>🔄 Re-fetch</button>
+                            </div>
+                            <div id="addressError" class="address-error" style="display:none;"></div>
                         </div>
-                        <div id="addressError" class="address-error" style="display:none;"></div>
                     </div>
                     <div id="connectionIndicator"></div>
+
+                    <div class="settings-section-title" data-i18n>Device</div>
+                    <!-- What the app decided this machine is. Everything
+                         device-specific in the UI follows from this one word, so
+                         when a screen looks wrong on an unusual device this is
+                         the first thing worth reading out. -->
+                    <p class="settings-desc-text" id="appDeviceText"></p>
 
                     <div class="settings-section-title" data-i18n>Local Data</div>
 
@@ -947,8 +1039,28 @@
 
                     <button id="btnResetSettings" class="btn" style="margin-bottom:4px;" data-i18n>↺ Reset All Settings</button>
                     <p class="settings-desc-text" data-i18n>Resets all app settings to their defaults. This cannot be undone.</p>
+                </div>
 
-                    <div id="appVersionText" class="version-text"></div>
+                <!-- About tab -->
+                <div class="settings-tab-content" id="settingsTab-about">
+                    <div class="settings-section-title" data-i18n>Minesweeper Online</div>
+                    <p class="settings-desc-text" id="appVersionText"></p>
+                    <!-- Set from JS so the credit is one translatable format
+                         string shared with the Qt client, names substituted. -->
+                    <p class="settings-desc-text" id="appAuthorText"></p>
+
+                    <!-- Kept beside the credit rather than filed under Links:
+                         it supports the person named directly above it, and it
+                         is the one thing here that asks something of the
+                         reader, hence a button and not a fourth muted link
+                         (Qt: the primary AppButton in SettingsContent.qml).
+                         The label is its own span because data-i18n assigns
+                         the element's whole textContent, glyph included. -->
+                    <a href="https://www.paypal.com/donate/?hosted_button_id=K3Y5Z6EWDSNT2" target="_blank" rel="noopener" class="btn btn-accent btn-small donate-btn"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/ui/paypal.svg');--app-icon-size:15px"></span><span data-i18n>Donate</span></a>
+
+                    <div class="settings-section-title" data-i18n>Links</div>
+                    <a href="https://vladimirjanus.github.io/" target="_blank" rel="noopener" class="privacy-link" data-i18n>Website</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.vladjsoftware.minesweeperonline" target="_blank" rel="noopener" class="privacy-link" data-i18n>Google Play Store</a>
                     <a href="https://vladimirjanus.github.io/MinesweeperOnline/privacy.html" target="_blank" rel="noopener" class="privacy-link" data-i18n>Privacy Policy</a>
                 </div>
 
@@ -1074,7 +1186,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="publicLobbyList" class="gb-list">
+                <div id="publicLobbyList" class="gb-list" data-nav-scroll="Public games" tabindex="0">
                     <div class="list-empty" data-i18n>No player lobbies available.
 Create one or refresh to check again!</div>
                 </div>
@@ -1120,13 +1232,13 @@ Create one or refresh to check again!</div>
                 </div>
 
                 <!-- Normal leaderboard list -->
-                <div id="leaderboardList" class="lb-list lb-page-list">
+                <div id="leaderboardList" class="lb-list lb-page-list" data-nav-scroll="Leaderboard" tabindex="0">
                     <div class="list-empty" data-i18n>No entries yet.
 Be the first!</div>
                 </div>
 
                 <!-- ELO leaderboard list (shown in ELO mode) -->
-                <div id="eloLeaderboardList" class="lb-list lb-page-list" style="display:none">
+                <div id="eloLeaderboardList" class="lb-list lb-page-list" data-nav-scroll="ELO leaderboard" tabindex="0" style="display:none">
                     <div class="list-empty" data-i18n>No ranked games yet.
 Be the first!</div>
                 </div>
@@ -1211,7 +1323,7 @@ Be the first!</div>
             <div class="modal lobby-friends-modal">
                 <h3 data-i18n>Friends</h3>
                 <p class="modal-desc" id="lobbyFriendsDialogStatus" data-i18n>Invite friends to this lobby</p>
-                <div id="lobbyFriendsDialogList" class="lobby-friends-list lobby-friends-dialog-list"></div>
+                <div id="lobbyFriendsDialogList" class="lobby-friends-list lobby-friends-dialog-list" data-nav-scroll="Friends available to invite" tabindex="0"></div>
                 <div class="modal-actions">
                     <button class="btn" id="btnLobbyFriendsClose" data-i18n>Close</button>
                 </div>
@@ -1264,7 +1376,7 @@ Be the first!</div>
                 <div class="form-group">
                     <input type="text" id="countryPickerSearch" placeholder="Search countries…" autocomplete="off">
                 </div>
-                <div class="country-picker-list" id="countryPickerList"></div>
+                <div class="country-picker-list" id="countryPickerList" data-nav-scroll="Countries" tabindex="0"></div>
                 <div class="modal-actions">
                     <button class="btn" id="countryPickerCancel" data-i18n>Cancel</button>
                 </div>
@@ -1287,7 +1399,7 @@ Be the first!</div>
                     <button class="player-stats-tab" data-tab="2">🏆 <span data-i18n>Achievements</span></button>
                 </div>
                 <div id="playerStatsLoading" class="player-stats-loading">Loading…</div>
-                <div id="playerStatsBody" class="player-stats-body" style="display:none"></div>
+                <div id="playerStatsBody" class="player-stats-body" data-nav-scroll="Player statistics" tabindex="0" style="display:none"></div>
             </div>
         </div>
 
@@ -1295,7 +1407,7 @@ Be the first!</div>
             <div class="modal social-duel-modal">
                 <h3 id="friendDuelTitle" data-i18n>Ranked Duel</h3>
                 <p class="modal-desc" id="friendDuelBody">Choose a category.</p>
-                <div id="friendDuelCategories" class="social-duel-categories"></div>
+                <div id="friendDuelCategories" class="social-duel-categories" data-nav-scroll="Ranked categories" tabindex="0"></div>
                 <div class="modal-actions">
                     <button class="btn btn-accent" id="btnFriendDuelSend" data-i18n>Send Challenge</button>
                     <button class="btn" id="btnFriendDuelCancel" data-i18n>Cancel</button>
@@ -1311,7 +1423,7 @@ Be the first!</div>
                     <h2 class="ranked-page-title" data-i18n>Ranked Duel</h2>
                     <button id="btnRankedRefresh" class="screen-back-btn" aria-label="Refresh"><span class="hdr-icon icon-refresh"></span></button>
                 </div>
-                <div class="ranked-scroll">
+                <div class="ranked-scroll" data-nav-scroll="Ranked duel" tabindex="0">
                     <div id="rankedStatusPanel" class="ranked-status-panel">
                         <span class="ranked-status-strip"></span>
                         <span id="rankedStatusDot" class="ranked-status-dot"></span>
@@ -1322,14 +1434,14 @@ Be the first!</div>
                         <span id="rankedActivePlayerCount" class="ranked-active-pill">online: 0 | playing: 0</span>
                         <button class="btn ranked-status-cancel" id="btnRankedCancel" style="display:none;" data-i18n>Cancel</button>
                     </div>
-                    <div class="ranked-page-grid">
+                    <div class="ranked-page-grid" data-nav-scroll="Ranked duel sections" tabindex="0">
                         <section class="ranked-page-section ranked-ladders-section">
                             <div class="ranked-section-title"><span data-i18n>Ladders</span><span id="rankedCategoryCount">0 available</span></div>
-                            <div id="rankedCategoryGrid" class="ranked-category-grid"></div>
+                            <div id="rankedCategoryGrid" class="ranked-category-grid" data-nav-scroll="Ranked categories" tabindex="0"></div>
                         </section>
                         <section class="ranked-page-section ranked-history-section">
                             <div class="ranked-section-title"><span data-i18n>Recent Matches</span><span data-i18n>local</span></div>
-                            <div id="rankedHistoryList" class="ranked-history-list">
+                            <div id="rankedHistoryList" class="ranked-history-list" data-nav-scroll="Recent ranked matches" tabindex="0">
                                 <div class="ranked-history-empty" data-i18n>No ranked matches yet.</div>
                             </div>
                         </section>
@@ -1374,7 +1486,7 @@ Be the first!</div>
                     <button class="stats-variant-tab" data-variant="infinite" data-i18n>Infinite</button>
                     <button class="stats-variant-tab" data-variant="NoGuess" data-i18n>No Guessing</button>
                 </div>
-                <div class="stats-scroll" id="statsScroll">
+                <div class="stats-scroll" id="statsScroll" data-nav-scroll="Statistics" tabindex="0">
                     <div class="stats-mode-title" id="statsModeTitle" data-i18n>Total</div>
                     <div class="stats-cards" id="statsCards"></div>
                 </div>
@@ -1389,8 +1501,8 @@ Be the first!</div>
                     <h3 data-i18n>Screenshots</h3>
                     <button id="btnScreenshotGalleryClose" class="screen-back-btn" aria-label="Close">×</button>
                 </div>
-                <div id="screenshotGalleryGrid" class="screenshot-gallery-grid"></div>
-                <div id="screenshotPreviewPane" class="screenshot-preview-pane">
+                <div id="screenshotGalleryGrid" class="screenshot-gallery-grid" data-nav-scroll="Screenshot gallery" tabindex="0"></div>
+                <div id="screenshotPreviewPane" class="screenshot-preview-pane" data-nav-scroll="Screenshot preview" tabindex="0">
                     <button id="btnScreenshotPreviewClose" class="screen-back-btn screenshot-preview-close" aria-label="Back">←</button>
                     <img id="screenshotPreviewImage" alt="Minesweeper screenshot">
                     <p id="screenshotPreviewMeta" class="settings-desc-text"></p>
@@ -1501,7 +1613,7 @@ This cannot be undone.</p>
                     <button class="btn btn-small ct-tab" data-ct-tab="mines" data-i18n>Mines</button>
                 </div>
 
-                <div class="ct-body">
+                <div class="ct-body" data-nav-scroll="Board theme settings" tabindex="0">
                     <div class="ct-pane" data-ct-pane="colours">
                         <div class="settings-section-title" data-i18n>Board</div>
                         <div class="ct-row"><label for="ctBackgroundColor" data-i18n>Background</label><input type="color" id="ctBackgroundColor" data-spec-key="backgroundColor"></div>
