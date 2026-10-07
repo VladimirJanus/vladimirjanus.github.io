@@ -1,10 +1,10 @@
 {
-    "version":  "1.12.0",
-    "versionLine":  "1.12",
+    "version":  "1.13.0",
+    "versionLine":  "1.13",
     "windowsInstaller":  "builds/windows/BetterTimetable-Windows-Setup.exe",
-    "windowsArchive":  "builds/windows/BetterTimetable-1.12.0-Windows-Setup.exe",
-    "windowsSha256":  "b48aec06d712af340f9e5fca52119cb56169733c04e708e6e05ad2ba8ca3dec1",
-    "windowsBytes":  42552177,
+    "windowsArchive":  "builds/windows/BetterTimetable-1.13.0-Windows-Setup.exe",
+    "windowsSha256":  "1572e2998dffeb1789eb8bbb5e25a8e2cb7ed7d740b794ddc7025e3502fd1e47",
+    "windowsBytes":  42582812,
     "googlePlay":  "https://play.google.com/store/apps/details?id=com.vladjsoftware.bettertimetable",
     "androidAvailability":  "closed-testing"
 }
