@@ -1,5 +1,5 @@
 {
   "format": 1,
-  "main": { "status": "online", "tcp": "5.tcp.eu.ngrok.io:22550", "wss": "wss://0719-146-212-207-148.ngrok-free.app" },
+  "main": { "status": "online", "tcp": "7.tcp.eu.ngrok.io:17792", "wss": "offline" },
   "backup": { "status": "offline" }
 }
