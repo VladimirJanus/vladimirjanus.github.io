@@ -1,8 +1,6 @@
 {
     "backup": {
-        "status": "online",
-        "tcp": "7.tcp.eu.ngrok.io:27757",
-        "tcpKey": "sha256/XNNz8/PP4hTB04gG/gcB4WEJErB0FDxeUWgyLTo88gQ="
+        "status": "offline"
     },
     "format": 1,
     "main": {
