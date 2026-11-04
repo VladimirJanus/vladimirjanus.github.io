@@ -1,0 +1,11 @@
+{
+    "backup": {
+        "status": "offline"
+    },
+    "format": 1,
+    "main": {
+        "status": "online",
+        "tcp": "offline",
+        "wss": "wss://cloudiest-ileen-nonpsychological.ngrok-free.dev"
+    }
+}

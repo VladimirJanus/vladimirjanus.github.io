@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a timetable — BetterTimetable</title>
+    <meta name="description" content="Open a timetable someone shared with you in BetterTimetable.">
+    <meta name="robots" content="noindex">
+    <meta name="referrer" content="no-referrer">
+    <link rel="icon" href="../assets/app-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../site.css">
+    <style>[hidden] { display: none !important; } button.button { font: inherit; text-align: left; cursor: pointer; width: 100%; }</style>
+</head>
+<body class="site-page home-page">
+    <header class="site-header">
+        <a class="site-brand" href="../../index.html" aria-label="Vladimir Januš home">
+            <span class="brand-mark" aria-hidden="true">VJ</span><span>Vladimir Januš</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary links">
+            <a href="../">BetterTimetable</a>
+            <a href="../../contact.html">Contact</a>
+        </nav>
+    </header>
+    <main class="home-layout">
+        <section class="minesweeper-panel timetable-panel" aria-labelledby="addTitle">
+            <div class="section-heading">
+                <img class="project-icon" src="../assets/app-icon.svg" width="64" height="64" alt="">
+                <p class="eyebrow">BetterTimetable</p>
+                <h1 id="addTitle">Someone shared their timetable</h1>
+                <p class="lede" id="addLede">Open it in BetterTimetable to add it as a profile and compare it with yours using Show intersect.</p>
+                <p class="project-note">The timetable stays on this device: it is in the part of the link after #, which browsers never send to this website. This page has no analytics or tracking.</p>
+            </div>
+            <div class="play-actions" aria-label="Open the shared timetable">
+                <a class="button button-green button-hero" id="openApp" href="../" hidden>
+                    <span class="button-mark mark-green" aria-hidden="true">OPEN</span>
+                    <span><span class="button-title">Open in BetterTimetable</span><span class="button-subtitle">Android · opens Google Play if the app isn't installed</span></span>
+                </a>
+                <button class="button button-amber" id="copyCode" type="button" hidden>
+                    <span class="button-mark mark-amber" aria-hidden="true">COPY</span>
+                    <span><span class="button-title" id="copyTitle">Copy the timetable code</span><span class="button-subtitle">Then in BetterTimetable: Data › Add profile › Paste</span></span>
+                </button>
+                <a class="button" href="https://play.google.com/store/apps/details?id=com.vladjsoftware.bettertimetable">
+                    <span class="button-mark" aria-hidden="true">GP</span>
+                    <span><span class="button-title">Get BetterTimetable on Google Play</span><span class="button-subtitle">Android · currently in closed testing</span></span>
+                </a>
+                <a class="button" href="../">
+                    <span class="button-mark" aria-hidden="true">WIN</span>
+                    <span><span class="button-title">Get BetterTimetable for Windows</span><span class="button-subtitle">Download page</span></span>
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <span>Published by VladJ Software</span>
+        <span class="footer-links"><a href="../../contact.html">Contact</a><a href="../privacy.html">Privacy</a></span>
+    </footer>
+    <script>
+    // Reads the shared code from the address on this device only; nothing is sent anywhere.
+    (function () {
+        var code = decodeURIComponent(location.hash.slice(1));
+        if (!/^BT2:[0-9A-Va-v]+\.?$/.test(code)) {
+            document.getElementById("addLede").textContent = "This link has no timetable in it. Ask for a new code from BetterTimetable: Data › My QR code.";
+            return;
+        }
+        // Keep the code out of this page's address and history entry.
+        try { history.replaceState(null, "", location.pathname); } catch (e) {}
+        if (/Android/i.test(navigator.userAgent)) {
+            // Android intent links reserve '#', so the app also accepts the code after '?'.
+            var store = "https://play.google.com/store/apps/details?id=com.vladjsoftware.bettertimetable";
+            var open = document.getElementById("openApp");
+            open.href = "intent://vladimirjanus.github.io/BetterTimetable/add/?" + code + "#Intent;scheme=https;package=com.vladjsoftware.bettertimetable;S.browser_fallback_url=" + encodeURIComponent(store) + ";end";
+            open.hidden = false;
+        }
+        var copy = document.getElementById("copyCode");
+        copy.hidden = false;
+        copy.addEventListener("click", function () {
+            var title = document.getElementById("copyTitle");
+            var done = function () { title.textContent = "Copied. Paste it in BetterTimetable."; };
+            if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code).then(done, function () { window.prompt("Copy this code:", code); });
+            else window.prompt("Copy this code:", code);
+        });
+    })();
+    </script>
+</body>
+</html>

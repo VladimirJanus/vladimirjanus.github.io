@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Join Minesweeper Online</title>
+<!-- Permanent redirect shim. Invite links in this form are already shared in chats,
+     so this URL must outlive the last 11.5 install. Never delete.
+     Only catches /command/join/?game=… — the path form /command/join/12345 is not a
+     real file, so GitHub Pages serves 404.html, whose minesweeper-legacy entry handles it. -->
+</head>
+<body>
+<p>Redirecting to your <a id="target" href="/MinesweeperOnline/command/join/">invite</a>.</p>
+<script>
+    var p = new URLSearchParams(location.search);
+    var raw = p.get("game") || p.get("gameId") || p.get("id") || "";
+    if (!/^\d+$/.test(raw)) {
+        var h = location.hash.match(/(\d+)/);
+        raw = h ? h[1] : "";
+    }
+    var url = "/MinesweeperOnline/command/join/"
+        + (raw ? "?game=" + encodeURIComponent(raw) : "");
+    document.getElementById("target").href = url;
+    location.replace(url);
+</script>
+</body>
+</html>

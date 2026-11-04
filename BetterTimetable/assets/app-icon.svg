@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>BetterTimetable app icon</title>
+  <desc>A three-column calendar with teal and blue class blocks and a check.</desc>
+  <rect width="512" height="512" fill="#14283e"/>
+  <g fill="none" stroke="#f7fafc" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="112" y="125" width="288" height="290" rx="36"/>
+    <path d="M126 197H386 M184 91V152 M328 91V152"/>
+  </g>
+  <path d="M208 219V390 M304 219V390" stroke="#f7fafc" stroke-width="7" opacity=".22"/>
+  <rect x="138" y="223" width="49" height="73" rx="12" fill="#1fd1b9"/>
+  <rect x="233" y="295" width="50" height="80" rx="12" fill="#4f8cff"/>
+  <rect x="329" y="324" width="45" height="52" rx="12" fill="#4f8cff" opacity=".65"/>
+  <path d="M329 250L347 268L377 231" fill="none" stroke="#1fd1b9" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
