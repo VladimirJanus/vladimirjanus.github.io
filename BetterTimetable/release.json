@@ -6,5 +6,5 @@
     "windowsSha256":  "518e890c62e87687a42434d5c70474b467140710ab3c91fe014d0974552c35f4",
     "windowsBytes":  43378935,
     "googlePlay":  "https://play.google.com/store/apps/details?id=com.vladjsoftware.bettertimetable",
-    "androidAvailability":  "closed-testing"
+    "androidAvailability":  "public"
 }
