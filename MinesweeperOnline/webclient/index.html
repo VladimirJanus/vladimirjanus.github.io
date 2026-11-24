@@ -80,8 +80,9 @@
                 <div class="solo-header">
                     <div class="screen-header-row">
                         <button id="btnSoloBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
-                        <h2 class="solo-title" id="soloMenuTitle">🎲 Solo Play</h2>
-                        <div class="screen-header-spacer"></div>
+                        <h2 class="solo-title" id="soloMenuTitle">Solo Play</h2>
+                        <!-- The shop (SoloMenu.qml's Shop button; ShopUI.js draws it) -->
+                        <button id="btnSoloShop" class="solo-shop-btn"></button>
                     </div>
                     <div class="solo-variant-row" id="soloVariantButtons"></div>
                 </div>
@@ -91,14 +92,13 @@
                         <div class="level-card-body" id="continueCardBody">
                             <div class="level-preview-container" id="continuePreview"></div>
                             <div class="level-info">
-                                <div class="level-name continue-title" data-i18n>Continue Last Game</div>
-                                <div class="level-detail" id="continueLevelName" data-i18n>Custom level</div>
-                                <div class="level-detail" id="continueSize">20 × 20</div>
-                                <div class="level-detail" id="continueDensity">Density: 20% (80 mines)</div>
-                                <div class="level-detail" id="continueTime">Time: 00:00:00</div>
+                                <div class="level-name continue-title" data-i18n data-i18n-context="SoloMenu">Continue Last Game</div>
+                                <div class="level-detail" id="continueLevelName"></div>
+                                <div class="level-detail" id="continueSize"></div>
+                                <div class="level-detail" id="continueDensity"></div>
                             </div>
                             <div class="level-actions">
-                                <button class="btn btn-icon" id="btnContinueGame">▶</button>
+                                <button class="btn btn-icon solo-action" id="btnContinueGame" title="Continue" aria-label="Continue" data-i18n="" data-i18n-attr="title,aria-label" data-i18n-context="SoloMenu">➡️</button>
                             </div>
                         </div>
                     </div>
@@ -108,15 +108,15 @@
                         <div class="level-card-body">
                             <div class="level-preview-container" id="customPreview"></div>
                             <div class="level-info">
-                                <div class="level-name" data-i18n>Custom</div>
-                                <div class="level-detail" id="soloCustomSize">20 × 20</div>
-                                <div class="level-detail" id="soloCustomDensity">Density: 20%</div>
-                                <div class="level-detail" id="soloCustomMines">Mines: 80</div>
+                                <div class="level-name" data-i18n data-i18n-context="SoloMenu">Custom</div>
+                                <div class="level-detail" id="soloCustomSize"></div>
+                                <div class="level-detail" id="soloCustomDensity"></div>
+                                <div class="level-detail" id="soloCustomMines"></div>
                             </div>
                             <div class="level-actions">
-                                <button class="btn btn-icon" id="btnSoloStart">▶</button>
-                                <button class="btn btn-icon" id="btnSoloSettings" data-i18n>Settings</button>
-                                <button class="btn btn-icon" id="btnCustomContinue" style="display:none" data-i18n>Continue</button>
+                                <button class="btn btn-icon solo-action" id="btnSoloStart" title="Play" aria-label="Play" data-i18n="" data-i18n-attr="title,aria-label" data-i18n-context="SoloMenu">▶️</button>
+                                <button class="btn btn-icon solo-action" id="btnSoloSettings" title="Custom Settings" aria-label="Custom Settings" data-i18n="" data-i18n-attr="title,aria-label" data-i18n-context="SoloMenu">⚙️</button>
+                                <button class="btn btn-icon solo-action" id="btnCustomContinue" title="Continue" aria-label="Continue" data-i18n="" data-i18n-attr="title,aria-label" data-i18n-context="SoloMenu" style="display:none">➡️</button>
                             </div>
                         </div>
                     </div>
@@ -167,8 +167,8 @@
                 background: var(--bg-grid, #202124); border:1px solid var(--panel-border, #2c3a4f); overflow:hidden; }
             #cbCanvas { width:100%; height:100%; display:block; }
             .cb-zoom-controls { position:absolute; top:12px; right:12px; display:flex; gap:6px; z-index:2; }
-            .cb-preview-hint { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-                width:70%; text-align:center; color: var(--text-muted, #7d8ca0); font-size:13px; pointer-events:none; }
+            /* Above the board, not over it (CustomLevelBuilder.qml). */
+            .cb-preview-hint { font-size:11px; color: var(--text-muted, #7d8ca0); }
             .cb-code-area { width:100%; height:130px; box-sizing:border-box; resize:none; font-family:monospace; font-size:11px;
                 padding:8px; border-radius:6px; background: var(--panel-background, #0e1622);
                 color: var(--text-primary, #e6edf3); border:1px solid var(--panel-border, #2c3a4f); word-break:break-all; }
@@ -266,6 +266,7 @@
                 </div>
 
                 <div class="cb-status" id="cbStatus"></div>
+                <div class="cb-preview-hint" id="cbPreviewHint" data-i18n>Preview — switch to “Custom” shape or “Place own” mines to edit the grid.</div>
 
                 <div class="cb-canvas-wrap" id="cbCanvasWrap">
                     <canvas id="cbCanvas"></canvas>
@@ -274,7 +275,6 @@
                         <button class="btn" id="cbZoomFit" data-i18n>Fit</button>
                         <button class="btn" id="cbZoomIn">+</button>
                     </div>
-                    <div class="cb-preview-hint" id="cbPreviewHint" data-i18n>Preview — switch to “Custom” shape or “Place own” mines to edit the grid.</div>
                 </div>
             </div>
         </div>
@@ -367,7 +367,7 @@
 
                     <div id="lobbyGameIDRow" class="lobby-gameid-row">
                         <div id="lobbyGameID" class="lobby-gameid">Game ID: —</div>
-                        <button id="btnCopyLobbyLink" class="lobby-icon-btn lobby-share-btn" title="Copy invite link" aria-label="Copy invite link">🔗</button>
+                        <button id="btnCopyLobbyLink" class="lobby-icon-btn lobby-share-btn" title="Copy invite link" aria-label="Copy invite link" data-i18n="" data-i18n-attr="title,aria-label" data-i18n-context="WANLobby">🔗</button>
                         <button id="btnLobbyFriendsOpen" class="lobby-icon-btn lobby-friends-open" title="Friends" aria-label="Friends">👥</button>
                     </div>
                     <div id="lobbyShareRow" class="lobby-share-row" style="display:none">
@@ -376,17 +376,21 @@
                     <div id="lobbyFriendsPanel" class="lobby-friends-panel" style="display:none">
                         <div class="lobby-friends-header">
                             <span data-i18n>Friends</span>
-                            <span id="lobbyFriendsStatus" data-i18n>Invite friends to this lobby</span>
+                            <span id="lobbyFriendsStatus"></span>
                         </div>
                         <div id="lobbyFriendsList" class="lobby-friends-list" data-nav-scroll="Lobby friends" tabindex="0"></div>
                     </div>
                     <div id="lobbyConfig" class="lobby-config">—</div>
+                    <div id="lobbyNextRound" class="next-round-line" style="display:none;">
+                        <span id="lobbyNextRoundText"></span>
+                        <button type="button" id="btnLobbyDiscardNextRound" class="btn btn-small" data-i18n data-i18n-context="NextRoundLine">Discard</button>
+                    </div>
                     <div id="lobbyHint" class="lobby-hint">Waiting...</div>
 
                     <div class="menu-separator"></div>
 
                     <div class="player-list-title-row">
-                        <div id="playerListTitle" class="player-list-title" data-i18n>👥 Connected Players</div>
+                        <div id="playerListTitle" class="player-list-title">👥 Connected Players</div>
                         <button id="btnMakeHost" class="btn btn-small btn-accent make-host-btn" style="display:none;" data-i18n>Make Host</button>
                     </div>
                     <div id="playerList"></div>
@@ -412,7 +416,7 @@
             <div class="social-content">
                 <div class="screen-header-row social-header-row">
                     <button id="btnFriendsBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
-                    <h2 class="solo-title social-title" data-i18n>Friends</h2>
+                    <h2 class="solo-title social-title" data-i18n data-i18n-context="FriendsPage">Friends</h2>
                     <button id="btnFriendsRefresh" class="screen-back-btn" aria-label="Refresh"><span class="hdr-icon icon-refresh"></span></button>
                 </div>
 
@@ -421,8 +425,8 @@
                         <div class="social-id-tools">
                             <div id="friendsOwnID" class="social-own-id">Your player ID: Not connected</div>
                             <form id="friendsAddByIDForm" class="social-add-id">
-                                <input id="friendsAddByIDInput" type="text" maxlength="8" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Player ID">
-                                <button id="btnFriendsAddByID" class="btn btn-small btn-accent" type="submit" data-i18n>Add Friend</button>
+                                <input id="friendsAddByIDInput" type="text" maxlength="8" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Player ID" data-i18n="" data-i18n-attr="placeholder" data-i18n-context="FriendsPage">
+                                <button id="btnFriendsAddByID" class="btn btn-small btn-accent" type="submit" data-i18n data-i18n-context="FriendsPage">Add Friend</button>
                             </form>
                         </div>
                     </div>
@@ -430,17 +434,25 @@
 
                 <div class="social-tabs">
                     <div class="social-tab-buttons">
-                        <button class="social-tab active" data-tab="friends" data-i18n>Friends</button>
-                        <button class="social-tab" data-tab="recent" data-i18n>Recent</button>
-                        <button class="social-tab" data-tab="blocked" data-i18n>Blocked</button>
+                        <button class="social-tab active" data-tab="friends" data-i18n data-i18n-context="FriendsPage">Friends</button>
+                        <button class="social-tab" data-tab="recent" data-i18n data-i18n-context="FriendsPage">Recent</button>
+                        <button class="social-tab" data-tab="blocked" data-i18n data-i18n-context="FriendsPage">Blocked</button>
                     </div>
+                    <!-- The list's count, on the right of the tabs (FriendsPage.qml). -->
                     <div class="social-tabs-status">
                         <div id="friendsStatus" class="social-status"></div>
-                        <div id="friendsCooldown" class="social-cooldown"></div>
                     </div>
                 </div>
+                <!-- What just happened, or the invite cooldown. -->
+                <div id="friendsCooldown" class="social-cooldown social-status-line" style="display:none"></div>
 
                 <div id="friendsList" class="social-list" data-nav-scroll="Friends" tabindex="0"></div>
+                <!-- A page of friends at a time; only the page shown is watched for presence. -->
+                <div id="friendsPagination" class="pagination-row social-pagination" style="display:none">
+                    <button class="btn btn-small" id="btnFriendsPrev">◀ <span data-i18n data-i18n-context="FriendsPage">Prev</span></button>
+                    <span id="friendsPageInfo"></span>
+                    <button class="btn btn-small" id="btnFriendsNext"><span data-i18n data-i18n-context="FriendsPage">Next</span> ▶</button>
+                </div>
             </div>
         </div>
 
@@ -506,6 +518,14 @@
                         Generating board…
                     </div>
                     <div id="chatToastStack" class="chat-toast-stack" style="display:none;"></div>
+                    <!-- The item line: an aimed item, or why one was refused (GameView.qml's itemPill) -->
+                    <div id="itemPill" class="item-pill" style="display:none;"></div>
+                    <!-- The items' bubble (ItemBubble.qml): Hint and Detector, opening upward -->
+                    <div id="itemBubbleCatcher" class="item-bubble-catcher" style="display:none;"></div>
+                    <div id="itemBubble" class="item-bubble" style="display:none;">
+                        <div id="itemBubbleMenu" class="item-bubble-menu" style="display:none;"></div>
+                        <button id="btnItemBubble" class="btn item-bubble-btn"></button>
+                    </div>
                     <div id="inGameNoticeBanner" class="in-game-notice-banner" style="display:none;">
                         <div id="inGameNoticeMessage" class="in-game-notice-message"></div>
                         <button id="btnInGameNoticeClose" class="in-game-notice-close" aria-label="Close notice">x</button>
@@ -556,85 +576,78 @@
                 <div class="chat-messages" id="chatMessages" data-nav-scroll="Chat messages" tabindex="0"></div>
                 <div class="chat-input-row">
                     <input type="text" id="chatInput" class="chat-input" data-wire-text="chat-message" data-nav-multiline placeholder="Type a message..." autocomplete="off">
-                    <button class="chat-send-btn" id="btnChatSend" data-i18n>Send</button>
+                    <button class="chat-send-btn" id="btnChatSend"><svg class="chat-cooldown-ring" viewBox="0 0 16 16" aria-hidden="true"><circle class="track" cx="8" cy="8" r="6"/><circle class="fill" cx="8" cy="8" r="6" pathLength="100"/></svg><span class="chat-send-label" data-i18n>Send</span></button>
                 </div>
             </div>
 
             
             <div id="gameModal" style="display:none;">
-                <div class="game-modal-card" id="gameModalCard" data-nav-scroll="Game dialog" tabindex="0">
-                    <button class="gm-settings-btn" id="btnModalSettings" title="Settings">⚙️</button>
-                    <button class="gm-screenshot-btn" id="btnModalScreenshot" title="Save screenshot" aria-label="Save screenshot" style="display:none;">📷</button>
-                    <button class="gm-close-btn" id="btnModalClose">X</button>
-                    <h2 id="modalTitle" class="gm-title" data-i18n>PAUSED</h2>
-                    <div id="modalPauseInfo" class="gm-pause-info" style="display:none;">
-                        <div id="modalPauseCategory" class="gm-pause-category"></div>
-                        <div id="modalPauseSpecs" class="gm-pause-specs"></div>
-                    </div>
-                    <div id="modalLevelStars" class="gm-level-stars" style="display:none;"></div>
-                    <div id="modalAliveCount" class="gm-alive" style="display:none;"></div>
-                    <div id="modalTimeDisplay" class="gm-time" style="display:none;"></div>
-                    <div id="modalInfiniteScores" class="gm-infinite-scores" style="display:none;">
-                        <div class="gm-infinite-score-row">
-                            <span id="modalInfiniteCurrentScore" class="gm-infinite-score-value"></span>
-                        </div>
-                        <div id="modalInfiniteHighRow" class="gm-infinite-score-row">
-                            <span id="modalInfiniteHighScore" class="gm-infinite-score-value gm-infinite-high-score"></span>
-                        </div>
+                <!-- Header, ONE scrolling body, a footer that stays put: the twin of
+                     game/modal/GameModal.qml (GameModalManager.js). -->
+                <div class="game-modal-card" id="gameModalCard">
+                    <div class="gm-header" id="gameModalHeader">
+                        <button class="gm-settings-btn" id="btnModalSettings" title="Settings" aria-label="Settings" data-i18n="" data-i18n-attr="title,aria-label" data-i18n-context="MainMenu">⚙️</button>
+                        <button class="gm-screenshot-btn" id="btnModalScreenshot" title="Screenshot" aria-label="Screenshot" data-i18n="" data-i18n-attr="title,aria-label" data-i18n-context="Main" style="display:none;">📷</button>
+                        <button class="gm-close-btn" id="btnModalClose">X</button>
+                        <h2 id="modalTitle" class="gm-title">PAUSED</h2>
                     </div>
 
-                    <!-- Solo rated leaderboard placement (shown after a SoloLeaderboard win) -->
-                    <div id="modalLeaderboard" class="gm-leaderboard" style="display:none;"></div>
-
-                    <!-- Top-3 podium (completed community games) -->
-                    <div id="communityPodium" class="gm-podium" style="display:none;"></div>
-
-                    <!-- Community game stats area -->
-                    <div id="communityStatsArea" data-nav-scroll="Community results" tabindex="0" style="display:none;">
-                        <table class="cs-table">
-                            <thead>
-                                <tr>
-                                    <th class="cs-th cs-th-name" data-sort="playerName"><span data-i18n>Name</span><span class="cs-th-arrow"></span></th>
-                                    <th class="cs-th cs-th-num cs-sorted" data-sort="score"><span data-i18n>Score</span><span class="cs-th-arrow"> ▼</span></th>
-                                    <th class="cs-th cs-th-num" data-sort="attemptCount"><span data-i18n>Att</span><span class="cs-th-arrow"></span></th>
-                                    <th class="cs-th cs-th-num" data-sort="revealCount"><span data-i18n>Reveals</span><span class="cs-th-arrow"></span></th>
-                                    <th class="cs-th cs-th-num" data-sort="flagCount"><span data-i18n>Flags</span><span class="cs-th-arrow"></span></th>
-                                    <th class="cs-th cs-th-num" data-sort="timeAliveMs"><span data-i18n>Alive</span><span class="cs-th-arrow"></span></th>
-                                </tr>
-                            </thead>
-                            <tbody id="communityStatsBody"></tbody>
-                        </table>
-                    </div>
-
-                    <!-- PVP Teams stats area -->
-                    <div id="pvpTeamsStatsArea" data-nav-scroll="Team results" tabindex="0" style="display:none;">
-                        <div class="team-stats-panel">
-                            <div class="team-stats-col" id="pvpTeam1Col"></div>
-                            <div class="team-stats-col" id="pvpTeam2Col"></div>
+                    <div class="gm-body" id="gameModalBody" data-nav-scroll="Game dialog" tabindex="0">
+                        <!-- The run summary (ModalRunSummary.qml) -->
+                        <div id="modalPauseInfo" class="gm-pause-info" style="display:none;">
+                            <div id="modalPauseCategory" class="gm-pause-category"></div>
+                            <!-- The specs, with the STATS toggle on their left where the
+                                 player stats table folds; the spacer mirrors it so the
+                                 specs stay on the card's centre (ModalSpecRow.qml). -->
+                            <div id="modalSpecRow" class="gm-spec-row">
+                                <button type="button" id="btnPlayerStatsToggle" class="gm-stats-toggle" aria-expanded="false" style="display:none;"></button>
+                                <div id="modalPauseSpecs" class="gm-pause-specs"></div>
+                                <span id="playerStatsToggleSpacer" class="gm-stats-toggle gm-stats-toggle-spacer" aria-hidden="true" style="display:none;"></span>
+                            </div>
                         </div>
-                    </div>
+                        <div id="modalLevelStars" class="gm-level-stars" style="display:none;"></div>
+                        <!-- The shop's lines (ModalRunSummary.qml, ModalItemButtons.qml; ShopUI.js) -->
+                        <div id="modalHelpedLine" class="gm-helped-line" style="display:none;"></div>
+                        <div id="modalNextRound" class="next-round-line" style="display:none;"></div>
+                        <div id="modalBoardEnd" class="gm-board-end" style="display:none;"></div>
+                        <div id="modalAliveCount" class="gm-alive" style="display:none;"></div>
+                        <div id="modalTimeDisplay" class="gm-time" style="display:none;"></div>
+                        <div id="modalInfiniteScores" class="gm-infinite-scores" style="display:none;">
+                            <div class="gm-infinite-score-row">
+                                <span id="modalInfiniteCurrentScore" class="gm-infinite-score-value"></span>
+                            </div>
+                            <div id="modalInfiniteHighRow" class="gm-infinite-score-row">
+                                <span id="modalInfiniteHighScore" class="gm-infinite-score-value gm-infinite-high-score"></span>
+                            </div>
+                        </div>
 
-                    <!-- Duel stats area -->
-                    <div id="duelStatsArea" data-nav-scroll="Duel results" tabindex="0" style="display:none;">
-                        <div class="duel-score-row">
-                            <span id="duelScoreLeft" class="duel-score">0</span>
-                            <span class="duel-score-colon">:</span>
-                            <span id="duelScoreRight" class="duel-score">0</span>
+                        <!-- Solo rated leaderboard placement (shown after a rated win) -->
+                        <div id="modalLeaderboard" class="gm-leaderboard" style="display:none;"></div>
+                        <div id="rankedRematchNotice" class="gm-rematch-notice" style="display:none;"></div>
+
+                        <!-- Player stats (ModalContentPlayerStats.qml): podium, then the table -->
+                        <div id="communityPodium" class="gm-podium" style="display:none;"></div>
+                        <div id="communityStatsArea" data-nav-scroll="Community results" tabindex="0" style="display:none;">
+                            <table class="cs-table">
+                                <thead><tr id="communityStatsHead"></tr></thead>
+                                <tbody id="communityStatsBody"></tbody>
+                            </table>
                         </div>
-                        <div class="duel-columns">
-                            <div class="duel-col duel-col-left" id="duelSelfCol"></div>
-                            <div class="duel-divider"></div>
-                            <div class="duel-col duel-col-right" id="duelOppCol"></div>
-                        </div>
-                        <div id="duelReasonBox" class="duel-reason-box" style="display:none;"></div>
+
+                        <!-- PVP Teams (ModalContentPVPTeams.qml) -->
+                        <div id="pvpTeamsStatsArea" style="display:none;"></div>
+
+                        <!-- Duel (ModalContentPVPDuel.qml) -->
+                        <div id="duelStatsArea" style="display:none;"></div>
                     </div>
 
                     <div class="gm-bottom-buttons">
+                        <button id="btnModalRevive" class="btn gm-revive-btn" style="display:none;"></button>
                         <div id="modalActionRow" class="gm-action-row">
-                            <button id="btnModalPrimary" class="btn btn-accent gm-btn gm-primary-btn" data-i18n>Resume</button>
-                            <button id="btnModalNext" class="btn btn-accent gm-next-btn" data-i18n>Next</button>
+                            <button id="btnModalPrimary" class="btn btn-accent gm-btn gm-primary-btn">Resume</button>
+                            <button id="btnModalNext" class="btn btn-accent gm-next-btn" data-i18n data-i18n-context="GameModal">Next</button>
                         </div>
-                        <button id="btnModalMenu" class="btn gm-btn" data-i18n>Main Menu</button>
+                        <button id="btnModalMenu" class="btn gm-btn" data-i18n data-i18n-context="GameModal">Main Menu</button>
                     </div>
                 </div>
             </div>
@@ -721,7 +734,8 @@
             <div class="modal">
                 <h3 id="gameSettingsTitle">🎯 Game Settings</h3>
                 <div id="settingsOnlineWarning" class="settings-warning" style="display:none;">
-                    ⚠️ <span data-i18n>Settings apply to the next game</span>
+                    <span id="settingsOnlineWarningText">⚠️ <span data-i18n data-i18n-context="Dialogs">Applies when this round ends, or when you restart.</span></span>
+                    <button type="button" id="btnSettingsDiscardNextRound" class="btn btn-small" data-i18n data-i18n-context="Dialogs" style="display:none;">Discard</button>
                 </div>
                 <div class="form-group" id="gameVariantRow" style="display:none;">
                     <label data-i18n>Variant</label>
@@ -823,10 +837,6 @@
                         <button type="button" class="btn settings-select" id="appCountryBtn" data-i18n>Global / Anonymous</button>
                     </div>
                     <div class="settings-section-title" data-i18n>Notifications</div>
-                    <div class="toggle-row">
-                        <label data-i18n>Show chat pop-up notifications</label>
-                        <input type="checkbox" id="appChatNotifications">
-                    </div>
                     <div class="toggle-row" id="appBackgroundDisconnectRow">
                         <div>
                             <label for="appBackgroundDisconnectNotification" data-i18n>Notify me if I get disconnected</label>
@@ -922,6 +932,10 @@
                         <input type="checkbox" id="appShowDecals" checked>
                     </div>
                     <p class="settings-desc-text" data-i18n>Marks the cell each player just revealed or flagged, so a shared board shows who did what.</p>
+                    <div class="toggle-row">
+                        <label data-i18n>Show chat pop-up notifications</label>
+                        <input type="checkbox" id="appChatNotifications">
+                    </div>
                     <div class="settings-section-title" data-i18n>Board Theme</div>
                     <div id="appBoardThemeGrid" class="board-theme-grid"></div>
                     <input type="hidden" id="appBoardThemeId" value="0">
@@ -1021,6 +1035,7 @@
                         </div>
                     </div>
                     <div id="connectionIndicator"></div>
+                    <button id="copyConnectionDetailsBtn" class="btn" type="button" data-i18n>Copy connection details</button>
 
                     <div class="settings-section-title" data-i18n>Device</div>
                     <!-- What the app decided this machine is. Everything
@@ -1071,6 +1086,7 @@
                     <p class="settings-desc-text" id="accountOfflineNote" style="display:none;" data-i18n>Connect to the server to manage your account.</p>
                     <p class="settings-desc-text" id="accountDevicesSummary"></p>
                     <div id="accountDevicesList"></div>
+                    <p class="settings-desc-text" id="accountDeviceStatus" style="display:none;"></p>
 
                     <div class="settings-section-title" data-i18n>Play on another device</div>
                     <p class="settings-desc-text" data-i18n>Create a one-time transfer phrase and type it into the other device's Account tab. The phrase adds ONE device and expires after 10 minutes. Anyone with the phrase can add a device, so keep it private.</p>
@@ -1078,7 +1094,7 @@
                     <div id="accountExportPhrase" class="account-transfer-phrase" style="display:none;"></div>
                     <p class="settings-desc-text" id="accountExportCountdown" style="display:none;"></p>
                     <p class="settings-desc-text account-status-error" id="accountExportStatus" style="display:none;"></p>
-                    <p class="settings-desc-text" id="accountLimitNote" style="display:none;" data-i18n>Device limit reached. Remove the other device below to free a slot.</p>
+                    <p class="settings-desc-text" id="accountLimitNote" style="display:none;" data-i18n>Device limit reached. Remove a device below to free a slot.</p>
 
                     <div class="settings-section-title" data-i18n>Use an account from another device</div>
                     <p class="settings-desc-text" data-i18n>Enter the transfer phrase shown on your other device. This device will switch to that account; its current account is left behind.</p>
@@ -1088,12 +1104,11 @@
                     </div>
                     <p class="settings-desc-text" id="accountImportStatus" style="display:none;"></p>
 
-                    <div id="accountRevokeSection" style="display:none;">
-                        <div class="settings-section-title" data-i18n>Remove Device</div>
-                        <p class="settings-desc-text" data-i18n>Remove this device from the account? It will be signed out and get a fresh account the next time it connects. Any unused transfer phrase is also invalidated.</p>
-                        <button id="btnRevokeDevice" class="btn" data-i18n>Remove Device</button>
-                        <p class="settings-desc-text" id="accountRevokeStatus" style="display:none;"></p>
-                    </div>
+                    <!-- Play's account-deletion rule wants a path in the app; a link
+                         to the site's request page is the one it accepts (roadmap 165). -->
+                    <div class="settings-section-title" data-i18n>Delete Account</div>
+                    <p class="settings-desc-text" data-i18n>Ask for this account and its data to be deleted. This opens a page on our website where you can send the request.</p>
+                    <a href="https://vladimirjanus.github.io/MinesweeperOnline/delete-account.html" target="_blank" rel="noopener" class="btn btn-danger account-delete-link" data-i18n>Request Account Deletion</a>
                 </div>
 
                 <div class="modal-actions">
@@ -1144,17 +1159,6 @@
             </div>
         </div>
 
-        <div id="gmCustomOverwriteConfirmDialog" class="modal-backdrop">
-            <div class="modal">
-                <h3 data-i18n>Delete Progress?</h3>
-                <p class="modal-desc" id="gmCustomOverwriteText"></p>
-                <div class="modal-actions">
-                    <button class="btn btn-danger" id="gmCustomOverwriteConfirmBtn" data-i18n>OK</button>
-                    <button class="btn" id="gmCustomOverwriteCancelBtn" data-i18n>Cancel</button>
-                </div>
-            </div>
-        </div>
-
         
         <div id="gameBrowserScreen" class="screen">
             <div class="game-browser-content">
@@ -1165,7 +1169,7 @@
                         <button id="btnPublicRefresh" class="screen-back-btn" aria-label="Refresh"><span class="hdr-icon icon-refresh"></span></button>
                     </div>
                     <div class="gb-join-row">
-                        <input type="text" id="browserJoinGameID" class="gb-join-input" inputmode="numeric" maxlength="6" placeholder="Game ID">
+                        <input type="text" id="browserJoinGameID" class="gb-join-input" inputmode="numeric" maxlength="6" placeholder="Game ID" data-i18n="" data-i18n-attr="placeholder" data-i18n-context="GameBrowserPage">
                         <button id="btnBrowserJoinByID" class="btn btn-accent gb-join-btn" data-i18n>Join</button>
                     </div>
                 </div>
@@ -1177,13 +1181,8 @@
                         </div>
                     </div>
                     <div class="lb-tabs-scroll" id="browserFilters">
-                        <div class="lb-tabs">
-                            <button class="lb-tab" id="browserFilterCoOpSoft" data-i18n>Co-Op Soft</button>
-                            <button class="lb-tab" id="browserFilterCoOpHard" data-i18n>Co-Op Hard</button>
-                            <button class="lb-tab" id="browserFilterPVP" data-i18n>PVP Duel</button>
-                            <button class="lb-tab" id="browserFilterPVPTeams" data-i18n>PVP Teams</button>
-                            <button class="lb-tab" id="browserFilterPVPConquest" data-i18n>PVP Conquest</button>
-                        </div>
+                        <!-- One chip per hostable mode, written from the mode table. -->
+                        <div class="lb-tabs" id="browserModeChips"></div>
                     </div>
                 </div>
                 <div id="publicLobbyList" class="gb-list" data-nav-scroll="Public games" tabindex="0">
@@ -1191,9 +1190,9 @@
 Create one or refresh to check again!</div>
                 </div>
                 <div class="pagination-row gb-pagination">
-                    <button class="btn btn-small" id="btnPublicPrev" disabled data-i18n>Prev</button>
+                    <button class="btn btn-small" id="btnPublicPrev" disabled>◀ <span data-i18n data-i18n-context="GameBrowserPage">Prev</span></button>
                     <span id="publicPageInfo">Page 1</span>
-                    <button class="btn btn-small" id="btnPublicNext" disabled>▶</button>
+                    <button class="btn btn-small" id="btnPublicNext" disabled><span data-i18n data-i18n-context="GameBrowserPage">Next</span> ▶</button>
                 </div>
             </div>
         </div>
@@ -1205,7 +1204,7 @@ Create one or refresh to check again!</div>
                     <div class="screen-header-row">
                         <button id="btnLbBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
                         <h2 class="solo-title" data-i18n>Leaderboards</h2>
-                        <div class="screen-header-spacer"></div>
+                        <button id="btnLbCommunity" class="screen-back-btn" type="button" title="Recent Community games" aria-label="Recent Community games" data-i18n="" data-i18n-attr="title,aria-label" data-i18n-context="LeaderboardPage"><span class="app-icon" style="--app-icon-src:url('../../../res/icons/ui/stat_team.svg'); --app-icon-size:58%"></span></button>
                     </div>
                 </div>
 
@@ -1256,6 +1255,37 @@ Be the first!</div>
             </div>
         </div>
 
+        <!-- Recent Community games (ROADMAP 111): opened from the Leaderboards
+             title bar, Back returns there. CommunityResultsManager.js fills it. -->
+        <div id="communityResultsPage" class="screen">
+            <div class="lb-page-content">
+                <div class="lb-page-header">
+                    <div class="screen-header-row">
+                        <button id="btnCrBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
+                        <h2 class="solo-title cr-title" data-i18n data-i18n-context="CommunityResultsPage">Recent Community games</h2>
+                        <div class="screen-header-spacer"></div>
+                    </div>
+                </div>
+
+                <div class="lb-page-tabs-row cr-filter-row">
+                    <div class="lb-tabs-scroll cr-variant-scroll">
+                        <div id="crVariantTabs" class="lb-tabs"></div>
+                    </div>
+                    <span class="cr-filter-divider" aria-hidden="true"></span>
+                    <button id="btnCrPlayedByMe" class="lb-tab" type="button" aria-pressed="false" data-i18n data-i18n-context="CommunityResultsPage">Played by me</button>
+                </div>
+
+                <div id="communityResultsList" class="lb-list lb-page-list cr-list" data-nav-scroll="Recent Community games" tabindex="0"></div>
+
+                <div class="pagination-row lb-page-pagination">
+                    <button class="btn btn-small" id="btnCrPrev" disabled>◀</button>
+                    <span id="crPageInfo">Page 1</span>
+                    <button class="btn btn-small" id="btnCrNext" disabled>▶</button>
+                </div>
+                <div id="crShowingInfo" class="lb-showing-info"></div>
+            </div>
+        </div>
+
         
         <div id="notConnectedDialog" class="modal-backdrop">
             <div class="modal">
@@ -1283,7 +1313,7 @@ Be the first!</div>
         <div id="connectingDialog" class="modal-backdrop">
             <div class="modal" style="text-align:center;">
                 <h3>🔗 <span data-i18n>Connection</span></h3>
-                <p class="modal-desc" data-i18n>Connecting to server...</p>
+                <p class="modal-desc" data-i18n>Connecting...</p>
                 <div class="spinner"></div>
                 <div class="modal-actions">
                     <button class="btn" onclick="app._hideModal('connectingDialog'); app.stopReconnection();" data-i18n>Cancel</button>
@@ -1295,7 +1325,7 @@ Be the first!</div>
         <div id="waitingApprovalDialog" class="modal-backdrop">
             <div class="modal" style="text-align:center;">
                 <h3>⏳ <span data-i18n>Joining Game</span></h3>
-                <p class="modal-desc" data-i18n>Waiting for the host to approve your request.</p>
+                <p class="modal-desc" id="waitingApprovalText">Sending your join request…</p>
                 <div class="spinner"></div>
                 <div class="modal-actions">
                     <button class="btn" onclick="app._hideModal('waitingApprovalDialog'); app.lobbyHandler.cancelPendingJoin();" data-i18n>Cancel</button>
@@ -1324,6 +1354,11 @@ Be the first!</div>
                 <h3 data-i18n>Friends</h3>
                 <p class="modal-desc" id="lobbyFriendsDialogStatus" data-i18n>Invite friends to this lobby</p>
                 <div id="lobbyFriendsDialogList" class="lobby-friends-list lobby-friends-dialog-list" data-nav-scroll="Friends available to invite" tabindex="0"></div>
+                <div id="lobbyFriendsPagination" class="pagination-row social-pagination" style="display:none">
+                    <button class="btn btn-small" id="btnLobbyFriendsPrev">◀ <span data-i18n data-i18n-context="WANLobby">Prev</span></button>
+                    <span id="lobbyFriendsPageInfo"></span>
+                    <button class="btn btn-small" id="btnLobbyFriendsNext"><span data-i18n data-i18n-context="WANLobby">Next</span> ▶</button>
+                </div>
                 <div class="modal-actions">
                     <button class="btn" id="btnLobbyFriendsClose" data-i18n>Close</button>
                 </div>
@@ -1347,23 +1382,23 @@ Be the first!</div>
                 <div class="social-profile-head">
                     <div id="friendProfileAvatar" class="social-profile-avatar">?</div>
                     <div class="social-profile-title-block">
-                        <h3 id="friendProfileName" data-i18n>Player</h3>
-                        <div id="friendProfileMeta" class="social-profile-meta">ID --</div>
+                        <h3 id="friendProfileName"></h3>
+                        <div id="friendProfileMeta" class="social-profile-meta"></div>
                         <div id="friendProfileBadges" class="social-profile-badges"></div>
                     </div>
                     <button class="social-profile-icon social-profile-friend" id="btnFriendProfileFriend" title="Add friend">&#128100; +</button>
                     <button class="social-profile-icon social-profile-block" id="btnFriendProfileBlock" title="Block player">🚫</button>
                     <button class="social-profile-exit" id="btnFriendProfileHeadClose" title="Close profile">X</button>
                 </div>
-                <button class="btn" id="btnFriendProfileUpdateName" style="display:none;" data-i18n>Update player name</button>
+                <button class="btn" id="btnFriendProfileUpdateName" style="display:none;" data-i18n data-i18n-context="FriendsPage">Update player name</button>
                 <div class="social-note-editor">
-                    <label for="friendProfileNote" data-i18n>Local note</label>
-                    <textarea id="friendProfileNote" maxlength="500" rows="3" placeholder="Only saved on this device"></textarea>
+                    <label for="friendProfileNote" data-i18n data-i18n-context="FriendsPage">Local note</label>
+                    <textarea id="friendProfileNote" maxlength="500" rows="3"></textarea>
                 </div>
                 <div class="social-profile-actions">
-                    <button class="btn btn-success" id="btnFriendProfileInvite" data-i18n>→ Invite</button>
-                    <button class="btn btn-duel" id="btnFriendProfileDuel" data-i18n>⚔ Duel</button>
-                    <button class="btn" id="btnFriendProfileStats" data-i18n>STATS</button>
+                    <button class="btn btn-success" id="btnFriendProfileInvite"></button>
+                    <button class="btn btn-duel" id="btnFriendProfileDuel" data-i18n data-i18n-context="FriendsPage">⚔ Duel</button>
+                    <button class="btn" id="btnFriendProfileStats" data-i18n data-i18n-context="FriendsPage">STATS</button>
                 </div>
             </div>
         </div>
@@ -1512,6 +1547,38 @@ Be the first!</div>
                         <button id="btnScreenshotCopy" class="btn" data-i18n>Copy</button>
                         <button id="btnScreenshotDelete" class="btn btn-danger" data-i18n>Delete</button>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The shop (ShopPage.qml) and the revive offer (ReviveDialog.qml); ShopUI.js fills them -->
+        <div id="shopDialog" class="modal-backdrop">
+            <div class="modal shop-modal">
+                <div class="shop-head">
+                    <h3 id="shopDialogTitle"></h3>
+                    <span id="shopDialogBalance" class="shop-head-balance"></span>
+                </div>
+                <div id="shopDialogBody" class="shop-body" data-nav-scroll="Shop" tabindex="0"></div>
+                <div class="modal-actions">
+                    <button class="btn" onclick="app._hideModal('shopDialog')" data-i18n>Close</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="reviveDialog" class="modal-backdrop">
+            <div class="modal revive-modal">
+                <div id="reviveDialogBody" class="revive-body"></div>
+                <div class="modal-actions revive-actions">
+                    <button id="btnReviveNotNow" class="btn" onclick="app.shopUI.closeRevive()"></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="itemAdDialog" class="modal-backdrop">
+            <div class="modal revive-modal">
+                <div id="itemAdDialogBody" class="revive-body"></div>
+                <div class="modal-actions revive-actions">
+                    <button id="btnItemAdNotNow" class="btn" onclick="app.shopUI.closeItemAd()"></button>
                 </div>
             </div>
         </div>
@@ -1738,16 +1805,76 @@ This cannot be undone.</p>
         <!-- Active session take-over box: shown while the account is in use on
              another device. Take over (kick the other device), exit (stay
              offline), or leave the account entirely on this device. -->
-        <div id="sessionTakeoverDialog" class="modal-backdrop">
+        <!-- The account is in use on another device. The confirmations happen
+             inside the box (NetworkDialogs.qml sessionTakeoverDialog confirmMode):
+             "" the main prompt; "takeover"; "leave", then "leaveWipe". Only its own
+             buttons close it. -->
+        <div id="sessionTakeoverDialog" class="modal-backdrop" data-no-dismiss>
             <div class="modal">
-                <h3>📱 <span data-i18n>Account in use elsewhere</span></h3>
-                <p class="modal-desc" data-i18n>Your account is currently being used on another device. You can take over the session here — this will disconnect the other device.</p>
-                <div class="modal-actions">
-                    <button class="btn btn-primary" id="sessionTakeoverConfirm" data-i18n>Take over session</button>
-                    <button class="btn" id="sessionTakeoverExit" data-i18n>Exit</button>
+                <h3>📱 <span data-i18n data-i18n-context="NetworkDialogs">Account in use elsewhere</span></h3>
+                <p class="modal-desc" data-takeover-mode="" data-i18n data-i18n-context="NetworkDialogs">Your account is currently being used on another device. You can take over the session here — this will disconnect the other device.</p>
+                <p class="modal-desc" data-takeover-mode="takeover" data-i18n data-i18n-context="NetworkDialogs">Take over the session on this device? The other device will be disconnected immediately and any game in progress there will be forfeited.</p>
+                <p class="modal-desc" data-takeover-mode="leave" data-i18n data-i18n-context="NetworkDialogs">Leave this account on this device? This device will be removed from the account and a fresh local account will be created here. Your other devices keep the account.</p>
+                <p class="modal-desc session-takeover-wipe" id="sessionTakeoverCopyWarning" data-takeover-mode="leave" data-i18n data-i18n-context="NetworkDialogs">Another copy of this device uses the same sign-in. Leaving signs it out too.</p>
+                <p class="modal-desc session-takeover-wipe" data-takeover-mode="leaveWipe" data-i18n data-i18n-context="NetworkDialogs">This will permanently wipe all of your achievements, statistics and completed levels on this device. Your other devices keep their data. This cannot be undone.</p>
+                <div class="session-takeover-leave" data-takeover-mode="">
+                    <button class="btn btn-link btn-compact" id="sessionTakeoverLeave" data-i18n data-i18n-context="NetworkDialogs">Leave this account on this device</button>
                 </div>
-                <div class="session-takeover-leave">
-                    <button class="btn btn-link btn-compact" id="sessionTakeoverLeave" data-i18n>Leave this account on this device</button>
+                <div class="modal-actions">
+                    <button class="btn" id="sessionTakeoverBack" data-i18n data-i18n-context="NetworkDialogs">Back</button>
+                    <button class="btn" id="sessionTakeoverExit" data-i18n data-i18n-context="NetworkDialogs">Exit</button>
+                    <button class="btn btn-primary" id="sessionTakeoverConfirm"></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- docs/account-waiters-and-copies.md §5 (NetworkDialogs.qml
+             accountFullDialog, sameDeviceDialog). Filled by UIManager. -->
+        <div id="accountFullDialog" class="modal-backdrop" data-no-dismiss>
+            <div class="modal">
+                <h3 id="accountFullTitle"></h3>
+                <p class="modal-desc" id="accountFullText"></p>
+                <div class="account-full-devices" id="accountFullDevices"></div>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="btnAccountFullConfirm"></button>
+                    <button class="btn" id="btnAccountFullCancel"></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="sameDeviceDialog" class="modal-backdrop" data-no-dismiss>
+            <div class="modal">
+                <h3 data-i18n data-i18n-context="NetworkDialogs">This account is open on a copy of this device</h3>
+                <p class="modal-desc" data-i18n data-i18n-context="NetworkDialogs">Another copy of this device signed in with the same details, so this one was signed out. That usually means the game's data was copied: a cloned disk, a copied browser profile, a restored PC image. Only one copy can be online at a time.</p>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="btnSameDeviceSeparate" data-i18n data-i18n-context="NetworkDialogs">Make this a separate device</button>
+                    <button class="btn" id="btnSameDeviceUseHere" data-i18n data-i18n-context="NetworkDialogs">Use it here</button>
+                    <button class="btn" id="btnSameDeviceClose" data-i18n data-i18n-context="NetworkDialogs">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Last in the document so they stack above every other dialog and the
+             game card. One message at a time, the rest queued (NetworkDialogs.qml
+             showError), and the in-app yes/no (ConfirmDialog.qml). -->
+        <div id="appMessageDialog" class="modal-backdrop app-message-dialog">
+            <div class="modal">
+                <h3 id="appMessageTitle"></h3>
+                <p class="modal-desc" id="appMessageText"></p>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="btnAppMessageOk" data-i18n data-i18n-context="MessageDialog">OK</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="appConfirmDialog" class="modal-backdrop app-confirm-dialog">
+            <div class="modal">
+                <h3 id="appConfirmTitle"></h3>
+                <p class="modal-desc" id="appConfirmMessage"></p>
+                <div class="modal-actions">
+                    <button class="btn" id="btnAppConfirmCancel">Cancel</button>
+                    <button class="btn btn-primary" id="btnAppConfirmExtra" style="display:none"></button>
+                    <button class="btn btn-primary" id="btnAppConfirmOk">OK</button>
                 </div>
             </div>
         </div>

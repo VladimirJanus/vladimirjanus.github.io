@@ -232,6 +232,24 @@
               ]
             }
           ]
+        },
+        {
+          "title": "Coins and items",
+          "summary": "Earn coins, spend them on hints, detectors and revives.",
+          "blocks": [
+            {
+              "type": "bullets",
+              "items": [
+                "<b>Coins are kept by the server</b>, on your account: you need to be connected to earn, buy or use anything. The Shop button on the Solo menu opens the shop.",
+                "<b>Earn them</b> with a level's first clear (once per level, ever), each star in Infinite the first time, a rated run faster than 75% of the level's runs (once per level a day), the daily bonus, and ads in the Android phone app.",
+                "<b>Hint</b> (H) marks the 10 safe cells nearest the spot you choose with a green circle, for you to open. <b>Detector</b> (D) flags every mine within two cells of the spot and takes off wrong flags. Both are in the Items bubble in a bottom corner of the board: pick the item, tap a spot to see where it lands, then tap the same cell again to use it. Any other cell, or Back, cancels, free.",
+                "<b>Short of coins?</b> Pressing Hint or Detector with none left offers one for an ad in the Android phone app, once a day each, aimed at once. Until the ad shows, you can stop it.",
+                "<b>Revive</b> brings the board back after a mine, with the mine flagged and the clock carrying on. After two minutes or more of play, the game asks first. In the Android phone app a revive can also come from an ad, once a day. After that, the revive dialog offers an ad for coins toward buying one.",
+                "<b>Items work in unrated Solo games only</b>, from your first reveal on: before it, the Items button is faded, and rated games have none. A run that used one still counts as a clear. Its time shows on the level with a * and earns no star.",
+                "There is nothing to buy with money. A donation goes to the developer and gives no coins or items."
+              ]
+            }
+          ]
         }
       ]
     },

@@ -313,6 +313,16 @@ input[type="checkbox"] {
     font-weight:800;
     white-space:nowrap;
 }
+/* The Settings badge once the server has refused this build as too old: it
+   offers the update, in Qt MainMenu's colours (#3A2D1A ground, orange). */
+.menu-action-count.menu-action-update {
+    padding:0 10px;
+    background:#3A2D1A;
+    border-color:var(--accent-orange);
+    color:var(--accent-orange);
+    cursor:pointer;
+}
+.menu-action-count.menu-action-update:hover { filter:brightness(1.2); }
 /* A bare chevron, not a boxed one. It marks the direction the row goes in; a
    border round it reads as a second button beside the row it belongs to, which
    is what the Qt menu deliberately does not do. It lights with the row's accent
@@ -338,6 +348,7 @@ input[type="checkbox"] {
    it needs the flex row itself, both to take the padding and to seat the brand
    glyph beside the label. */
 .donate-btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; margin-top:2px; text-decoration:none; }
+.account-delete-link { display:block; text-align:center; text-decoration:none; }
 
 /* Server address row at bottom of main menu */
 .server-address-row { display:flex; gap:8px; margin-top:4px; }
@@ -363,15 +374,30 @@ input[type="checkbox"] {
     margin:4px auto 0; max-width:320px; box-sizing:border-box;
     transition:background .3s;
 }
-.connection-indicator .ci-emoji { font-size:14px; line-height:1; }
-.connection-indicator .ci-text { font-size:12px; font-weight:bold; color:#fff; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.connection-indicator .ci-btn {
-    background:rgba(0,0,0,.15); border:1px solid rgba(255,255,255,.3);
-    border-radius:4px; width:24px; height:24px;
-    font-size:11px; cursor:pointer; line-height:1; padding:0;
+/* The same bar in both hosts (Qt ConnectionStatusIndicator): icon, the
+   headline over its countdown line, then the buttons. */
+:is(.connection-indicator, .connection-indicator-embed) .ci-emoji { font-size:14px; line-height:1; flex:0 0 auto; }
+:is(.connection-indicator, .connection-indicator-embed) .ci-body {
+    flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:2px;
+}
+:is(.connection-indicator, .connection-indicator-embed) .ci-text {
+    font-size:12px; font-weight:bold; color:#fff; min-width:0;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+:is(.connection-indicator, .connection-indicator-embed) .ci-countdown { font-size:10px; color:rgba(255,255,255,.8); }
+:is(.connection-indicator, .connection-indicator-embed) .ci-countdown:empty { display:none; }
+:is(.connection-indicator, .connection-indicator-embed) .ci-btn {
+    flex:0 0 auto;
+    background:rgba(0,0,0,.15); border:1px solid rgba(255,255,255,.45);
+    border-radius:4px; min-width:28px; height:28px; box-sizing:border-box;
+    color:#fff; cursor:pointer; line-height:1; padding:0;
     display:flex; align-items:center; justify-content:center;
 }
-.connection-indicator .ci-btn:hover { background:rgba(0,0,0,.3); }
+:is(.connection-indicator, .connection-indicator-embed) .ci-btn:hover { background:rgba(0,0,0,.24); }
+:is(.connection-indicator, .connection-indicator-embed) .ci-btn:active { background:rgba(0,0,0,.33); }
+:is(.connection-indicator, .connection-indicator-embed) .ci-btn:focus-visible { outline:none; border:2px solid var(--focus-ring, #69D6FF); }
+:is(.connection-indicator, .connection-indicator-embed) .ci-btn .hdr-icon { width:14px; height:14px; }
+:is(.connection-indicator, .connection-indicator-embed) .ci-btn-text { padding:0 8px; font-size:12px; font-weight:bold; white-space:nowrap; }
 
 /* Connection indicator states */
 .bg-connected    { background:var(--accent-green); }
@@ -380,9 +406,11 @@ input[type="checkbox"] {
 .bg-failed       { background:var(--accent-red); }
 .bg-givenup      { background:#7F3C3C; }
 .bg-disconnected { background:var(--text-dimmed); }
-.bg-server-offline { background:var(--accent-red); }
+.bg-server-offline { background:#4A0E0E; }
 .bg-server-maintenance { background:#5A4A12; }
 .bg-session-elsewhere { background:#5B3A8C; }
+.bg-offline      { background:#3A4048; }
+.bg-backup       { background:#24506E; }
 
 /* Account tab (session transfer) */
 .account-transfer-phrase {
@@ -406,6 +434,9 @@ input[type="checkbox"] {
 /* Take-over box: the small "leave this account" escape hatch sits below the
    main Take over / Exit actions. */
 .session-takeover-leave { margin-top: 10px; text-align: center; }
+/* The full-account picker's devices: one row each, the chosen one lit. */
+.account-full-devices { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; }
+.account-full-devices .account-full-device { text-align: left; white-space: normal; overflow-wrap: anywhere; }
 .btn-compact { padding: 4px 10px; font-size: 12px; }
 .btn-link { background: transparent; border: none; color: var(--text-muted); text-decoration: underline; cursor: pointer; }
 .btn-link:hover { color: var(--text-primary); }
@@ -445,18 +476,12 @@ input[type="checkbox"] {
 }
 
 /* Embedded indicator in dialogs */
+/* No ground of its own: every state brings its .bg-* class, and a ground
+   declared here came later than those and painted every state grey. */
 .connection-indicator-embed {
     display:flex; align-items:center; justify-content:center;
     gap:6px; padding:8px 14px; border-radius:4px;
-    margin:4px auto; max-width:300px; background:var(--text-dimmed);
-}
-.connection-indicator-embed .ci-emoji { font-size:14px; }
-.connection-indicator-embed .ci-text { font-size:12px; font-weight:bold; color:#fff; }
-.connection-indicator-embed .ci-btn {
-    background:rgba(0,0,0,.15); border:1px solid rgba(255,255,255,.3);
-    border-radius:4px; width:24px; height:24px;
-    font-size:11px; cursor:pointer; padding:0;
-    display:flex; align-items:center; justify-content:center;
+    margin:4px auto; max-width:300px;
 }
 
 /* Spinner for connecting / waiting dialogs */
@@ -630,6 +655,17 @@ input[type="checkbox"] {
 .level-name { font-size:16px; font-weight:bold; }
 .level-detail { font-size:12px; color:var(--text-detail); }
 .level-actions { display:flex; flex-direction:column; gap:6px; align-items:flex-end; }
+/* A card's square action (SoloActionButton.qml): an emoji on the accent, named
+   by its tooltip. A reserved one keeps its slot so the buttons line up. */
+.solo-action {
+    width:calc(40px * var(--ui-scale)); height:calc(40px * var(--ui-scale));
+    padding:0; display:inline-flex; align-items:center; justify-content:center;
+    border-radius:8px; font-size:calc(15px * var(--ui-scale)); line-height:1;
+    background:var(--accent-blue); border:1px solid color-mix(in srgb, var(--accent-blue), white 12%);
+}
+.solo-action:hover:not(:disabled) { background:color-mix(in srgb, var(--accent-blue), white 8%); }
+.solo-action.solo-action-reserved,
+.solo-action[style*="visibility: hidden"] { visibility:hidden; pointer-events:none; }
 
 /* Custom level cards: keep them compact — flow the icon buttons in a row */
 .custom-level-card .level-card-body { flex-wrap:nowrap; align-items:center; }
@@ -737,6 +773,10 @@ input[type="checkbox"] {
 .record-strip-time { font-size:13px; font-weight:bold; color:var(--text-primary); }
 .record-strip-time.run   { font-size:20px; }
 .record-strip-time.empty { color:var(--text-dimmed); }
+/* A helped clear's time, with its * (LevelRecordStrip.qml): under the timed
+   best, or as the best with no timed clear. */
+.record-strip-time.helped { color:var(--text-secondary); }
+.record-strip-helped-note { font-size:10px; color:var(--text-muted); }
 /* How the run is pacing against the next bar, as one line of text. This was a
    drainable bar and it earned its removal: it read as a progress meter
    (full = done) when it meant the opposite. */
@@ -750,6 +790,18 @@ input[type="checkbox"] {
 .record-strip-score-label { font-size:11px; color:var(--text-detail); }
 .record-strip-score-value { font-size:11px; color:var(--text-detail); }
 .record-strip-score-value.high { font-weight:bold; color:var(--text-continue); }
+/* The coins a level pays (LevelRecordStrip.qml): amber while still to earn,
+   dimmed with a green check once had. Wraps between rewards; a reward wider than
+   the strip puts what it is for under the amount, wrapped at words. */
+.record-strip-rewards { display:flex; flex-wrap:wrap; gap:3px 8px; align-items:center; }
+.record-reward { display:inline-flex; flex-wrap:wrap; align-items:center; gap:0 3px; max-width:100%; font-size:10px; }
+.record-reward-coin { color:var(--accent-orange); }
+.record-reward-coins { font-weight:bold; white-space:nowrap; color:var(--accent-orange); }
+.record-reward-label { min-width:0; color:var(--text-secondary); }
+.record-reward-check { color:var(--accent-green); }
+.record-reward.claimed .record-reward-coin { color:var(--text-dimmed); }
+.record-reward.claimed .record-reward-coins { color:var(--text-muted); }
+.record-reward.claimed .record-reward-label { color:var(--text-dimmed); }
 
 /* The modal's strip matches the leaderboard placement card below it, so the two
    read as one stack rather than a framed panel next to loose glyphs. */
@@ -895,6 +947,9 @@ input[type="checkbox"] {
 }
 .lobby-config { color:var(--text-secondary); text-align:center; font-size:14px; }
 .lobby-hint { color:var(--text-secondary); text-align:center; font-size:13px; margin:4px 0; }
+/* What the host holds for the next round (NextRoundLine.qml). */
+.next-round-line { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px; color:var(--accent-orange); font-size:12px; text-align:center; margin:4px 0; }
+.next-round-line .btn { width:auto; }
 
 .player-list-title { color:var(--accent-green); font-size:16px; font-weight:bold; margin-top:8px; }
 .pending-title { color:var(--accent-orange)!important; }
@@ -1061,6 +1116,10 @@ input[type="checkbox"] {
 }
 .social-status { color:var(--text-primary); font-size:var(--font-small); font-weight:900; }
 .social-cooldown { color:var(--accent-orange); font-size:var(--font-small); font-weight:800; min-height:14px; }
+/* The line under the tabs: a message teal, the invite cooldown orange
+   (FriendsPage.qml statusLineText). */
+.social-status-line { text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin:4px 0; }
+.social-status-line.message { color:var(--accent-teal); }
 .social-list {
     flex:1;
     min-height:0;
@@ -1070,6 +1129,9 @@ input[type="checkbox"] {
     gap:6px;
     padding-bottom:var(--space-2);
 }
+/* A page of friends at a time (FriendsPage.qml, WANLobby.qml's dialog). */
+.social-pagination { flex-shrink:0; padding:6px 12px 2px; }
+.social-pagination .btn { width:auto; }
 .social-empty {
     min-height:70px;
     display:flex;
@@ -1276,6 +1338,7 @@ input[type="checkbox"] {
 .social-profile-meta {
     color:var(--text-muted);
     font-size:var(--font-small);
+    white-space:pre-line;
 }
 .social-profile-badges {
     display:flex;
@@ -1616,6 +1679,9 @@ input[type="checkbox"] {
 .achievements-page.visible { display:block; }
 .achievements-inner {
     height:100%;
+    /* The same for a short window: the filters scroll up out of the way and the
+       list keeps room for a couple of cards (AchievementsPage.qml, roadmap 116). */
+    overflow-y:auto;
     /* Cards are laid out in an auto-fill grid, so the page is allowed to use a
        wide window — the same "how many 380px cards fit" rule the Qt page has. */
     max-width:1600px; margin:0 auto;
@@ -1646,6 +1712,33 @@ input[type="checkbox"] {
     height:100%; border-radius:3px; background:var(--star-earned);
     transition:width 320ms cubic-bezier(.22,.61,.36,1);
 }
+
+/* Recently earned (ROADMAP 187): this device's unlocks, newest first, in a
+   row that scrolls sideways. */
+.ach-recent { display:flex; flex-direction:column; gap:6px; margin-bottom:var(--space-3); }
+.ach-recent-title { color:var(--text-secondary); font-size:calc(12px * var(--ui-scale)); font-weight:800; }
+.ach-recent-empty { color:var(--text-dimmed); font-size:calc(11px * var(--ui-scale)); }
+.ach-recent-list { display:flex; gap:8px; overflow-x:auto; overscroll-behavior-x:contain; padding-bottom:4px; }
+.ach-recent-chip {
+    flex:0 0 236px; height:52px; display:flex; align-items:center; gap:10px;
+    padding:0 10px; border-radius:10px; text-align:left; cursor:pointer;
+    background:var(--panel-bg); border:1px solid var(--panel-border); color:inherit; font:inherit;
+    transition:background-color 120ms;
+}
+.ach-recent-chip:hover { background:var(--card-hover); }
+.ach-recent-chip.complete { border-color:color-mix(in srgb, var(--progress-complete) 50%, transparent); }
+.ach-recent-glyph {
+    flex:0 0 32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center;
+    background:var(--panel-elevated); color:var(--star-earned);
+}
+.ach-recent-chip.complete .ach-recent-glyph { color:var(--progress-complete); }
+.ach-recent-body { min-width:0; display:flex; flex-direction:column; gap:2px; }
+.ach-recent-name {
+    color:var(--text-primary); font-size:calc(13px * var(--ui-scale)); font-weight:800;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.ach-recent-meta { display:flex; gap:6px; color:var(--text-secondary); font-size:calc(11px * var(--ui-scale)); }
+.ach-recent-stars { color:var(--star-earned); }
 
 /* Filters: one panel, not three stacked ones. Rows that do not apply are
    hidden rather than left as empty boxes. */
@@ -1706,7 +1799,7 @@ input[type="checkbox"] {
     color:var(--text-on-accent); font-weight:800;
 }
 .achievements-list {
-    flex:1; min-height:0; overflow-y:auto;
+    flex:1; min-height:calc(240px * var(--ui-scale)); overflow-y:auto;
     display:flex; flex-direction:column; gap:8px;
     padding-right:4px;
 }
@@ -1847,6 +1940,11 @@ input[type="checkbox"] {
 }
 .ach-goal > span { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .ach-goal.done { color:var(--win-green); }
+/* A second line under the goal (Collector exclusions, Devoted's streak). */
+.ach-note {
+    color:var(--text-muted); font-size:calc(11px * var(--ui-scale));
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
 .ach-progress { display:flex; align-items:center; gap:8px; }
 .ach-progress-track {
     flex:1; min-width:0; height:6px; border-radius:3px;
@@ -1862,9 +1960,10 @@ input[type="checkbox"] {
 /* ====================================================================
    ACHIEVEMENT UNLOCK TOAST
    ==================================================================== */
+/* Two at a time, one under the other (ROADMAP 187), then "+N more". */
 .achievement-toast-stack {
     position:fixed; top:16px; left:0; right:0; z-index:90;
-    display:flex; justify-content:center; pointer-events:none;
+    display:flex; flex-direction:column; align-items:center; gap:8px; pointer-events:none;
 }
 .achievement-toast {
     pointer-events:auto;
@@ -1877,6 +1976,8 @@ input[type="checkbox"] {
     transform:translateY(-130%); opacity:0;
     transition:transform .32s cubic-bezier(.22,.61,.36,1), opacity .26s;
     cursor:pointer;
+    /* Swiped away (SwipeDismiss.js): the finger drags it, the page stays. */
+    touch-action:none; user-select:none; -webkit-user-select:none;
 }
 .achievement-toast.visible { transform:translateY(0); opacity:1; }
 .achievement-toast-icon { font-size:calc(30px * var(--ui-scale)); line-height:1; }
@@ -1891,6 +1992,13 @@ input[type="checkbox"] {
 }
 .achievement-toast-stars { color:var(--win-green); font-size:calc(14px * var(--ui-scale)); }
 .achievement-toast-sub { color:var(--text-secondary); font-size:calc(11px * var(--ui-scale)); }
+.achievement-toast-more {
+    pointer-events:none; opacity:0; transition:opacity .18s;
+    padding:4px 10px; border-radius:999px; cursor:pointer;
+    background:var(--panel-elevated); border:1px solid var(--panel-border);
+    color:var(--text-secondary); font-size:calc(12px * var(--ui-scale)); font-weight:800;
+}
+.achievement-toast-more.visible { pointer-events:auto; opacity:1; }
 
 /* Server announcements — operator broadcasts. Sit above the achievement toast:
    a maintenance warning is the one thing that must never be covered. */
@@ -1908,6 +2016,7 @@ input[type="checkbox"] {
     transform:translateY(-130%); opacity:0;
     transition:transform .32s cubic-bezier(.22,.61,.36,1), opacity .26s;
     cursor:pointer;
+    touch-action:none; user-select:none; -webkit-user-select:none;
 }
 .server-announcement.visible { transform:translateY(0); opacity:1; }
 .server-announcement-close {
@@ -2465,6 +2574,24 @@ input[type="checkbox"] {
     font-weight:bold; cursor:pointer; white-space:nowrap;
 }
 .chat-send-btn:hover { filter:brightness(1.1); }
+/* The chat's pace: while the next line cannot go, Send is unavailable and a
+   ring fills in place of its word, the button keeping its size so the row never
+   moves (ChatHandler._refreshCooldown; ChatPanel.qml's ring). */
+.chat-send-btn { position:relative; }
+.chat-send-btn:disabled { cursor:default; filter:none; opacity:.6; }
+.chat-cooldown-ring {
+    display:none; position:absolute; left:50%; top:50%;
+    width:16px; height:16px; margin:-8px 0 0 -8px; transform:rotate(-90deg);
+}
+.chat-send-btn.cooling .chat-cooldown-ring { display:block; }
+.chat-send-btn.cooling .chat-send-label { visibility:hidden; }
+.chat-cooldown-ring circle { fill:none; stroke:currentColor; stroke-width:2.5; }
+.chat-cooldown-ring .track { opacity:.3; }
+.chat-cooldown-ring .fill { stroke-dasharray:100; stroke-dashoffset:100; }
+.chat-send-btn.cooling .chat-cooldown-ring .fill {
+    animation:chat-cooldown var(--chat-cooldown-ms, 1s) linear forwards;
+}
+@keyframes chat-cooldown { to { stroke-dashoffset:0; } }
 
 /* Compact in-game chat notifications (under status/network bars) */
 .chat-toast-stack {
@@ -2489,6 +2616,8 @@ input[type="checkbox"] {
     gap:4px;
     box-shadow:0 2px 8px rgba(0,0,0,0.25);
 }
+/* A round-timer warning (Qt: the toast's warning border). */
+.chat-toast.warning { border-color:var(--accent-orange); }
 
 .chat-toast-name {
     font-size:11px;
@@ -2724,8 +2853,15 @@ input[type="checkbox"] {
 
 .sv-content { position:relative; flex:1 1 auto; min-height:0; }
 .sv-pane { position:absolute; inset:0; width:100%; height:100%; }
-/* A Fit pane is steered by dragging it, which moves the MAIN board. */
+/* An Overview steers the main board; both minimaps handle their own pinch. */
 #smallViewMinimapCanvas { cursor:crosshair; }
+#smallViewMinimapCanvas, #smallViewInfiniteCanvas { touch-action:none; }
+.sv-zoom {
+    position:absolute; z-index:2; left:8%; bottom:8px; width:84%; margin:0;
+    accent-color:var(--focus-ring, #69d6ff);
+    opacity:0; pointer-events:none; transition:opacity 0.19s; touch-action:none;
+}
+.sv-zoom.sv-zoom-shown { opacity:1; pointer-events:auto; transition-duration:0.11s; }
 
 /* The stub. Never taken away, at any window size, whatever is open: the caret
    on it is the only route back to the panel. Everything else in the panel is
@@ -2792,10 +2928,15 @@ input[type="checkbox"] {
     z-index:55; box-shadow:0 4px 12px rgba(0,0,0,.4);
 }
 
-/* The connection-lost choice box is raised over the game modal: it opens while
-   that modal is being shown by the disconnect teardown, and it owns the board's
-   fate, so it must not end up behind it. */
-#connectionLostInGameDialog { z-index:2100; }
+/* Dialogs take their z-index from the order they open, all of them above the
+   game card (UIManager._showModal). An error is drawn red, a notice blue
+   (NetworkDialogs.qml errorDialog accentColor). */
+#appMessageDialog .modal { border-top:3px solid var(--accent-red); max-width:380px; }
+#appMessageDialog.notice .modal { border-top-color:var(--accent-blue); }
+#appMessageText { white-space:pre-line; overflow-wrap:anywhere; }
+#appMessageText a { color:var(--accent-blue); }
+#appConfirmDialog .modal { max-width:380px; }
+#appConfirmMessage { white-space:pre-line; }
 
 /* ====================================================================
    GAME MODAL (pause / game-over / duel results)
@@ -2856,6 +2997,9 @@ input[type="checkbox"] {
 .gm-pause-specs { font-size:12px; color:#9a9a9a; margin-top:2px; }
 .gm-alive { font-size:17px; text-align:center; }
 .gm-time  { font-size:17px; text-align:center; }
+/* A Community board's end under the title: why it ended, or its countdown. */
+.gm-board-end { font-size:14px; text-align:center; color:var(--text-secondary); }
+.gm-board-end.ended { font-weight:bold; color:var(--text-primary); }
 .gm-infinite-scores {
     text-align:center;
     font-size:16px;
@@ -2919,17 +3063,6 @@ input[type="checkbox"] {
     margin-top:8px;
 }
 
-.game-modal-card.gm-duel-stats {
-    max-width:430px;
-    overflow:hidden;
-}
-.game-modal-card.gm-duel-stats #duelStatsArea {
-    min-height:0;
-    max-height:clamp(220px, 56vh, 500px);
-    overflow-y:auto;
-    padding-right:4px;
-    scrollbar-width:thin;
-}
 .duel-score-card {
     width:min(180px, 100%);
     min-height:44px;
@@ -3056,7 +3189,6 @@ input[type="checkbox"] {
     line-height:1.25;
 }
 .gm-rematch-notice {
-    width:230px;
     color:var(--text-secondary);
     font-size:12px;
     font-weight:800;
@@ -3118,29 +3250,23 @@ input[type="checkbox"] {
 
 /* Community game stats table */
 #communityStatsArea {
-    max-height:clamp(148px, 42vh, 340px); overflow-y:auto;
-    /* Below .cs-table's min-width the table stops compressing and this scrolls
+    /* No height of its own: every row is at its natural height and the card's
+       body is the one vertical scroller (ModalContentPlayerStats.qml).
+       Below .cs-table's min-width the table stops compressing and this scrolls
        sideways to it, rather than squeezing six columns into a phone's width.
        Mirrors ModalContentCommunity.qml's minimumTableWidth. */
     overflow-x:auto;
     margin:4px 0;
     scrollbar-width:thin;
 }
-#pvpTeamsStatsArea {
-    max-height:clamp(220px, 52vh, 520px);
-    overflow-y:auto;
-    margin:4px 0;
-    scrollbar-width:thin;
-}
+/* Every roster at its natural height under the body's one scroller; one or two
+   panels abreast by the body's width (GameModalManager._layoutTeamColumns). */
+#pvpTeamsStatsArea { margin:4px 0; }
 .team-stats-panel { display:grid; gap:12px; }
 .team-stats-col { min-width:0; }
-.team-stats-scroll {
-    overflow-y:auto;
-    scrollbar-width:thin;
-}
-.team-stats-title { font-size:16px; font-weight:bold; text-align:center; margin-bottom:2px; }
+.team-stats-title { font-size:16px; font-weight:bold; text-align:center; margin-bottom:2px; white-space:pre; overflow:hidden; text-overflow:ellipsis; }
+.team-stats-title.own-team { text-decoration:underline; text-underline-offset:3px; }
 .team-stats-total { font-size:11px; color:#ccc; text-align:center; margin-bottom:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.team-winner-badge { margin-left:8px; color:#00FF00; font-size:11px; letter-spacing:0; }
 .team-badge { display:inline-block; min-width:22px; padding:2px 5px; border-radius:3px; color:#fff; font-size:10px; font-weight:bold; text-align:center; }
 .team-badge.team1 { background:#2E86C1; }
 .team-badge.team2 { background:#B9770E; }
@@ -3174,6 +3300,22 @@ input[type="checkbox"] {
    While it glides the cell stops eliding: the travel is what shows the rest. */
 .cs-name-inner { display:inline-block; white-space:nowrap; will-change:transform; }
 .cs-td-name.cs-name-glides { text-overflow:clip; }
+/* A player's name that opens their profile card (the stats table, the podium,
+   the leaderboards): a button for the keyboard and screen readers, drawn as the
+   text it stands for, with a hover, press and focus cue. */
+.player-name-link {
+    font:inherit; color:inherit; text-align:inherit;
+    background:none; border:0; margin:0; padding:0;
+    cursor:pointer;
+}
+.player-name-link:hover { text-decoration:underline; }
+.player-name-link:active { opacity:0.6; }
+.player-name-link:focus-visible { outline:2px solid var(--focus-ring); outline-offset:1px; border-radius:3px; }
+.gm-podium-name .player-name-link {
+    max-width:100%; vertical-align:bottom;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.lb-name.player-name-link { text-align:left; }
 .cs-td-num   { text-align:right; color:#ccc; }
 .cs-td-score { color:#eee; font-weight:bold; }
 .cs-row-own  { background:rgba(52,152,219,0.18); }
@@ -3755,6 +3897,9 @@ input[type="checkbox"] {
     font-size:10px; font-weight:bold; white-space:nowrap; cursor:pointer;
 }
 .lb-watch:hover { background:color-mix(in srgb, var(--leaderboard-row-accent) 18%, transparent); }
+/* Your own ELO row has no STATS, but keeps the button's width so its rating
+   stays in the column (LeaderboardManager._statsHtml). */
+.lb-stats-btn.lb-slot { visibility:hidden; }
 
 .lb-showing-info { font-size:10px; color:var(--text-dimmed); text-align:center; margin-top:4px; padding:0 12px 6px; }
 
@@ -3898,6 +4043,10 @@ input[type="checkbox"] {
 .lb-page-content {
     display:flex; flex-direction:column;
     height:100%;
+    /* A short window (a phone on its side, at Big) left the list a row or two
+       under the header and the three tab rows (roadmap 116): the page scrolls
+       instead, and the list keeps room for a few rows (LeaderboardPage.qml). */
+    overflow-y:auto;
 }
 .lb-page-header {
     flex-shrink:0;
@@ -3933,6 +4082,7 @@ input[type="checkbox"] {
     flex:1; overflow-y:auto; overflow-x:hidden;
     margin:6px 12px 0;
     max-height:none;
+    min-height:calc(5 * 40px * var(--ui-scale));
     border:1px solid var(--leaderboard-row-border);
     border-radius:4px;
 }
@@ -3940,6 +4090,54 @@ input[type="checkbox"] {
     flex-shrink:0;
     padding:8px 12px 2px;
 }
+
+/* Recent Community games (CommunityResultsPage.qml / CommunityResultCard.qml):
+   variant chips that scroll, a divider, then the Played-by-me toggle; then a
+   list of cards, each a board end with its rows. */
+#btnLbCommunity .app-icon { color:var(--text-secondary); }
+#btnLbCommunity:hover .app-icon { color:var(--focus-ring); }
+/* Shrinks to fit a phone (Qt: fontSizeMode HorizontalFit), eliding only past that. */
+.lb-page-header .cr-title { font-size:min(var(--font-title), 5vw); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
+.cr-filter-row { display:flex; align-items:center; gap:6px; }
+.cr-variant-scroll { flex:1 1 auto; min-width:0; overflow-x:auto; }
+.cr-filter-divider { flex:0 0 1px; align-self:stretch; margin:4px 0; background:var(--leaderboard-row-border); }
+#btnCrPlayedByMe { flex:0 0 auto; font-size:11px; white-space:nowrap; }
+.cr-list { padding:6px; }
+.cr-card {
+    display:flex; flex-direction:column; gap:3px;
+    padding:8px 10px; margin-bottom:8px;
+    background:var(--leaderboard-panel-bg);
+    border:1px solid var(--leaderboard-row-border);
+    border-radius:8px;
+    color:var(--leaderboard-row-text);
+}
+.cr-card-head, .cr-card-sub { display:flex; align-items:center; gap:8px; min-width:0; }
+.cr-board-name { flex:1 1 auto; min-width:0; font-weight:bold; font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.cr-when, .cr-players { flex:0 0 auto; font-size:11px; color:var(--leaderboard-row-muted); white-space:nowrap; }
+.cr-grid { flex:1 1 auto; min-width:0; font-size:11px; color:var(--leaderboard-row-muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.cr-join { flex:0 0 auto; font-size:11px; font-weight:bold; }
+.cr-card .lb-entry { margin-bottom:0; padding:4px 8px; }
+.cr-card .lb-entry:nth-child(odd) { background:var(--leaderboard-row-bg); }
+.cr-card .lb-entry.lb-own { background:linear-gradient(90deg, rgba(105,214,255,.18), var(--leaderboard-time-bg) 68%); }
+.cr-card .lb-rank { width:34px; font-size:12px; }
+.cr-card .lb-time { font-size:12px; }
+.cr-card .cr-podium { margin:2px 0; gap:6px; }
+.cr-podium .gm-podium-card { padding:6px; }
+.cr-podium .gm-podium-card.cr-podium-own { background:var(--leaderboard-time-bg); border-width:2px; }
+.cr-podium-score { display:flex; align-items:center; justify-content:center; gap:4px; min-height:18px; }
+/* The runners-up: four fifths of a podium place each, centred under it. */
+.cr-card .cr-runners { justify-content:center; }
+.cr-runners .gm-podium-card.cr-runner { flex:0 0 calc((100% - 12px) / 3 * 0.8); padding:3px 4px; border-radius:6px; }
+/* Two lines: the place beside the name, then the score. */
+.cr-runner .gm-podium-name { font-size:11px; margin-top:0; display:flex; justify-content:center; align-items:baseline; gap:4px; }
+.cr-runner .gm-podium-name > :last-child { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.cr-runner .gm-podium-place { flex:none; font-size:10px; color:var(--leaderboard-row-muted); }
+.cr-runner .cr-podium-score { font-size:10px; min-height:14px; margin-top:0; }
+.cr-runner .lb-own-badge { font-size:9px; padding:0 5px; }
+.cr-runners .gm-podium-card.cr-runner.cr-podium-own { border-color:var(--leaderboard-row-accent); }
+.cr-finisher { flex:0 0 auto; font-weight:bold; color:var(--accent-green); }
+.cr-divider { height:1px; margin:2px 0; background:var(--leaderboard-row-border); opacity:.7; }
+.cr-none { font-size:11px; color:var(--leaderboard-row-muted); }
 
 /* ====================================================================
    TOAST NOTIFICATIONS
@@ -3969,6 +4167,8 @@ input[type="checkbox"] {
     opacity:0;
     transition:transform .18s ease-out, opacity .18s ease-out;
     pointer-events:auto;
+    /* Swiped away (SwipeDismiss.js): the finger drags it, the page stays. */
+    touch-action:none; user-select:none; -webkit-user-select:none;
 }
 .social-invite-toast.visible {
     transform:translateX(0);
@@ -4044,9 +4244,11 @@ input[type="checkbox"] {
     flex:1;
     min-width:0;
 }
+/* Above the game card and every dialog: a toast is news about whatever is on
+   screen, so it must not be dimmed behind it. */
 #toastContainer {
     position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
-    z-index:300; display:flex; flex-direction:column;
+    z-index:17000; display:flex; flex-direction:column;
     gap:8px; align-items:center;
 }
 .toast {
@@ -4956,9 +5158,92 @@ input[type="checkbox"] {
     gap:var(--space-2);
     box-shadow:0 22px 54px rgba(0,0,0,.36);
 }
-.game-modal-card.gm-community-stats { width:min(560px, calc(100vw - 32px)); max-width:none; }
-.game-modal-card.gm-pvpteams-stats { width:min(760px, calc(100vw - 32px)); max-width:none; }
-.game-modal-card.gm-duel-stats { width:min(430px, calc(100vw - 32px)); }
+.game-modal-card.gm-community-stats { width:min(540px, calc(100vw - 32px)); max-width:none; }
+.game-modal-card.gm-pvpteams-stats { width:min(620px, calc(100vw - 32px)); max-width:none; }
+.game-modal-card.gm-duel-stats { width:min(420px, calc(100vw - 32px)); }
+
+/* A header, ONE scrolling body, and a footer that stays put (GameModalFrame.qml,
+   docs/game-modal-layout.md §5). The card asks to be at least as wide as its
+   footer's one row (--gm-row-width, measured by _layoutModalActions); the window
+   decides whether it gets it. */
+.game-modal-card {
+    overflow:hidden;
+    min-width:min(calc(var(--gm-row-width, 0px) + 2 * var(--space-4) + 4px), calc(100vw - 32px));
+}
+.gm-header { flex:none; }
+.gm-body {
+    flex:0 1 auto;
+    min-height:0;
+    overflow-x:hidden;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    gap:inherit;
+    scrollbar-width:thin;
+}
+/* Nothing inside shrinks, so the body is the ONE vertical scroller: a table that
+   scrolls sideways is a scroll container, and a scroll container in a flex
+   column would otherwise shrink into a second, nested vertical one. */
+.gm-body > * { flex-shrink:0; }
+.gm-bottom-buttons { flex:none; }
+/* Too short for the header, the footer and a sliver of body: the card scrolls as
+   a whole instead, so every action stays reachable (§4.6). */
+.game-modal-card.gm-whole-card-scroll { overflow-y:auto; }
+.game-modal-card.gm-whole-card-scroll .gm-body { flex:none; overflow:visible; }
+
+/* The generic body is as wide as its header and footer ask, and at least its
+   summary's 240px (320 with Infinite's scores or a leaderboard card). Its text
+   wraps inside that instead of widening the card, as ModalRunSummary's does;
+   only the STATS row asks to keep its specs on one line. */
+.game-modal-card.gm-generic {
+    --gm-summary-width:calc(240px * var(--ui-scale));
+    width:fit-content;
+    min-width:min(calc(max(var(--gm-summary-width), var(--gm-row-width, 0px)) + 2 * var(--space-4) + 4px), calc(100vw - 32px));
+    max-width:calc(100vw - 32px);
+}
+.game-modal-card.gm-generic.gm-summary-wide { --gm-summary-width:calc(320px * var(--ui-scale)); }
+.game-modal-card.gm-generic .gm-body > :not(.gm-pause-info),
+.game-modal-card.gm-generic .gm-pause-info > :not(.gm-spec-row.has-toggle) { contain:inline-size; }
+
+/* The specs line, with the STATS toggle on its left where the player stats table
+   folds. The toggle's width is reserved on BOTH sides (the spacer is its
+   invisible twin), so the specs stay on the card's centre and wrap inside the
+   lane between (ModalSpecRow.qml). */
+.gm-spec-row.has-toggle {
+    display:grid;
+    grid-template-columns:minmax(max-content, 1fr) minmax(0, auto) minmax(max-content, 1fr);
+    align-items:center;
+    column-gap:8px;
+}
+.gm-spec-row.has-toggle .gm-pause-specs { margin-top:0; }
+.gm-stats-toggle {
+    justify-self:start;
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    padding:2px 6px;
+    background:transparent;
+    border:1px solid transparent;
+    border-radius:var(--radius-sm);
+    color:var(--text-secondary);
+    font-size:var(--font-small);
+    font-weight:bold;
+    cursor:pointer;
+}
+.gm-stats-toggle:hover { background:var(--card-hover); }
+.gm-stats-toggle:active { background:var(--card-pressed); }
+/* caret.svg points right unrotated: down offers the table, up puts it away. */
+.gm-stats-toggle .gm-stats-caret { transform:rotate(90deg); transition:transform 130ms; }
+.gm-stats-toggle.expanded .gm-stats-caret { transform:rotate(-90deg); color:var(--accent-blue); }
+.gm-stats-toggle-spacer { justify-self:end; visibility:hidden; pointer-events:none; }
+
+/* A disabled Ready waiting on somebody who could still turn up breathes
+   (GameModalFooter.qml primaryPulse). */
+@keyframes gm-primary-pulse { from { opacity:.8; } to { opacity:.95; } }
+.gm-primary-btn.gm-pulse:disabled { animation:gm-primary-pulse 1.5s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) {
+    .gm-primary-btn.gm-pulse:disabled { animation:none; opacity:.8; }
+}
 .gm-close-btn {
     background:transparent;
     color:var(--text-muted);
@@ -5009,8 +5294,7 @@ input[type="checkbox"] {
 .duel-score { color:var(--duel-score-text); }
 .duel-score-colon { color:var(--duel-score-colon); }
 .duel-divider { background:var(--duel-divider); }
-.duel-reason-box,
-.team-stats-scroll {
+.duel-reason-box {
     background:var(--reason-box-bg);
     border:1px solid var(--reason-box-border);
     border-radius:var(--radius-sm);
@@ -5057,7 +5341,6 @@ input[type="checkbox"] {
 }
 /* The ranked-rematch notice lives among the buttons on the web; keep it on its
    own line above them. */
-.gm-bottom-buttons.gm-one-row .gm-rematch-notice { flex:0 0 100%; width:auto; }
 /* Measuring: every action at its natural width, nothing stretching. */
 .gm-bottom-buttons.gm-measure .gm-btn,
 .gm-bottom-buttons.gm-measure .gm-next-btn {
@@ -5184,11 +5467,6 @@ input[type="checkbox"] {
 .modal-backdrop {
     background:var(--modal-overlay);
     padding:var(--space-4);
-}
-#leaveConfirmDialog,
-#lobbyLeaveConfirmDialog,
-#appSettingsDialog {
-    z-index:2400;
 }
 .modal {
     background:var(--bg-modal);
@@ -6122,3 +6400,299 @@ input[type="checkbox"] {
 .country-row-name { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .country-row-sub { font-size:12px; opacity:0.7; }
 .country-picker-divider { height:1px; margin:6px 2px; background:rgba(127,127,127,0.3); }
+
+/* ── The shop (docs/shop-and-coins.md §6, §11; ShopUI.js) ─────────────────
+   The Solo header's Shop button, the shop and revive dialogs, the pause card's
+   items and helped line, the board's item line and the coin toast. Every
+   button that cannot act stays visible, disabled, with its reason under it. */
+.solo-shop-btn {
+    flex-shrink:0;
+    display:flex; align-items:center; gap:6px;
+    min-height:calc(46px * var(--ui-scale) * var(--density-scale));
+    padding:0 12px;
+    background:var(--card-primary); color:var(--text-primary);
+    border:1px solid var(--panel-border); border-radius:var(--radius-md);
+    cursor:pointer; font:inherit;
+}
+.solo-shop-btn:hover { background:var(--card-hover); }
+.solo-shop-btn.bonus-ready { border-color:var(--accent-orange); }
+.solo-shop-icon { color:var(--accent-orange); }
+.solo-shop-text { display:flex; flex-direction:column; align-items:flex-start; line-height:1.15; }
+.solo-shop-label { font-weight:800; font-size:calc(14px * var(--ui-scale)); }
+.solo-shop-status { font-size:calc(11px * var(--ui-scale)); color:var(--accent-orange); font-weight:700; }
+
+.shop-modal { max-width:min(520px, 94vw); }
+.shop-head {
+    display:flex; align-items:center; gap:var(--space-3);
+    background:var(--panel-elevated);
+    border-bottom:1px solid var(--separator);
+}
+.shop-head h3 { flex:1; min-width:0; background:transparent; border-bottom:none; }
+/* The coin count, apart in a chip of its own (ShopPage.qml's shopCoinChip). */
+.shop-head-balance {
+    margin-right:var(--space-4); padding:4px 12px; border-radius:999px;
+    display:inline-flex; align-items:center; gap:6px;
+    border:1px solid var(--accent-orange); background:rgba(255,165,0,0.14);
+    color:var(--accent-orange); font-weight:800; white-space:nowrap;
+}
+/* A glyph in a tinted round badge (ShopPage.qml's IconBadge). */
+.shop-badge {
+    --tint:var(--accent-blue);
+    flex:none; width:var(--badge); height:var(--badge); border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    color:var(--tint);
+    background:color-mix(in srgb, var(--tint) 16%, transparent);
+    border:1px solid color-mix(in srgb, var(--tint) 45%, transparent);
+}
+.shop-tint-blue { --tint:var(--accent-blue); color:var(--accent-blue); }
+.shop-tint-green { --tint:var(--accent-green); color:var(--accent-green); }
+.shop-tint-orange { --tint:var(--accent-orange); color:var(--accent-orange); }
+.shop-tint-red { --tint:var(--accent-red); color:var(--accent-red); }
+/* A boxed section: the daily bonus, the balance. */
+.shop-box {
+    display:flex; flex-direction:column; gap:8px; padding:12px; margin-top:var(--space-2);
+    border:1px solid var(--panel-border, rgba(255,255,255,0.12)); border-radius:10px;
+    background:var(--panel-elevated, rgba(255,255,255,0.04));
+}
+.shop-box.ready { border-color:var(--accent-green); }
+.shop-box-head { display:flex; align-items:center; gap:8px; font-weight:800; font-size:calc(16px * var(--ui-scale)); }
+/* A part's label inside a box: Get coins under the balance (ShopPage.qml). */
+.shop-box-sub { margin-top:4px; font-weight:800; font-size:var(--font-small); color:var(--text-secondary); }
+.shop-pic { position:relative; display:inline-flex; height:26px; width:calc(26px + (var(--coins) - 1) * 14px); margin:2px auto; }
+.shop-pic .shop-pic-coin { position:absolute; top:0; }
+.shop-pic .shop-pic-coin:nth-child(2) { left:14px; }
+.shop-pic .shop-pic-coin:nth-child(3) { left:28px; }
+.shop-pic.claimed .shop-pic-coin { opacity:.45; }
+.shop-pic-tick {
+    position:absolute; right:-5px; bottom:-3px; width:14px; height:14px; border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    background:var(--accent-green); color:#fff;
+}
+.shop-body { padding:var(--space-2) var(--space-4) var(--space-3); display:flex; flex-direction:column; gap:var(--space-2); }
+.shop-section {
+    margin:var(--space-3) 0 0; font-size:calc(13px * var(--ui-scale));
+    font-weight:800; color:var(--text-secondary); text-transform:uppercase; letter-spacing:.06em;
+}
+/* One line for everything that can't act right now (offline, another device,
+   loading...), over the shop or the revive dialog's ways (§6.5). */
+.state-banner {
+    display:flex; align-items:center; gap:10px; padding:8px 12px; margin-top:var(--space-2);
+    border-radius:10px; color:var(--text-primary);
+    background:color-mix(in srgb, var(--accent-orange) 12%, transparent);
+    border:1px solid color-mix(in srgb, var(--accent-orange) 55%, transparent);
+}
+.state-banner-text { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+.state-banner strong { font-weight:700; }
+.state-banner span span,
+.state-banner-text > span { color:var(--text-secondary); font-size:var(--font-small); }
+.state-spinner {
+    flex:none; width:22px; height:22px; border-radius:50%;
+    border:3px solid color-mix(in srgb, var(--accent-orange) 25%, transparent);
+    border-top-color:var(--accent-orange);
+    animation:revive-spin .9s linear infinite;
+}
+.shop-notice { color:var(--accent-orange); font-weight:700; margin:var(--space-1) 0 0; }
+.shop-warn { color:var(--accent-red); margin:0; font-size:var(--font-small); }
+.shop-hint { color:var(--text-muted); margin:0; font-size:var(--font-small); }
+/* Seven abreast where they fit, else four (ShopPage.qml's bonus strip). */
+.shop-box { container-type:inline-size; }
+.shop-days { display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:6px; }
+@container (min-width: 420px) { .shop-days { grid-template-columns:repeat(7, minmax(0, 1fr)); } }
+.shop-day {
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    padding:6px 2px; border-radius:var(--radius-sm);
+    background:var(--card-primary); border:1px solid var(--panel-border);
+    text-align:center; min-width:0;
+}
+.shop-day.claimed .shop-day-label { color:var(--accent-green); }
+.shop-day.claimed .shop-day-reward { color:var(--text-muted); }
+.shop-day.today { border:2px solid var(--accent-green); }
+.shop-day.prize:not(.today) { border:2px solid var(--accent-orange); }
+.shop-day.prize .shop-day-reward,
+.shop-day.today .shop-day-reward { font-weight:800; color:var(--text-primary); }
+.shop-day-label { font-size:calc(11px * var(--ui-scale)); font-weight:800; }
+.shop-day-reward { font-size:calc(11px * var(--ui-scale)); color:var(--text-secondary); overflow-wrap:anywhere; }
+.shop-day .btn { width:100%; padding:4px 2px; }
+.shop-balance { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:6px; }
+@container (min-width: 420px) { .shop-balance { grid-template-columns:repeat(4, minmax(0, 1fr)); } }
+.shop-balance-tile {
+    display:flex; align-items:center; gap:8px; padding:6px 8px; font-weight:700;
+    border:1px solid var(--panel-border, rgba(255,255,255,0.12)); border-radius:8px;
+}
+.shop-card-meta { display:flex; flex-wrap:wrap; gap:4px 12px; align-items:center; }
+.shop-price { display:inline-flex; align-items:center; gap:3px; color:var(--accent-orange); font-weight:800; font-size:var(--font-small); }
+.shop-card-have { display:inline-flex; align-items:center; gap:3px; }
+.shop-earn { flex-direction:column; align-items:stretch; gap:8px; }
+.shop-earn-row { display:flex; align-items:center; gap:10px; color:var(--text-secondary); font-size:var(--font-small); }
+.shop-card {
+    display:flex; align-items:center; gap:var(--space-3);
+    padding:var(--space-2) var(--space-3);
+    background:var(--card-primary); border:1px solid var(--panel-border); border-radius:var(--radius-md);
+}
+.shop-card-body { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+.shop-card-title { font-weight:800; }
+.shop-card-desc { color:var(--text-secondary); font-size:var(--font-small); }
+.shop-card-have { color:var(--text-muted); font-size:var(--font-small); }
+.shop-card > .btn { flex-shrink:0; width:auto; }
+.shop-reason,
+.gm-item-reason,
+.revive-reason { color:var(--text-muted); font-size:calc(11px * var(--ui-scale)); }
+
+/* The revive dialog (ReviveDialog.qml): a beating heart over the run's time,
+   then a card per way back, its price at the right. */
+.revive-modal { max-width:min(420px, 94vw); }
+.revive-body { padding:var(--space-3) var(--space-4) var(--space-2); display:flex; flex-direction:column; gap:var(--space-2); }
+.revive-hero { position:relative; width:90px; height:90px; margin:2px auto 0; display:flex; align-items:center; justify-content:center; }
+.revive-hero::before {
+    content:''; position:absolute; width:64px; height:64px; border-radius:50%;
+    border:3px solid var(--accent-red); opacity:0;
+    animation:revive-halo 1.35s ease-out infinite;
+}
+.revive-heart {
+    position:relative; width:64px; height:64px; border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    color:var(--accent-red); border:2px solid var(--accent-red);
+    background:color-mix(in srgb, var(--accent-red) 16%, transparent);
+}
+.revive-heart > * { animation:revive-beat 1.35s ease-in-out infinite; }
+@keyframes revive-beat {
+    0% { transform:scale(1); } 10% { transform:scale(1.12); } 26% { transform:scale(1); }
+    35% { transform:scale(1.07); } 54%, 100% { transform:scale(1); }
+}
+@keyframes revive-halo { 0% { transform:scale(1); opacity:.55; } 80% { transform:scale(1.38); opacity:0; } 100% { opacity:0; } }
+@keyframes revive-spin { to { transform:rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+    .revive-hero::before, .revive-heart > * { animation:none; }
+}
+.revive-title { text-align:center; font-size:calc(24px * var(--ui-scale)); font-weight:800; color:var(--text-primary); }
+.revive-run {
+    margin:0; display:flex; align-items:center; justify-content:center; gap:6px;
+    color:var(--text-secondary); text-align:center;
+}
+.revive-ways { display:flex; flex-direction:column; gap:8px; margin-top:var(--space-1); }
+.revive-way {
+    --tint:var(--accent-green);
+    display:flex; align-items:center; gap:12px; width:100%; padding:10px 12px;
+    text-align:left; font:inherit; color:var(--text-primary); cursor:pointer;
+    background:var(--card-primary); border:1px solid var(--panel-border); border-radius:12px;
+    transition:background-color .11s;
+}
+.revive-way:hover:not(:disabled) { background:var(--card-hover); }
+.revive-way:active:not(:disabled) { background:var(--card-pressed); }
+/* The first way that can act. */
+.revive-way.best {
+    border:2px solid var(--tint); padding:9px 11px;
+    background:color-mix(in srgb, var(--tint) 10%, var(--card-primary));
+}
+.revive-way.paying { border:2px solid var(--tint); padding:9px 11px; }
+.revive-way:disabled { cursor:default; background:transparent; }
+.revive-way:disabled .shop-badge { opacity:.45; }
+.revive-way:disabled .revive-price { opacity:.55; }
+.revive-way:disabled .revive-way-title { color:var(--text-dimmed); }
+.revive-way-text { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+.revive-way-title { font-weight:800; font-size:calc(15px * var(--ui-scale)); }
+.revive-way-detail { display:flex; align-items:flex-start; gap:4px; color:var(--text-secondary); font-size:var(--font-small); }
+.revive-way-detail > :first-child:not(:last-child) { flex:none; margin-top:1px; color:var(--text-muted); }
+.revive-price {
+    flex:none; display:inline-flex; align-items:center; gap:4px; padding:3px 9px; border-radius:999px;
+    font-weight:800; font-size:var(--font-small); color:var(--tint);
+    background:color-mix(in srgb, var(--tint) 14%, transparent);
+    border:1px solid color-mix(in srgb, var(--tint) 55%, transparent);
+}
+.revive-spinner {
+    flex:none; width:24px; height:24px; border-radius:50%;
+    border:3px solid color-mix(in srgb, var(--tint) 25%, transparent); border-top-color:var(--tint);
+    animation:revive-spin .9s linear infinite;
+}
+.revive-wide { margin-top:var(--space-1); flex-direction:column; align-items:stretch; gap:2px; }
+.revive-wide > span { color:var(--text-secondary); font-size:var(--font-small); }
+.revive-notice { color:var(--accent-orange); font-weight:700; font-size:var(--font-small); }
+.revive-actions { padding:0 var(--space-4) var(--space-3); }
+.revive-actions .btn { width:100%; }
+
+/* The not-enough-coins dialog (ItemAdDialog.qml): the item in its colour with
+   the coin it is short of, the player's coins over its price, the ways. */
+.item-ad-hero { position:relative; width:84px; height:74px; margin:2px auto 0; display:flex; align-items:center; justify-content:center; }
+/* Its colour comes from its shop-tint-* class. */
+.item-ad-badge {
+    width:64px; height:64px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;
+    border:2px solid currentColor; background:color-mix(in srgb, currentColor 16%, transparent);
+}
+.item-ad-coin {
+    position:absolute; right:4px; bottom:0; width:30px; height:30px; border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    color:var(--accent-orange); background:var(--card-primary); border:2px solid var(--accent-orange);
+}
+.item-ad-coins {
+    --tint:var(--accent-orange);
+    align-self:center; display:inline-flex; align-items:center; gap:5px; padding:4px 10px; border-radius:999px;
+    font-weight:800; color:var(--tint);
+    background:color-mix(in srgb, var(--tint) 12%, transparent);
+    border:1px solid color-mix(in srgb, var(--tint) 55%, transparent);
+}
+.item-ad-coins > .app-icon { color:var(--accent-orange); }
+.item-ad-coins.short { --tint:var(--accent-red); }
+.shop-price.short { color:var(--accent-red); }
+
+.gm-helped-line { margin-top:6px; text-align:center; color:var(--accent-orange); font-size:var(--font-small); font-weight:700; }
+/* A row of its own above the card's actions, as wide as its label needs and at
+   least as wide as they are (GameModalFooter.qml's reviveButton). */
+.gm-revive-btn {
+    border:2px solid var(--accent-orange);
+    width:max-content; min-width:min(220px, 100%); max-width:100%;
+    white-space:normal; text-align:center;
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+}
+/* The revive's heart before its label (GameModalFooter.qml). */
+.gm-revive-icon { flex:none; color:var(--accent-red); }
+.gm-revive-btn:disabled .gm-revive-icon { color:var(--text-muted); }
+.gm-bottom-buttons.gm-one-row .gm-revive-btn { flex:1 0 100%; }
+
+/* At the top, as GameView.qml's is: the bottom corners hold the items'
+   bubble and the small view. */
+.item-pill {
+    position:absolute; top:14px; left:50%; transform:translateX(-50%);
+    z-index:19;
+    display:flex; align-items:center; gap:10px;
+    max-width:calc(100% - 32px); box-sizing:border-box;
+    padding:6px 8px 6px 14px; border-radius:999px;
+    background:rgba(20,22,28,0.92); border:1px solid rgba(255,255,255,0.16);
+    color:#fff; font-size:13px; font-weight:600;
+}
+.item-pill.aiming { border-color:var(--accent-orange); }
+
+/* The items' bubble (ItemBubble.qml): a bottom corner of the board, opening
+   upward. Above the board, below the pause card. */
+.item-bubble {
+    position:absolute; bottom:12px; left:12px; z-index:20;
+    display:flex; flex-direction:column; align-items:flex-start; gap:8px;
+}
+.item-bubble.right { left:auto; right:12px; align-items:flex-end; }
+.item-bubble-menu { display:flex; flex-direction:column; align-items:inherit; gap:6px; }
+.item-bubble-btn {
+    width:56px; height:56px; min-width:0; padding:0; border-radius:50%;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px;
+    transition:opacity .16s;
+}
+/* No item can act on this board (a rated game, before the first reveal): the
+   button itself fades and takes no press (ItemBubble.qml, 2026-11-09). */
+.item-bubble-btn.faded, .item-bubble-btn.faded:disabled { opacity:.35; cursor:default; }
+.item-bubble-btn .item-bubble-icon { color:var(--accent-orange); }
+.item-bubble-label { font-size:11px; font-weight:700; line-height:1; }
+.item-bubble.open .item-bubble-btn { background:var(--accent-orange); border-color:var(--accent-orange); color:#fff; }
+.item-bubble.open .item-bubble-btn .item-bubble-icon { color:#fff; }
+.item-bubble-item {
+    width:auto; display:inline-flex; align-items:center; gap:6px;
+    padding:6px 12px 6px 10px; border-radius:999px; white-space:nowrap;
+}
+.item-bubble-item .app-icon { color:var(--accent-orange); }
+.item-bubble-item.dim { opacity:.6; }
+.item-bubble-item.aimed { background:var(--accent-green); border-color:var(--accent-green); color:#fff; }
+.item-bubble-item.aimed .app-icon { color:#fff; }
+.item-bubble-catcher { position:absolute; inset:0; z-index:19; }
+.item-pill-text { min-width:0; }
+.item-pill .btn { width:auto; flex-shrink:0; }
+
+.achievement-toast-coins { border-color:var(--accent-orange); }
+.achievement-toast-coins .achievement-toast-icon { color:var(--accent-orange); display:flex; }
+.achievement-toast-coins .achievement-toast-name { white-space:normal; }
