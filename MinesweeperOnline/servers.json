@@ -5,7 +5,8 @@
     "format": 1,
     "main": {
         "status": "online",
-        "tcp": "offline",
+        "tcp": "5.tcp.eu.ngrok.io:22550",
+        "tcpKey": "sha256/zEurUG4wd72n2yJnCuaEsZ2m7Q37yi/L0ck9EVVRj0I=",
         "wss": "wss://cloudiest-ileen-nonpsychological.ngrok-free.dev"
     }
 }
