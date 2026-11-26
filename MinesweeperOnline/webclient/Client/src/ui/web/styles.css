@@ -1,5 +1,4 @@
-/* styles.css — Faithful to Qt client Theme.js colours + QML layouts
-   ===================================================================== */
+
 
 :root {
     color-scheme: dark;
@@ -28,6 +27,7 @@
     --bg-lobby:#182128; --bg-lobby-top:#1D2830; --bg-lobby-bottom:#151C22;
     --bg-grid:#202124; --bg-statusbar:#252B34; --bg-modal:#20242B; --bg-networkbar:#1B222A;
 
+    --card-stale:#232730;
     --card-primary:#252A33; --card-secondary:#263A38; --card-active:#313846; --card-hover:#303744; --card-pressed:#202630;
     --card-level:#242934; --card-level-started:#2A3342; --card-level-done:#24382F;
     --panel-bg:#20252D; --panel-elevated:#2A303B; --panel-border:#3B4552; --border:#3B4552; --focus-ring:#69D6FF;
@@ -44,8 +44,7 @@
     --separator:#3A4552; --modal-border:#DCE6F0; --modal-overlay:rgba(10,14,20,0.82);
     --duel-stat-text:#D5DCE4; --duel-divider:#46515F; --duel-score-text:#D5DCE4; --duel-score-colon:#8793A1; --reason-box-bg:#181C22; --reason-box-border:#3A4552;
     --progress-bg:#1E232B; --progress-complete:#39D98A; --progress-partial:#4F8CFF;
-    /* Level stars are GOLD, not green — green is the "completed" colour and the
-       stars vanished into the completed card's green when they shared it. */
+    
     --star-earned:#F6C453; --star-pending:#9A874F; --star-track:#4A5361;
     --ready-active:#2ECC71; --ready-inactive:#7F8C8D;
     --avatar-bg:#2A303B; --avatar-text:#F7FAFC; --avatar-border:#46515F;
@@ -57,6 +56,7 @@
     --bg-menu:#2B3D50; --bg-menu-top:#344D63; --bg-menu-bottom:#26384A;
     --bg-lobby:#2B4254; --bg-lobby-top:#365267; --bg-lobby-bottom:#263A4B;
     --bg-grid:#546777; --bg-statusbar:#25384C; --bg-modal:#26394D; --bg-networkbar:#263B50;
+    --card-stale:#364B5F;
     --card-primary:#3A5065; --card-secondary:#375B61; --card-active:#486174; --card-hover:#435B70; --card-pressed:#2D4357;
     --card-level:#374D61; --card-level-started:#405C74; --card-level-done:#3A6558;
     --panel-bg:#2F455A; --panel-elevated:#3A5268; --panel-border:#6D8AA1; --border:#6D8AA1; --focus-ring:#8DDCFF;
@@ -79,6 +79,7 @@
     --bg-menu:#E7F0F7; --bg-menu-top:#F2F7FB; --bg-menu-bottom:#DCEAF4;
     --bg-lobby:#E3EEF6; --bg-lobby-top:#EEF6FB; --bg-lobby-bottom:#D8E7F1;
     --bg-grid:#D8E3EC; --bg-statusbar:#D6E2EC; --bg-modal:#EDF4F8; --bg-networkbar:#DCE8F2;
+    --card-stale:#E4E9ED;
     --card-primary:#F3F8FC; --card-secondary:#E3F1EE; --card-active:#D9E7F2; --card-hover:#EAF3FA; --card-pressed:#CFDEE9;
     --card-level:#F4F8FB; --card-level-started:#E4EEF8; --card-level-done:#E0F0E9;
     --panel-bg:#EAF2F8; --panel-elevated:#F5F9FC; --panel-border:#B6C8D7; --border:#B6C8D7; --focus-ring:#2D8FD6;
@@ -102,23 +103,22 @@
 :root[data-ui-density="veryCompact"] { --density-scale: .58; }
 :root[data-ui-density="compact"] { --density-scale: .76; }
 
-/* ====================================================================
-   Reset
-   ==================================================================== */
+
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+button, input, select, textarea { font-family:inherit; }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: var(--bg-menu);
     color: var(--text-primary);
     overflow: hidden;
-    height: 100vh; width: 100vw;     /* fallback for older browsers */
-    height: 100dvh; width: 100dvw;  /* dynamic viewport — excludes mobile browser chrome */
+    height: 100vh; width: 100vw;     
+    height: 100dvh; width: 100dvw;  
     user-select: none; -webkit-user-select: none;
 }
 
-/* A data-nav-scroll element is a focus proxy for its native vertical scrollbar.
-   UIManager only enables its tab stop while it genuinely overflows. */
+
 [data-nav-scroll].nav-scroll-available:focus-visible {
     outline:2px solid color-mix(in srgb, var(--focus-ring), transparent 35%);
     outline-offset:-2px;
@@ -138,9 +138,7 @@ body {
     position:relative;
 }
 
-/* ====================================================================
-   Buttons
-   ==================================================================== */
+
 .btn {
     min-height: var(--button-height);
     background: var(--btn-default);
@@ -169,9 +167,7 @@ body {
 .btn-warning{ background: var(--accent-orange); color:var(--text-on-accent); border-color:color-mix(in srgb, var(--accent-orange), white 15%); }
 .btn-duel{ background: var(--accent-purple); color:var(--text-on-accent); border-color:color-mix(in srgb, var(--accent-purple), white 15%); }
 
-/* ====================================================================
-   Inputs
-   ==================================================================== */
+
 input[type="text"],input[type="number"],select {
     background: var(--input-bg); color: var(--text-primary);
     border: 1px solid var(--input-border); border-radius: var(--radius-md);
@@ -194,9 +190,7 @@ input[type="checkbox"] {
     width:18px; height:18px; accent-color: var(--accent-blue);
 }
 
-/* ====================================================================
-   Screens  (stack on top of each other)
-   ==================================================================== */
+
 .screen {
     position:absolute; top:0; left:0;
     width:100%; height:100%;
@@ -204,9 +198,7 @@ input[type="checkbox"] {
 }
 .screen.active { display:flex; }
 
-/* ====================================================================
-   MAIN MENU
-   ==================================================================== */
+
 #mainMenu {
     background:
         linear-gradient(165deg, var(--bg-menu-top), var(--bg-menu-bottom)),
@@ -219,7 +211,8 @@ input[type="checkbox"] {
 }
 #mainMenu::before {
     content:"";
-    position:absolute;
+    
+    position:fixed;
     inset:-40px;
     pointer-events:none;
     opacity:.35;
@@ -253,9 +246,7 @@ input[type="checkbox"] {
 .subtitle { color:var(--text-secondary); text-align:center; font-size:16px; margin-bottom:8px; }
 .menu-separator { height:2px; background:var(--separator); margin:8px 0; }
 .menu-section { display:flex; flex-direction:column; gap:var(--space-1); }
-/* Uppercase, letter-spaced, and followed by a hairline rule to the right edge
-   — the same section header the Qt menu draws. The rule is what makes these read
-   as headings for the rows beneath rather than as another row. */
+
 .menu-section-title {
     color:var(--text-muted); font-weight:bold; text-align:left;
     font-size:var(--font-small); margin:0;
@@ -300,7 +291,9 @@ input[type="checkbox"] {
 .menu-action-app { --menu-accent:var(--text-secondary); }
 .menu-action-count {
     flex:0 0 auto;
-    min-width:96px;
+    
+    min-width:calc(64px * var(--ui-scale));
+    padding-inline:var(--space-2);
     height:30px;
     display:inline-flex;
     align-items:center;
@@ -313,8 +306,7 @@ input[type="checkbox"] {
     font-weight:800;
     white-space:nowrap;
 }
-/* The Settings badge once the server has refused this build as too old: it
-   offers the update, in Qt MainMenu's colours (#3A2D1A ground, orange). */
+
 .menu-action-count.menu-action-update {
     padding:0 10px;
     background:#3A2D1A;
@@ -323,10 +315,7 @@ input[type="checkbox"] {
     cursor:pointer;
 }
 .menu-action-count.menu-action-update:hover { filter:brightness(1.2); }
-/* A bare chevron, not a boxed one. It marks the direction the row goes in; a
-   border round it reads as a second button beside the row it belongs to, which
-   is what the Qt menu deliberately does not do. It lights with the row's accent
-   on hover and focus, exactly as the Qt AppArrow does. */
+
 .menu-arrow {
     flex:0 0 auto;
     width:30px;
@@ -344,13 +333,11 @@ input[type="checkbox"] {
 .settings-section-title { color:var(--text-primary); font-size:14px; font-weight:bold; margin-top:14px; margin-bottom:6px; }
 .settings-desc-text { color:var(--text-muted); font-size:11px; margin-bottom:10px; }
 .privacy-link { color:var(--accent-blue); font-size:12px; text-align:left; display:block; margin-top:8px; }
-/* Donate is a .btn on an <a>, which unlike <button> is inline by default — so
-   it needs the flex row itself, both to take the padding and to seat the brand
-   glyph beside the label. */
+
 .donate-btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; margin-top:2px; text-decoration:none; }
 .account-delete-link { display:block; text-align:center; text-decoration:none; }
 
-/* Server address row at bottom of main menu */
+
 .server-address-row { display:flex; gap:8px; margin-top:4px; }
 .server-addr-row { display:flex; gap:8px; align-items:center; margin-top:4px; min-width:0; }
 .server-addr-row .server-input { flex:1; min-width:0; }
@@ -367,15 +354,14 @@ input[type="checkbox"] {
 .server-input { font-size:13px; padding:8px 10px; text-align:center; }
 .address-error { color:var(--accent-red); font-size:12px; text-align:center; }
 
-/* Connection indicator — full status bar (replaces the old dot) */
+
 .connection-indicator {
     display:flex; align-items:center; justify-content:center;
     gap:6px; padding:6px 12px; border-radius:4px;
     margin:4px auto 0; max-width:320px; box-sizing:border-box;
     transition:background .3s;
 }
-/* The same bar in both hosts (Qt ConnectionStatusIndicator): icon, the
-   headline over its countdown line, then the buttons. */
+
 :is(.connection-indicator, .connection-indicator-embed) .ci-emoji { font-size:14px; line-height:1; flex:0 0 auto; }
 :is(.connection-indicator, .connection-indicator-embed) .ci-body {
     flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:2px;
@@ -399,7 +385,7 @@ input[type="checkbox"] {
 :is(.connection-indicator, .connection-indicator-embed) .ci-btn .hdr-icon { width:14px; height:14px; }
 :is(.connection-indicator, .connection-indicator-embed) .ci-btn-text { padding:0 8px; font-size:12px; font-weight:bold; white-space:nowrap; }
 
-/* Connection indicator states */
+
 .bg-connected    { background:var(--accent-green); }
 .bg-connecting   { background:var(--accent-orange); }
 .bg-retrying     { background:var(--text-muted); }
@@ -412,7 +398,7 @@ input[type="checkbox"] {
 .bg-offline      { background:#3A4048; }
 .bg-backup       { background:#24506E; }
 
-/* Account tab (session transfer) */
+
 .account-transfer-phrase {
     font-weight: bold;
     font-size: 14px;
@@ -431,10 +417,9 @@ input[type="checkbox"] {
 .account-device-label { flex: 1 1 auto; }
 .account-device-remove { flex: 0 0 auto; }
 
-/* Take-over box: the small "leave this account" escape hatch sits below the
-   main Take over / Exit actions. */
+
 .session-takeover-leave { margin-top: 10px; text-align: center; }
-/* The full-account picker's devices: one row each, the chosen one lit. */
+
 .account-full-devices { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; }
 .account-full-devices .account-full-device { text-align: left; white-space: normal; overflow-wrap: anywhere; }
 .btn-compact { padding: 4px 10px; font-size: 12px; }
@@ -475,16 +460,15 @@ input[type="checkbox"] {
     font-size:16px;
 }
 
-/* Embedded indicator in dialogs */
-/* No ground of its own: every state brings its .bg-* class, and a ground
-   declared here came later than those and painted every state grey. */
+
+
 .connection-indicator-embed {
     display:flex; align-items:center; justify-content:center;
     gap:6px; padding:8px 14px; border-radius:4px;
     margin:4px auto; max-width:300px;
 }
 
-/* Spinner for connecting / waiting dialogs */
+
 .spinner {
     width:32px; height:32px; margin:8px auto;
     border:3px solid rgba(255,255,255,.2);
@@ -494,9 +478,7 @@ input[type="checkbox"] {
 }
 @keyframes spin { to { transform:rotate(360deg); } }
 
-/* ====================================================================
-   SOLO MENU
-   ==================================================================== */
+
 #soloMenu {
     background: var(--bg-menu);
     padding:0;
@@ -512,14 +494,19 @@ input[type="checkbox"] {
 .solo-title {
     font-size:24px; font-weight:bold; color:white; margin:0;
     text-align:center; flex:1;
+    
+    min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
+
 .solo-variant-row {
-    display:grid;
-    grid-template-columns:repeat(4, minmax(0, 1fr));
+    display:flex;
+    flex-wrap:wrap;
     gap:8px;
     margin-top:10px;
 }
 .solo-variant-button {
+    flex:0 0 auto;
+    max-width:100%;
     min-width:0;
     min-height:36px;
     padding:0 8px;
@@ -545,7 +532,7 @@ input[type="checkbox"] {
     padding:20px;
 }
 
-/* Shared top-header row (back btn | title | spacer) — mirrors Qt RowLayout */
+
 .screen-header-row {
     display:flex; align-items:center;
     gap:10px;
@@ -566,9 +553,7 @@ input[type="checkbox"] {
     width:50px; height:50px;
 }
 
-/* Monochrome header icons drawn from inline SVG via CSS mask, so they take the
-   button text colour (theme-aware) and never fall back to a missing-glyph box
-   the way a font character (e.g. "↻") can on some Android system fonts. */
+
 .hdr-icon {
     display:inline-block;
     width:58%; height:58%;
@@ -585,13 +570,10 @@ input[type="checkbox"] {
     -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='black'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M21%202v6h-6'/%3E%3Cpath%20d='M3%2012a9%209%200%200%201%2015-6.7L21%208'/%3E%3Cpath%20d='M3%2022v-6h6'/%3E%3Cpath%20d='M21%2012a9%209%200%200%201-15%206.7L3%2016'/%3E%3C/svg%3E");
     mask-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='black'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M21%202v6h-6'/%3E%3Cpath%20d='M3%2012a9%209%200%200%201%2015-6.7L21%208'/%3E%3Cpath%20d='M3%2022v-6h6'/%3E%3Cpath%20d='M21%2012a9%209%200%200%201-15%206.7L3%2016'/%3E%3C/svg%3E");
 }
-/* Inline (non-header) refresh buttons size the icon to the text line instead. */
+
 .btn .hdr-icon { width:1.1em; height:1.1em; vertical-align:-0.15em; }
 
-/* Tinted monochrome glyphs from res/icons/ — the web twin of AppIcon.qml. Same
-   mask trick as .hdr-icon, but the asset is a file rather than an inline data
-   URI, so the whole icon set is shared with the Qt client byte for byte.
-   See Client/src/ui/web/AppIcon.js. */
+
 .app-icon {
     display:inline-block;
     flex:0 0 auto;
@@ -603,11 +585,10 @@ input[type="checkbox"] {
     -webkit-mask-position:center; mask-position:center;
     -webkit-mask-size:contain; mask-size:contain;
 }
-/* Turns a glyph around so one asset can serve a symmetric pair (play/previous,
-   skip-to-end/skip-to-start) — the web twin of AppIcon.qml's `rotation`. */
+
 .app-icon.flip-180 { transform:rotate(180deg); }
 
-/* Menu-button icon chip: a rounded accent-tinted square holding the glyph. */
+
 .menu-action-icon {
     flex:0 0 auto;
     width:34px; height:34px;
@@ -629,14 +610,14 @@ input[type="checkbox"] {
 .main-menu-title { display:flex; align-items:center; justify-content:center; gap:12px; }
 .main-menu-logo { color:var(--accent-teal); }
 
-/* Level cards */
+
 .level-card {
     background: var(--card-primary);
     border-radius:6px; margin-bottom:12px;
     overflow:hidden;
 }
 
-/* Continue saved game card */
+
 .continue-card {
     background: var(--card-secondary, #3a3a5a);
     border-left: 4px solid var(--text-continue, #4CAF50);
@@ -655,8 +636,7 @@ input[type="checkbox"] {
 .level-name { font-size:16px; font-weight:bold; }
 .level-detail { font-size:12px; color:var(--text-detail); }
 .level-actions { display:flex; flex-direction:column; gap:6px; align-items:flex-end; }
-/* A card's square action (SoloActionButton.qml): an emoji on the accent, named
-   by its tooltip. A reserved one keeps its slot so the buttons line up. */
+
 .solo-action {
     width:calc(40px * var(--ui-scale)); height:calc(40px * var(--ui-scale));
     padding:0; display:inline-flex; align-items:center; justify-content:center;
@@ -667,9 +647,9 @@ input[type="checkbox"] {
 .solo-action.solo-action-reserved,
 .solo-action[style*="visibility: hidden"] { visibility:hidden; pointer-events:none; }
 
-/* Custom level cards: keep them compact — flow the icon buttons in a row */
+
 .custom-level-card .level-card-body { flex-wrap:nowrap; align-items:center; }
-/* Compact shape-silhouette thumbnail (overrides the 150px preset preview). */
+
 .custom-level-card .custom-level-thumb { width:54px; height:54px; }
 .custom-level-card .level-actions {
     flex-direction:row;
@@ -678,7 +658,7 @@ input[type="checkbox"] {
     justify-content:flex-end;
 }
 
-/* Category header (collapsible) */
+
 .category-header {
     background: var(--card-primary);
     border-radius:6px; padding:14px 16px;
@@ -691,11 +671,11 @@ input[type="checkbox"] {
 .category-name { font-size:18px; font-weight:bold; flex:1; }
 .category-count { font-size:12px; color:var(--text-detail); }
 
-/* Level items inside expanded category */
+
 .category-levels { display:none; padding-left:8px; margin-bottom:10px; }
 .category-levels.expanded { display:block; }
 
-/* Game mode cards */
+
 .game-mode-card { cursor:pointer; }
 .game-mode-card .level-card-body { padding:12px 16px; }
 
@@ -705,27 +685,20 @@ input[type="checkbox"] {
 .level-card-preset .level-card-body {
     flex-wrap:wrap;
 }
-/* The record strip owns the "best time" treatment on level cards now; this is
-   only still used for the custom-size card's current-score line. */
+
 .level-best-set { color:var(--text-continue); }
 
-/* ── Star ladder + level record strip ────────────────────────────────────────
-   Twin of StarRow.qml / LevelRecordStrip.qml. The ladder is a LADDER, not a
-   score: every bar keeps its time on screen in every state, so a mastered level
-   still says what it was mastered at. State is carried by emphasis, not by
-   presence — earned = gold fill, next up = pending colour with the label in
-   bold (the live target), locked = track outline with a dimmed label. */
+
 .star-row {
     display:flex; align-items:flex-start; gap:10px; line-height:1;
 }
 .star-cell {
     display:flex; flex-direction:column; align-items:center; gap:2px;
 }
-/* The glyph is an .app-icon (res/icons/ui/star{,_outline}.svg), so the state
-   colours below tint it through currentColor. */
+
 .star-cell-glyph {
     line-height:1;
-    /* transform-origin keeps the pop centred on the glyph, not the column. */
+    
     transform-origin:50% 50%;
 }
 .star-cell-label { font-size:9px; white-space:nowrap; }
@@ -736,8 +709,7 @@ input[type="checkbox"] {
 .star-cell.locked  .star-cell-glyph { color:var(--star-track); }
 .star-cell.locked  .star-cell-label { color:var(--text-dimmed); }
 
-/* Staggered pop across the earned stars on a win. Celebrates the run, not a
-   newly-earned star — the client cannot know what the count was before it. */
+
 .star-cell.pop .star-cell-glyph {
     animation:star-pop 300ms ease-out both;
     animation-delay:var(--star-pop-delay, 0ms);
@@ -751,9 +723,7 @@ input[type="checkbox"] {
     .star-cell.pop .star-cell-glyph { animation:none; }
 }
 
-/* The record for a level as one object: the time, the ladder that time is
-   scored against, and (in the modal) how the run is pacing against the next
-   bar. Shared by the solo-menu level cards and the game modal. */
+
 .record-strip {
     display:flex; flex-direction:column; gap:5px;
     margin-top:4px; padding:7px 10px;
@@ -773,13 +743,10 @@ input[type="checkbox"] {
 .record-strip-time { font-size:13px; font-weight:bold; color:var(--text-primary); }
 .record-strip-time.run   { font-size:20px; }
 .record-strip-time.empty { color:var(--text-dimmed); }
-/* A helped clear's time, with its * (LevelRecordStrip.qml): under the timed
-   best, or as the best with no timed clear. */
+
 .record-strip-time.helped { color:var(--text-secondary); }
 .record-strip-helped-note { font-size:10px; color:var(--text-muted); }
-/* How the run is pacing against the next bar, as one line of text. This was a
-   drainable bar and it earned its removal: it read as a progress meter
-   (full = done) when it meant the opposite. */
+
 .record-strip-pace { font-size:11px; }
 .record-strip-pace.met    { color:var(--text-secondary); }
 .record-strip-pace.missed { color:var(--text-muted); }
@@ -790,9 +757,7 @@ input[type="checkbox"] {
 .record-strip-score-label { font-size:11px; color:var(--text-detail); }
 .record-strip-score-value { font-size:11px; color:var(--text-detail); }
 .record-strip-score-value.high { font-weight:bold; color:var(--text-continue); }
-/* The coins a level pays (LevelRecordStrip.qml): amber while still to earn,
-   dimmed with a green check once had. Wraps between rewards; a reward wider than
-   the strip puts what it is for under the amount, wrapped at words. */
+
 .record-strip-rewards { display:flex; flex-wrap:wrap; gap:3px 8px; align-items:center; }
 .record-reward { display:inline-flex; flex-wrap:wrap; align-items:center; gap:0 3px; max-width:100%; font-size:10px; }
 .record-reward-coin { color:var(--accent-orange); }
@@ -803,12 +768,11 @@ input[type="checkbox"] {
 .record-reward.claimed .record-reward-coins { color:var(--text-muted); }
 .record-reward.claimed .record-reward-label { color:var(--text-dimmed); }
 
-/* The modal's strip matches the leaderboard placement card below it, so the two
-   read as one stack rather than a framed panel next to loose glyphs. */
+
 .gm-level-stars { display:flex; justify-content:center; margin-top:6px; }
 .gm-level-stars .record-strip { width:100%; max-width:280px; }
 
-/* Progress bar */
+
 .progress-bar-container {
     width:100%; height:8px; border-radius:4px;
     background:var(--progress-bg);
@@ -825,9 +789,7 @@ input[type="checkbox"] {
     font-size:9px; font-weight:bold; color:#aaa;
 }
 
-/* ====================================================================
-   WAN LOBBY
-   ==================================================================== */
+
 #wanLobby {
     background: var(--bg-lobby);
     padding:0;
@@ -947,7 +909,7 @@ input[type="checkbox"] {
 }
 .lobby-config { color:var(--text-secondary); text-align:center; font-size:14px; }
 .lobby-hint { color:var(--text-secondary); text-align:center; font-size:13px; margin:4px 0; }
-/* What the host holds for the next round (NextRoundLine.qml). */
+
 .next-round-line { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px; color:var(--accent-orange); font-size:12px; text-align:center; margin:4px 0; }
 .next-round-line .btn { width:auto; }
 
@@ -983,9 +945,7 @@ input[type="checkbox"] {
 .player-profile-btn:hover,
 .npt-profile:hover { background:rgba(255,255,255,.18); }
 
-/* ====================================================================
-   FRIENDS / RECENT PLAYERS
-   ==================================================================== */
+
 .social-screen {
     background:
         linear-gradient(165deg, var(--bg-lobby-top), var(--bg-lobby-bottom)),
@@ -1048,8 +1008,9 @@ input[type="checkbox"] {
     cursor:pointer;
 }
 .social-tab.active {
-    background:var(--card-primary);
-    color:var(--text-primary);
+    
+    background:var(--accent-blue);
+    color:var(--text-on-accent);
     border-color:var(--focus-ring);
 }
 .social-toolbar {
@@ -1116,8 +1077,7 @@ input[type="checkbox"] {
 }
 .social-status { color:var(--text-primary); font-size:var(--font-small); font-weight:900; }
 .social-cooldown { color:var(--accent-orange); font-size:var(--font-small); font-weight:800; min-height:14px; }
-/* The line under the tabs: a message teal, the invite cooldown orange
-   (FriendsPage.qml statusLineText). */
+
 .social-status-line { text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin:4px 0; }
 .social-status-line.message { color:var(--accent-teal); }
 .social-list {
@@ -1129,7 +1089,7 @@ input[type="checkbox"] {
     gap:6px;
     padding-bottom:var(--space-2);
 }
-/* A page of friends at a time (FriendsPage.qml, WANLobby.qml's dialog). */
+
 .social-pagination { flex-shrink:0; padding:6px 12px 2px; }
 .social-pagination .btn { width:auto; }
 .social-empty {
@@ -1165,13 +1125,7 @@ input[type="checkbox"] {
     border-color:color-mix(in srgb, var(--pause-yellow), var(--panel-border) 38%);
     box-shadow:0 0 14px rgba(246,211,101,.18);
 }
-/* :focus-visible, not :focus — the browser's own version of the split the Qt
-   client spells out as Nav.showFocus (docs/dpad-navigation.md, round 9). A row
-   keeps focus after it is clicked, so plain :focus left every row the user had
-   ever touched wearing the keyboard's highlight. Every other focus rule in this
-   file is already :focus-visible; the bare :focus ones are all text inputs,
-   where the mark means "you are typing here" and is right to show under the
-   pointer. */
+
 .social-row:hover,
 .social-row:focus-visible {
     background:var(--card-hover);
@@ -1435,7 +1389,7 @@ input[type="checkbox"] {
     font-size:var(--font-small);
 }
 
-/* Player ranked stats modal - mirrors the Qt PlayerStatsPanel layout. */
+
 .modal.player-stats-modal {
     width:min(480px, calc(100vw - 24px));
     max-width:none;
@@ -1604,9 +1558,7 @@ input[type="checkbox"] {
     text-align:center;
 }
 
-/* ====================================================================
-   PROFILE PANEL — avatar, section tabs, statistics + achievement cards
-   ==================================================================== */
+
 .player-stats-avatar {
     width:40px; height:40px; flex:0 0 40px;
     display:flex; align-items:center; justify-content:center;
@@ -1665,9 +1617,7 @@ input[type="checkbox"] {
 .profile-ach-orange { color:var(--accent-orange); }
 .profile-ach-sub { color:var(--text-muted); font-size:calc(10px * var(--ui-scale)); }
 
-/* ====================================================================
-   ACHIEVEMENTS PAGE — full-screen overlay opened from the trophy button
-   ==================================================================== */
+
 .stats-trophy-btn { font-size:calc(18px * var(--ui-scale)); }
 .achievements-page {
     position:fixed; inset:0; z-index:60;
@@ -1679,11 +1629,9 @@ input[type="checkbox"] {
 .achievements-page.visible { display:block; }
 .achievements-inner {
     height:100%;
-    /* The same for a short window: the filters scroll up out of the way and the
-       list keeps room for a couple of cards (AchievementsPage.qml, roadmap 116). */
+    
     overflow-y:auto;
-    /* Cards are laid out in an auto-fill grid, so the page is allowed to use a
-       wide window — the same "how many 380px cards fit" rule the Qt page has. */
+    
     max-width:1600px; margin:0 auto;
     padding:clamp(14px, 3.5vw, 24px);
     display:flex; flex-direction:column;
@@ -1697,8 +1645,7 @@ input[type="checkbox"] {
 .ach-title-icon { color:var(--star-earned); }
 .achievements-subtitle { color:var(--text-secondary); font-size:calc(11px * var(--ui-scale)); }
 
-/* Hero: two numbers over one bar measured in stars (the finer of the two
-   scales). No panel frame — the page already has enough chrome. */
+
 .ach-hero { display:flex; flex-direction:column; gap:5px; margin-bottom:var(--space-3); }
 .ach-hero-row { display:flex; align-items:center; gap:8px; }
 .ach-hero-count { color:var(--text-secondary); font-size:calc(12px * var(--ui-scale)); }
@@ -1713,8 +1660,7 @@ input[type="checkbox"] {
     transition:width 320ms cubic-bezier(.22,.61,.36,1);
 }
 
-/* Recently earned (ROADMAP 187): this device's unlocks, newest first, in a
-   row that scrolls sideways. */
+
 .ach-recent { display:flex; flex-direction:column; gap:6px; margin-bottom:var(--space-3); }
 .ach-recent-title { color:var(--text-secondary); font-size:calc(12px * var(--ui-scale)); font-weight:800; }
 .ach-recent-empty { color:var(--text-dimmed); font-size:calc(11px * var(--ui-scale)); }
@@ -1740,8 +1686,7 @@ input[type="checkbox"] {
 .ach-recent-meta { display:flex; gap:6px; color:var(--text-secondary); font-size:calc(11px * var(--ui-scale)); }
 .ach-recent-stars { color:var(--star-earned); }
 
-/* Filters: one panel, not three stacked ones. Rows that do not apply are
-   hidden rather than left as empty boxes. */
+
 .ach-filters {
     display:flex; flex-direction:column; gap:6px;
     padding:var(--space-2);
@@ -1764,9 +1709,10 @@ input[type="checkbox"] {
 }
 .ach-search:focus { outline:none; border-color:var(--focus-ring); }
 .ach-sort { flex:0 0 auto; width:auto; min-width:140px; }
-/* Status chips share the width equally, so the four read as one control. */
+
 .ach-status-row { flex-wrap:nowrap; }
-.ach-status-chip { flex:1 1 0; min-width:0; }
+
+.ach-status-chip { flex:1 1 auto; min-width:0; white-space:nowrap; padding-inline:var(--space-2); }
 
 .achievements-cats {
     display:flex; flex-wrap:wrap; gap:4px;
@@ -1774,13 +1720,10 @@ input[type="checkbox"] {
     background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:8px;
     margin-bottom:var(--space-3);
 }
-/* Mode / variant sub-filter: same chips as the category tabs, but centred on one
-   line that scrolls horizontally once the mode list outgrows a narrow window
-   (mirrors the leaderboard's selector rows). */
+
 .achievements-subfilter {
     flex-wrap:nowrap;
-    /* `safe` keeps the first chips reachable once the row overflows — plain
-       centring would push them past the left edge with no way to scroll back. */
+    
     justify-content:center; justify-content:safe center;
     overflow-x:auto; overflow-y:hidden;
     scrollbar-width:thin;
@@ -1803,8 +1746,7 @@ input[type="checkbox"] {
     display:flex; flex-direction:column; gap:8px;
     padding-right:4px;
 }
-/* Empty state: a blank void gave no clue that a filter, not the catalog, was
-   the reason nothing was on screen. */
+
 .achievements-empty-state {
     flex:1; min-height:0;
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
@@ -1812,7 +1754,7 @@ input[type="checkbox"] {
 .ach-empty-icon { color:var(--text-dimmed); opacity:.6; }
 .ach-empty-text { color:var(--text-secondary); font-size:calc(13px * var(--ui-scale)); }
 
-/* Level group header — collapsible, the way the solo menu groups presets. */
+
 .ach-group-header {
     width:100%; min-height:38px;
     display:flex; align-items:center; gap:8px;
@@ -1830,10 +1772,7 @@ input[type="checkbox"] {
 .ach-group-count.complete { color:var(--win-green); }
 .ach-group-star { color:var(--star-earned); }
 
-/* One line of cards. What a card actually needs — the star ladder with its
-   threshold labels plus a pair of action buttons — sits a little under 380px,
-   so the column count is "how many of these fit" rather than a breakpoint
-   ladder. */
+
 .ach-card-row {
     display:grid; gap:8px;
     grid-template-columns:repeat(auto-fill, minmax(min(380px, 100%), 1fr));
@@ -1872,12 +1811,12 @@ input[type="checkbox"] {
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
 .ach-card-name.complete { color:var(--win-green); }
-/* Recorded best time on a level card — the value its stars are derived from. */
+
 .ach-best { display:flex; align-items:baseline; gap:4px; white-space:nowrap; }
 .ach-best-label { color:var(--text-dimmed); font-size:calc(9px * var(--ui-scale)); font-weight:800; }
 .ach-best-value { color:var(--text-primary); font-size:calc(12px * var(--ui-scale)); font-weight:bold; }
 .ach-best-value.dim { color:var(--text-dimmed); }
-/* Stage pill: N / M, plus a check or a padlock at the extremes. */
+
 .ach-stage-pill {
     flex:0 0 auto;
     display:inline-flex; align-items:center; gap:4px;
@@ -1890,9 +1829,7 @@ input[type="checkbox"] {
 }
 
 .ach-ladder-row { display:flex; align-items:center; gap:10px; }
-/* The star ladder. State is carried by emphasis, never by presence: every bar
-   stays on screen, and the selected column carries a raised pill behind it so
-   the interaction is visible before it is discovered. */
+
 .ach-stars { display:flex; gap:4px; }
 .ach-star {
     display:flex; flex-direction:column; align-items:center; gap:2px;
@@ -1912,8 +1849,7 @@ input[type="checkbox"] {
 .ach-star.locked  .ach-star-label { color:var(--text-dimmed); }
 .ach-star.selected .ach-star-label { font-weight:bold; }
 
-/* Level actions: a filled primary (Play) and an outlined secondary (Rated).
-   The labels drop out on a narrow card rather than squeezing the ladder. */
+
 .ach-actions { margin-left:auto; display:flex; gap:6px; }
 .ach-action {
     height:32px; min-width:32px; padding:0 10px;
@@ -1940,7 +1876,7 @@ input[type="checkbox"] {
 }
 .ach-goal > span { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .ach-goal.done { color:var(--win-green); }
-/* A second line under the goal (Collector exclusions, Devoted's streak). */
+
 .ach-note {
     color:var(--text-muted); font-size:calc(11px * var(--ui-scale));
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
@@ -1957,10 +1893,8 @@ input[type="checkbox"] {
 .ach-progress-fill.complete { background:var(--progress-complete); }
 .ach-progress-text { color:var(--text-muted); font-size:calc(10px * var(--ui-scale)); white-space:nowrap; }
 
-/* ====================================================================
-   ACHIEVEMENT UNLOCK TOAST
-   ==================================================================== */
-/* Two at a time, one under the other (ROADMAP 187), then "+N more". */
+
+
 .achievement-toast-stack {
     position:fixed; top:16px; left:0; right:0; z-index:90;
     display:flex; flex-direction:column; align-items:center; gap:8px; pointer-events:none;
@@ -1976,7 +1910,7 @@ input[type="checkbox"] {
     transform:translateY(-130%); opacity:0;
     transition:transform .32s cubic-bezier(.22,.61,.36,1), opacity .26s;
     cursor:pointer;
-    /* Swiped away (SwipeDismiss.js): the finger drags it, the page stays. */
+    
     touch-action:none; user-select:none; -webkit-user-select:none;
 }
 .achievement-toast.visible { transform:translateY(0); opacity:1; }
@@ -2000,8 +1934,7 @@ input[type="checkbox"] {
 }
 .achievement-toast-more.visible { pointer-events:auto; opacity:1; }
 
-/* Server announcements — operator broadcasts. Sit above the achievement toast:
-   a maintenance warning is the one thing that must never be covered. */
+
 .server-announcement-stack {
     position:fixed; top:16px; left:0; right:0; z-index:95;
     display:flex; justify-content:center; pointer-events:none;
@@ -2032,7 +1965,7 @@ input[type="checkbox"] {
 }
 .server-announcement-text {
     color:var(--text-primary); font-size:calc(15px * var(--ui-scale));
-    /* A 255-byte message can run to several lines; the banner grows to fit. */
+    
     white-space:pre-wrap; overflow-wrap:anywhere;
 }
 .server-announcement-sub {
@@ -2148,12 +2081,12 @@ input[type="checkbox"] {
     }
 }
 
-/* Return to game / Join in progress */
+
 .btn-return-game { background:#9B59B6; font-size:18px; font-weight:bold; }
 .btn-join-progress { background:#27AE60; font-size:18px; font-weight:bold; }
 .btn-force-restart { background:#C0392B; font-size:17px; font-weight:bold; }
 
-/* Pulse animation */
+
 .pulse-opacity {
     animation: pulseOpacity 2s ease-in-out infinite;
 }
@@ -2162,17 +2095,11 @@ input[type="checkbox"] {
     50% { opacity:1; }
 }
 
-/* ====================================================================
-   GAME VIEW
-   ==================================================================== */
+
 #gameView { flex-direction:column; position:relative; }
 
-/* Network bar */
-/* Everything the network bar takes room from. One parent, so a top bar costs
-   the whole game-facing subtree height and a side bar costs it width — see
-   docs/network-bar-placement.md. position:relative WITHOUT a z-index, so it
-   bounds the floating small view without creating a stacking context the panel
-   could not rise out of. */
+
+
 #playArea {
     flex:1 1 auto; min-width:0; min-height:0;
     display:flex; flex-direction:column;
@@ -2186,11 +2113,7 @@ input[type="checkbox"] {
 }
 #networkBar.visible { display:flex; }
 
-/* ── Side placement ───────────────────────────────────────────────────────
-   Not the horizontal bar rotated: one column of player tags, a vertically
-   scrollable player region, and the fixed controls above it. Which side is
-   chosen (and whether a side is chosen at all) is decided in JS — the CSS only
-   describes the two shapes. */
+
 #gameView.netbar-left,
 #gameView.netbar-right { flex-direction:row; }
 #gameView.netbar-right { flex-direction:row-reverse; }
@@ -2211,16 +2134,10 @@ input[type="checkbox"] {
 }
 #gameView.netbar-left .netbar-spacer,
 #gameView.netbar-right .netbar-spacer { flex-basis:100%; height:0; }
-/* The player region is the only part that grows, and the only part that
-   scrolls: the controls above it must never be pushed off the top. Vertically
-   only — a side bar that scrolls sideways is a side bar whose contents do not
-   fit, which is the thing the column layout exists to prevent. */
+
 #gameView.netbar-left .netbar-players,
 #gameView.netbar-right .netbar-players {
-    /* Takes the room it needs and no more, so the ready/respawn control that
-       shares this row sits directly under the last tag instead of being pushed
-       to the floor of a full-height column. The SCROLL is on the tag list
-       below, which is the only part that can grow without bound. */
+    
     flex:0 1 auto;
     min-height:0;
     min-width:0;
@@ -2229,8 +2146,7 @@ input[type="checkbox"] {
     align-items:stretch;
     overflow:hidden;
 }
-/* One tag per row, each as wide as the column, with the name eliding rather
-   than pushing the row wider. The top bar keeps its natural-width flow. */
+
 #gameView.netbar-left .netbar-player-tags,
 #gameView.netbar-right .netbar-player-tags {
     display:flex;
@@ -2239,7 +2155,7 @@ input[type="checkbox"] {
     gap:4px;
     min-width:0;
     width:100%;
-    /* The one part of the bar that scrolls. Vertically only. */
+    
     flex:0 1 auto;
     min-height:0;
     overflow-y:auto;
@@ -2259,10 +2175,7 @@ input[type="checkbox"] {
     text-overflow:ellipsis;
     white-space:nowrap;
 }
-/* Controls that share the player row in the top bar (the ready slot, the ranked
-   action strip) become full-width rows of their own down the side. The slot is
-   a fixed 92 px pushed right by `margin-left:auto` up top; both of those are
-   about a horizontal row and have to go. */
+
 #gameView.netbar-left .netbar-players > *,
 #gameView.netbar-right .netbar-players > * {
     flex:0 0 auto;
@@ -2317,16 +2230,14 @@ input[type="checkbox"] {
 }
 .netbar-players-label { color:var(--text-secondary); margin-right:4px; }
 
-/* Player tag in network bar */
+
 .net-player-tag {
     display:inline-flex; align-items:center; gap:3px;
     padding:2px 8px; border-radius:3px;
     font-size:11px; color:#fff; position:relative;
 }
 .net-player-tag .npt-icon { font-size:11px; position:relative; display:inline-block; }
-/* The action flash: a brief 🚩 / 👆 over the player's own icon, in the tag's own
-   colour so it reads as that player's doing. Twin of the Qt PlayerTag overlay —
-   instant in, half a second held, a second to fade. */
+
 .net-player-tag .npt-action {
     position:absolute; inset:-2px -3px;
     display:flex; align-items:center; justify-content:center;
@@ -2359,13 +2270,13 @@ input[type="checkbox"] {
     font-weight:bold;
 }
 
-/* Player tags wrapper — fills available width to push buttons right */
+
 .netbar-player-tags {
     display:flex; flex-wrap:wrap; align-items:center; gap:4px;
     flex:1; min-width:0;
 }
 
-/* Ready button in network bar */
+
 .netbar-ready-slot {
     display:inline-flex; justify-content:flex-end;
     flex:0 0 92px; margin-left:auto; min-width:92px;
@@ -2424,7 +2335,7 @@ input[type="checkbox"] {
 .netbar-ranked-menu button:disabled { opacity:.55; cursor:default; }
 .netbar-ranked-menu button.danger { color:var(--loss-red); }
 
-/* Respawn button in network bar */
+
 .netbar-respawn-btn {
     display:inline-flex; align-items:center; gap:4px;
     padding:2px 8px; border-radius:3px;
@@ -2435,7 +2346,7 @@ input[type="checkbox"] {
 .netbar-respawn-btn.enabled { border-color:var(--ready-active); }
 .netbar-respawn-btn:disabled { opacity:0.7; cursor:default; }
 
-/* Pending players in network bar */
+
 .netbar-pending {
     display:flex; flex-wrap:wrap; align-items:center; gap:4px;
     font-size:11px;
@@ -2460,15 +2371,16 @@ input[type="checkbox"] {
     display:flex; align-items:center; justify-content:center; padding:0;
 }
 
-/* Chat button in network bar */
+
 .net-chat-btn-wrapper {
     position:relative; display:inline-flex;
 }
 .net-chat-btn {
+    
     background:var(--accent-blue); color:#fff;
-    border:none; border-radius:4px; width:28px; height:28px;
-    font-size:14px; cursor:pointer; display:flex;
-    align-items:center; justify-content:center;
+    border:none; border-radius:4px; padding:4px 10px; gap:4px;
+    font-size:12px; font-weight:bold; cursor:pointer; display:flex;
+    align-items:center; justify-content:center; white-space:nowrap;
 }
 .net-chat-btn:hover { filter:brightness(1.1); }
 .chat-unread-dot {
@@ -2478,7 +2390,7 @@ input[type="checkbox"] {
 }
 .chat-unread-dot.visible { display:block; }
 
-/* Chat panel (overlays game view) */
+
 .chat-panel {
     display:none; flex-direction:column;
     position:absolute; right:8px; top:80px; bottom:60px;
@@ -2525,8 +2437,7 @@ input[type="checkbox"] {
 .chat-msg-blocked { opacity:0.55; }
 .chat-text-blocked { font-style:italic; color:var(--text-muted); }
 .chat-input-row {
-    /* wrap so the charset warning (.wire-text-warning) drops to its own line
-       instead of competing with the input and the Send button for this one. */
+    
     display:flex; gap:4px; align-items:center; flex-wrap:wrap;
 }
 .chat-input {
@@ -2537,10 +2448,7 @@ input[type="checkbox"] {
 .chat-input:focus { border-color:var(--accent-blue); }
 .chat-input::placeholder { color:var(--text-muted); }
 
-/* The "13/20" readout beside a wire-text input (see ui/web/WireTextInput.js).
-   The element is created by that module, so the layout it needs lives here
-   rather than in the markup: it sits inline after its input, stays out of the
-   flex stretch, and turns red at the limit. */
+
 .wire-text-counter {
     flex:0 0 auto;
     font-size:11px;
@@ -2552,12 +2460,7 @@ input[type="checkbox"] {
 .wire-text-counter[hidden] { display:none; }
 .wire-text-counter.at-limit { color:var(--accent-red); }
 
-/* Charset rejection notice — see WireTextInput.js. The module inserts it as a
-   flex sibling of its input, and the two containers that host one disagree
-   about direction: .form-group is a column, .chat-input-row is a row. Hence
-   width rather than flex-basis — a basis of 100% would resolve against HEIGHT
-   in the column case — plus flex-wrap on the row below, which is what sends
-   this onto its own line instead of squeezing the input and the Send button. */
+
 .wire-text-warning {
     flex:0 0 auto;
     width:100%;
@@ -2574,9 +2477,7 @@ input[type="checkbox"] {
     font-weight:bold; cursor:pointer; white-space:nowrap;
 }
 .chat-send-btn:hover { filter:brightness(1.1); }
-/* The chat's pace: while the next line cannot go, Send is unavailable and a
-   ring fills in place of its word, the button keeping its size so the row never
-   moves (ChatHandler._refreshCooldown; ChatPanel.qml's ring). */
+
 .chat-send-btn { position:relative; }
 .chat-send-btn:disabled { cursor:default; filter:none; opacity:.6; }
 .chat-cooldown-ring {
@@ -2593,7 +2494,7 @@ input[type="checkbox"] {
 }
 @keyframes chat-cooldown { to { stroke-dashoffset:0; } }
 
-/* Compact in-game chat notifications (under status/network bars) */
+
 .chat-toast-stack {
     position:absolute;
     top:8px;
@@ -2616,7 +2517,7 @@ input[type="checkbox"] {
     gap:4px;
     box-shadow:0 2px 8px rgba(0,0,0,0.25);
 }
-/* A round-timer warning (Qt: the toast's warning border). */
+
 .chat-toast.warning { border-color:var(--accent-orange); }
 
 .chat-toast-name {
@@ -2688,7 +2589,7 @@ input[type="checkbox"] {
     outline:none;
 }
 
-/* Status bar — modeled after the Qt StatusBar with LED displays */
+
 #statusBar {
     display:flex; align-items:center; justify-content:space-between;
     padding:6px 10px; background:var(--bg-statusbar);
@@ -2697,7 +2598,7 @@ input[type="checkbox"] {
 .status-left {
     display:flex; align-items:center; gap:6px;
 }
-/* LED-style display (mine counter + timer) */
+
 .status-display {
     background:var(--display-bg);
     color:var(--display-text);
@@ -2714,13 +2615,13 @@ input[type="checkbox"] {
     line-height:1;
 }
 
-/* Fog of war countdown bar */
+
 #fogCounterBar {
     text-align:center; font-size:12px; color:#aaaacc;
     background:#1a1a2e; padding:3px 0; line-height:1;
 }
 
-/* Duel / PVPTeams banner (mirrors Qt DuelBanner) */
+
 #duelBanner {
     display:flex; align-items:center; justify-content:space-between;
     background:var(--bg-networkbar); color:var(--text-primary);
@@ -2750,13 +2651,13 @@ input[type="checkbox"] {
 #duelBanner.team-banner-multi .duel-banner-left { justify-content:flex-start; }
 #duelBanner.team-banner-multi .duel-banner-right { justify-content:flex-end; }
 
-/* Grid area — wrapper for own + opponent grid */
+
 #gridsWrapper { flex:1; display:flex; overflow:hidden; }
 #gridContainer { flex:1; position:relative; overflow:hidden; }
 #gridCanvas { position:absolute; top:0;left:0; width:100%;height:100%; }
 #infiniteCanvas { position:absolute; top:0;left:0; width:100%;height:100%; }
 
-/* Keyboard selection position badge (mirrors Qt keyboardPositionBadge) */
+
 .kbd-pos-badge {
     position:absolute;
     left:10px;
@@ -2773,24 +2674,18 @@ input[type="checkbox"] {
     white-space:nowrap;
 }
 
-/* ── Small view: the floating board-overview panel ─────────────────────────
-   A movable, tabbed holder for any secondary look at a board — a minimap of the
-   player's own board, an opponent's, a team's. Positioned in JS (left/top,
-   against the board area's rect) because placement is a solved preference, not
-   a static corner: see ui/web/game/SmallViewPanel.js. */
+
 .small-view-panel {
     position:absolute;
     display:flex; flex-direction:column;
-    /* z is written by the panel and FOLLOWS ATTENTION: below the modal
-       normally, above it while peeked open. */
+    
     z-index:15;
     background:rgba(32,39,51,0.90);
     border:1px solid var(--panel-border);
     border-radius:10px;
     overflow:hidden;
     transition:left 0.22s cubic-bezier(0.33,1,0.68,1), top 0.22s cubic-bezier(0.33,1,0.68,1);
-    /* The panel is opaque, so it has to BEHAVE opaque: nothing here may fall
-       through to the board and reveal a cell the player never aimed at. */
+    
     touch-action:none;
 }
 .small-view-panel.sv-dragging { transition:none; }
@@ -2804,12 +2699,7 @@ input[type="checkbox"] {
     cursor:move;
     user-select:none;
 }
-/* The caret alone sits on the edge that STAYS ON SCREEN when the panel is
-   stubbed — the panel's inner edge — and reset sits on the far one, so the two
-   swap sides with the resolved corner. A panel snapped RIGHT slides off to the
-   right, so its left edge is the one left showing and the caret belongs there.
-   Get this backwards and the stub is a blank sliver with its one control off
-   the edge of the screen. */
+
 .small-view-panel.sv-snap-right .sv-header { flex-direction:row; }
 .small-view-panel:not(.sv-snap-right) .sv-header { flex-direction:row-reverse; }
 
@@ -2822,8 +2712,7 @@ input[type="checkbox"] {
 }
 .sv-btn:hover { background:rgba(255,255,255,0.14); }
 .sv-btn:focus-visible { outline:1px solid var(--focus-ring, #69d6ff); outline-offset:-2px; }
-/* Tinted while the pane is following by itself, dimmed once the player has
-   taken the view over. The icon IS the state readout. */
+
 .sv-follow { color:var(--text-muted); }
 .sv-follow.sv-following { color:var(--focus-ring, #69d6ff); }
 
@@ -2853,7 +2742,7 @@ input[type="checkbox"] {
 
 .sv-content { position:relative; flex:1 1 auto; min-height:0; }
 .sv-pane { position:absolute; inset:0; width:100%; height:100%; }
-/* An Overview steers the main board; both minimaps handle their own pinch. */
+
 #smallViewMinimapCanvas { cursor:crosshair; }
 #smallViewMinimapCanvas, #smallViewInfiniteCanvas { touch-action:none; }
 .sv-zoom {
@@ -2863,15 +2752,12 @@ input[type="checkbox"] {
 }
 .sv-zoom.sv-zoom-shown { opacity:1; pointer-events:auto; transition-duration:0.11s; }
 
-/* The stub. Never taken away, at any window size, whatever is open: the caret
-   on it is the only route back to the panel. Everything else in the panel is
-   hidden rather than merely off-screen, so nothing can still hold the keyboard
-   from outside the viewport. */
+
 .small-view-panel.sv-stubbed { transition:left 0.22s cubic-bezier(0.33,1,0.68,1), top 0.22s cubic-bezier(0.33,1,0.68,1); }
 .small-view-panel.sv-stubbed .sv-content { display:none; }
 .small-view-panel.sv-stubbed .sv-header { cursor:default; }
 
-/* Freeze time overlay */
+
 #freezeOverlay {
     position:absolute; top:50%; left:50%;
     transform:translate(-50%,-50%);
@@ -2887,13 +2773,13 @@ input[type="checkbox"] {
     color:#fff; font-size:32px; font-weight:bold;
     text-shadow:0 0 8px rgba(0,0,0,.5);
 }
-/* Freeze blocker covers entire grid */
+
 #freezeBlocker {
     position:absolute; top:0;left:0; width:100%;height:100%;
     z-index:49; cursor:not-allowed;
 }
 
-/* Spectator click feedback */
+
 #spectatorFeedback {
     position:absolute; top:50%; left:50%;
     transform:translate(-50%,-50%);
@@ -2909,7 +2795,7 @@ input[type="checkbox"] {
     opacity:0.8;
 }
 
-/* Level preview canvas (solo menu) */
+
 .level-preview-container {
     width:150px; height:150px; flex-shrink:0;
     background:var(--bg-grid); border-radius:4px;
@@ -2919,7 +2805,7 @@ input[type="checkbox"] {
     display:block;
 }
 
-/* Claim victory */
+
 .btn-claim-victory {
     position:absolute; bottom:16px; left:50%; transform:translateX(-50%);
     background:var(--accent-orange); color:#fff;
@@ -2928,9 +2814,7 @@ input[type="checkbox"] {
     z-index:55; box-shadow:0 4px 12px rgba(0,0,0,.4);
 }
 
-/* Dialogs take their z-index from the order they open, all of them above the
-   game card (UIManager._showModal). An error is drawn red, a notice blue
-   (NetworkDialogs.qml errorDialog accentColor). */
+
 #appMessageDialog .modal { border-top:3px solid var(--accent-red); max-width:380px; }
 #appMessageDialog.notice .modal { border-top-color:var(--accent-blue); }
 #appMessageText { white-space:pre-line; overflow-wrap:anywhere; }
@@ -2938,9 +2822,7 @@ input[type="checkbox"] {
 #appConfirmDialog .modal { max-width:380px; }
 #appConfirmMessage { white-space:pre-line; }
 
-/* ====================================================================
-   GAME MODAL (pause / game-over / duel results)
-   ==================================================================== */
+
 #gameModal {
     position:absolute; top:0;left:0;
     width:100%;height:100%;
@@ -2952,8 +2834,7 @@ input[type="checkbox"] {
     background:var(--bg-modal);
     border:3px solid var(--modal-border);
     border-radius:12px;
-    /* Tighter across than down on purpose: horizontal room is the scarce one
-       in a card that has to hold a six-column table on a phone. */
+    
     padding:20px 18px 18px;
     max-width:420px; width:92%;
     max-height:85vh; overflow-y:auto;
@@ -2997,7 +2878,7 @@ input[type="checkbox"] {
 .gm-pause-specs { font-size:12px; color:#9a9a9a; margin-top:2px; }
 .gm-alive { font-size:17px; text-align:center; }
 .gm-time  { font-size:17px; text-align:center; }
-/* A Community board's end under the title: why it ended, or its countdown. */
+
 .gm-board-end { font-size:14px; text-align:center; color:var(--text-secondary); }
 .gm-board-end.ended { font-weight:bold; color:var(--text-primary); }
 .gm-infinite-scores {
@@ -3021,7 +2902,7 @@ input[type="checkbox"] {
 }
 .gm-infinite-high-score { color:var(--text-continue); }
 
-/* Solo rated leaderboard placement (shown after a SoloLeaderboard win) */
+
 .gm-leaderboard {
     align-self:center;
     width:min(100%, 280px);
@@ -3040,7 +2921,7 @@ input[type="checkbox"] {
 .gm-lb-miss-title { font-size:16px; font-weight:bold; color:var(--gm-lb-accent, var(--accent-orange)); }
 .gm-lb-miss-desc { font-size:12px; color:var(--text-muted); margin-top:2px; }
 
-/* Duel stats */
+
 .duel-score-row { display:flex; align-items:center; justify-content:center; gap:6px; margin:4px 0; }
 .duel-score { font-size:20px; font-weight:bold; color:var(--duel-score-text); }
 .duel-score-colon { font-size:20px; font-weight:bold; color:var(--duel-score-colon); }
@@ -3229,8 +3110,7 @@ input[type="checkbox"] {
     flex:0 0 auto;
 }
 
-/* The same font and padding as its neighbours: in one row, a smaller label on
-   the one filled button reads as a different kind of control. */
+
 .gm-next-btn {
     display:none;
     width:auto;
@@ -3248,19 +3128,14 @@ input[type="checkbox"] {
     display:inline-block;
 }
 
-/* Community game stats table */
+
 #communityStatsArea {
-    /* No height of its own: every row is at its natural height and the card's
-       body is the one vertical scroller (ModalContentPlayerStats.qml).
-       Below .cs-table's min-width the table stops compressing and this scrolls
-       sideways to it, rather than squeezing six columns into a phone's width.
-       Mirrors ModalContentCommunity.qml's minimumTableWidth. */
+    
     overflow-x:auto;
     margin:4px 0;
     scrollbar-width:thin;
 }
-/* Every roster at its natural height under the body's one scroller; one or two
-   panels abreast by the body's width (GameModalManager._layoutTeamColumns). */
+
 #pvpTeamsStatsArea { margin:4px 0; }
 .team-stats-panel { display:grid; gap:12px; }
 .team-stats-col { min-width:0; }
@@ -3270,17 +3145,12 @@ input[type="checkbox"] {
 .team-badge { display:inline-block; min-width:22px; padding:2px 5px; border-radius:3px; color:#fff; font-size:10px; font-weight:bold; text-align:center; }
 .team-badge.team1 { background:#2E86C1; }
 .team-badge.team2 { background:#B9770E; }
-/* `min-content` and not a round number: the table stops compressing at what its
-   own columns need, so the area below scrolls sideways only once there is
-   genuinely nothing left to give. A flat 300px made a phone scroll early.
-   ModalContentCommunity.qml derives the same floor from its measured columns. */
+
 .cs-table { width:100%; min-width:min-content; border-collapse:collapse; font-size:13px; }
 .cs-th-arrow { white-space:pre; }
 .cs-th {
     cursor:pointer; user-select:none;
-    /* 5 px a side, so two columns are separated by 10 px — the same separation
-       ModalContentCommunity.qml builds from colGap + colPad. Wider than that and
-       the headings drift apart and the name column pays for it. */
+    
     padding:4px 5px;
     color:#aaa; font-weight:bold; font-size:12px;
     border-bottom:1px solid rgba(255,255,255,0.15);
@@ -3295,14 +3165,10 @@ input[type="checkbox"] {
     border-bottom:1px solid rgba(255,255,255,0.06);
 }
 .cs-td-name  { text-align:left; color:#ddd; max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-/* The name and its flag as one inline box, so a name that does not fit can
-   glide as a unit (GameModalManager._applyNameGlide) instead of being cut off.
-   While it glides the cell stops eliding: the travel is what shows the rest. */
+
 .cs-name-inner { display:inline-block; white-space:nowrap; will-change:transform; }
 .cs-td-name.cs-name-glides { text-overflow:clip; }
-/* A player's name that opens their profile card (the stats table, the podium,
-   the leaderboards): a button for the keyboard and screen readers, drawn as the
-   text it stands for, with a hover, press and focus cue. */
+
 .player-name-link {
     font:inherit; color:inherit; text-align:inherit;
     background:none; border:0; margin:0; padding:0;
@@ -3321,7 +3187,7 @@ input[type="checkbox"] {
 .cs-row-own  { background:rgba(52,152,219,0.18); }
 .cs-row-own .cs-td-name { color:#3498DB; font-weight:bold; }
 
-/* Top-3 podium (completed community games) */
+
 .gm-podium { display:flex; gap:8px; margin-bottom:8px; }
 .gm-podium-card {
     flex:1 1 0;
@@ -3390,9 +3256,7 @@ input[type="checkbox"] {
 .screenshot-preview-pane img { max-width:100%; min-height:0; flex:1; object-fit:contain; background:#020617; }
 .screenshot-preview-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
 
-/* ====================================================================
-   MODAL DIALOGS  (host / join / settings / etc.)
-   ==================================================================== */
+
 .modal-backdrop {
     display:none; position:fixed; top:0;left:0;
     width:100%;height:100%;
@@ -3412,9 +3276,7 @@ input[type="checkbox"] {
 .modal-wide { max-width:600px; }
 
 .modal h3 { font-size:20px; text-align:center; }
-/* Qt keeps multi-paragraph confirmations in ONE translatable string, split by
-   newlines — so the web has to render those newlines rather than re-splitting
-   the sentence into separate elements the catalog would not have keys for. */
+
 .modal-desc { color:var(--text-secondary); font-size:13px; text-align:center; white-space:pre-line; }
 #gmCustomOverwriteText { white-space:pre-line; }
 .modal label { color:var(--text-secondary); font-size:13px; display:block; margin-bottom:4px; }
@@ -3427,7 +3289,7 @@ input[type="checkbox"] {
 .settings-warning { color:var(--accent-orange); font-size:12px; text-align:center; padding:6px; background:rgba(243,156,18,.1); border-radius:4px; }
 .click-mapping-warning { color:#F1C40F; background:rgba(241,196,15,.14); }
 
-/* Solo game settings should be compact and not reserve space for online-only controls. */
+
 #gameSettingsDialog.solo-mode .modal {
     max-height:64vh;
     max-width:400px;
@@ -3446,9 +3308,7 @@ input[type="checkbox"] {
 .toggle-row { display:flex; align-items:center; gap:10px; justify-content:space-between; }
 .toggle-row label { margin:0; }
 
-/* ====================================================================
-   SETTINGS TABS
-   ==================================================================== */
+
 .settings-tabs {
     display:flex; gap:8px; flex-wrap:wrap;
 }
@@ -3577,11 +3437,8 @@ input[type="checkbox"] {
     white-space:nowrap;
 }
 
-/* ── Custom board theme editor ─────────────────────────────────────── */
-/* The modal itself stops scrolling: the preview, the "start from" row and the
-   tabs are pinned, and .ct-body is the only thing that moves. A fixed height
-   keeps the tabs still while sections of very different lengths swap under
-   them (mirrors CustomBoardThemeDialog.qml). */
+
+
 .ct-modal {
     height:min(88vh, 640px);
     overflow:hidden;
@@ -3606,7 +3463,7 @@ input[type="checkbox"] {
     border-radius:var(--radius-md);
     background:var(--panel-bg);
 }
-/* The editor's preview is the same widget the tiles use, just larger. */
+
 .ct-preview-host .board-theme-preview { min-height:70px; }
 .ct-preview-host .board-theme-preview-cell span { font-size:15px; }
 
@@ -3629,8 +3486,7 @@ input[type="checkbox"] {
 }
 
 .ct-digits { display:flex; flex-wrap:wrap; gap:6px; }
-/* Each digit swatch is a colour input sitting on the revealed-cell colour, with
-   the digit itself drawn on top — clicking anywhere opens the picker. */
+
 .ct-digit { position:relative; width:34px; height:34px; }
 .ct-digit input[type="color"] {
     position:absolute; inset:0; width:100%; height:100%; padding:0;
@@ -3648,18 +3504,16 @@ input[type="checkbox"] {
 .ct-presets { display:flex; flex-wrap:wrap; gap:6px; }
 .ct-presets .btn { flex:1 1 auto; width:auto; min-width:64px; }
 
-/* Standalone close/action buttons at bottom of tall dialogs */
+
 .modal-tall > .btn:last-child,
 .modal-wide > .btn:last-child { width:auto; max-width:200px; margin:4px auto 0; }
 .density-slider,.volume-slider { margin-top:4px; }
 
-/* ====================================================================
-   PUBLIC LOBBIES DIALOG
-   ==================================================================== */
+
 .lobby-list-header { display:flex; align-items:center; justify-content:space-between; }
 .scrollable-list { max-height:250px; overflow-y:auto; }
 .list-empty { color:var(--text-muted); text-align:center; padding:20px; white-space:pre-line; }
-/* Same slot as .list-empty, but for a page request still in flight. */
+
 .list-loading { display:flex; flex-direction:column; align-items:center; gap:4px; }
 .list-loading .spinner { width:24px; height:24px; margin:0; }
 
@@ -3680,9 +3534,7 @@ input[type="checkbox"] {
     padding:2px 10px; border-radius:12px; white-space:nowrap;
 }
 
-/* ====================================================================
-   STATS MENU
-   ==================================================================== */
+
 #statsMenu {
     background: var(--bg-menu);
     padding:0;
@@ -3721,9 +3573,7 @@ input[type="checkbox"] {
     display:flex;
     align-items:center;
     gap:4px;
-    /* Scroll the chip strip horizontally rather than wrapping/clipping, so a
-       long variant list never hides its last chips. No visible scrollbar — it
-       reads as a swipe/drag chip strip, matching the Qt Flickable. */
+    
     flex-wrap:nowrap;
     overflow-x:auto;
     scrollbar-width:none;
@@ -3769,7 +3619,7 @@ input[type="checkbox"] {
     display:flex; flex-direction:column; gap:16px;
 }
 
-/* Grouped stat sections */
+
 .stats-section { display:flex; flex-direction:column; gap:8px; }
 .stats-section-header { display:flex; align-items:center; gap:8px; }
 .stats-section-title {
@@ -3802,9 +3652,7 @@ input[type="checkbox"] {
 
 .pagination-row { display:flex; align-items:center; justify-content:center; gap:12px; }
 
-/* ====================================================================
-   LEADERBOARD DIALOG
-   ==================================================================== */
+
 .lb-tabs-scroll { overflow-x:auto; overflow-y:hidden; padding-bottom:2px; }
 .lb-tabs {
     display:flex; gap:8px; min-width:min-content;
@@ -3846,7 +3694,8 @@ input[type="checkbox"] {
     background:var(--leaderboard-panel-bg); border:1px solid var(--leaderboard-row-border);
     border-radius:4px; padding:6px 10px;
 }
-.lb-selection-text { flex:1; font-size:12px; font-weight:bold; color:var(--leaderboard-row-accent); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+.lb-selection-text { flex:1; min-width:0; font-size:12px; font-weight:bold; color:var(--leaderboard-row-accent); overflow:hidden; overflow-wrap:break-word; line-height:1.25; }
 
 .lb-list { max-height:300px; }
 .lb-entry {
@@ -3860,7 +3709,7 @@ input[type="checkbox"] {
 }
 .lb-entry:nth-child(odd) { background:var(--leaderboard-row-bg-alt); }
 
-/* Medal highlights */
+
 .lb-entry.lb-gold   { background:linear-gradient(90deg, rgba(255,215,0,.16), var(--leaderboard-row-bg) 58%); }
 .lb-entry.lb-silver { background:linear-gradient(90deg, rgba(192,192,192,.16), var(--leaderboard-row-bg) 58%); }
 .lb-entry.lb-bronze { background:linear-gradient(90deg, rgba(205,127,50,.16), var(--leaderboard-row-bg) 58%); }
@@ -3888,7 +3737,7 @@ input[type="checkbox"] {
 .lb-time { font-family:monospace; color:var(--leaderboard-row-accent); white-space:nowrap; }
 .lb-date { font-size:10px; color:var(--leaderboard-row-muted); white-space:nowrap; }
 
-/* WATCH — shown only on rows whose run has a stored recording. */
+
 .lb-watch {
     flex:0 0 auto;
     padding:2px 8px;
@@ -3897,15 +3746,12 @@ input[type="checkbox"] {
     font-size:10px; font-weight:bold; white-space:nowrap; cursor:pointer;
 }
 .lb-watch:hover { background:color-mix(in srgb, var(--leaderboard-row-accent) 18%, transparent); }
-/* Your own ELO row has no STATS, but keeps the button's width so its rating
-   stays in the column (LeaderboardManager._statsHtml). */
+
 .lb-stats-btn.lb-slot { visibility:hidden; }
 
 .lb-showing-info { font-size:10px; color:var(--text-dimmed); text-align:center; margin-top:4px; padding:0 12px 6px; }
 
-/* ====================================================================
-   REPLAY VIEWER (full screen)
-   ==================================================================== */
+
 .replay-page {
     position:fixed; inset:0; z-index:70;
     display:none;
@@ -3934,8 +3780,7 @@ input[type="checkbox"] {
     color:var(--text-on-accent);
 }
 
-/* Board slot. The two canvases are stacked in the same box; the controller
-   shows whichever variant the recording needs. */
+
 .replay-board {
     position:relative; flex:1; min-height:0;
     border:1px solid var(--panel-border); border-radius:10px;
@@ -3968,7 +3813,7 @@ input[type="checkbox"] {
 @keyframes replay-spin { to { transform:rotate(360deg); } }
 @media (prefers-reduced-motion:reduce) { .replay-spinner { animation-duration:2s; } }
 
-/* Transport bar */
+
 .replay-transport {
     flex:0 0 auto;
     display:flex; flex-direction:column; gap:6px;
@@ -3988,8 +3833,7 @@ input[type="checkbox"] {
 
 .replay-controls { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
 .replay-buttons { display:flex; gap:4px; }
-/* A plain button rather than .btn: the transport glyphs are single symbols that
-   need to sit optically centred at a fixed square size. */
+
 .replay-btn {
     width:38px; height:30px;
     display:inline-flex; align-items:center; justify-content:center;
@@ -4033,9 +3877,7 @@ input[type="checkbox"] {
 .replay-tallies { gap:calc(8px * var(--ui-scale)); }
 .replay-tally { gap:calc(3px * var(--ui-scale)); }
 
-/* ====================================================================
-   LEADERBOARD PAGE (full screen)
-   ==================================================================== */
+
 #leaderboardPage {
     background: var(--bg-menu);
     padding:0;
@@ -4043,9 +3885,7 @@ input[type="checkbox"] {
 .lb-page-content {
     display:flex; flex-direction:column;
     height:100%;
-    /* A short window (a phone on its side, at Big) left the list a row or two
-       under the header and the three tab rows (roadmap 116): the page scrolls
-       instead, and the list keeps room for a few rows (LeaderboardPage.qml). */
+    
     overflow-y:auto;
 }
 .lb-page-header {
@@ -4091,12 +3931,10 @@ input[type="checkbox"] {
     padding:8px 12px 2px;
 }
 
-/* Recent Community games (CommunityResultsPage.qml / CommunityResultCard.qml):
-   variant chips that scroll, a divider, then the Played-by-me toggle; then a
-   list of cards, each a board end with its rows. */
+
 #btnLbCommunity .app-icon { color:var(--text-secondary); }
 #btnLbCommunity:hover .app-icon { color:var(--focus-ring); }
-/* Shrinks to fit a phone (Qt: fontSizeMode HorizontalFit), eliding only past that. */
+
 .lb-page-header .cr-title { font-size:min(var(--font-title), 5vw); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
 .cr-filter-row { display:flex; align-items:center; gap:6px; }
 .cr-variant-scroll { flex:1 1 auto; min-width:0; overflow-x:auto; }
@@ -4125,10 +3963,10 @@ input[type="checkbox"] {
 .cr-podium .gm-podium-card { padding:6px; }
 .cr-podium .gm-podium-card.cr-podium-own { background:var(--leaderboard-time-bg); border-width:2px; }
 .cr-podium-score { display:flex; align-items:center; justify-content:center; gap:4px; min-height:18px; }
-/* The runners-up: four fifths of a podium place each, centred under it. */
+
 .cr-card .cr-runners { justify-content:center; }
 .cr-runners .gm-podium-card.cr-runner { flex:0 0 calc((100% - 12px) / 3 * 0.8); padding:3px 4px; border-radius:6px; }
-/* Two lines: the place beside the name, then the score. */
+
 .cr-runner .gm-podium-name { font-size:11px; margin-top:0; display:flex; justify-content:center; align-items:baseline; gap:4px; }
 .cr-runner .gm-podium-name > :last-child { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .cr-runner .gm-podium-place { flex:none; font-size:10px; color:var(--leaderboard-row-muted); }
@@ -4139,9 +3977,7 @@ input[type="checkbox"] {
 .cr-divider { height:1px; margin:2px 0; background:var(--leaderboard-row-border); opacity:.7; }
 .cr-none { font-size:11px; color:var(--leaderboard-row-muted); }
 
-/* ====================================================================
-   TOAST NOTIFICATIONS
-   ==================================================================== */
+
 .social-invite-toast-stack {
     position:fixed;
     top:16px;
@@ -4167,7 +4003,7 @@ input[type="checkbox"] {
     opacity:0;
     transition:transform .18s ease-out, opacity .18s ease-out;
     pointer-events:auto;
-    /* Swiped away (SwipeDismiss.js): the finger drags it, the page stays. */
+    
     touch-action:none; user-select:none; -webkit-user-select:none;
 }
 .social-invite-toast.visible {
@@ -4244,8 +4080,7 @@ input[type="checkbox"] {
     flex:1;
     min-width:0;
 }
-/* Above the game card and every dialog: a toast is news about whatever is on
-   screen, so it must not be dimmed behind it. */
+
 #toastContainer {
     position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
     z-index:17000; display:flex; flex-direction:column;
@@ -4300,9 +4135,7 @@ input[type="checkbox"] {
     to { transform:translateX(-50%) scale(1.025); }
 }
 
-/* ====================================================================
-   GAME BROWSER SCREEN
-   ==================================================================== */
+
 .game-browser-content {
     display: flex; flex-direction: column;
     height: 100%;
@@ -4339,7 +4172,7 @@ input[type="checkbox"] {
     padding: 8px 12px;
 }
 
-/* Game entry card */
+
 .gb-entry {
     display: flex; flex-direction: column;
     padding: 10px 12px 10px 16px;
@@ -4370,7 +4203,7 @@ input[type="checkbox"] {
 .gb-type-pvpconquest { background: #2E7D6E; }
 .gb-type-other     { background: var(--bg-networkbar); }
 
-/* Left strip color per type is applied inline via --gb-accent */
+
 
 .gb-host {
     flex: 1; font-size: 15px; font-weight: bold;
@@ -4397,9 +4230,7 @@ input[type="checkbox"] {
 }
 .gb-cooldown.static { color: var(--text-dimmed); }
 
-/* ====================================================================
-   GAME BROWSER TABS + FILTERS (legacy modal, kept for reference)
-   ==================================================================== */
+
 .browser-tabs {
     display: flex;
     align-items: center;
@@ -4439,9 +4270,7 @@ input[type="checkbox"] {
 .browser-filter:hover { background: #4a5f74; }
 .browser-filter.active { background: var(--accent-blue); color: #fff; font-weight: bold; }
 
-/* ====================================================================
-   QT FACELIFT PORT OVERRIDES
-   ==================================================================== */
+
 #soloMenu,
 #statsMenu,
 #leaderboardPage,
@@ -4547,6 +4376,22 @@ input[type="checkbox"] {
     border-color:var(--focus-ring);
     filter:none;
 }
+
+.gm-community-coins { text-align:center; margin:4px 0; font-size:calc(12px * var(--ui-scale, 1)); color:var(--text-muted); }
+.gm-coin-row { display:flex; align-items:center; justify-content:center; gap:6px; color:var(--text-secondary); }
+.gm-coin-pips { display:inline-flex; gap:3px; }
+.gm-coin-pip { width:10px; height:10px; border-radius:50%; border:1px solid var(--accent-orange); box-sizing:border-box; }
+.gm-coin-pip.filled { background:var(--accent-orange); }
+.gm-coin-step { display:inline-flex; align-items:center; gap:2px; color:var(--accent-orange); }
+.gm-coin-step.paused { color:var(--text-dimmed); }
+.gm-coin-progress { color:var(--text-muted); }
+.gm-coin-end { margin-top:2px; display:flex; align-items:center; justify-content:center; gap:4px;
+               font-weight:bold; color:var(--accent-orange); font-size:calc(14px * var(--ui-scale, 1)); }
+
+
+.gb-entry { transition: background-color 150ms ease-out, border-color .1s; }
+.gb-entry.gb-stale { background:var(--card-stale); }
+.gb-entry.gb-stale:hover { background:var(--card-hover); }
 
 .continue-card {
     background:var(--card-secondary);
@@ -5041,7 +4886,7 @@ input[type="checkbox"] {
     border-color:color-mix(in srgb, var(--danger-default), white 24%);
 }
 .net-chat-btn {
-    width:calc(30px * var(--ui-scale) * var(--density-scale));
+    width:auto;
     height:calc(30px * var(--ui-scale) * var(--density-scale));
     min-width:28px;
     min-height:28px;
@@ -5099,7 +4944,8 @@ input[type="checkbox"] {
 }
 
 .chat-panel {
-    background:color-mix(in srgb, var(--panel-bg), transparent 6%);
+    
+    background:var(--panel-bg);
     border:1px solid var(--panel-border);
     border-radius:var(--radius-lg);
     padding:var(--space-3);
@@ -5162,10 +5008,7 @@ input[type="checkbox"] {
 .game-modal-card.gm-pvpteams-stats { width:min(620px, calc(100vw - 32px)); max-width:none; }
 .game-modal-card.gm-duel-stats { width:min(420px, calc(100vw - 32px)); }
 
-/* A header, ONE scrolling body, and a footer that stays put (GameModalFrame.qml,
-   docs/game-modal-layout.md §5). The card asks to be at least as wide as its
-   footer's one row (--gm-row-width, measured by _layoutModalActions); the window
-   decides whether it gets it. */
+
 .game-modal-card {
     overflow:hidden;
     min-width:min(calc(var(--gm-row-width, 0px) + 2 * var(--space-4) + 4px), calc(100vw - 32px));
@@ -5181,20 +5024,14 @@ input[type="checkbox"] {
     gap:inherit;
     scrollbar-width:thin;
 }
-/* Nothing inside shrinks, so the body is the ONE vertical scroller: a table that
-   scrolls sideways is a scroll container, and a scroll container in a flex
-   column would otherwise shrink into a second, nested vertical one. */
+
 .gm-body > * { flex-shrink:0; }
 .gm-bottom-buttons { flex:none; }
-/* Too short for the header, the footer and a sliver of body: the card scrolls as
-   a whole instead, so every action stays reachable (§4.6). */
+
 .game-modal-card.gm-whole-card-scroll { overflow-y:auto; }
 .game-modal-card.gm-whole-card-scroll .gm-body { flex:none; overflow:visible; }
 
-/* The generic body is as wide as its header and footer ask, and at least its
-   summary's 240px (320 with Infinite's scores or a leaderboard card). Its text
-   wraps inside that instead of widening the card, as ModalRunSummary's does;
-   only the STATS row asks to keep its specs on one line. */
+
 .game-modal-card.gm-generic {
     --gm-summary-width:calc(240px * var(--ui-scale));
     width:fit-content;
@@ -5205,10 +5042,7 @@ input[type="checkbox"] {
 .game-modal-card.gm-generic .gm-body > :not(.gm-pause-info),
 .game-modal-card.gm-generic .gm-pause-info > :not(.gm-spec-row.has-toggle) { contain:inline-size; }
 
-/* The specs line, with the STATS toggle on its left where the player stats table
-   folds. The toggle's width is reserved on BOTH sides (the spacer is its
-   invisible twin), so the specs stay on the card's centre and wrap inside the
-   lane between (ModalSpecRow.qml). */
+
 .gm-spec-row.has-toggle {
     display:grid;
     grid-template-columns:minmax(max-content, 1fr) minmax(0, auto) minmax(max-content, 1fr);
@@ -5232,13 +5066,12 @@ input[type="checkbox"] {
 }
 .gm-stats-toggle:hover { background:var(--card-hover); }
 .gm-stats-toggle:active { background:var(--card-pressed); }
-/* caret.svg points right unrotated: down offers the table, up puts it away. */
+
 .gm-stats-toggle .gm-stats-caret { transform:rotate(90deg); transition:transform 130ms; }
 .gm-stats-toggle.expanded .gm-stats-caret { transform:rotate(-90deg); color:var(--accent-blue); }
 .gm-stats-toggle-spacer { justify-self:end; visibility:hidden; pointer-events:none; }
 
-/* A disabled Ready waiting on somebody who could still turn up breathes
-   (GameModalFooter.qml primaryPulse). */
+
 @keyframes gm-primary-pulse { from { opacity:.8; } to { opacity:.95; } }
 .gm-primary-btn.gm-pulse:disabled { animation:gm-primary-pulse 1.5s ease-in-out infinite alternate; }
 @media (prefers-reduced-motion: reduce) {
@@ -5322,10 +5155,7 @@ input[type="checkbox"] {
 .gm-action-row,
 .gm-primary-btn { width:min(220px, 100%); }
 
-/* One row -- Main Menu, primary, Next -- when their natural widths fit the card.
-   GameModalManager._layoutModalActions decides and puts Main Menu first in the
-   DOM; mirrors GameModalFooter.qml. The action row dissolves so its buttons join
-   the row, which shares its width evenly but never below a label (min-width). */
+
 .gm-bottom-buttons.gm-one-row {
     flex-direction:row;
     flex-wrap:wrap;
@@ -5339,9 +5169,8 @@ input[type="checkbox"] {
     min-width:max-content;
     margin-left:0;
 }
-/* The ranked-rematch notice lives among the buttons on the web; keep it on its
-   own line above them. */
-/* Measuring: every action at its natural width, nothing stretching. */
+
+
 .gm-bottom-buttons.gm-measure .gm-btn,
 .gm-bottom-buttons.gm-measure .gm-next-btn {
     flex:none;
@@ -5495,11 +5324,7 @@ input[type="checkbox"] {
 .modal.modal-tall { max-height:min(88vh, calc(100vh - 24px)); }
 .modal.welcome-name-modal { max-width:min(380px, 92vw); }
 
-/* Header band for a dismissible modal — the web twin of AppDialog's
-   showCloseButton. The band keeps `.modal h3`'s own look; the wrapper takes it
-   over so the elevated strip still spans the full width with the X sitting in
-   it, and the title reserves room on the right so a long one never runs under
-   the button. */
+
 .modal-title-row {
     position:relative;
     display:flex;
@@ -5512,7 +5337,7 @@ input[type="checkbox"] {
     min-width:0;
     background:transparent;
     border-bottom:none;
-    padding-right:calc(var(--space-5) + 28px);
+    padding-right:calc(var(--space-5) + 34px * var(--ui-scale));
 }
 .modal-close-btn {
     position:absolute;
@@ -5526,8 +5351,7 @@ input[type="checkbox"] {
     line-height:1; border-radius:var(--radius-sm, 4px);
 }
 .modal-close-btn:hover { color:var(--text-primary); background:var(--card-hover); }
-/* It is not a .btn, so it does not inherit that class's ring — and keyboard
-   focus lands here first, which is where the browser default would show. */
+
 .modal-close-btn:focus-visible { outline:2px solid var(--focus-ring); outline-offset:2px; }
 .ranked-screen {
     background:
@@ -5703,6 +5527,9 @@ input[type="checkbox"] {
     justify-content:space-between;
     gap:var(--space-2);
 }
+
+.ranked-category-top { flex-wrap:wrap; }
+.ranked-category-top .ranked-category-title { flex:1 1 auto; }
 .ranked-category-badges {
     flex:0 0 auto;
     display:flex;
@@ -5902,7 +5729,7 @@ input[type="checkbox"] {
 .ranked-history-row.draw .ranked-history-rating { color:var(--accent-orange); }
 .ranked-history-row.loss .ranked-history-rating { color:var(--loss-red); }
 
-/* RankedDuelPage.qml parity overrides */
+
 .ranked-header-row { flex:0 0 auto; }
 .ranked-page-title {
     flex:initial;
@@ -6088,6 +5915,8 @@ input[type="checkbox"] {
     text-overflow:ellipsis;
     white-space:nowrap;
 }
+
+.ranked-category-stats span { white-space:normal; text-overflow:clip; text-align:right; }
 .ranked-category-record strong:first-child { color:var(--win-green); }
 .ranked-category-record strong:last-child { color:var(--loss-red); }
 .ranked-category-record {
@@ -6265,12 +6094,15 @@ input[type="checkbox"] {
     color:var(--text-primary) !important;
     font-size:calc(11px * var(--ui-scale)) !important;
     font-weight:800;
-    line-height:1.05;
+    line-height:1.25;
 }
+
 .lb-level-specs {
     white-space:normal;
-    line-height:1.05;
+    line-height:1.25;
 }
+
+#btnLbPlayRated { flex:0 0 auto; padding:var(--space-1) var(--space-2); }
 .lb-selection-row,
 .lb-page-selection-row {
     background:var(--leaderboard-panel-bg);
@@ -6327,9 +6159,7 @@ input[type="checkbox"] {
 }
 .lb-date { color:var(--leaderboard-row-muted); }
 
-/* ====================================================================
-   RESPONSIVE
-   ==================================================================== */
+
 @media (max-width:980px) {
     .ranked-page-grid {
         grid-template-columns:1fr;
@@ -6368,11 +6198,7 @@ input[type="checkbox"] {
     .ranked-category-grid { grid-template-columns:1fr; }
 }
 
-/* ---- Player country flag -------------------------------------------------
-   Sits immediately after a player's name. Sized in em so it tracks whatever
-   text it trails (lobby rows, leaderboards, chat, the ranked banner) without
-   each call site restating a size. Global/anonymous players render no element
-   at all, so there is no empty-state rule here. */
+
 .player-flag {
     display:inline-block;
     height:1em;
@@ -6386,8 +6212,7 @@ input[type="checkbox"] {
     flex:none;
 }
 
-/* The country picker reuses the app's list-row look; the flag there is a
-   leading icon at a fixed readable size rather than a name suffix. */
+
 .country-picker-list { max-height:min(52vh, 420px); overflow-y:auto; }
 .country-row {
     display:flex; align-items:center; gap:10px;
@@ -6401,10 +6226,7 @@ input[type="checkbox"] {
 .country-row-sub { font-size:12px; opacity:0.7; }
 .country-picker-divider { height:1px; margin:6px 2px; background:rgba(127,127,127,0.3); }
 
-/* ── The shop (docs/shop-and-coins.md §6, §11; ShopUI.js) ─────────────────
-   The Solo header's Shop button, the shop and revive dialogs, the pause card's
-   items and helped line, the board's item line and the coin toast. Every
-   button that cannot act stays visible, disabled, with its reason under it. */
+
 .solo-shop-btn {
     flex-shrink:0;
     display:flex; align-items:center; gap:6px;
@@ -6415,11 +6237,13 @@ input[type="checkbox"] {
     cursor:pointer; font:inherit;
 }
 .solo-shop-btn:hover { background:var(--card-hover); }
-.solo-shop-btn.bonus-ready { border-color:var(--accent-orange); }
+
+.solo-shop-btn.bonus-ready { border-color:var(--accent-green); border-width:2px; }
 .solo-shop-icon { color:var(--accent-orange); }
-.solo-shop-text { display:flex; flex-direction:column; align-items:flex-start; line-height:1.15; }
+.solo-shop-text { display:flex; flex-direction:column; align-items:flex-start; line-height:1.2; }
 .solo-shop-label { font-weight:800; font-size:calc(14px * var(--ui-scale)); }
-.solo-shop-status { font-size:calc(11px * var(--ui-scale)); color:var(--accent-orange); font-weight:700; }
+.solo-shop-status { font-size:calc(10px * var(--ui-scale)); color:var(--accent-green); font-weight:700; }
+.solo-shop-btn.shop-closed .solo-shop-status { color:var(--text-muted); }
 
 .shop-modal { max-width:min(520px, 94vw); }
 .shop-head {
@@ -6428,14 +6252,14 @@ input[type="checkbox"] {
     border-bottom:1px solid var(--separator);
 }
 .shop-head h3 { flex:1; min-width:0; background:transparent; border-bottom:none; }
-/* The coin count, apart in a chip of its own (ShopPage.qml's shopCoinChip). */
+
 .shop-head-balance {
     margin-right:var(--space-4); padding:4px 12px; border-radius:999px;
     display:inline-flex; align-items:center; gap:6px;
     border:1px solid var(--accent-orange); background:rgba(255,165,0,0.14);
     color:var(--accent-orange); font-weight:800; white-space:nowrap;
 }
-/* A glyph in a tinted round badge (ShopPage.qml's IconBadge). */
+
 .shop-badge {
     --tint:var(--accent-blue);
     flex:none; width:var(--badge); height:var(--badge); border-radius:50%;
@@ -6448,7 +6272,8 @@ input[type="checkbox"] {
 .shop-tint-green { --tint:var(--accent-green); color:var(--accent-green); }
 .shop-tint-orange { --tint:var(--accent-orange); color:var(--accent-orange); }
 .shop-tint-red { --tint:var(--accent-red); color:var(--accent-red); }
-/* A boxed section: the daily bonus, the balance. */
+.shop-tint-teal { --tint:var(--accent-teal, #1FD1B9); color:var(--accent-teal, #1FD1B9); }
+
 .shop-box {
     display:flex; flex-direction:column; gap:8px; padding:12px; margin-top:var(--space-2);
     border:1px solid var(--panel-border, rgba(255,255,255,0.12)); border-radius:10px;
@@ -6456,7 +6281,7 @@ input[type="checkbox"] {
 }
 .shop-box.ready { border-color:var(--accent-green); }
 .shop-box-head { display:flex; align-items:center; gap:8px; font-weight:800; font-size:calc(16px * var(--ui-scale)); }
-/* A part's label inside a box: Get coins under the balance (ShopPage.qml). */
+
 .shop-box-sub { margin-top:4px; font-weight:800; font-size:var(--font-small); color:var(--text-secondary); }
 .shop-pic { position:relative; display:inline-flex; height:26px; width:calc(26px + (var(--coins) - 1) * 14px); margin:2px auto; }
 .shop-pic .shop-pic-coin { position:absolute; top:0; }
@@ -6473,8 +6298,7 @@ input[type="checkbox"] {
     margin:var(--space-3) 0 0; font-size:calc(13px * var(--ui-scale));
     font-weight:800; color:var(--text-secondary); text-transform:uppercase; letter-spacing:.06em;
 }
-/* One line for everything that can't act right now (offline, another device,
-   loading...), over the shop or the revive dialog's ways (§6.5). */
+
 .state-banner {
     display:flex; align-items:center; gap:10px; padding:8px 12px; margin-top:var(--space-2);
     border-radius:10px; color:var(--text-primary);
@@ -6494,7 +6318,7 @@ input[type="checkbox"] {
 .shop-notice { color:var(--accent-orange); font-weight:700; margin:var(--space-1) 0 0; }
 .shop-warn { color:var(--accent-red); margin:0; font-size:var(--font-small); }
 .shop-hint { color:var(--text-muted); margin:0; font-size:var(--font-small); }
-/* Seven abreast where they fit, else four (ShopPage.qml's bonus strip). */
+
 .shop-box { container-type:inline-size; }
 .shop-days { display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:6px; }
 @container (min-width: 420px) { .shop-days { grid-template-columns:repeat(7, minmax(0, 1fr)); } }
@@ -6534,12 +6358,56 @@ input[type="checkbox"] {
 .shop-card-desc { color:var(--text-secondary); font-size:var(--font-small); }
 .shop-card-have { color:var(--text-muted); font-size:var(--font-small); }
 .shop-card > .btn { flex-shrink:0; width:auto; }
+
+
+.cosmetics-modal { width:min(560px, 94vw); max-width:min(560px, 94vw); }
+.cosmetics-modal .shop-body { container-type:inline-size; }
+.cosmetics-bar .cosmetics-pic { width:40px; height:40px; border-radius:6px; flex-shrink:0; }
+
+.cosmetics-bar { flex-wrap:wrap; }
+.cosmetics-bar .shop-card-body { min-width:9em; }
+.cosmetics-bar > .btn { margin-left:auto; }
+.cosmetics-tabs { display:flex; gap:6px; }
+.cosmetics-tabs .btn { flex:1; }
+.cosmetics-preview {
+    display:flex; justify-content:center; padding:8px;
+    background:var(--grid-background, #333); border:1px solid var(--panel-border); border-radius:var(--radius-md);
+}
+.cosmetics-preview canvas { width:min(190px, 60vw); height:auto; image-rendering:auto; }
+.cosmetics-preview canvas.tappable { cursor:pointer; }
+.cosmetics-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:6px; }
+@container (min-width: 360px) { .cosmetics-grid { grid-template-columns:repeat(3, minmax(0, 1fr)); } }
+@container (min-width: 560px) { .cosmetics-grid { grid-template-columns:repeat(4, minmax(0, 1fr)); } .cosmetics-grid.colours { grid-template-columns:repeat(5, minmax(0, 1fr)); } }
+.cosmetics-card {
+    display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px; text-align:center;
+    background:var(--panel-elevated, var(--card-primary)); border:1px solid var(--panel-border); border-radius:10px;
+}
+.cosmetics-card.picked { border:2px solid var(--accent-blue); background:var(--card-hover); }
+.cosmetics-card .cosmetics-pic { width:56px; height:56px; cursor:pointer; border-radius:6px; }
+.cosmetics-card .cosmetics-pic:focus-visible,
+.cosmetics-preview canvas.tappable:focus-visible { outline:2px solid var(--focus-ring, var(--accent-blue)); outline-offset:2px; }
+
+.cosmetics-card .btn { width:auto; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+.cosmetics-card .cosmetics-equipped {
+    cursor:default; pointer-events:none; color:var(--accent-green); font-weight:800;
+    background:color-mix(in srgb, var(--accent-green) 16%, transparent); border:1px solid var(--accent-green);
+}
+
+.cosmetics-reason { min-height:1.3em; }
+
+.cosmetics-card .cosmetics-status { margin-top:auto; }
+.cosmetics-own { font-size:var(--font-small); color:var(--text-secondary); }
+.cosmetics-status { font-size:var(--font-small); font-weight:800; }
+.cosmetics-status.owned { color:var(--accent-green); }
+.cosmetics-status.price { color:var(--accent-orange); }
+.cosmetics-status.short { color:var(--accent-red); }
+.cosmetics-swatch { width:36px; height:36px; border-radius:50%; border:2px solid var(--panel-border); cursor:pointer; padding:0; }
 .shop-reason,
 .gm-item-reason,
 .revive-reason { color:var(--text-muted); font-size:calc(11px * var(--ui-scale)); }
 
-/* The revive dialog (ReviveDialog.qml): a beating heart over the run's time,
-   then a card per way back, its price at the right. */
+
 .revive-modal { max-width:min(420px, 94vw); }
 .revive-body { padding:var(--space-3) var(--space-4) var(--space-2); display:flex; flex-direction:column; gap:var(--space-2); }
 .revive-hero { position:relative; width:90px; height:90px; margin:2px auto 0; display:flex; align-items:center; justify-content:center; }
@@ -6579,7 +6447,7 @@ input[type="checkbox"] {
 }
 .revive-way:hover:not(:disabled) { background:var(--card-hover); }
 .revive-way:active:not(:disabled) { background:var(--card-pressed); }
-/* The first way that can act. */
+
 .revive-way.best {
     border:2px solid var(--tint); padding:9px 11px;
     background:color-mix(in srgb, var(--tint) 10%, var(--card-primary));
@@ -6610,10 +6478,9 @@ input[type="checkbox"] {
 .revive-actions { padding:0 var(--space-4) var(--space-3); }
 .revive-actions .btn { width:100%; }
 
-/* The not-enough-coins dialog (ItemAdDialog.qml): the item in its colour with
-   the coin it is short of, the player's coins over its price, the ways. */
+
 .item-ad-hero { position:relative; width:84px; height:74px; margin:2px auto 0; display:flex; align-items:center; justify-content:center; }
-/* Its colour comes from its shop-tint-* class. */
+
 .item-ad-badge {
     width:64px; height:64px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;
     border:2px solid currentColor; background:color-mix(in srgb, currentColor 16%, transparent);
@@ -6635,21 +6502,19 @@ input[type="checkbox"] {
 .shop-price.short { color:var(--accent-red); }
 
 .gm-helped-line { margin-top:6px; text-align:center; color:var(--accent-orange); font-size:var(--font-small); font-weight:700; }
-/* A row of its own above the card's actions, as wide as its label needs and at
-   least as wide as they are (GameModalFooter.qml's reviveButton). */
+
 .gm-revive-btn {
     border:2px solid var(--accent-orange);
     width:max-content; min-width:min(220px, 100%); max-width:100%;
     white-space:normal; text-align:center;
     display:inline-flex; align-items:center; justify-content:center; gap:8px;
 }
-/* The revive's heart before its label (GameModalFooter.qml). */
+
 .gm-revive-icon { flex:none; color:var(--accent-red); }
 .gm-revive-btn:disabled .gm-revive-icon { color:var(--text-muted); }
 .gm-bottom-buttons.gm-one-row .gm-revive-btn { flex:1 0 100%; }
 
-/* At the top, as GameView.qml's is: the bottom corners hold the items'
-   bubble and the small view. */
+
 .item-pill {
     position:absolute; top:14px; left:50%; transform:translateX(-50%);
     z-index:19;
@@ -6661,8 +6526,12 @@ input[type="checkbox"] {
 }
 .item-pill.aiming { border-color:var(--accent-orange); }
 
-/* The items' bubble (ItemBubble.qml): a bottom corner of the board, opening
-   upward. Above the board, below the pause card. */
+.item-pill.cells { border-color:#4FB3FF; border-width:2px; }
+.social-profile-meta-row { display:flex; align-items:center; gap:6px; min-width:0; }
+.social-profile-meta-row .social-profile-meta { flex:1; min-width:0; }
+.social-profile-cells { width:auto; flex-shrink:0; align-self:center; white-space:nowrap; }
+
+
 .item-bubble {
     position:absolute; bottom:12px; left:12px; z-index:20;
     display:flex; flex-direction:column; align-items:flex-start; gap:8px;
@@ -6674,8 +6543,7 @@ input[type="checkbox"] {
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px;
     transition:opacity .16s;
 }
-/* No item can act on this board (a rated game, before the first reveal): the
-   button itself fades and takes no press (ItemBubble.qml, 2026-11-09). */
+
 .item-bubble-btn.faded, .item-bubble-btn.faded:disabled { opacity:.35; cursor:default; }
 .item-bubble-btn .item-bubble-icon { color:var(--accent-orange); }
 .item-bubble-label { font-size:11px; font-weight:700; line-height:1; }
@@ -6696,3 +6564,44 @@ input[type="checkbox"] {
 .achievement-toast-coins { border-color:var(--accent-orange); }
 .achievement-toast-coins .achievement-toast-icon { color:var(--accent-orange); display:flex; }
 .achievement-toast-coins .achievement-toast-name { white-space:normal; }
+
+
+.close-x { display:block; fill:none; stroke:currentColor; stroke-width:1.75; stroke-linecap:round; }
+.close-btn,
+.player-stats-modal .social-profile-exit.close-btn {
+    width:calc(34px * var(--ui-scale));
+    height:calc(34px * var(--ui-scale));
+    flex:0 0 auto;
+    padding:0;
+    display:flex; align-items:center; justify-content:center;
+    background:transparent;
+    color:var(--text-secondary);
+    border:1px solid var(--panel-border);
+    border-radius:var(--radius-md);
+    font-size:0; line-height:0;
+    cursor:pointer;
+}
+.close-btn .close-x { width:40%; height:40%; }
+.close-btn:hover,
+.close-btn:focus-visible {
+    background:var(--card-hover);
+    border-color:var(--panel-border);
+    color:var(--text-primary);
+}
+.close-btn:active { background:var(--card-pressed); }
+.in-game-notice-close { display:flex; align-items:center; justify-content:center; }
+.in-game-notice-close .close-x { width:8px; height:8px; }
+.server-announcement-close .close-x { width:calc(12px * var(--ui-scale)); height:calc(12px * var(--ui-scale)); }
+
+
+.settings-live-actions { align-items:center; justify-content:space-between; gap:var(--space-3); }
+.settings-live-note { flex:1 1 auto; min-width:0; color:var(--text-muted); font-size:var(--font-small); }
+.settings-live-actions .btn { flex:0 0 auto; width:auto; min-width:calc(96px * var(--ui-scale)); }
+
+
+.chat-messages:empty { justify-content:center; }
+.chat-messages:empty::before { content:attr(data-empty); align-self:center; color:var(--text-muted); font-size:var(--font-small); }
+
+
+.netbar-header > * { white-space:nowrap; flex-shrink:0; }
+.netbar-header .netbar-gameid { flex-shrink:1; min-width:0; overflow:hidden; text-overflow:ellipsis; }

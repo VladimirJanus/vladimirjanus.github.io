@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Minesweeper Online</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="Client/src/ui/web/styles.css">
+    <link rel="stylesheet" href="Client/src/ui/web/styles.css?v=777c215a">
 </head>
 <body>
     <div id="app">
@@ -16,12 +16,11 @@
                 <h1 class="main-menu-title">
                     <span class="app-icon main-menu-logo" aria-hidden="true"
                           style="--app-icon-src:url('../../../res/icons/menu/logo.svg');--app-icon-size:32px"></span>
-                    <span data-i18n>Minesweeper Online</span>
+                    <span data-i18n data-i18n-context="MainMenu">Minesweeper Online</span>
                 </h1>
             </header>
 
-            <!-- The menu-action icons are the same SVGs the Qt client uses; the
-                 chip tints them with the button's own --menu-accent. -->
+            
             <div class="menu-content">
                 <section class="menu-section">
                     <div class="menu-section-title" data-i18n>Singleplayer</div>
@@ -81,13 +80,13 @@
                     <div class="screen-header-row">
                         <button id="btnSoloBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
                         <h2 class="solo-title" id="soloMenuTitle">Solo Play</h2>
-                        <!-- The shop (SoloMenu.qml's Shop button; ShopUI.js draws it) -->
+                        
                         <button id="btnSoloShop" class="solo-shop-btn"></button>
                     </div>
                     <div class="solo-variant-row" id="soloVariantButtons"></div>
                 </div>
                 <div class="solo-scroll-area" id="soloScrollArea" data-nav-scroll="Solo menu" tabindex="0">
-                    <!-- Continue last game card (hidden when no save exists) -->
+                    
                     <div class="level-card continue-card" id="continueCard" style="display:none">
                         <div class="level-card-body" id="continueCardBody">
                             <div class="level-preview-container" id="continuePreview"></div>
@@ -103,7 +102,7 @@
                         </div>
                     </div>
 
-                    <!-- Custom level card -->
+                    
                     <div class="level-card custom-card">
                         <div class="level-card-body">
                             <div class="level-preview-container" id="customPreview"></div>
@@ -121,13 +120,13 @@
                         </div>
                     </div>
 
-                    <!-- Preset categories (injected by JS) -->
+                    
                     <div id="presetCategories"></div>
 
-                    <!-- Other game modes (injected by JS) -->
+                    
                     <div id="otherGameModes"></div>
 
-                    <!-- Game mode level sub-view (hidden by default) -->
+                    
                     <div id="gameModeLevelView" style="display:none">
                         <div id="gameModeLevelCategories"></div>
                     </div>
@@ -137,7 +136,7 @@
             </div>
         </div>
 
-        <!-- ===== Custom Level Builder ===== -->
+        
         <style>
             .cb-content { display:flex; flex-direction:column; height:100%; gap:12px; padding:14px; box-sizing:border-box; }
             .cb-header { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
@@ -167,20 +166,16 @@
                 background: var(--bg-grid, #202124); border:1px solid var(--panel-border, #2c3a4f); overflow:hidden; }
             #cbCanvas { width:100%; height:100%; display:block; }
             .cb-zoom-controls { position:absolute; top:12px; right:12px; display:flex; gap:6px; z-index:2; }
-            /* Above the board, not over it (CustomLevelBuilder.qml). */
+            
             .cb-preview-hint { font-size:11px; color: var(--text-muted, #7d8ca0); }
             .cb-code-area { width:100%; height:130px; box-sizing:border-box; resize:none; font-family:monospace; font-size:11px;
                 padding:8px; border-radius:6px; background: var(--panel-background, #0e1622);
                 color: var(--text-primary, #e6edf3); border:1px solid var(--panel-border, #2c3a4f); word-break:break-all; }
             .cb-import-error { color: var(--accent-red, #e5534b); font-size:11px; margin-top:6px; min-height:14px; }
 
-            /* ── Narrow / portrait screens ────────────────────────────────────
-               Header collapses to: [✕  title] / [name field] / [Save | Play],
-               control buttons and number fields stretch to fill the width so
-               they stay comfortably tappable. */
+            
             @media (max-width:560px) {
-                /* Let the whole builder scroll; the canvas becomes a fixed block
-                   so the controls above it stay reachable. */
+                
                 .cb-content { padding:10px; gap:10px; overflow-y:auto; }
                 .cb-header { gap:8px; row-gap:8px; }
                 .cb-header .solo-title { font-size:17px; }
@@ -279,7 +274,7 @@
             </div>
         </div>
 
-        <!-- Custom level: rename -->
+        
         <div id="cbRenameDialog" class="modal-backdrop">
             <div class="modal">
                 <h3 data-i18n>Rename Level</h3>
@@ -291,7 +286,7 @@
             </div>
         </div>
 
-        <!-- Custom level: delete -->
+        
         <div id="cbDeleteDialog" class="modal-backdrop">
             <div class="modal">
                 <h3 data-i18n>Delete Level?</h3>
@@ -303,7 +298,7 @@
             </div>
         </div>
 
-        <!-- Custom level: leaving the builder with unsaved work -->
+        
         <div id="cbUnsavedDialog" class="modal-backdrop">
             <div class="modal">
                 <h3 data-i18n>Unsaved changes</h3>
@@ -316,7 +311,7 @@
             </div>
         </div>
 
-        <!-- Custom level: saving an edited level clears its record -->
+        
         <div id="cbResetStatsDialog" class="modal-backdrop">
             <div class="modal">
                 <h3 data-i18n>Reset level record?</h3>
@@ -328,7 +323,7 @@
             </div>
         </div>
 
-        <!-- Custom level: export code -->
+        
         <div id="cbExportDialog" class="modal-backdrop">
             <div class="modal">
                 <h3 data-i18n>Export Level Code</h3>
@@ -341,7 +336,7 @@
             </div>
         </div>
 
-        <!-- Custom level: import code -->
+        
         <div id="cbImportDialog" class="modal-backdrop">
             <div class="modal">
                 <h3 data-i18n>Import Level Code</h3>
@@ -438,16 +433,16 @@
                         <button class="social-tab" data-tab="recent" data-i18n data-i18n-context="FriendsPage">Recent</button>
                         <button class="social-tab" data-tab="blocked" data-i18n data-i18n-context="FriendsPage">Blocked</button>
                     </div>
-                    <!-- The list's count, on the right of the tabs (FriendsPage.qml). -->
+                    
                     <div class="social-tabs-status">
                         <div id="friendsStatus" class="social-status"></div>
                     </div>
                 </div>
-                <!-- What just happened, or the invite cooldown. -->
+                
                 <div id="friendsCooldown" class="social-cooldown social-status-line" style="display:none"></div>
 
                 <div id="friendsList" class="social-list" data-nav-scroll="Friends" tabindex="0"></div>
-                <!-- A page of friends at a time; only the page shown is watched for presence. -->
+                
                 <div id="friendsPagination" class="pagination-row social-pagination" style="display:none">
                     <button class="btn btn-small" id="btnFriendsPrev">◀ <span data-i18n data-i18n-context="FriendsPage">Prev</span></button>
                     <span id="friendsPageInfo"></span>
@@ -461,23 +456,21 @@
 
             <div id="networkBar">
                 <div class="netbar-header">
-                    <span class="netbar-role" id="netRole">🔌 Connected</span>
+                    <span class="netbar-role" id="netRole">Connected</span>
                     <span class="netbar-gameid" id="netGameID"></span>
                     <span class="netbar-spacer"></span>
                     <span class="net-chat-btn-wrapper">
-                        <button class="net-chat-btn" id="btnNetChat">💬</button>
+                        <button class="net-chat-btn" id="btnNetChat"><span data-i18n data-i18n-context="NetworkBar">Chat</span></button>
                         <span class="chat-unread-dot" id="chatUnreadDot"></span>
                     </span>
-                    <button class="net-lobby-btn" id="btnNetLobby">🏠 <span data-i18n>Lobby</span></button>
+                    <button class="net-lobby-btn" id="btnNetLobby"><span data-i18n>Lobby</span></button>
                     <button class="net-leave-btn" id="btnNetLeave">❌</button>
                 </div>
                 <div class="netbar-players" id="netPlayerRow"></div>
                 <div class="netbar-pending" id="netPendingRow" style="display:none;"></div>
             </div>
 
-            <!-- Everything the network bar takes room FROM, under one parent, so
-                 the whole game-facing subtree loses height for a top bar or width
-                 for a side bar together. Mirrors the Qt playArea. -->
+            
             <div id="playArea">
 
             <div id="statusBar">
@@ -510,17 +503,16 @@
 
                     <div id="kbdPositionBadge" class="kbd-pos-badge" style="display:none;"></div>
 
-                    <!-- Inline "Generating…" pill for No-Guess boards (shown debounced
-                         by NoGuessGenService so quick boards never flash it). -->
+                    
                     <style>@keyframes ngspin { to { transform: rotate(360deg); } }</style>
                     <div id="noGuessGeneratingPill" style="display:none;position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:19000;align-items:center;gap:8px;padding:6px 14px;border-radius:8px;background:rgba(20,22,28,0.92);border:1px solid rgba(255,255,255,0.16);color:#fff;font-size:13px;font-weight:600;pointer-events:none;">
                         <span style="width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;display:inline-block;animation:ngspin 0.8s linear infinite;"></span>
                         Generating board…
                     </div>
                     <div id="chatToastStack" class="chat-toast-stack" style="display:none;"></div>
-                    <!-- The item line: an aimed item, or why one was refused (GameView.qml's itemPill) -->
+                    
                     <div id="itemPill" class="item-pill" style="display:none;"></div>
-                    <!-- The items' bubble (ItemBubble.qml): Hint and Detector, opening upward -->
+                    
                     <div id="itemBubbleCatcher" class="item-bubble-catcher" style="display:none;"></div>
                     <div id="itemBubble" class="item-bubble" style="display:none;">
                         <div id="itemBubbleMenu" class="item-bubble-menu" style="display:none;"></div>
@@ -528,7 +520,7 @@
                     </div>
                     <div id="inGameNoticeBanner" class="in-game-notice-banner" style="display:none;">
                         <div id="inGameNoticeMessage" class="in-game-notice-message"></div>
-                        <button id="btnInGameNoticeClose" class="in-game-notice-close" aria-label="Close notice">x</button>
+                        <button id="btnInGameNoticeClose" class="in-game-notice-close" aria-label="Close notice"><svg class="close-x" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8"/></svg></button>
                     </div>
                     
                     <div id="freezeOverlay" style="display:none;">
@@ -544,11 +536,7 @@
                 </div>
             </div>
 
-            <!-- The small view: a movable, tabbed holder for any secondary look
-                 at a board (a minimap of your own, an opponent's, a team's).
-                 A sibling of the board area rather than a child, so its stacking
-                 can rise above the modal while it holds attention; the board
-                 area is still what bounds it. See ui/web/game/SmallViewPanel.js. -->
+            
             <div id="smallViewPanel" class="small-view-panel" style="display:none;">
                 <div class="sv-header">
                     <button type="button" class="sv-btn sv-caret" aria-label="Minimise board overview"></button>
@@ -564,13 +552,13 @@
                 </div>
             </div>
 
-            </div><!-- /#playArea -->
+            </div>
 
             
             <div id="chatPanel" class="chat-panel" style="display:none;">
                 <div class="chat-header">
                     <span class="chat-title" data-i18n>Chat</span>
-                    <button class="chat-close-btn" id="btnChatClose" aria-label="Close chat">&times;</button>
+                    <button class="chat-close-btn close-btn" id="btnChatClose" aria-label="Close chat"><svg class="close-x" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8"/></svg></button>
                 </div>
                 <div class="chat-separator"></div>
                 <div class="chat-messages" id="chatMessages" data-nav-scroll="Chat messages" tabindex="0"></div>
@@ -582,23 +570,20 @@
 
             
             <div id="gameModal" style="display:none;">
-                <!-- Header, ONE scrolling body, a footer that stays put: the twin of
-                     game/modal/GameModal.qml (GameModalManager.js). -->
+                
                 <div class="game-modal-card" id="gameModalCard">
                     <div class="gm-header" id="gameModalHeader">
                         <button class="gm-settings-btn" id="btnModalSettings" title="Settings" aria-label="Settings" data-i18n="" data-i18n-attr="title,aria-label" data-i18n-context="MainMenu">⚙️</button>
                         <button class="gm-screenshot-btn" id="btnModalScreenshot" title="Screenshot" aria-label="Screenshot" data-i18n="" data-i18n-attr="title,aria-label" data-i18n-context="Main" style="display:none;">📷</button>
-                        <button class="gm-close-btn" id="btnModalClose">X</button>
+                        <button class="gm-close-btn close-btn" id="btnModalClose" aria-label="Close"><svg class="close-x" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8"/></svg></button>
                         <h2 id="modalTitle" class="gm-title">PAUSED</h2>
                     </div>
 
                     <div class="gm-body" id="gameModalBody" data-nav-scroll="Game dialog" tabindex="0">
-                        <!-- The run summary (ModalRunSummary.qml) -->
+                        
                         <div id="modalPauseInfo" class="gm-pause-info" style="display:none;">
                             <div id="modalPauseCategory" class="gm-pause-category"></div>
-                            <!-- The specs, with the STATS toggle on their left where the
-                                 player stats table folds; the spacer mirrors it so the
-                                 specs stay on the card's centre (ModalSpecRow.qml). -->
+                            
                             <div id="modalSpecRow" class="gm-spec-row">
                                 <button type="button" id="btnPlayerStatsToggle" class="gm-stats-toggle" aria-expanded="false" style="display:none;"></button>
                                 <div id="modalPauseSpecs" class="gm-pause-specs"></div>
@@ -606,10 +591,11 @@
                             </div>
                         </div>
                         <div id="modalLevelStars" class="gm-level-stars" style="display:none;"></div>
-                        <!-- The shop's lines (ModalRunSummary.qml, ModalItemButtons.qml; ShopUI.js) -->
+                        
                         <div id="modalHelpedLine" class="gm-helped-line" style="display:none;"></div>
                         <div id="modalNextRound" class="next-round-line" style="display:none;"></div>
                         <div id="modalBoardEnd" class="gm-board-end" style="display:none;"></div>
+                        <div id="modalCommunityCoins" class="gm-community-coins" style="display:none;"></div>
                         <div id="modalAliveCount" class="gm-alive" style="display:none;"></div>
                         <div id="modalTimeDisplay" class="gm-time" style="display:none;"></div>
                         <div id="modalInfiniteScores" class="gm-infinite-scores" style="display:none;">
@@ -621,11 +607,11 @@
                             </div>
                         </div>
 
-                        <!-- Solo rated leaderboard placement (shown after a rated win) -->
+                        
                         <div id="modalLeaderboard" class="gm-leaderboard" style="display:none;"></div>
                         <div id="rankedRematchNotice" class="gm-rematch-notice" style="display:none;"></div>
 
-                        <!-- Player stats (ModalContentPlayerStats.qml): podium, then the table -->
+                        
                         <div id="communityPodium" class="gm-podium" style="display:none;"></div>
                         <div id="communityStatsArea" data-nav-scroll="Community results" tabindex="0" style="display:none;">
                             <table class="cs-table">
@@ -634,10 +620,10 @@
                             </table>
                         </div>
 
-                        <!-- PVP Teams (ModalContentPVPTeams.qml) -->
+                        
                         <div id="pvpTeamsStatsArea" style="display:none;"></div>
 
-                        <!-- Duel (ModalContentPVPDuel.qml) -->
+                        
                         <div id="duelStatsArea" style="display:none;"></div>
                     </div>
 
@@ -688,17 +674,12 @@
             </div>
         </div>
 
-        <!-- Follows the first-run welcome dialog. Unlike that one it can simply
-             be dismissed: a name is required to play online, a language is not.
-             The English notice is deliberately NOT data-i18n — it must stay
-             English so it is readable even when the translation of it is the
-             thing that is wrong. #welcomeLanguageNoticeTranslated is written by
-             JS (and so carries no data-i18n either). -->
+        
         <div id="languageNoticeDialog" class="modal-backdrop">
             <div class="modal welcome-name-modal">
                 <div class="modal-title-row">
                     <h3 data-i18n>Language</h3>
-                    <button type="button" class="modal-close-btn" id="languageNoticeClose" aria-label="Close">&times;</button>
+                    <button type="button" class="modal-close-btn close-btn" id="languageNoticeClose" aria-label="Close"><svg class="close-x" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8"/></svg></button>
                 </div>
                 <p class="modal-desc" data-i18n>Pick the language the game speaks. You can change it later in Settings.</p>
                 <div class="form-group">
@@ -826,8 +807,12 @@
                     <button class="settings-tab" data-tab="about"><span class="app-icon" style="--app-icon-src:url('../../../res/icons/ui/settings_about.svg');--app-icon-size:17px"></span><span data-i18n>About</span></button>
                 </div>
 
-                <!-- General tab -->
+                
                 <div class="settings-tab-content active" id="settingsTab-general">
+                    <div id="appPlayerProfileHead">
+                        <div class="settings-section-title" data-i18n data-i18n-context="SettingsContent">Player Profile</div>
+                        <p class="settings-desc-text" data-i18n data-i18n-context="SettingsContent">How other players see you in lobbies and on leaderboards.</p>
+                    </div>
                     <div class="form-group">
                         <label data-i18n>Player Name</label>
                         <input type="text" id="appPlayerName" data-wire-text="player-name" data-wire-text-required="1" placeholder="Enter username">
@@ -863,7 +848,7 @@
                     </div>
                 </div>
 
-                <!-- Appearance tab -->
+                
                 <div class="settings-tab-content" id="settingsTab-appearance">
                     <div class="settings-section-title" data-i18n>Application</div>
                     <div class="form-group">
@@ -902,8 +887,7 @@
                     </div>
                     <div class="form-group">
                         <label data-i18n="Language">Language</label>
-                        <!-- Options are filled from TranslationManager's shipped
-                             list so a new catalog appears here automatically. -->
+                        
                         <select id="appLanguage" class="settings-select"></select>
                     </div>
                     <div class="settings-section-title" data-i18n>Board Overview</div>
@@ -942,7 +926,7 @@
                     <button class="btn btn-ghost" id="btnEditCustomBoardTheme" data-i18n>Edit Custom Theme…</button>
                     </div>
 
-                <!-- Controls tab -->
+                
                 <div class="settings-tab-content" id="settingsTab-controls">
                     <div class="form-group">
                         <label id="appLeftClickLabel" data-i18n>Left Click</label>
@@ -1008,17 +992,15 @@
                     </div>
                 </div>
 
-                <!-- Guide tab: generated from the Qt GuideSection source. -->
+                
                 <div class="settings-tab-content" id="settingsTab-guide">
                     <div id="appGuideContent" class="guide-content" aria-live="polite">Loading guide…</div>
                 </div>
 
-                <!-- System tab -->
+                
                 <div class="settings-tab-content" id="settingsTab-system">
                     <div class="settings-section-title" data-i18n>Server Connection</div>
-                    <!-- First in the section, because it governs whether anything
-                         else here matters: with it on, the address is never dialled
-                         and never even looked up. -->
+                    
                     <div class="toggle-row">
                         <label data-i18n>Play offline only</label>
                         <input type="checkbox" id="appPlayOfflineOnly">
@@ -1038,10 +1020,7 @@
                     <button id="copyConnectionDetailsBtn" class="btn" type="button" data-i18n>Copy connection details</button>
 
                     <div class="settings-section-title" data-i18n>Device</div>
-                    <!-- What the app decided this machine is. Everything
-                         device-specific in the UI follows from this one word, so
-                         when a screen looks wrong on an unusual device this is
-                         the first thing worth reading out. -->
+                    
                     <p class="settings-desc-text" id="appDeviceText"></p>
 
                     <div class="settings-section-title" data-i18n>Local Data</div>
@@ -1056,21 +1035,14 @@
                     <p class="settings-desc-text" data-i18n>Resets all app settings to their defaults. This cannot be undone.</p>
                 </div>
 
-                <!-- About tab -->
+                
                 <div class="settings-tab-content" id="settingsTab-about">
-                    <div class="settings-section-title" data-i18n>Minesweeper Online</div>
+                    <div class="settings-section-title" data-i18n data-i18n-context="SettingsContent">Minesweeper Online</div>
                     <p class="settings-desc-text" id="appVersionText"></p>
-                    <!-- Set from JS so the credit is one translatable format
-                         string shared with the Qt client, names substituted. -->
+                    
                     <p class="settings-desc-text" id="appAuthorText"></p>
 
-                    <!-- Kept beside the credit rather than filed under Links:
-                         it supports the person named directly above it, and it
-                         is the one thing here that asks something of the
-                         reader, hence a button and not a fourth muted link
-                         (Qt: the primary AppButton in SettingsContent.qml).
-                         The label is its own span because data-i18n assigns
-                         the element's whole textContent, glyph included. -->
+                    
                     <a href="https://www.paypal.com/donate/?hosted_button_id=K3Y5Z6EWDSNT2" target="_blank" rel="noopener" class="btn btn-accent btn-small donate-btn"><span class="app-icon" aria-hidden="true" style="--app-icon-src:url('../../../res/icons/ui/paypal.svg');--app-icon-size:15px"></span><span data-i18n>Donate</span></a>
 
                     <div class="settings-section-title" data-i18n>Links</div>
@@ -1079,7 +1051,7 @@
                     <a href="https://vladimirjanus.github.io/MinesweeperOnline/privacy.html" target="_blank" rel="noopener" class="privacy-link" data-i18n>Privacy Policy</a>
                 </div>
 
-                <!-- Account tab -->
+                
                 <div class="settings-tab-content" id="settingsTab-account">
                     <div class="settings-section-title" data-i18n>Account</div>
                     <p class="settings-desc-text" id="accountFriendCode">Friend code: (offline)</p>
@@ -1104,16 +1076,20 @@
                     </div>
                     <p class="settings-desc-text" id="accountImportStatus" style="display:none;"></p>
 
-                    <!-- Play's account-deletion rule wants a path in the app; a link
-                         to the site's request page is the one it accepts (roadmap 165). -->
+                    
                     <div class="settings-section-title" data-i18n>Delete Account</div>
                     <p class="settings-desc-text" data-i18n>Ask for this account and its data to be deleted. This opens a page on our website where you can send the request.</p>
                     <a href="https://vladimirjanus.github.io/MinesweeperOnline/delete-account.html" target="_blank" rel="noopener" class="btn btn-danger account-delete-link" data-i18n>Request Account Deletion</a>
                 </div>
 
-                <div class="modal-actions">
+                
+                <div class="modal-actions" id="appSettingsStagedActions">
                     <button class="btn btn-accent" onclick="app.handleAppSettingsConfirm()" data-i18n>Save</button>
                     <button class="btn" onclick="app._hideModal('appSettingsDialog')" data-i18n>Cancel</button>
+                </div>
+                <div class="modal-actions settings-live-actions" id="appSettingsLiveActions" style="display:none">
+                    <span class="settings-live-note" data-i18n data-i18n-context="SettingsPage">Changes are saved as you make them</span>
+                    <button class="btn" onclick="app._hideModal('appSettingsDialog')" data-i18n data-i18n-context="NetworkDialogs">Close</button>
                 </div>
             </div>
         </div>
@@ -1181,7 +1157,7 @@
                         </div>
                     </div>
                     <div class="lb-tabs-scroll" id="browserFilters">
-                        <!-- One chip per hostable mode, written from the mode table. -->
+                        
                         <div class="lb-tabs" id="browserModeChips"></div>
                     </div>
                 </div>
@@ -1212,40 +1188,40 @@ Create one or refresh to check again!</div>
                     <div id="lbVariantTabs" class="lb-tabs"></div>
                 </div>
 
-                <!-- Category tabs -->
+                
                 <div class="lb-tabs-scroll lb-page-tabs-row">
                     <div id="lbCategoryTabs" class="lb-tabs"></div>
                 </div>
 
-                <!-- Level tabs — hidden in ELO mode -->
+                
                 <div class="lb-tabs-scroll lb-page-tabs-row" id="lbLevelTabsRow">
                     <div id="lbLevelTabs" class="lb-tabs lb-level-tabs"></div>
                 </div>
 
-                <!-- Selection info row -->
+                
                 <div class="lb-selection-row lb-page-selection-row" id="lbSelectionRow">
                     <span>📊</span>
                     <span id="lbSelectionText" class="lb-selection-text"></span>
-                    <button class="btn btn-small btn-accent" id="btnLbPlayRated" data-i18n>Play Rated</button>
+                    <button class="btn btn-small btn-success" id="btnLbPlayRated" data-i18n>Play Rated</button>
                     <button class="btn btn-small" id="btnLbRefresh" aria-label="Refresh"><span class="hdr-icon icon-refresh"></span></button>
                 </div>
 
-                <!-- Normal leaderboard list -->
+                
                 <div id="leaderboardList" class="lb-list lb-page-list" data-nav-scroll="Leaderboard" tabindex="0">
                     <div class="list-empty" data-i18n>No entries yet.
 Be the first!</div>
                 </div>
 
-                <!-- ELO leaderboard list (shown in ELO mode) -->
+                
                 <div id="eloLeaderboardList" class="lb-list lb-page-list" data-nav-scroll="ELO leaderboard" tabindex="0" style="display:none">
                     <div class="list-empty" data-i18n>No ranked games yet.
 Be the first!</div>
                 </div>
 
-                <!-- ELO pinned own-card -->
+                
                 <div id="eloPinnedCard" class="elo-pinned-card" style="display:none"></div>
 
-                <!-- Pagination -->
+                
                 <div class="pagination-row lb-page-pagination" id="lbPagination">
                     <button class="btn btn-small" id="btnLbPrev" disabled>◀</button>
                     <span id="lbPageInfo">Page 1</span>
@@ -1255,8 +1231,7 @@ Be the first!</div>
             </div>
         </div>
 
-        <!-- Recent Community games (ROADMAP 111): opened from the Leaderboards
-             title bar, Back returns there. CommunityResultsManager.js fills it. -->
+        
         <div id="communityResultsPage" class="screen">
             <div class="lb-page-content">
                 <div class="lb-page-header">
@@ -1333,11 +1308,7 @@ Be the first!</div>
             </div>
         </div>
 
-        <!-- Losing the connection with a board still on screen is not a dismissable
-             "OK" error: the game becomes a stranded online board that the player
-             either plays out offline or abandons, so this box makes them choose.
-             data-no-dismiss keeps Back/Escape from closing it (mirrors the Qt
-             dialog's Popup.NoAutoClose). -->
+        
         <div id="connectionLostInGameDialog" class="modal-backdrop" data-no-dismiss>
             <div class="modal">
                 <h3 data-i18n>Connection Lost</h3>
@@ -1383,12 +1354,16 @@ Be the first!</div>
                     <div id="friendProfileAvatar" class="social-profile-avatar">?</div>
                     <div class="social-profile-title-block">
                         <h3 id="friendProfileName"></h3>
-                        <div id="friendProfileMeta" class="social-profile-meta"></div>
+                        <div class="social-profile-meta-row">
+                            <div id="friendProfileMeta" class="social-profile-meta"></div>
+                            
+                            <button class="btn btn-small social-profile-cells" id="btnFriendProfileCells" style="display:none;"></button>
+                        </div>
                         <div id="friendProfileBadges" class="social-profile-badges"></div>
                     </div>
                     <button class="social-profile-icon social-profile-friend" id="btnFriendProfileFriend" title="Add friend">&#128100; +</button>
                     <button class="social-profile-icon social-profile-block" id="btnFriendProfileBlock" title="Block player">🚫</button>
-                    <button class="social-profile-exit" id="btnFriendProfileHeadClose" title="Close profile">X</button>
+                    <button class="social-profile-exit close-btn" id="btnFriendProfileHeadClose" title="Close profile" aria-label="Close profile"><svg class="close-x" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8"/></svg></button>
                 </div>
                 <button class="btn" id="btnFriendProfileUpdateName" style="display:none;" data-i18n data-i18n-context="FriendsPage">Update player name</button>
                 <div class="social-note-editor">
@@ -1403,7 +1378,7 @@ Be the first!</div>
             </div>
         </div>
 
-        <!-- Player Stats Modal -->
+        
         <div id="countryPickerDialog" class="modal-backdrop">
             <div class="modal">
                 <h3 data-i18n>Country</h3>
@@ -1426,7 +1401,7 @@ Be the first!</div>
                         <h3 id="playerStatsName" data-i18n>Player</h3>
                         <div id="playerStatsSubtitle" class="player-stats-subtitle"></div>
                     </div>
-                    <button class="social-profile-exit" id="btnPlayerStatsClose" title="Close">X</button>
+                    <button class="social-profile-exit close-btn" id="btnPlayerStatsClose" title="Close" aria-label="Close"><svg class="close-x" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8"/></svg></button>
                 </div>
                 <div class="player-stats-tabs" id="playerStatsTabs">
                     <button class="player-stats-tab active" data-tab="0">📊 <span data-i18n>Statistics</span></button>
@@ -1491,7 +1466,7 @@ Be the first!</div>
                 <div class="stats-header">
                     <div class="screen-header-row">
                         <button id="btnStatsBack" class="screen-back-btn" aria-label="Back"><span class="hdr-icon icon-back"></span></button>
-                        <h2>📊 <span data-i18n>Statistics</span></h2>
+                        <h2><span data-i18n>Statistics</span></h2>
                         <div class="stats-header-actions">
                             <button id="btnScreenshotGallery" class="screen-back-btn" aria-label="Screenshot gallery" title="Screenshot gallery">🖼️</button>
                             <button id="btnAchievements" class="screen-back-btn stats-trophy-btn" aria-label="Achievements" title="Achievements">🏆</button>
@@ -1551,7 +1526,7 @@ Be the first!</div>
             </div>
         </div>
 
-        <!-- The shop (ShopPage.qml) and the revive offer (ReviveDialog.qml); ShopUI.js fills them -->
+        
         <div id="shopDialog" class="modal-backdrop">
             <div class="modal shop-modal">
                 <div class="shop-head">
@@ -1561,6 +1536,20 @@ Be the first!</div>
                 <div id="shopDialogBody" class="shop-body" data-nav-scroll="Shop" tabindex="0"></div>
                 <div class="modal-actions">
                     <button class="btn" onclick="app._hideModal('shopDialog')" data-i18n>Close</button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="cosmeticsDialog" class="modal-backdrop">
+            <div class="modal shop-modal cosmetics-modal">
+                <div class="shop-head">
+                    <h3 id="cosmeticsDialogTitle"></h3>
+                    <span id="cosmeticsDialogBalance" class="shop-head-balance"></span>
+                </div>
+                <div id="cosmeticsDialogBody" class="shop-body" data-nav-scroll="Cosmetics" tabindex="0"></div>
+                <div class="modal-actions">
+                    <button class="btn" onclick="app.cosmeticsUI.close()" data-i18n>Close</button>
                 </div>
             </div>
         </div>
@@ -1647,21 +1636,10 @@ This cannot be undone.</p>
             </div>
         </div>
 
-        <!-- Editor for the one board theme the user owns (BoardThemeId.Custom).
-             Edits are live: every change is pushed straight into the running
-             theme, which repaints the preview at the top of this dialog, the tile
-             in the settings grid and — if the custom theme is the selected one —
-             the board itself. Cancel puts back the spec as it was on open.
-
-             The style keys below are the contract with BoardTheme.js
-             (mineStyleGlyphs / flagStyleGlyphs / numberStyleFields); the labels
-             next to them are ours. Adding a style means adding it in both. -->
+        
         <div id="customBoardThemeDialog" class="modal-backdrop">
             <div class="modal modal-tall ct-modal">
-                <!-- The preview, the "start from" row and the section tabs are
-                     PINNED; only the controls below them scroll. A live editor
-                     whose preview scrolls off the top is a preview you cannot
-                     see while you edit. -->
+                
                 <h3 data-i18n>Custom Board Theme</h3>
                 <p class="modal-desc" data-i18n>Changes apply as you make them</p>
 
@@ -1697,7 +1675,7 @@ This cannot be undone.</p>
                         <p class="ct-hint" data-i18n>How each cell is outlined on the board.</p>
                         <div class="ct-row">
                             <label for="ctBorderStyle" data-i18n>Style</label>
-                            <!-- Option order matches BorderStyle. -->
+                            
                             <select id="ctBorderStyle" class="settings-select">
                                 <option value="0">Flat</option>
                                 <option value="1">3D bevel</option>
@@ -1724,8 +1702,7 @@ This cannot be undone.</p>
                         </div>
                         <div class="ct-row">
                             <label for="ctNumberFont" data-i18n>Font</label>
-                            <!-- Digital numbers are SVG art, so the text styling below has
-                                 nothing to act on. -->
+                            
                             <select id="ctNumberFont" class="settings-select">
                                 <option value="">Default</option>
                                 <option value="Tahoma">Tahoma</option>
@@ -1753,7 +1730,7 @@ This cannot be undone.</p>
                             <button class="btn btn-small" data-preset="mono" data-i18n>Mono</button>
                         </div>
                         <div class="ct-row">
-                            <!-- Only 3D boards produce adjacency counts above 8. -->
+                            
                             <label for="ctOverflowColor" data-i18n>9 and above</label>
                             <select id="ctOverflowColor" class="settings-select">
                                 <option value="0">Black</option>
@@ -1802,13 +1779,8 @@ This cannot be undone.</p>
             </div>
         </div>
 
-        <!-- Active session take-over box: shown while the account is in use on
-             another device. Take over (kick the other device), exit (stay
-             offline), or leave the account entirely on this device. -->
-        <!-- The account is in use on another device. The confirmations happen
-             inside the box (NetworkDialogs.qml sessionTakeoverDialog confirmMode):
-             "" the main prompt; "takeover"; "leave", then "leaveWipe". Only its own
-             buttons close it. -->
+        
+        
         <div id="sessionTakeoverDialog" class="modal-backdrop" data-no-dismiss>
             <div class="modal">
                 <h3>📱 <span data-i18n data-i18n-context="NetworkDialogs">Account in use elsewhere</span></h3>
@@ -1828,8 +1800,7 @@ This cannot be undone.</p>
             </div>
         </div>
 
-        <!-- docs/account-waiters-and-copies.md §5 (NetworkDialogs.qml
-             accountFullDialog, sameDeviceDialog). Filled by UIManager. -->
+        
         <div id="accountFullDialog" class="modal-backdrop" data-no-dismiss>
             <div class="modal">
                 <h3 id="accountFullTitle"></h3>
@@ -1854,9 +1825,7 @@ This cannot be undone.</p>
             </div>
         </div>
 
-        <!-- Last in the document so they stack above every other dialog and the
-             game card. One message at a time, the rest queued (NetworkDialogs.qml
-             showError), and the in-app yes/no (ConfirmDialog.qml). -->
+        
         <div id="appMessageDialog" class="modal-backdrop app-message-dialog">
             <div class="modal">
                 <h3 id="appMessageTitle"></h3>
@@ -1881,6 +1850,6 @@ This cannot be undone.</p>
 
     </div>
 
-    <script type="module" src="Client/src/main.js"></script>
+    <script type="module" src="app.47240d1d.js"></script>
 </body>
 </html>

@@ -1,0 +1,114 @@
+{
+ "cell": 48,
+ "cells": 5,
+ "fps": 24,
+ "cols": 8,
+ "still": 128,
+ "mines": [
+  "emoji",
+  "modern",
+  "classic"
+ ],
+ "styles": [
+  {
+   "key": "burst",
+   "frames": 27,
+   "scale": 1.7
+  },
+  {
+   "key": "shockwave",
+   "frames": 22,
+   "scale": 1
+  },
+  {
+   "key": "smoke",
+   "frames": 36,
+   "scale": 1.4
+  },
+  {
+   "key": "pixel",
+   "frames": 15,
+   "scale": 1.6
+  },
+  {
+   "key": "slime",
+   "frames": 36,
+   "scale": 1.15
+  },
+  {
+   "key": "bubbles",
+   "frames": 35,
+   "scale": 2
+  },
+  {
+   "key": "confetti",
+   "frames": 38,
+   "scale": 1.5
+  },
+  {
+   "key": "firework",
+   "frames": 32,
+   "scale": 1.6
+  },
+  {
+   "key": "lightning",
+   "frames": 31,
+   "scale": 1
+  },
+  {
+   "key": "ice",
+   "frames": 31,
+   "scale": 1.5
+  },
+  {
+   "key": "ink",
+   "frames": 36,
+   "scale": 1.15
+  },
+  {
+   "key": "comic",
+   "frames": 35,
+   "scale": 1
+  },
+  {
+   "key": "hearts",
+   "frames": 39,
+   "scale": 2
+  },
+  {
+   "key": "flower",
+   "frames": 37,
+   "scale": 2
+  },
+  {
+   "key": "firering",
+   "frames": 32,
+   "scale": 1
+  },
+  {
+   "key": "blackhole",
+   "frames": 38,
+   "scale": 1
+  },
+  {
+   "key": "stardust",
+   "frames": 38,
+   "scale": 1
+  },
+  {
+   "key": "glitch",
+   "frames": 36,
+   "scale": 1
+  },
+  {
+   "key": "coins",
+   "frames": 33,
+   "scale": 1.15
+  },
+  {
+   "key": "supernova",
+   "frames": 33,
+   "scale": 1
+  }
+ ]
+}
